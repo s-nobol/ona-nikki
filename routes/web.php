@@ -49,4 +49,20 @@ Route::get('/information', 'AppController@information')->name('information');
 Route::resource('users', 'UserController');
 Route::resource('logs', 'LogController');
 Route::get('/logs/year/{year}', 'LogController@year')->name('logs-year');
-Route::get('/logs/month/{month}', 'LogController@month')->name('logs-month');
+Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
+
+
+Route::get('/{year}', 'AppController@year');
+Route::get('/{year}/{month}', 'AppController@month');
+
+
+// Cartjsの導入
+// Seed修正
+
+// 2019/1~2020/1で動くが確かめる
+// 2019/1/1~2019/2/1で動くが確かめる
+// api-test
+
+// vueの作成
+// User-vue(profile, years, month )
+// All_User-vue(home, years, month )

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class LogController extends Controller
@@ -95,14 +96,69 @@ class LogController extends Controller
     }
     
     
+    
+    // 月別での集計を行う
     public function year($year)
     {
-        $logs  = "後日追加";
-        return view('log.year')->with([ 'logs' => $logs ]);
+        
+        $logs = Log::whereYear('created_at', $year)
+            ->select(DB::raw('count(*) as count , id, month'))
+            ->groupBy('month')
+            ->get();
+        
+        $test_logs =  "test";
+        
+        return view('log.year',compact('logs','test_logs'));
     }
-    public function month($month)
+    
+    
+    
+    
+    // ログの取得
+    
+    public function month($year,  $month)
     {
-        $logs  = "後日追加";
-        return view('log.month')->with([ 'logs' => $logs ]);
+        
+        // エラーが発生したら400を返す
+        // dd($carbon);
+        
+        $date_start = Carbon::create($year,$month);
+        $date_end = Carbon::create($year,$month+1);
+        // dd($date_end);
+        $logs = Log::whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->select(DB::raw('count(*) as count , id'))
+            // ->groupBy('time')
+            ->get();
+        
+        $test_logs =  "test";
+        // $logs = $logs->pluck('count');//countのみ取得
+        
+        return view('log.month',compact('month','logs','test_logs'));
     }
+    
+    private function test_method($date){
+        $date_start = "開始日";
+        $date_end = "終了日";
+        Log::select(DB::raw('count(*) as count , id'))
+            ->where('created_at','>', $date_start)->where('created_at','<', $date_end)
+            ->groupBy('time')
+            ->get();
+    }
+    
+    
+    // 月別での集計を行う
+    public function api_year($year)
+    {
+        
+        $logs = Log::whereYear('created_at', $year)
+            ->select(DB::raw('count(*) as count , id, month'))
+            ->groupBy('month')
+            ->get();
+        
+        $month = $logs->pluck('month');
+        $count = $logs->pluck('count');
+        return compact('logs','month','count');
+    }
+    
 }

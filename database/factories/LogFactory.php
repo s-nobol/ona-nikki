@@ -4,11 +4,14 @@
 
 use App\Log;
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 $factory->define(Log::class, function (Faker $faker) {
    return [
         'user_id' => 1,
-        'time' => $faker->time,
+        'time' => rand(0,23),
+        'month' => rand(1,12),
+        'created_at' =>  Carbon::create(rand(2017,2020),rand(1,12)),
     ];
 });
 // $table->time('time');
