@@ -70,3 +70,11 @@ Route::get('/{year}/{month}', 'AppController@month');
 
 
 // Herokuにデプロイ
+//  source <(curl -sL https://cdn.learnenough.com/heroku_install)
+// postgres://jueuvjniykzgrj:bfc158a5070d2a4724d2b0d04f6e6509a6fa98c961deef3f68d5083e6c7e4ef7@ec2-107-21-110-75.compute-1.amazonaws.com:5432/d7alfafu9q6sr
+//  heroku config:set DB_CONNECTION=pgsql
+//  heroku config:set DB_HOST=ec2-107-21-110-75.compute-1.amazonaws.com
+//  heroku config:set DB_DATABASE=test
+//  heroku config:set DB_USERNAME=jueuvjniykzgrj
+//  heroku config:set DB_PASSWORD=bfc158a5070d2a4724d2b0d04f6e6509a6fa98c961deef3f68d5083e6c7e4ef7
+
