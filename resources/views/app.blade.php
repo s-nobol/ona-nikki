@@ -10,7 +10,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <!--<script src="{{ secure_asset('js/app.js') }}" defer></script>-->
         
         <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
         <!--integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
         <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -98,7 +98,7 @@
             @else
                 
             <div>
-                <!--<img src="{{ asset('image/ona-nikki3.jpg') }}" style="width:100%;"></img>-->
+                <!--<img src="{{ secure_asset('image/ona-nikki3.jpg') }}" style="width:100%;"></img>-->
             </div>
             
             <div class="bg_red p-4">
@@ -176,6 +176,6 @@
         <div class="p-3 text-center">日本全国オワこん・プロジェクト</div>
     </footer>
     <!-- body タグの最後に足す-->
-    <script src=" {{ mix('js/app.js') }} "></script>
+    <script src="{{ mix('js/app.js') }} "></script>
 </body>
 </html>

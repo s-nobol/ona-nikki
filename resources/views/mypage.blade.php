@@ -205,7 +205,7 @@
     
 
     
-    <div><img src="{{ asset('image/ona-nikki5.jpg') }}"></img></div>
+    <div><img src="{{ secure_asset('image/ona-nikki5.jpg') }}"></img></div>
     <!--多い時間帯-->
         <!--説明-->
         <div class="w-75 m-auto pt-5">
@@ -215,7 +215,7 @@
                     <p>今月のてすと様の射回数は、***252**　となっております。先月の**158***回数と比較しておよそ***15％***　増加いたしました。
                    また、平均射O回数は、****558***となっており、先月の**158***回数と比較しておよそ***15％***　増加いたしました。</p>
                 </div>
-                <img class="ml-3" src="{{ asset('image/chara.png') }}" alt="Generic placeholder image" style="width:150px;">
+                <img class="ml-3" src="{{ secure_asset('image/chara.png') }}" alt="Generic placeholder image" style="width:150px;">
             </div>
 
         </div>

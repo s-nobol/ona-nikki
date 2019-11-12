@@ -92,7 +92,7 @@
             <div>
                 <h4>一日ごとの集計</h4>
                 <canvas id="bar_Chart"></canvas>
-                <!--<img src="{{ asset('image/ona-nikki2.jpg') }}" style="width:100%;"></img>-->
+                <!--<img src="{{ secure_asset('image/ona-nikki2.jpg') }}" style="width:100%;"></img>-->
             </div>
             
             
@@ -104,7 +104,7 @@
                     <h5 class="mt-0 mb-1">Media object</h5>
                     本日もお勤めご苦労様でした
                 </div>
-                <img class="ml-3" src="{{ asset('image/chara.png') }}" alt="Generic placeholder image" style="width:150px;">
+                <img class="ml-3" src="{{ secure_asset('image/chara.png') }}" alt="Generic placeholder image" style="width:150px;">
             </div>
             
     <!--多い時間帯-->
