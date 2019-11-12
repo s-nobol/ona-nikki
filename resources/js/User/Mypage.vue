@@ -2,7 +2,7 @@
     <div>
        <!--チャートを入力-->
        
-       <!--<h5 class="bg__danger">app/sassの起動確認</h5>-->
+       
        <Bar :dataSet="count" />
        <Radar :dataSet="count" />
     </div>

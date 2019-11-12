@@ -52,6 +52,7 @@ Route::get('/logs/year/{year}', 'LogController@year')->name('logs-year');
 Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
 
 
+Route::get('/ranking', 'AppController@ranking');
 Route::get('/{year}', 'AppController@year');
 Route::get('/{year}/{month}', 'AppController@month');
 
@@ -66,3 +67,6 @@ Route::get('/{year}/{month}', 'AppController@month');
 // vueの作成
 // User-vue(profile, years, month )
 // All_User-vue(home, years, month )
+
+
+// Herokuにデプロイ

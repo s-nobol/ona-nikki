@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-       <!--チャートを入力-->
+    <div>
+       <!--線グラフ-->
        
        
         <canvas id="Bar_Chart" ></canvas>
@@ -9,10 +9,6 @@
 </template>
 
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクトリに素材ごとのチャートをいれておく
-
 
 export default {
     props: {
@@ -20,8 +16,7 @@ export default {
             type: Array,
             require  : false,
             default: () => []
-          },
-         loading: Boolean,
+        },
     },
     methods: {
         // チャートの作成
@@ -38,27 +33,14 @@ export default {
                         backgroundColor: 'rgba(255, 74, 74, 0.9)',
                         data: this.dataSet
                     }]
-                },  
-                options: {    
-                    scales: {                          //軸設定
-                        yAxes: [{                      //y軸設定
-                            display: true,             //表示設定
-                            ticks: {                      //最大値最小値設定
-                                min: 0,                   //最小値
-                                max: 50,                  //最大値
-                                fontSize: 18,             //フォントサイズ
-                                stepSize: 5               //軸間隔
-                            },
-                        }],
-                    }
-                }
+                },
             });
         },
     },
     watch: {
-      dataSet: function(dataSet){
-          this.create_chart()
-      }
+        dataSet: function(dataSet){
+            this.create_chart()
+        }
     }
 }
 </script>

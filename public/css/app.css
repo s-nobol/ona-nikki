@@ -11100,3 +11100,7 @@ a.text-dark:focus {
   }
 }
 
+.bg__danger {
+  background-color: tomato;
+}
+

@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-       <!--チャートを入力-->
+    <div>
+       <!--散布図グラフ-->
        
        
         <canvas id="Bar_Chart" ></canvas>

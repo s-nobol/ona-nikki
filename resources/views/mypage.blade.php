@@ -5,9 +5,9 @@
 <div>
     <!--<h2>マイページ</h2> -->
     <div>
-        <ul class="data_list ">
+        <ul class="data_list bg-white p-2">
             <li class="data_list_item">
-                <strong class="data_list_item_title">総合射回数</strong>
+                <strong class="data_list_item_title">今月の射回数</strong>
                 <strong class="data_list_item_content">875<small>回</small></strong>
             </li>
             <li class="data_list_item">
@@ -27,11 +27,6 @@
                 <strong class="data_list_item_content">25<small>Cal</small></strong>
             </li>
         </ul>
-        <!--<span>総合射回数</span>-->
-        <!--<span>本日の射回数</span>-->
-        <!--<span>平均精回数</span>-->
-        <!--<span>合計支援金</span>-->
-        <!--<span>消費カロリー</span>-->
     </div>
     <style type="text/css">
     .data_list{
@@ -79,21 +74,21 @@
     
     <!--過去一か月の射精回数（一年）-->
     <!--<canvas id="bar_Chart"></canvas>-->
-    
+    <h4 class="mt-3"><b>今月のデータとみんなの比較</b></h4>
     <!--月ごとの射精回数（一年）-->
-    
-    <div class="chart__tab">
-        <span class="chart__tab__item">グラフの種類: </span>
-        <span class="chart__tab__item">月別</span>
-        <span class="chart__tab__item">年間</span>
-        <span class="chart__tab__item">全期間</span>
-        <span class="chart__tab__item">折れ線</span>
+    <div class="card bg-white p-5 ">
+        <div class="chart__tab">
+            <span class="chart__tab__item">グラフの種類: </span>
+            <span class="chart__tab__item">月別</span>
+            <span class="chart__tab__item">年間</span>
+            <span class="chart__tab__item">全期間</span>
+            <span class="chart__tab__item">折れ線</span>
+        </div>
+        <div>自分の記録とみんなの記録比較（折れ線グラフ）</div>
+        <canvas id="bar_Chart" ></canvas>
     </div>
-    <div>自分の記録とみんなの記録比較（折れ線グラフ）</div>
-    <canvas id="bar_Chart"></canvas>
     
     <div class="w-75 m-auto">
-    <div>グラフ項目（）</div>
     </div>
     <style>
         .chart__tab{
@@ -106,39 +101,75 @@
     </style>
     
     
-    <!--ジャンル-->
-    <div class="row">
-        <div class="col-4">
-            <div>ユーザーとみんなの比較（棒グラフ）</div>
+        <h5><b>先月比較</b></h5>
+    <div class="row m-0 p-0">
+        <div class="col-3 m-0 card p-5">
+            <span><b>総合射精回数</b></span>
+            <span>15％↗上昇</span>
         </div>
-        <div class="col-4">
-
+        <div class="col-3 m-0 card p-5">
+            <span><b>先日射精回数</b></span>
+            <span>5％↗上昇</span>
         </div>
-        <div class="col-4">
-            <div>ユーザーの消費カロリー</div>
+        <div class="col-3 m-0 card p-5">
+            <span><b>平均射精回数</b></span>
+            <span>5％↗上昇</span>
+        </div>
+        <div class="col-3 m-0 card p-5">
+            <span><b>先日射精回数</b></span>
+            <span>15％↗上昇</span>
         </div>
     </div>
-
+    
+    <div class="row m-0 p-0">
+        <div class="col-3 m-0 card p-5">
+            <span><b>消費カロリー指数</b></span>
+            <span>15％↗上昇</span>
+        </div>
+        <div class="col-3 m-0 card p-5">
+            <span><b>支援金</b></span>
+            <span>15％↗上昇</span>
+        </div>
+        <div class="col-3 m-0 card p-5">
+            <span><b>ランキング</b></span>
+            <span>15％↗上昇</span>
+        </div>
+        <div class="col-3 m-0 card p-5">
+            <span><b>レベル</b></span>
+            <span>15％↗上昇</span>
+        </div>
+    </div>
     
     <!--ジャンル-->
+    <h5><b>月別データ（みんなと比較）</b></h5>
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 card bg-white p-5">
             <h5>棒グラフ(利用比率時間　月ごと)</h5>
             <canvas id="bar_Chart2"></canvas>
             <div>比率　15％</div>
         </div>
-        <div class="col-4">
+        <div class="col-4 card bg-white p-5">
             <h5>円形グラフ(カテゴリー　カテゴり一覧)</h5>
             <canvas id="pie_Chart2" ></canvas>
             <div>比率　15％</div>
         </div>
-        <div class="col-4">
+        <div class="col-4 card bg-white p-5">
             <h5>棒グラフ(利用比率時間)</h5>
             <canvas id="bar_Chart3"></canvas>
             <div>比率　15％</div>
         </div>
     </div>
     
+    <div class="row m-0 p-0">
+        <div class="col-6 m-0 card p-5">
+            <span><b>総合射精回数</b></span>
+            <span>15％↗上昇</span>
+        </div>
+        <div class="col-6 m-0 card p-5">
+            <span><b>先日射精回数</b></span>
+            <span>5％↗上昇</span>
+        </div>
+    </div>
 
     
     <!--ジャンル-->
@@ -148,8 +179,18 @@
             <canvas id="pie_Chart" ></canvas>
             <div>比率　15％</div>
         </div>
-        <div class="col-6">
+        <div class="col-3">
             <h5>円形グラフ(カテゴリー　カテゴり一覧)</h5>
+            <div>利用頻度データ</div>
+            <div>総合データ</div>
+            <div>利用時間帯データ</div>
+            <div></div>
+            <div></div>
+            <div>データ1</div>
+            <div>データ1</div>
+        </div>
+        <div class="col-3">
+            <h5>横グラフ(カテゴリー　カテゴり一覧)</h5>
             <div>利用頻度データ</div>
             <div>総合データ</div>
             <div>利用時間帯データ</div>
@@ -184,9 +225,6 @@
             <chart-vue></chart-vue>
         </div>
         
-        <!-- body タグの最後に足す-->
-        <script src=" {{ mix('js/app.js') }} "></script>
-    
     <script>
     
         var bar_Chart = document.getElementById('bar_Chart').getContext('2d');

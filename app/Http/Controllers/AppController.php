@@ -37,6 +37,10 @@ class AppController extends Controller
     }
     
     
+    public function ranking()
+    {
+        return view('app.ranking');
+    }
     
     
     // みんなのグラフ

@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
-       <!--チャートを入力-->
+    <div>
+       <!--帯グラフ-->
        
        
-        <canvas id="Bar_Chart" ></canvas>
+        <canvas id="BarChart" ></canvas>
        
     </div>
 </template>
@@ -27,15 +27,16 @@ export default {
         // チャートの作成
         create_chart(){
 
-            var Bar_Chart = document.getElementById('Bar_Chart').getContext('2d');
-            var myChart = new Chart(Bar_Chart, {
+            var BarChart = document.getElementById('BarChart').getContext('2d');
+            var BarChart = new Chart(BarChart, {
                 type: 'bar',
     
                 data: {
                     labels: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月', ],
                     datasets: [{
                         label: '月別集計',
-                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
+                        borderColor: ['rgba(255, 74, 74, 0.9)'],
+                        backgroundColor: 'rgba(255, 74, 74, 0.4)',
                         data: this.dataSet
                     }]
                 },  
@@ -46,8 +47,8 @@ export default {
                             ticks: {                      //最大値最小値設定
                                 min: 0,                   //最小値
                                 max: 50,                  //最大値
-                                fontSize: 18,             //フォントサイズ
-                                stepSize: 5               //軸間隔
+                                fontSize: 8,             //フォントサイズ
+                                stepSize: 10               //軸間隔
                             },
                         }],
                     }

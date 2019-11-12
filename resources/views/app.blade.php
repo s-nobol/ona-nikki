@@ -55,7 +55,7 @@
     </header>
 
     <!--<h1>ホームです</h1>-->
-    <div class="row">
+    <div class="row m-0">
         
         
         <!--サイドバー（Left）-->
@@ -127,7 +127,7 @@
         </div>
         
         <div class="col-8">
-            <main class="bg-white pl-5 pr-5">
+            <main class=" ">
                 @yield('content')
             </main>
         </div>
@@ -175,5 +175,7 @@
     <footer>
         <div class="p-3 text-center">日本全国オワこん・プロジェクト</div>
     </footer>
+    <!-- body タグの最後に足す-->
+    <script src=" {{ mix('js/app.js') }} "></script>
 </body>
 </html>
