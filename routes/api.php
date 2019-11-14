@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
 // Route::get('user', 'UserController@index')->middleware('auth:api');
 
 
-Route::get('/logs/year/{year}', 'LogController@api_year')->name('logs-year');
+Route::put('/logs/{log}', 'LogController@update');
+
+Route::get('/logs/{year}', 'LogController@api_year')->name('logs-year');
 Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
 

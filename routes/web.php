@@ -49,27 +49,19 @@ Route::get('/{year}', 'AppController@year');
 Route::get('/{year}/{month}', 'AppController@month');
 
 
-// Cartjsの導入
-// Seed修正
 
-// 2019/1~2020/1で動くが確かめる
-// 2019/1/1~2019/2/1で動くが確かめる
-// api-test
+// テストの追加
+// php artisan make:test Log_CreateTest
+// php artisan make:test UserTest
+// php artisan make:test Url_Home_Test --unit
+// php artisan make:test Url_User_Test --unit
+// php artisan make:test Url_Log_Test --unit
 
-// vueの作成
-// User-vue(profile, years, month )
-// All_User-vue(home, years, month )
-
-
-// Herokuにデプロイ
-// Twitterログインページ作成
-// パスポートの削除
-// composer require laravel/socialite
-
-// Client error: `GET https://api.github.com/user?access_token=` 
-// resulted in a `401 Unauthorized` 
-// response: { "message": "Requires authentication", 
-// "documentation_url": "https://developer.github.com/v3/users/#get-the-authent (truncated...)
-
-
-// php artisan make:test OAuthTest
+// vue で仕上げる
+// Vue を使ったシングルアプリケーションに変更
+// Oauth認証
+// https://qiita.com/hareku/items/ea09602bf40bf0a42040
+//1 axios で　Twitterログインページにとぶ
+//2 axios /login/Oauth/callback　のvueページを作成する
+//3 Twitterログイン後　 /login/Oauth/callback　にアクセスし、パラメータをもとに、Laravelの方に送信する
+//4 Store に書き込む

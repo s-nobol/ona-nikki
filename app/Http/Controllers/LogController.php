@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Exception;
 
 class LogController extends Controller
 {
@@ -41,7 +41,6 @@ class LogController extends Controller
         $logs->user_id =  Auth::user()->id; 
         $logs->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
         $logs->save();
-        
     }
 
     /**
@@ -80,6 +79,7 @@ class LogController extends Controller
     
         $log = $log->fill($request->all());
         $log->save();
+        // return $log;
         return view('log.edit')->with([ 'log' => $log ]);
         
     }
@@ -159,6 +159,17 @@ class LogController extends Controller
         $month = $logs->pluck('month');
         $count = $logs->pluck('count');
         return compact('logs','month','count');
+    }
+    
+    
+    // Urlパラメータが正しいのか検証
+    private function carbon_try($year, $month){
+        try{
+            return Carbon::create($year,$month);
+        }catch(Exception $e){
+            abort(404);
+            return false;
+        }
     }
     
 }

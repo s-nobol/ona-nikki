@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use App\Log;
-
+use Exception;
 class AppController extends Controller
 {
     //
@@ -47,7 +47,7 @@ class AppController extends Controller
     // 月別での集計を行う
     public function year($year)
     {
-        $logs  = "後日追加"; 
+        $this->carbon_try($year, 1);
         
         
         $logs = Log::whereYear('created_at', $year)
@@ -67,12 +67,13 @@ class AppController extends Controller
     
     public function month($year,  $month)
     {
+        $this->carbon_try($year, $month);
+        
         
         // 2020/XX/1 ~ 2020/XX/1
-        
-        
         $date_start = Carbon::create($year,$month);
         $date_end = Carbon::create($year,$month+1);
+        
         
         // 日付ごとの集計
         $logs = Log::whereYear('created_at', $year)
@@ -80,9 +81,21 @@ class AppController extends Controller
             ->select(DB::raw('count(*) as count , id'))
             // ->groupBy('time')
             ->get();
+            
         
         $test_logs =  "test";
         return view('log.month',compact('month','logs','test_logs'));
     }
     
+    
+    
+    // Urlパラメータが正しいのか検証
+    private function carbon_try($year, $month){
+        try{
+            return Carbon::create($year,$month);
+        }catch(Exception $e){
+            abort(404);
+            return false;
+        }
+    }
 }
