@@ -16,9 +16,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('email')->unique();
+            // $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             
             
             $table->string('address')->nullable(); //住所
@@ -28,6 +29,14 @@ class CreateUsersTable extends Migration
             $table->date('birthday')->nullable();//生年月日
                 
             $table->rememberToken();
+            
+            
+             // ソーシャルログイン用
+            $table->string('provider_id')->nullable();
+            $table->string('provider_name')->nullable();
+            
+            $table->unique(['provider_id', 'provider_name']);
+            
             $table->timestamps();
         });
     }

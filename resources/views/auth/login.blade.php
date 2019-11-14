@@ -7,10 +7,17 @@
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
+                        <div class="form-group row">
+                            <label for="github" class="col-md-6 col-form-label text-md-right">
+                                <a href="{{ url('login/github') }}"><i class="fab fa-github  fa-2x  text-dark"></i></a>
+                                <a href="{{ url('login/twitter') }}"><i class="fab fa-twitter fa-2x "></i></a>
+                            </label>
+                        </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
+                        
+                        
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

@@ -10,24 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// O-Auth　キー作成
-// NULL2:~/environment/ona-nikki $ php artisan passport:install
-// Encryption keys generated successfully.
-// Personal access client created successfully.
-// Client ID: 1
-// Client secret: kwFv0PtredHI2hrrhmAHWc7vtzFWuevlNapSeW4O
-// Password grant client created successfully.
-// Client ID: 2
-// Client secret: Ojvz2zIi9W2FfmiSc3bLQwml8Oow4Nl29EvO6h37
-
-
-// Route::get('/', function () {
-//     return view('home');
-// });
-
 
 Route::get('/', 'AppController@index')->name('index');
 Route::get('/home', 'AppController@home')->name('home');
+
+
+// OAuthでのログイン
+// { OAuth } にはgithub twitter google などが入る
+Route::get('login/{OAuth}', 'Auth\OAuthController@redirectToProvider')->name('LoginOAuth');
+Route::get('login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback')->name('LoginOAuthCallback');
+
 
 // OAuth認証はApiのみ有効
 Auth::routes();
@@ -70,11 +62,14 @@ Route::get('/{year}/{month}', 'AppController@month');
 
 
 // Herokuにデプロイ
-//  source <(curl -sL https://cdn.learnenough.com/heroku_install)
-// postgres://jueuvjniykzgrj:bfc158a5070d2a4724d2b0d04f6e6509a6fa98c961deef3f68d5083e6c7e4ef7@ec2-107-21-110-75.compute-1.amazonaws.com:5432/d7alfafu9q6sr
-//  heroku config:set DB_CONNECTION=pgsql
-//  heroku config:set DB_HOST=ec2-107-21-110-75.compute-1.amazonaws.com
-//  heroku config:set DB_DATABASE=test
-//  heroku config:set DB_USERNAME=jueuvjniykzgrj
-//  heroku config:set DB_PASSWORD=bfc158a5070d2a4724d2b0d04f6e6509a6fa98c961deef3f68d5083e6c7e4ef7
+// Twitterログインページ作成
+// パスポートの削除
+// composer require laravel/socialite
 
+// Client error: `GET https://api.github.com/user?access_token=` 
+// resulted in a `401 Unauthorized` 
+// response: { "message": "Requires authentication", 
+// "documentation_url": "https://developer.github.com/v3/users/#get-the-authent (truncated...)
+
+
+// php artisan make:test OAuthTest
