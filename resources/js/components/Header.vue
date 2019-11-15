@@ -16,9 +16,10 @@
             <span class="navbar-text">
                 
                 <RouterLink v-if="! currentUser" to="/login">ログイン</RouterLink>
+                <RouterLink v-if="! currentUser" to="/login">サインアップ</RouterLink>
                 
-                <span v-if="currentUser">{{currentUser.name}}</span>
-                <button class="btn btn-light" @click="logout">Logout</button>
+                <button  v-if="currentUser"class="btn btn-danger" @click="createLog">送信</button>
+                <button  v-if="currentUser"class="btn btn-light" @click="logout">Logout</button>
             </span>
         </div>
     </nav>
@@ -44,7 +45,7 @@ export default {
     },
     methods: {
         logout(){
-            axios.post(`api/logout`).then(response => {
+            axios.post(`/api/logout`).then(response => {
                 console.log(response); 
                 if(response.status === 200){
                     this.$store.commit('currentUser', null)
@@ -53,7 +54,9 @@ export default {
                 console.log(err);
             });
 
-        }
+        },
+        createLog(){
+            }
     },
     created(){
     }

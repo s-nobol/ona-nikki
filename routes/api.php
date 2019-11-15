@@ -23,6 +23,9 @@ Route::get('/reflesh-tiken', function(Request $request){
     return response()->json();
 });
 
+// Oauth
+Route::get('/login/{OAuth}', 'Auth\OAuthController@redirectToProvider');
+Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback');
 
 Route::put('/logs/{log}', 'LogController@update');
 

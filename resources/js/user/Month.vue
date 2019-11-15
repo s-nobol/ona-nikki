@@ -2,6 +2,7 @@
     <div>
        <!--チャートを入力-->
        
+       <div>mypage_month</div>
        
        <Bar :dataSet="count" />
        <Radar :dataSet="count" />

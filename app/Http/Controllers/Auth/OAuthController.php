@@ -14,20 +14,22 @@ class OAuthController extends Controller
     
     
      /**
-     * GitHubの認証ページヘユーザーをリダイレクト
+     * $OAuthの認証ページヘユーザーをリダイレクト
      *
      * @return \Illuminate\Http\Response
      */
     public function redirectToProvider($OAuth)
     {
-        return Socialite::driver($OAuth)->redirect();
+        // return Socialite::driver($OAuth)->redirect();
+        return Socialite::driver($OAuth)->redirect()->getTargetUrl();
+
     }
 
 
 
     /**
-     * GitHubからユーザー情報を取得
-     *
+     * $OAuthからユーザー情報を取得
+     *try今度いれる
      * @return \Illuminate\Http\Response
      */
     public function handleProviderCallback($OAuth)
@@ -35,30 +37,24 @@ class OAuthController extends Controller
         
         $socialUser  = Socialite::driver($OAuth)->user();
         
-        // メールアドレスからユーザーを探す
         $user = User::where([ 'email' => $socialUser->getEmail() ])->first();
+
 
         if ($user) {
             Auth::login($user);
-            return redirect('/home');
         } else {
             $user = User::create([
                 'name' => $socialUser->getNickname(),
                 'email' => $socialUser->getEmail(),
-                // 'password' => Hash::make($socialUser->getNickname()),  // 例としての記述なので、マネしないように
+                // 'password' => Hash::make($socialUser->getNickname()),  // すべてのアカウントで共通する
             ]);
             
-            // ユーザーの作成
-            // dd("ユーザーの作成");
             Auth::login($user);
-            return redirect('/home');
         }
         
-        return redirect()->route('home');
+        return Auth::user();
     }
 }
-
-
 // getId()
 // getNickname()
 // getName()

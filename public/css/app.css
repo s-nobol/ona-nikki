@@ -11114,3 +11114,8 @@ a.text-dark:focus {
   padding: 0px;
 }
 
+.bg__red {
+  background-color: #ff4a4a;
+  color: white;
+}
+

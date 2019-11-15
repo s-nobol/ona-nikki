@@ -1,4 +1,6 @@
 
+$mein_color: #ff4a4a;
+
 
 body{
     // background-color: whitesmoke;
@@ -14,4 +16,8 @@ body{
 .col-2{
     margin: 0px;
     padding: 0px;
+}
+.bg__red{
+    background-color: $mein_color;
+    color: white; 
 }

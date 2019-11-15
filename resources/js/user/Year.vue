@@ -1,7 +1,7 @@
 <template>
     <div>
        <!--チャートを入力-->
-       
+       <div>mypage_Years</div>
        
        <Bar :dataSet="count" />
        <Radar :dataSet="count" />

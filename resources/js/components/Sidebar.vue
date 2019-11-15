@@ -2,25 +2,73 @@
 <div>
     <!--サイドバー-->
     <!--<div>サイドバー</div>-->
-    <div class="bg-danger p-4">
+    
+    
+    <div v-if="currentUser">
+        
+        <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
+        <ul class="list-group">
+            <li class="list-group-item">
+            年代
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/mypage/logs/2018">2018</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/mypage/logs/2019">2019</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/mypage/logs">Logs</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/users/1">プロフィール</RouterLink>
+            </li>
+            
+            <li class="list-group-item">
+                <RouterLink  to="/mypage/quest">クエスト</RouterLink>
+            </li>
+            
+            
+            <li class="list-group-item">
+            <a href="/donation">貢献施設</a>
+            </li>
+            
+        </ul>
+    </div>
+    
+    
+    <div class="bg__red p-4">
         <b>2018年版</b>
     </div>
     
     
-    <ul class="list-group">
-        <li class="list-group-item">お知らせ</li>
-        <li class="list-group-item">年代</li>
-        <li class="list-group-item">2019</li>
-        <li class="list-group-item">2018</li>
-        <li class="list-group-item">2017</li>
-        <li class="list-group-item">性別</li>
-        <li class="list-group-item">年齢</li>
-        <li class="list-group-item">地域（都道府県）</li>
-        <li class="list-group-item">カテゴリー</li>
-        <li class="list-group-item">ランキング</li>
-        <li class="list-group-item">探す</li>
-        <li class="list-group-item">おな日記について</li>
-        <li class="list-group-item">プライバシーポリシー</li>
+    <ul class="list-group">   
+        <li class="list-group-item">
+            <RouterLink  to="/notification">お知らせ</RouterLink>
+        </li>
+        <li class="list-group-item">年代
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/logs/year/2017">2017</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/logs/year/2017">2018</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/logs/year/2019">2019</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/sex">性別</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/age">年齢</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/location">地域（都道府県）</RouterLink>
+        </li>
+        <li class="list-group-item">
+            <RouterLink  to="/about">おな日記について</RouterLink>
+        </li>
     </ul>
         
 </div>
@@ -32,13 +80,10 @@
 // chartディレクｓトリに素材ごとのチャートをいれておく
 
 export default {
-    data(){
-        return{
-        }
+    computed: {
+        currentUser(){
+            return this.$store.getters['currentUser']
+        },
     },
-    methods: {
-    },
-    created(){
-    }
 }
 </script>

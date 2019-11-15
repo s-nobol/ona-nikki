@@ -1,7 +1,7 @@
 <template>
     <div>
        <!--ランキング-->
-       <h5><b>ランキング</b></h5>
+       <h5><b>location</b></h5>
        
     </div>
 </template>

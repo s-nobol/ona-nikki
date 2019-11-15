@@ -1,7 +1,7 @@
 <template>
     <div>
        <!--ランキング-->
-       <h5><b>home</b></h5>
+       <h5><b>お知らせ</b></h5>
        
     </div>
 </template>
