@@ -153,7 +153,13 @@
             
             <div>
                 <h5><b>タイムライン</b></h5>
-                <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">ITは劇中のペニーワイズは怖かったけど舞台裏のペニーワイズは普通に明るくて優しいお茶目なピエロさん <a href="https://t.co/kkO0MlXhln">pic.twitter.com/kkO0MlXhln</a></p>&mdash; マナミーJr (@masososo_) <a href="https://twitter.com/masososo_/status/1192808769790439424?ref_src=twsrc%5Etfw">November 8, 2019</a>
+                <blockquote class="twitter-tweet">
+                <p lang="ja" dir="ltr">
+                ITは劇中の
+                ペニーワイズは怖かったけど舞台裏のペニーワイズは普通に明るくて優しいお
+                茶目なピエロさん 
+                <a href="https://t.co/kkO0MlXhln">pic.twitter.com/kkO0MlXhln</a>
+                </p>&mdash; マナミーJr (@masososo_) <a href="https://twitter.com/masososo_/status/1192808769790439424?ref_src=twsrc%5Etfw">November 8, 2019</a>
                 </blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         

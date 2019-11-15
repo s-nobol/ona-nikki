@@ -11,18 +11,22 @@
 |
 */
 
-Route::get('/', 'AppController@index')->name('index');
-Route::get('/home', 'AppController@home')->name('home');
+Route::get('/{any}', function () {
+    return view('spa');
+})->where('any', '.*');
+
+// Route::get('/', 'AppController@index')->name('index');
+// Route::get('/home', 'AppController@home')->name('home');
 
 
 // OAuthでのログイン
 // { OAuth } にはgithub twitter google などが入る
-Route::get('login/{OAuth}', 'Auth\OAuthController@redirectToProvider')->name('LoginOAuth');
-Route::get('login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback')->name('LoginOAuthCallback');
+// Route::get('login/{OAuth}', 'Auth\OAuthController@redirectToProvider')->name('LoginOAuth');
+// Route::get('login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback')->name('LoginOAuthCallback');
 
 
 // OAuth認証はApiのみ有効
-Auth::routes();
+// Auth::routes();
 
 
 // log（おな日記のデータ）の作成
@@ -32,21 +36,21 @@ Auth::routes();
 // ログ
 // 月別
 
-Route::get('/ranking', 'AppController@home')->name('ranking');
-// Route::get('/search', 'AppController@home')->name('search');
-// Route::get('/day', 'AppController@home')->name('home');
-Route::get('/information', 'AppController@information')->name('information');
+// Route::get('/ranking', 'AppController@home')->name('ranking');
+// // Route::get('/search', 'AppController@home')->name('search');
+// // Route::get('/day', 'AppController@home')->name('home');
+// Route::get('/information', 'AppController@information')->name('information');
 
 
-Route::resource('users', 'UserController');
-Route::resource('logs', 'LogController');
-Route::get('/logs/year/{year}', 'LogController@year')->name('logs-year');
-Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
+// Route::resource('users', 'UserController');
+// Route::resource('logs', 'LogController');
+// Route::get('/logs/year/{year}', 'LogController@year')->name('logs-year');
+// Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
 
 
-Route::get('/ranking', 'AppController@ranking');
-Route::get('/{year}', 'AppController@year');
-Route::get('/{year}/{month}', 'AppController@month');
+// Route::get('/ranking', 'AppController@ranking');
+// Route::get('/{year}', 'AppController@year');
+// Route::get('/{year}/{month}', 'AppController@month');
 
 
 

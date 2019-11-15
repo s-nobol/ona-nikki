@@ -13,10 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-// Route::get('user', 'UserController@index')->middleware('auth:api');
+Auth::routes();
+Route::get('/currentUser', function () {
+    return Auth::user();
+});
+// トークンリフレッシュ
+Route::get('/reflesh-tiken', function(Request $request){
+    $request->session()->regenerateToken();
+    return response()->json();
+});
 
 
 Route::put('/logs/{log}', 'LogController@update');
