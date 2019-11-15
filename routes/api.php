@@ -29,3 +29,4 @@ Route::put('/logs/{log}', 'LogController@update');
 Route::get('/logs/{year}', 'LogController@api_year')->name('logs-year');
 Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
 
+// php artisan make:test LoginTest

@@ -16,7 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            
+            
             // $table->string('email')->unique();
+            
+            
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -25,18 +29,17 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable(); //住所
             $table->string('sex')->nullable();     //性別
             $table->integer('level')->default(1); //address
-            
             $table->date('birthday')->nullable();//生年月日
                 
-            $table->rememberToken();
             
             
              // ソーシャルログイン用
             $table->string('provider_id')->nullable();
             $table->string('provider_name')->nullable();
-            
             $table->unique(['provider_id', 'provider_name']);
             
+            
+            $table->rememberToken();
             $table->timestamps();
         });
     }
