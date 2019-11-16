@@ -10,11 +10,6 @@
 </template>
 
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
-
-
 import Bar from '../charts/Bar.vue'
 import Bubble from '../charts/Bubble.vue'
 import Doughnut from '../charts/Doughnut.vue'

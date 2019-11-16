@@ -55,7 +55,7 @@ jobs:
       - run: ./vendor/bin/codecept run
       
       
-      # アプリケーションキー作成
-      - run: php artisan key:generate
       # run テスト
+      - run: php artisan migrate
+      - run: php artisan db:seed
       - run: ./vendor/bin/phpunit

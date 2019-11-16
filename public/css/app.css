@@ -11187,3 +11187,7 @@ a.text-dark:focus {
   margin-top: -25px;
 }
 
+.bg__menu {
+  background-color: Menu;
+}
+

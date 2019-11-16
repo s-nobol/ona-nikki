@@ -1,7 +1,11 @@
 <template>
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom ">
-        <a class="navbar-brand" href="#">おな日記</a>
+    
+        <RouterLink v-if="! currentUser" to="/login">
+            <span class="header__title">おな 日記</span>
+        </RouterLink>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
         data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#"> 08:15 <span class="sr-only">(current)</span></a>
+                    <span class="header__nowtime">{{ nowTime }}</span>
                 </li>
             </ul>
             <span class="navbar-text">
@@ -26,7 +30,17 @@
    
 </div>
 </template>
-
+<style type="text/css">
+    .header__title{
+        font-size:35px;
+        /*font-weight: bold;*/
+        color:black;
+    }
+    .header__nowtime{
+        margin-left: 15px;
+        font-weight: bold;
+    }
+</style>
 <script>
 // 初めに複数のチャートのデータを取得
 // まとめて表示する
@@ -35,6 +49,7 @@
 export default {
     data(){
         return{
+            nowTime: new Date().getHours() + ':' +  new Date().getMinutes() 
         }
     },
     

@@ -42,7 +42,7 @@ export default new Router({
         { path: '/location', component: location  },
         { path: '/ranking', component: ranking  },
         { path: '/logs/:year', component: home_year, props: true  },
-        { path: '/logs/:year/:month', component: home_month,  props: true },
+        // { path: '/logs/:year/:month', component: home_month,  props: true },　//今は入れなくていい
         
         //login && Oauth
         { path: '/login', component: login  },

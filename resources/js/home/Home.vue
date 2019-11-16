@@ -71,10 +71,6 @@
 </style>
 
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
-
 export default {
     data(){
         return{

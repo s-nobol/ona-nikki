@@ -83,7 +83,7 @@ export default {
         },
         
         $route () {
-            this.$store.commit('error/setCode', null)
+            // this.$store.commit('error/setCode', null)
         }
     },
 }
