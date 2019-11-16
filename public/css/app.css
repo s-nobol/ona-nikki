@@ -11119,3 +11119,71 @@ a.text-dark:focus {
   color: white;
 }
 
+.Statusbar {
+  list-style: none;
+  font-size: 0px;
+  padding: 0px;
+  margin: 0px;
+  background: white;
+}
+
+.Statusbar__item {
+  display: inline-block;
+  position: relative;
+  height: 100px;
+  width: 150px;
+  padding: 15px;
+}
+
+.Statusbar__item__title {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.Statusbar__item__content {
+  font-size: 35px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-weight: bold;
+}
+
+.Statusbar__item__content small {
+  font-size: 18px;
+  color: gray;
+}
+
+.StatusCard {
+  height: 170px;
+  overflow: hidden;
+}
+
+.StatusCard__title {
+  margin-top: 15px;
+  position: relative;
+}
+
+.StatusCard__title span {
+  font-weight: bold;
+}
+
+.StatusCard__title strong {
+  position: absolute;
+  right: 5px;
+  color: gray;
+}
+
+.StatusCard__content {
+  line-height: 120px;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.StatusCard__content i {
+  font-size: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -25px;
+}
+

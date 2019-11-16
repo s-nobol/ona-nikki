@@ -6,7 +6,7 @@ import Router from 'vue-router'
 import index from './pages/Index.vue'
 
 //home
-import hoem from './home/Home.vue'
+import home from './home/Home.vue'
 import sex from './home/Sex.vue'
 import age from './home/Age.vue'
 import location from './home/Location.vue'
@@ -34,7 +34,7 @@ export default new Router({
     routes: [
         // home
         { path: '/', component: index  },
-        { path: '/hoem', component: index  },
+        { path: '/home', component: home  },
         { path: '/about', component: about  },
         { path: '/notification', component: notification  },
         { path: '/sex', component: sex  },
