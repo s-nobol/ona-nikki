@@ -46,6 +46,7 @@ class OAuthController extends Controller
             $user = User::create([
                 'name' => $socialUser->getNickname(),
                 'email' => $socialUser->getEmail(),
+                'oauth_check' => true,
                 // 'password' => Hash::make($socialUser->getNickname()),  // すべてのアカウントで共通する
             ]);
             

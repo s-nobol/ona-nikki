@@ -5,6 +5,14 @@
         </header>
         
         
+        <!--フラッシュ-->
+        <transition name="slide_down" >
+        <div v-if="message" class="flash__form" :class="messageType">
+            <div class=" container alert"  >{{ message }}{{ messageType}}</div>
+        </div>
+        </transition >
+        
+        
         <div class="row ">
             <!--サイドバー-->
             <div class="col-2">
@@ -29,7 +37,15 @@
         </footer>
     </div>
 </template>
-
+<style type="text/css">
+    
+.slide_down-enter-active, .slide_down-leave-active {
+    transition: all .5s;
+}
+.slide_down-enter, .slide_down-leave-to {
+    height: 0;
+}
+</style>
 <script>
 
 import Header from './components/Header.vue'
@@ -46,7 +62,16 @@ export default {
     computed: {
         currentUser(){
             return this.$store.getters['currentUser']
+        },   
+        message(){
+            return this.$store.state.message
         },
+        messageType(){
+            return this.$store.state.message_type
+        },
+        // errorCode () {
+        //     return this.$store.state.error.code
+        // }
     },
     
       watch: {

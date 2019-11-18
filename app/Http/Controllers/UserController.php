@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use Auth;
+use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+        $this->authorizeResource(User::class, 'user');  
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +53,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show')->with([ 'user' => $user ]);
+        // return view('user.show')->with([ 'user' => $user ]);
+        return $user;
     }
 
     /**
@@ -68,12 +76,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
         $user = $user->fill($request->all());
         $user->save();
-        return view('user.show')->with([ 'user' => $user ]);
+        return $user;
     }
 
     /**

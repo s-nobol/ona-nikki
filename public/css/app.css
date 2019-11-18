@@ -11191,3 +11191,35 @@ a.text-dark:focus {
   background-color: Menu;
 }
 
+.flash__form {
+  height: 50px;
+  overflow: hidden;
+}
+
+.flash-edit {
+  background-color: mediumseagreen;
+  color: white;
+}
+
+.fade-leave-active,
+.fade-enter-active {
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide_down-enter-active,
+.slide_down-leave-active {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.slide_down-enter,
+.slide_down-leave-to {
+  height: 0;
+}
+

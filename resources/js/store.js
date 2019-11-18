@@ -8,6 +8,8 @@ const store = new Vuex.Store({
     
     state: {
         user: null,
+        message: null,
+        message_type: ''
     },
     
     getters:{
@@ -16,6 +18,7 @@ const store = new Vuex.Store({
     
     
     mutations:{
+        // ユーザーログイン
         currentUser (state, user) {
             state.user = user
             
@@ -24,10 +27,13 @@ const store = new Vuex.Store({
             const response = await axios.get('/api/currentUser')
             const user = response.data || null
             state.user = user
-            // var user = window.sessionStorage.getItem(['user'])
-            // if(user){
-            //     state.user = user
-            // }
+        },
+        
+        // フラッシュメッセージ
+        message( state, {type, content, }) {
+            state.message = content
+            state.message_type = 'flash-'+type
+            setTimeout(() => (state.message = '' ,state.message_type = ''), 5000)
         },
     }
 

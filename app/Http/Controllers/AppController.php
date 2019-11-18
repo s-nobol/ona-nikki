@@ -48,8 +48,6 @@ class AppController extends Controller
     public function year($year)
     {
         $this->carbon_try($year, 1);
-        
-        
         $logs = Log::whereYear('created_at', $year)
             ->select(DB::raw('count(*) as count , id, month'))
             ->groupBy('month')
@@ -57,7 +55,7 @@ class AppController extends Controller
         
         $test_logs =  "test";
         
-        return view('log.year',compact('logs','test_logs'));
+        return  compact('logs','test_logs');
     }
     
     
@@ -67,8 +65,8 @@ class AppController extends Controller
     
     public function month($year,  $month)
     {
-        $this->carbon_try($year, $month);
-        
+        $d = $this->carbon_try($year, $month);
+        if(! $d){ abort(404);}
         
         // 2020/XX/1 ~ 2020/XX/1
         $date_start = Carbon::create($year,$month);
@@ -84,7 +82,7 @@ class AppController extends Controller
             
         
         $test_logs =  "test";
-        return view('log.month',compact('month','logs','test_logs'));
+        return compact('month','logs','test_logs');
     }
     
     
@@ -94,8 +92,7 @@ class AppController extends Controller
         try{
             return Carbon::create($year,$month);
         }catch(Exception $e){
-            abort(404);
-            return false;
+            return abort(404);
         }
     }
 }

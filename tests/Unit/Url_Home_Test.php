@@ -13,17 +13,18 @@ class Url_Home_Test extends TestCase
     
     use RefreshDatabase;
     
-    private $flamer;
-    private $category;
     private $user;
+    private $log;
     
+    /**
+     * 
+     * ./vendor/bin/phpunit tests/Unit/Url_Home_Test.php
+     * 
+     * /
     
     public function setUp():void
     {
         parent::setUp();
-        // $category = factory(Category::class)->create();
-        // $flamer = factory(Flamer::class)->create(['category_id' => 1,]);  
-        
         // ログイン用のユーザー
         // $this->user = factory(User::class)->create();
         
@@ -33,37 +34,13 @@ class Url_Home_Test extends TestCase
     {
         
         // ログインせずにアクセス
-        // $response = $this->get('/api/home');
-        $response = $this->get('/home');
+        $response = $this->json('get', '/api/home' );
         $response->assertStatus(200);
         
         
     }
     
     
-    // 年
-    public function test__home__year()
-    {
-        //エラーデータ
-        $response = $this->get('/test2019');
-        $response->assertStatus(404);
-        
-        //成功
-        $response = $this->get('/2019');
-        $response->assertStatus(200);
-    }
-    // 月
-    public function test__home__month()
-    {
-        // エラーデータ
-        $response = $this->get('/2019/test');
-        $response->assertStatus(404);
-        
-        
-        //成功
-        $response = $this->get('/2019/1');
-        $response->assertStatus(200);
-    }
     
     // エリア
     
@@ -78,16 +55,49 @@ class Url_Home_Test extends TestCase
     * Api 用のルーティングテスト
     * 
     **/
-    // public function test__api__home__year()
+    public function test__api__home__year()
+    {
+        //エラーデータ
+        $response = $this->json('get', '/api/logs/test2019' );
+        $response->assertStatus(404);
+        
+        //成功
+        $response = $this->json('get', '/api/logs/2019' );
+        $response->assertStatus(200);
+    }
+    
+    public function test__api__home__month()
+    {
+        //エラーデータ
+        $response = $this->json('get', '/api/logs/2019/test' );
+        $response->assertStatus(404);
+        
+        //成功
+        $response = $this->json('get', '/api/logs/2019/5' );
+        $response->assertStatus(200);
+    }
+    
+    // // 年
+    // public function test__home__year()
     // {
-    //     $response = $this->get('/api/2019');
+    //     //エラーデータ
+    //     $response = $this->get('/test2019');
+    //     $response->assertStatus(404);
+        
+    //     //成功
+    //     $response = $this->get('/2019');
     //     $response->assertStatus(200);
     // }
-    
-    // public function test__api__home__month()
+    // // 月
+    // public function test__home__month()
     // {
-    //     $response = $this->get('/api/2019/1');
+    //     // エラーデータ
+    //     $response = $this->get('/2019/test');
+    //     $response->assertStatus(404);
+        
+        
+    //     //成功
+    //     $response = $this->get('/2019/1');
     //     $response->assertStatus(200);
     // }
-    
 }

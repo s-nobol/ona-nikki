@@ -29,7 +29,14 @@ Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallba
 
 Route::put('/logs/{log}', 'LogController@update');
 
-Route::get('/logs/{year}', 'LogController@api_year')->name('logs-year');
-Route::get('/logs/{year}/{month}', 'LogController@month')->name('logs-month');
 
-// php artisan make:test LoginTest
+// home logs
+Route::get('/logs/{year}', 'AppController@year')->name('logs-year');
+Route::get('/logs/{year}/{month}', 'AppController@month')->name('logs-month');
+
+Route::resource('users', 'UserController');
+// Route::resource('logs', 'LogController');
+
+// プロフィールが正しく編集できるようにする
+// php artisan make:request UserRequest
+// php artisan make:test UserEditTest 

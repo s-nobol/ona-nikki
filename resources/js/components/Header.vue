@@ -2,9 +2,9 @@
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom ">
     
-        <RouterLink v-if="! currentUser" to="/login">
-            <span class="header__title">おな 日記</span>
-        </RouterLink>
+        <!--<RouterLink to="/login">-->
+            <span class="header__title" @click="onHome">おな 日記</span>
+        <!--</RouterLink>-->
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
         data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,9 @@
 <style type="text/css">
     .header__title{
         font-size:35px;
-        /*font-weight: bold;*/
+        font-weight: bold;
         color:black;
+        cursor: pointer;
     }
     .header__nowtime{
         margin-left: 15px;
@@ -59,6 +60,9 @@ export default {
         },
     },
     methods: {
+        onHome(){
+            this.$router.push("/")
+        },
         logout(){
             axios.post(`/api/logout`).then(response => {
                 console.log(response); 

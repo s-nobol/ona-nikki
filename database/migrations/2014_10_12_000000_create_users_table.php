@@ -18,32 +18,39 @@ class CreateUsersTable extends Migration
             $table->string('name');
             
             
-            // $table->string('email')->unique();
             
-            
-            $table->string('email')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             
             
-            $table->string('address')->nullable(); //住所
+            // ユーザー設定
+            $table->integer('level')->default(1); //level
+            $table->integer('experience_point')->default(1);  //経験値
+            $table->string('age')->nullable();     //年齢
             $table->string('sex')->nullable();     //性別
-            $table->integer('level')->default(1); //address
-            $table->date('birthday')->nullable();//生年月日
-                
+            $table->string('address')->nullable(); //住所
+            $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する？
+            $table->string('theme')->default("red");  //テーマ
+            
+            // クエスト    
             
             
-             // ソーシャルログイン用
-            $table->string('provider_id')->nullable();
-            $table->string('provider_name')->nullable();
-            $table->unique(['provider_id', 'provider_name']);
+             // ソーシャルログイン用(name email は初期設定でいいかも？)
+            $table->boolean('oauth_check')->default(false);; //ソーシャルユーザーでログインしているか？
+            $table->string('oauth_image')->nullable(); //画像
+            // $table->string('oauth_id')->nullable();
+            // $table->string('oauth_name')->nullable();
+            // $table->unique(['oauth_id', 'oauth_name']);
             
+            
+            // 管理者
+            $table->smallInteger('role')->default(0); //管理者権限3以上
             
             $table->rememberToken();
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

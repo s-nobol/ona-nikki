@@ -22,11 +22,12 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <!-- Styles -->
-        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        <!--<link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">-->
+        <!--<link href="{{ secure_asset('css/anime.css') }}" rel="stylesheet">-->
         
-        
-          <!-- Styles -->
-          <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+      
+        <!-- Styles -->
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <!--認証クラス-->
