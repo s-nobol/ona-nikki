@@ -17,40 +17,40 @@
                     <span class="header__nowtime">{{ nowTime }}</span>
                 </li>
             </ul>
-            <span class="navbar-text">
-                
-                <RouterLink v-if="! currentUser" to="/login">ログイン</RouterLink>
-                <RouterLink v-if="! currentUser" to="/login">サインアップ</RouterLink>
-                
-                <button  v-if="currentUser"class="btn btn-danger" @click="createLog">送信</button>
-                <button  v-if="currentUser"class="btn btn-light" @click="logout">Logout</button>
+            <span v-if="currentUser"　class="navbar-text">
+                <button class="btn btn-danger" @click="createLog">送信</button>
+                <button class="btn btn-light" @click="logout">Logout</button>
+            </span>
+            <span v-else class="navbar-text">
+                <span @click="onLoginModal">ログイン</span>
+                <RouterLink   to="/login">サインアップ</RouterLink>
             </span>
         </div>
     </nav>
+    
+    
+    <!--モーダル-->
+    <transition name="fade" >
+        <LoginModal v-if="loginModal"@close="onCloseModal" />
+    </transition >
+    
+    <!--モーダル-->
+    <transition name="fade" >
+        <LevelModal v-if="levelModal"@close="onCloseModal" />
+    </transition >
    
 </div>
 </template>
-<style type="text/css">
-    .header__title{
-        font-size:35px;
-        font-weight: bold;
-        color:black;
-        cursor: pointer;
-    }
-    .header__nowtime{
-        margin-left: 15px;
-        font-weight: bold;
-    }
-</style>
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
-
+import LoginModal from './modal/Login.vue'
+import LevelModal from './modal/Level.vue'
 export default {
+    components: { LoginModal,LevelModal },
     data(){
         return{
-            nowTime: new Date().getHours() + ':' +  new Date().getMinutes() 
+            nowTime: new Date().getHours() + ':' +  new Date().getMinutes() ,
+            loginModal: false,
+            levelModal: false,
         }
     },
     
@@ -69,13 +69,24 @@ export default {
                 if(response.status === 200){
                     this.$store.commit('currentUser', null)
                 }
-            }).catch(err => {
-                console.log(err);
-            });
-
+            })
         },
         createLog(){
-            }
+            // axios.post(`/api/logout`).then(response => {
+            //     console.log(response); 
+            //     if(response.status === 200){
+            //         this.$store.commit('currentUser', null)
+            //     }
+            // })
+            this.levelModal = true
+        },
+        onLoginModal(){
+            this.loginModal = true
+        },
+        onCloseModal() {
+            this.loginModal = false
+            this.levelModal = false
+        },
     },
     created(){
     }

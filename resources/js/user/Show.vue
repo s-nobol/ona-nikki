@@ -279,7 +279,7 @@ export default {
             })
         },
         changeMode(){
-             const mode = ! this.mode
+            const mode = ! this.mode
             this.mode = mode
             window.sessionStorage.setItem(['mode'],[mode]);
         }
@@ -289,11 +289,6 @@ export default {
     created(){
         this.getUser()
         this.mode = window.sessionStorage.getItem(['mode']); 
-        
-        
-        axios.get(`/api/logs/1505/1` ).then(response => {
-            console.log(response); 
-        })
     },
 }
 </script>

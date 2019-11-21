@@ -86,6 +86,7 @@ body{
 .bg__menu{
     background-color: Menu;
 }
+// フラッシュ
 .flash__form{
     height: 50px;
     overflow: hidden;
@@ -93,4 +94,16 @@ body{
 .flash-edit{
     background-color: mediumseagreen;
     color:white;
+}
+
+// ヘッダー
+.header__title{
+    font-size:35px;
+    font-weight: bold;
+    color:black;
+    cursor: pointer;
+}
+.header__nowtime{
+    margin-left: 15px;
+    font-weight: bold;
 }

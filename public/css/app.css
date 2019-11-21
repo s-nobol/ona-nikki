@@ -11201,25 +11201,104 @@ a.text-dark:focus {
   color: white;
 }
 
-.fade-leave-active,
-.fade-enter-active {
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+.header__title {
+  font-size: 35px;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
 }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
+.header__nowtime {
+  margin-left: 15px;
+  font-weight: bold;
 }
 
-.slide_down-enter-active,
-.slide_down-leave-active {
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+.model {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 }
 
-.slide_down-enter,
-.slide_down-leave-to {
-  height: 0;
+.model__content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  margin-left: -180px;
+  margin-top: -250px;
+}
+
+.LoginForm {
+  padding: 0px 30px;
+  height: 450px;
+  width: 340px;
+  margin: auto;
+}
+
+.LoginForm__title {
+  margin-top: 35px;
+}
+
+.LoginForm label {
+  font-weight: bold;
+}
+
+.LoginForm input {
+  width: 100%;
+  padding: 5px;
+}
+
+.LoginForm__button {
+  margin-top: 15px;
+}
+
+.LoginForm__button button {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: crimson;
+  color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.LoginForm i {
+  padding: 0px 15px;
+}
+
+.LoginForm span {
+  margin: auto;
+}
+
+.LoginForm__border::before {
+  content: "\30FC";
+}
+
+.LoginForm__border::after {
+  content: "\30FC";
+}
+
+.LoginForm__google__button {
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: #DD5144;
+  color: white;
+}
+
+.LoginForm__twitter__button {
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: #1da1f2;
+  color: white;
 }
 
