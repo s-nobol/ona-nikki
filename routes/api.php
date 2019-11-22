@@ -30,10 +30,13 @@ Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallba
 
 
 // home logs
-Route::get('/logs/{year}', 'AppController@year');
-Route::get('/logs/{year}/{month}', 'AppController@month');
+Route::get('/log/{year}', 'AppController@year');
+Route::get('/log/{year}/{month}', 'AppController@month');
+// Route::get('/log/{year}', 'AppController@year');
+// Route::get('/log/{year}/{month}', 'AppController@month');
 
 // user logs
+// Route::resource('log', 'LogController');
 Route::post('/logs', 'LogController@store');
 Route::put('/logs/{log}', 'LogController@update');
 Route::delete('/logs/{log}', 'LogController@destroy');
