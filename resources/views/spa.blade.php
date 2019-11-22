@@ -25,7 +25,7 @@
         <!--<link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">-->
         <!--<link href="{{ secure_asset('css/anime.css') }}" rel="stylesheet">-->
         
-      
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>

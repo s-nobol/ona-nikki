@@ -34,7 +34,7 @@ class Url_Log_Test extends TestCase
         
         // ログインせずにアクセス
         $response = $this->get('/api/logs/2019' );
-        $response->assertStatus(401);
+        $response->assertStatus(200);
         
         // ログインしてにアクセス
         $this->actingAs($current_user);
@@ -45,6 +45,7 @@ class Url_Log_Test extends TestCase
         $response->assertStatus(200);
     }
     
+    
     public function test__api__month__Log()
     {  
         $current_user = User::where('id', $this->user->id )->first();
@@ -52,7 +53,7 @@ class Url_Log_Test extends TestCase
         
         // ログインせずにアクセス
         $response = $this->get('/api/logs/2019/1' );
-        $response->assertStatus(401);
+        $response->assertStatus(200);
         
         // ログインしてにアクセス
         $this->actingAs($current_user);
@@ -62,6 +63,7 @@ class Url_Log_Test extends TestCase
         $response = $this->get('/api/logs/2019/1' );
         $response->assertStatus(200);
     }
+    
     
     
     // urlのテストなので中身については問わない
@@ -79,42 +81,47 @@ class Url_Log_Test extends TestCase
         
         // ログインしてにアクセス
         $response = $this->post('/api/logs');
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
+    
+    
     
     // urlのテストなので中身については問わない
     public function test__api__update()
     {  
       
         // ログインせずにアクセス
-        $response = $this->put('/api/logs/'.$this->log);
+        $response = $this->put('/api/logs/'.$this->log->id);
         $response->assertStatus(401);
         
         // ログインしてにアクセス
         $current_user = User::where('id', $this->user->id )->first();
-        $this->actingAs($current_user);
+        // print_r($current_user->id , $this->log->user());
+        $this->actingAs($this->user);
         $this->assertTrue(Auth::check());
         
         // ログインしてにアクセス
-        $response = $this->put('/api/logs/'.$this->log);
+        $response = $this->put('/api/logs/'.$this->log->id);
         $response->assertStatus(200);
     }
+    
+    
     
     // urlのテストなので中身については問わない
     public function test__api__destroy()
     {  
       
         // ログインせずにアクセス
-        $response = $this->delete('/api/logs/'.$this->log);
+        $response = $this->delete('/api/logs/'.$this->log->id);
         $response->assertStatus(401);
         
         // ログインしてにアクセス
         $current_user = User::where('id', $this->user->id )->first();
-        $this->actingAs($current_user);
+        $this->actingAs($this->user);
         $this->assertTrue(Auth::check());
         
         // ログインしてにアクセス
-        $response = $this->delete('/api/logs/'.$this->log);
+        $response = $this->delete('/api/logs/'.$this->log->id);
         $response->assertStatus(200);
     }
     

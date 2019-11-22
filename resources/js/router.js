@@ -42,7 +42,7 @@ export default new Router({
         { path: '/location', component: location  },
         { path: '/ranking', component: ranking  },
         { path: '/logs/:year', component: home_year, props: true  },
-        // { path: '/logs/:year/:month', component: home_month,  props: true },　//今は入れなくていい
+        { path: '/logs/:year/:month', component: home_month,  props: true },　
         
         //login && Oauth
         { path: '/login', component: login  },
@@ -53,7 +53,7 @@ export default new Router({
         { path: '/users/:id', component: show, props: true   },
         { path: '/mypage/logs', component: logs  },
         { path: '/mypage/logs/:year', component: user_year, props: true  },
-        { path: '/mypage/logs/:year/:month', component: user_month,  props: true },
+        { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
     ],
     
     base: process.env.BASE_URL,  // これ

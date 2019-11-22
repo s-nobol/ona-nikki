@@ -9,6 +9,9 @@ class Log extends Model
     //
     protected $fillable = [
         'time', 'category', 'comment',
+    ];    
+    protected $casts = [
+        'count' => 'int',
     ];
     
     public function user()

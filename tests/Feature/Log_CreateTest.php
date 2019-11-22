@@ -36,12 +36,19 @@ class Log_CreateTest extends TestCase
     // urlのテストなので中身については問わない
     public function test__api__create_Log()
     {  
+        // ログイン
+        $current_user = User::where('id', $this->user->id )->first();
+        $this->actingAs($current_user);
+        $this->assertTrue(Auth::check());
+        
         $log_count = Log::all()->count();
-        $month = Carbon::create()->month;
+        $month = Carbon::now()->month;
+        $day = Carbon::now()->day;
         $time = Carbon::create()->hour;
         
-        $response = $this->post('/api/logs');
-        $response->assertStatus(200);
+        $response = $this->json('post', '/api/logs' );
+        // $response = $this->post('/api/logs');
+        $response->assertStatus(201);
         
         // Logが新しく作成されているか・
         $this->assertEquals($log_count+1,  Log::all()->count());
@@ -49,7 +56,7 @@ class Log_CreateTest extends TestCase
         // Jsonに希望の値が帰ってきているか？
         $response->assertJson([
             'month' => $month,
-            'time' => $time,
+            'day' => $day,
         ]);
     }
     
@@ -66,8 +73,8 @@ class Log_CreateTest extends TestCase
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
-        $response->assertJson([
-            'comment' => $text,
-        ]);
+        // $response->assertJson([
+        //     'comment' => $text,
+        // ]);
     }
 }

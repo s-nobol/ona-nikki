@@ -16,12 +16,15 @@ class CreateLogsTable extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             
-            $table->tinyInteger('time');
             $table->tinyInteger('month');
+            $table->date('day');
+            $table->tinyInteger('time');
             
             $table->string('category')->nullable();
             $table->string('comment')->nullable();
             // $table->integer('')->nullable(); 費やした時間
+            
+            
             
             $table->timestamps();
             

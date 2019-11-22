@@ -6,7 +6,9 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 use App\User;
+use App\Log;
 use App\Policies\UserPolicy;
+use App\Policies\LogPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -16,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         User::class => UserPolicy::class,
+        Log::class => LogPolicy::class,
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 

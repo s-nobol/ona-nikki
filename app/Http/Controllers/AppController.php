@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-
+// use Illuminate\Support\Facades\DB;
+use DB;
 use App\Log;
 use Exception;
 class AppController extends Controller
@@ -20,9 +20,6 @@ class AppController extends Controller
     public function index()
     {
 
-        if (Auth::check()) {
-            return view('mypage');
-        }
         return view('home');
     }
 
@@ -48,14 +45,33 @@ class AppController extends Controller
     public function year($year)
     {
         $this->carbon_try($year, 1);
-        $logs = Log::whereYear('created_at', $year)
-            ->select(DB::raw('count(*) as count , id, month'))
-            ->groupBy('month')
-            ->get();
         
-        $test_logs =  "test";
+        $month_data = [];
         
-        return  compact('logs','test_logs');
+        for ($i = 1; $i < 13; $i++) {
+            
+            //日付ごとに集計
+            $logs = Log::whereYear('created_at', $year)
+                ->whereMonth('created_at', $i)
+                ->select(DB::raw('count(*) as count , day as label'))
+                ->groupBy('day')
+                ->get();
+            
+            
+            if (count($logs)) {
+                array_push($month_data,[ 
+                    'month' => $i, 
+                    'data' => $logs->pluck('count') ,
+                    'label' => $logs->pluck('label') 
+                ]);
+            }
+            
+        }
+            
+        
+        
+        return  compact('month_data');
+        
     }
     
     
@@ -65,24 +81,35 @@ class AppController extends Controller
     
     public function month($year,  $month)
     {
-        $d = $this->carbon_try($year, $month);
-        if(! $d){ abort(404);}
+        $this->carbon_try($year, $month);
         
         // 2020/XX/1 ~ 2020/XX/1
         $date_start = Carbon::create($year,$month);
         $date_end = Carbon::create($year,$month+1);
         
         
-        // 日付ごとの集計
+        
+        // あとで削除
         $logs = Log::whereYear('created_at', $year)
             ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count , id'))
-            // ->groupBy('time')
+            ->select(DB::raw('count(*) as count , day as label'))
+            ->groupBy('day')
             ->get();
             
+            
+        $month_count = $logs->pluck('count'); 
+        $month_label = $logs->pluck('label');
+        $month_count_ave = "";
         
-        $test_logs =  "test";
-        return compact('month','logs','test_logs');
+        
+        $all_logs = Log::
+                selectRaw('count(*) / ? as count', [24])
+                ->groupBy('day')
+                ->get();
+        $month_count_ave = $all_logs->pluck('count');
+        
+        
+        return compact('month','logs','month_count','month_count_ave','month_label');
     }
     
     
@@ -96,3 +123,10 @@ class AppController extends Controller
         }
     }
 }
+
+// 日付ごとの集計
+// $logs = Log::whereYear('created_at', $year)
+//     ->whereMonth('created_at', $month)
+//     ->select(DB::raw('count(*) as count , id'))
+//     ->groupBy('day') 
+//     ->get();

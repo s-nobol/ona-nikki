@@ -19,5 +19,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('123123123'),
             // 'role' => 3 ,//ユーザーにレベル3の権限
         ]);
+        // Log 50個
+        factory(App\User::class, 10)->create()->each(function ($log) {});
     }
 }

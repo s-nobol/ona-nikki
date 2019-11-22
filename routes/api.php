@@ -27,16 +27,17 @@ Route::get('/reflesh-tiken', function(Request $request){
 Route::get('/login/{OAuth}', 'Auth\OAuthController@redirectToProvider');
 Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback');
 
-Route::put('/logs/{log}', 'LogController@update');
 
 
 // home logs
-Route::get('/logs/{year}', 'AppController@year')->name('logs-year');
-Route::get('/logs/{year}/{month}', 'AppController@month')->name('logs-month');
+Route::get('/logs/{year}', 'AppController@year');
+Route::get('/logs/{year}/{month}', 'AppController@month');
+
+// user logs
+Route::post('/logs', 'LogController@store');
+Route::put('/logs/{log}', 'LogController@update');
+Route::delete('/logs/{log}', 'LogController@destroy');
+Route::get('/mypage/logs/{year}', 'LogController@year');
+
 
 Route::resource('users', 'UserController');
-// Route::resource('logs', 'LogController');
-
-// プロフィールが正しく編集できるようにする
-// php artisan make:request UserRequest
-// php artisan make:test UserEditTest 

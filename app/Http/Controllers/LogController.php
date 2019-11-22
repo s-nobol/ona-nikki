@@ -12,6 +12,11 @@ use Exception;
 
 class LogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+        $this->authorizeResource(Log::class, 'log');  
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,11 +41,16 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
+        // month 削除
         
         $logs = new Log();
         $logs->user_id =  Auth::user()->id; 
+        $logs->month =  Carbon::now()->month;
+        $logs->day =  Carbon::now()->day;
         $logs->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
         $logs->save();
+        
+        return $logs;
     }
 
     /**
@@ -76,7 +86,7 @@ class LogController extends Controller
      */
     public function update(Request $request, Log $log)
     {
-    
+        // dd($log);
         $log = $log->fill($request->all());
         $log->save();
         // return $log;
@@ -92,7 +102,6 @@ class LogController extends Controller
      */
     public function destroy(Log $log)
     {
-        //
     }
     
     
@@ -146,20 +155,6 @@ class LogController extends Controller
             ->get();
     }
     
-    
-    // 月別での集計を行う
-    public function api_year($year)
-    {
-        
-        $logs = Log::whereYear('created_at', $year)
-            ->select(DB::raw('count(*) as count , id, month'))
-            ->groupBy('month')
-            ->get();
-        
-        $month = $logs->pluck('month');
-        $count = $logs->pluck('count');
-        return compact('logs','month','count');
-    }
     
     
     // Urlパラメータが正しいのか検証

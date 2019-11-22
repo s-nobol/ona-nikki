@@ -72,7 +72,7 @@ export default {
             })
         },
         createLog(){
-            // axios.post(`/api/logout`).then(response => {
+            // axios.post(`/api/logs`).then(response => {
             //     console.log(response); 
             //     if(response.status === 200){
             //         this.$store.commit('currentUser', null)
