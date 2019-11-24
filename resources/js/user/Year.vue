@@ -1,16 +1,77 @@
 <template>
     <div>
-       <!--チャートを入力-->
-       <h5><b>year</b></h5>
        
        
        <div class="card ">
+       <!--チャートを入力-->
+       <h5><b>year</b></h5>
            <h4>{{ year }} 年月別射精回数グラフ(自分のデータとみんなのデータを比較)</h4>
-           <img src="/image/chart.jpg"></img>
+           <!--<img src="/image/chart.jpg"></img>-->
+            
+            <LineChart 
+                :dataSet="month_data_count"
+                :dataSet2="other_user_month_data_count"
+                :labels="month_data_label"
+            />
+                    
+            <!--後日検討-->
+            <!--<div class="row">-->
+            <!--    <div class="col-10">-->
+            <!--    </div>-->
+            <!--    <div class="col-2">-->
+            <!--    </div>-->
+            <!--</div>-->
        </div>
-       
-       
-       
+   
+        <div class="row">
+            <div class="card col-4 ">
+            
+                <div class="chart_title">
+                    <span ><i class="fas fa-plus"></i></span>
+                    <span>課金指数</span>
+                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
+                </div>
+                
+                <div class="chart_content">
+                <Bar
+                    :dataSet="time_data"
+                    :labels="time_data_label"
+                    />
+                </div>
+                    
+            </div>
+            <div class="card col-4">
+            
+                <div class="chart_title">
+                    <span ><i class="fas fa-plus"></i></span>
+                    <span>年間割合</span>
+                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
+                </div>
+                
+                <div class="chart_content">
+                    <Doughnut 
+                        :dataSet="month_data_label" class="Doughnut_Chart"
+                    />
+                </div>
+                
+            </div>
+            <div class="card col-4">
+            
+                <div class="chart_title">
+                    <span ><i class="fas fa-plus"></i></span>
+                    <span>時間帯別割合</span>
+                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
+                </div>
+                
+                <div class="chart_content">
+                    <Bar
+                        id="time"
+                        :dataSet="time_data"
+                        :labels="time_data_label"
+                        />
+                </div>
+            </div>
+        </div>
        
        
        <!--今月と先月の比較-->
@@ -55,70 +116,60 @@
             </div>
         </div>
         
-        <!--今月と先月の比較-->
-        <div class="row">
-            <div class="col-8 card ">
-               <h5><b>みんなと比較（棒グラフ）</b></h5>
-                 <img src="/image/chart.jpg"></img>
-                 
-                 <div>
-                   <h5><b>比較データ詳細除法）</b></h5>
-                 </div>
-            </div>
-            <div class="col-4 p-0 ">
-                <div class="card p-5">
-                   <h5><b>支援金比較（円グラフ）</b></h5>
-                </div>
-                <div class="card p-5">
-                   <h5><b>支援金比較（円グラフ）</b></h5>
-                </div>
-            </div>
-        </div>
-        
         <div>
             <img src="/image/ona-nikki5.jpg"></img>
         </div>
        
-       <Bar :dataSet="count" />
-       <Radar :dataSet="count" />
     </div>
 </template>
-
+<style type="text/css">
+    .Doughnut_Chart{
+        /*width:500px;*/
+    }
+.chart_title{
+    padding: 10px;
+    background-color: #fafafa;
+    color:gray;
+}
+.chart_content{
+    padding: 10px;
+}
+</style>
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
-
-
+import LineChart from '../charts/Line.vue'
 import Bar from '../charts/Bar.vue'
-import Bubble from '../charts/Bubble.vue'
 import Doughnut from '../charts/Doughnut.vue'
-import Radar from '../charts/Radar.vue'
 export default {
-    components: { Bar,Bubble ,Doughnut ,Radar},
+    components: { LineChart,Bar,Doughnut , },
+    props: {
+         year: String,
+    },
     data(){
         return{
             count: [],
             month: [],
+            month_data_label:[],
+            month_data_count:[],
+            other_user_month_data_count: [],
             doughnut: [],
+            time_data: [],
+            time_data_label:[],
             msg: '150'
         }
     },
     methods: {
         get_chart(){
             console.log("チャートの取得")
-            axios.get(`api/logs/year/2018`, this.NoticeEditForm).then(response => {
+            axios.get(`/api/mypage/logs/${this.year}`, ).then(response => {
               
                 console.log(response);
-                this.count = response.data.count
-                this.month = response.data.month
-                
-                this.doughnut = response.data
-             
-                // this.create_chart()
-            }).catch(err => {
-                    alert(err)
-            });
+                this.month_data_count = response.data.month_data_count
+                this.month_data_label = response.data.month_data_label
+                this.other_user_month_data_count = response.data.otherlogs
+                this.time_data = response.data.time_data
+                this.time_data_label = response.data.time_data_label
+                // otherlogs
+            })
         },
     },
     created(){

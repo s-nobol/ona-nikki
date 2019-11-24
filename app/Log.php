@@ -12,6 +12,7 @@ class Log extends Model
     ];    
     protected $casts = [
         'count' => 'int',
+        'created_at' => 'datetime:Y年m月d日',
     ];
     
     public function user()

@@ -1,9 +1,13 @@
 
 $mein_color: #ff4a4a;
 
-
+.card{
+    // padding: 20;
+    margin-bottom: 20px;
+}
 body{
-    // background-color: whitesmoke;
+    background-color: Menu;
+    // background-color: white;
 }
 
 .bg__danger{
@@ -13,8 +17,13 @@ body{
     margin: 0px;
     padding: 0px;
 }
-.col-2{
-    margin: 0px;
+.col-2,
+.col-3,
+.col-4,
+.col-6,
+.col-8,
+.col-9{
+    // margin: 0px;
     padding: 0px;
 }
 .bg__red{
@@ -39,6 +48,7 @@ body{
     padding: 15px;
 }
 .Statusbar__item__title{
+    color: gray;
     font-size: 15px;
     font-weight: bold;
 }
@@ -106,4 +116,23 @@ body{
 .header__nowtime{
     margin-left: 15px;
     font-weight: bold;
+}
+.DoughnutChart{
+    position: relative;
+}
+.DoughnutChart__content{
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    line-height: 100px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: rgba(255, 74, 74, 0.9);
+    
 }

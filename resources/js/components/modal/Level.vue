@@ -1,9 +1,9 @@
 <template>
 <div >
     <div class="model" @click.self="">
-        <div class="model__content">
+        <div class="model__content modal-dialog ">
         
-            <div class="levelForm">
+            <div class="levelForm modal-content">
                 <div class="levelForm__title">
                     <h5><b>レベルが上がりました</b></h5>
                 </div>
@@ -24,7 +24,10 @@
             </div>
             
         </div>
-    </div>
+  </div>
+  
+
+  
 </div>
 </template>
 <style type="text/css">

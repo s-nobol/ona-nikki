@@ -20,7 +20,7 @@
             </div>
             
             <!--メイン-->
-            <main  class="col-8">
+            <main  class="col-8 pl-4 pr-4">
                  <RouterView />
             </main>
         
@@ -33,7 +33,7 @@
         
         
         <footer>
-                <div>日本全国オワコンプロジェクト111</div>
+            <div>日本全国オワコンプロジェクト111</div>
         </footer>
     </div>
 </template>

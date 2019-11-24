@@ -25,7 +25,7 @@ import mypage from './user/Mypage.vue'
 import show from './user/Show.vue'
 import logs from './user/Logs.vue'
 import user_year from './user/Year.vue'
-import user_month from './user/Month.vue'
+// import user_month from './user/Month.vue'
 
 
 Vue.use(Router)
@@ -53,7 +53,7 @@ export default new Router({
         { path: '/users/:id', component: show, props: true   },
         { path: '/mypage/logs', component: logs  },
         { path: '/mypage/logs/:year', component: user_year, props: true  },
-        { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
+        // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
     ],
     
     base: process.env.BASE_URL,  // これ

@@ -1,25 +1,24 @@
 <template>
     <div>
-        <!--棒グラフと折れ線グラフ-->
-        <canvas id="BarLine_Chart" ></canvas>
+       <!--帯グラフ-->
+        <canvas :id="id" ></canvas>
     </div>
 </template>
 
 <script>
-
 export default {
     props: {
+        id: {
+            type: String,
+            require  : false,
+            default: 'BarHorizontalChart',
+        },
+        dataSet: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
         labels: {
-            type: Array,
-            require  : false,
-            default: () => []
-        },
-        barDataSet: {
-            type: Array,
-            require  : false,
-            default: () => []
-        },
-        lineDataSet: {
             type: Array,
             require  : false,
             default: () => []
@@ -33,43 +32,40 @@ export default {
     methods: {
         // チャートの作成
         create_chart(){
-
-            var BarLine_Chart = document.getElementById('BarLine_Chart').getContext('2d');
-            this.chart = new Chart(BarLine_Chart, {
-                type: 'bar',
+            var BarChart = document.getElementById(this.id).getContext('2d');
+            this.chart = new Chart(BarChart, {
+                type: 'horizontalBar',
     
                 data: {
                     labels: this.labels,
-                    datasets: [{ 
-                        type: 'line',
+                    datasets: [{
                         label: '月別集計',
-                        backgroundColor: 'rgba(255, 74, 74, 0.1)', 
-                        pointBackgroundColor: "rgba(192,192,192,0.9)",
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        borderColor: 'rgba(255, 74, 74, 0.9)',
-                        data: this.lineDataSet
-                    },{ 
-                        type: 'bar',
-                        label: '月別集計',
-                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
-                        data: this.barDataSet
+                        borderColor: 'rgba(255, 74, 74, 0.8)',
+                        backgroundColor: 'rgba(255, 74, 74, 0.8)',
+                        data: this.dataSet
                     }]
-                },
-                  options: { 
+                },  
+                // laberuの非表示
+                options: { 
                     legend: {
                         display: false
                      }, 
+                     tooltips: {
+                        enabled: true
+                     },
                     scales: {
                         xAxes: [{
-                            display: true,
+                            display: false,
                             stacked: false,
                             gridLines: {
-                                display: false
-                            },
-                            barPercentage: 0.5
+                                display: true
+                            }, 
+                            ticks: {
+                                beginAtZero: true
+                            }
                         }],
                         yAxes: [{
-                            display: true,
+                            display: false,
                             gridLines: {
                                 drawBorder: false
                             }
@@ -82,10 +78,12 @@ export default {
     },
     watch: {
         labels: function(labels){
-            console.log("BarLine",this.labels)
+            console.log("BarHorizontalChart")
             if(this.chart){this.chart.destroy()}
             this.create_chart()
         }
-    }
+    },
 }
 </script>
+
+      

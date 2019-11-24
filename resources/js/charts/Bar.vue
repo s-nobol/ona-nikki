@@ -1,21 +1,18 @@
 <template>
     <div>
        <!--帯グラフ-->
-       
-       
-        <canvas id="BarChart" ></canvas>
-       
+        <canvas :id="id" ></canvas>
     </div>
 </template>
 
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクトリに素材ごとのチャートをいれておく
-
-
 export default {
     props: {
+        id: {
+            type: String,
+            require  : false,
+            default: 'BarChart',
+        },
         dataSet: {
             type: Array,
             require  : false,
@@ -27,20 +24,24 @@ export default {
             default: () => []
         },
     },
+    data(){
+        return{
+            chart: null
+            }
+    },
     methods: {
         // チャートの作成
         create_chart(){
-
-            var BarChart = document.getElementById('BarChart').getContext('2d');
-            var BarChart1 = new Chart(BarChart, {
+            var BarChart = document.getElementById(this.id).getContext('2d');
+             this.chart = new Chart(BarChart, {
                 type: 'bar',
     
                 data: {
                     labels: this.labels,
                     datasets: [{
                         label: '月別集計',
-                        borderColor: ['rgba(255, 74, 74, 0.9)'],
-                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
+                        borderColor: ['rgba(63, 55, 110, 0.9)'],
+                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
                         data: this.dataSet
                     }]
                 },  
@@ -50,50 +51,38 @@ export default {
                         display: false
                      }, 
                      tooltips: {
-                        enabled: false
+                        enabled: true
                      },
-                    scales: {                          //軸設定
-                        // yAxes: [{                      //y軸設定
-                        //     display: true,             //表示設定
-                        //     ticks: {                      //最大値最小値設定
-                        //         min: 0,                   //最小値
-                        //         max: 50,                  //最大値
-                        //         fontSize: 8,             //フォントサイズ
-                        //         stepSize: 10               //軸間隔
-                        //     },
-                        // }],
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                            stacked: false,
+                            gridLines: {
+                                display: true
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }],
+                        yAxes: [{
+                            display: false,
+                            gridLines: {
+                                drawBorder: false
+                            }
+                        }]
                     },
-                    // scales: {
-                    //     xAxes: [{
-                    //         display: false,
-                    //         stacked: false,
-                    //         gridLines: {
-                    //             display: true
-                    //         }
-                    //     }],
-                    //     yAxes: [{
-                    //         display: false,
-                    //         gridLines: {
-                    //             drawBorder: false
-                    //         }
-                    //     }]
-                    // },
                       
                 }
             });
         },
     },
     watch: {
-      dataSet: function(dataSet){
-          this.create_chart()
-        //   console.log("bar_chart",this.dataSet())
-      }
+        labels: function(labels){
+            console.log("BarChart")
+            if(this.chart){this.chart.destroy()}
+            this.create_chart()
+        }
     },
-    mounted(){
-        //   console.log("bar_chart",this.dataSet)
-          console.log("bar_chart",this.labels)
-          this.create_chart()
-    }
 }
 </script>
 

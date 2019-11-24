@@ -11,6 +11,7 @@ $factory->define(Log::class, function (Faker $faker) {
         'user_id' => rand(1,5),
         'month' => rand(1,12),
         'day' => rand(1,30),
+        'category' => rand(1,5),
         'time' => rand(0,23),
         'created_at' =>  Carbon::create(rand(2018,2019),rand(1,12)),
     ];

@@ -11,13 +11,19 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # Using the RAM variation mitigates I/O contention
       # for database intensive operations.
-      - image: circleci/mysql:5.7-ram
+      # mysqlの場合
+      # - image: circleci/mysql:5.7-ram
+      # postgresの場合
+      - image: circleci/postgres:9.6-alpine
     environment:
       - APP_DEBUG: true
       - APP_ENV: testing
       - APP_KEY: base64:YlIJx6uH3OUb3hxN+PAiJKlC+EGZ2KYi8VHxsfdJpLk=
       #後日Mysqlに変更する
-      - DB_CONNECTION: sqlite
+      - DB_CONNECTION: pgsql
+      - DB_DATABASE: test
+      - DB_USERNAME: username
+      - DB_PASSWORD: password
       # - MYSQL_ALLOW_EMPTY_PASSWORD: true
     #   - image: redis:2.8.19
 

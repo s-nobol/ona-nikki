@@ -1,61 +1,60 @@
 <template>
     <div>
-        <!--棒グラフと折れ線グラフ-->
-        <canvas id="BarLine_Chart" ></canvas>
+        <!--線グラフ-->
+        <canvas id="Line_Chart" ></canvas>
     </div>
 </template>
 
 <script>
-
 export default {
     props: {
+        dataSet: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
+        dataSet2: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
         labels: {
             type: Array,
             require  : false,
             default: () => []
         },
-        barDataSet: {
-            type: Array,
-            require  : false,
-            default: () => []
-        },
-        lineDataSet: {
-            type: Array,
-            require  : false,
-            default: () => []
-        },
-    },
-    data(){
-        return{
-            chart: null
-            }
     },
     methods: {
         // チャートの作成
         create_chart(){
 
-            var BarLine_Chart = document.getElementById('BarLine_Chart').getContext('2d');
-            this.chart = new Chart(BarLine_Chart, {
-                type: 'bar',
+            var Line_Chart = document.getElementById('Line_Chart').getContext('2d');
+             new Chart(Line_Chart, {
+                type: 'line',
     
                 data: {
                     labels: this.labels,
-                    datasets: [{ 
-                        type: 'line',
+                    datasets: [{
                         label: '月別集計',
-                        backgroundColor: 'rgba(255, 74, 74, 0.1)', 
-                        pointBackgroundColor: "rgba(192,192,192,0.9)",
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        borderColor: 'rgba(255, 74, 74, 0.9)',
-                        data: this.lineDataSet
-                    },{ 
-                        type: 'bar',
+                        backgroundColor: 'rgba(255, 74, 74, 0.3)',
+                        borderColor: 'rgba(255, 74, 74, 0.8)',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'rgba(255, 74, 74, 0.8)',
+                        pointBorderWidth: 2,
+                        pointRadius:5,
+                        data: this.dataSet2
+                    },{
                         label: '月別集計',
-                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
-                        data: this.barDataSet
+                        backgroundColor: 'rgba(255, 74, 74, 0.3)',
+                        borderColor: 'rgba(255, 74, 74, 0.8)',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'rgba(255, 74, 74, 0.8)',
+                        pointBorderWidth: 2,
+                        pointRadius:5,
+                        data: this.dataSet
                     }]
                 },
-                  options: { 
+                options: { 
                     legend: {
                         display: false
                      }, 
@@ -75,15 +74,14 @@ export default {
                             }
                         }]
                     },
-                      
                 }
+                
             });
         },
     },
     watch: {
         labels: function(labels){
-            console.log("BarLine",this.labels)
-            if(this.chart){this.chart.destroy()}
+            console.log("起動")
             this.create_chart()
         }
     }

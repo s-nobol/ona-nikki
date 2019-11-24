@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Log;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
+
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
+use App\Log;
+use Auth;
+use DB;
 use Exception;
 
 class LogController extends Controller
@@ -17,20 +18,6 @@ class LogController extends Controller
         $this->middleware('auth')->except(['index']);
         $this->authorizeResource(Log::class, 'log');  
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // 自分のLogのみ
-        // $logs  = Auth::user()->logs->latest();
-        $logs = Log::where('user_id',Auth::user()->id)->latest()->get();
-        return view('log.index')->with([ 'logs' => $logs ]);
-    }
-
- 
 
     /**
      * Store a newly created resource in storage.
@@ -54,30 +41,6 @@ class LogController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Log $log)
-    {
-        //
-        return view('log.show')->with([ 'logs' => $log ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Log $log)
-    {
-        //
-        return view('log.edit')->with([ 'log' => $log ]);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -86,12 +49,9 @@ class LogController extends Controller
      */
     public function update(Request $request, Log $log)
     {
-        // dd($log);
         $log = $log->fill($request->all());
         $log->save();
-        // return $log;
-        return view('log.edit')->with([ 'log' => $log ]);
-        
+        return $log;
     }
 
     /**
@@ -102,58 +62,73 @@ class LogController extends Controller
      */
     public function destroy(Log $log)
     {
+        return "Log削除成功";
     }
     
-    
-    
-    // 月別での集計を行う
-    public function year($year)
+    /**
+    *
+    * MtpageControllerにも同じもの作った
+    * 
+    */
+    // 月ごとのデータ
+    public function my_month_data()
     {
-        
-        $logs = Log::whereYear('created_at', $year)
-            ->select(DB::raw('count(*) as count , id, month'))
-            ->groupBy('month')
-            ->get();
-        
-        $test_logs =  "test";
-        
-        return view('log.year',compact('logs','test_logs'));
-    }
-    
-    
-    
-    
-    // ログの取得
-    
-    public function month($year,  $month)
-    {
-        
-        // エラーが発生したら400を返す
-        // dd($carbon);
-        
-        $date_start = Carbon::create($year,$month);
-        $date_end = Carbon::create($year,$month+1);
-        // dd($date_end);
-        $logs = Log::whereYear('created_at', $year)
+        $carbon = new Carbon();
+        $year = $carbon->year;
+        $month = $carbon->month;
+        $month_logs = Auth::user()->logs()
+            ->whereYear('created_at', $year)
             ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count , id'))
-            // ->groupBy('time')
+            ->select(DB::raw('count(*) as count, day as label '))
+            ->groupBy('day')
             ->get();
         
-        $test_logs =  "test";
-        // $logs = $logs->pluck('count');//countのみ取得
-        
-        return view('log.month',compact('month','logs','test_logs'));
+        $monht_data = $month_logs->pluck('count');
+        $month_data_label = $month_logs->pluck('label');
+            
+        return compact( 'data', 'data_label');
     }
     
-    private function test_method($date){
-        $date_start = "開始日";
-        $date_end = "終了日";
-        Log::select(DB::raw('count(*) as count , id'))
-            ->where('created_at','>', $date_start)->where('created_at','<', $date_end)
-            ->groupBy('time')
+    
+    // 一年間のデータ
+    public function my_year_data()
+    {
+        $carbon = new Carbon();
+        $month = $carbon->month;
+        $year = $carbon->subYear();
+        
+        $year_logs = Auth::user()->logs()
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->select(DB::raw('count(*) as count, day as label '))
+            ->groupBy('day')
             ->get();
+        
+        $year_data = $year_logs->pluck('count');
+        $year_data_label = $year_logs->pluck('label');
+        
+        return compact( 'data', 'data_label');
     }
+    
+    
+    // すべてのデータ
+    public function my_all_data()
+    {
+        
+        $logs = Auth::user()->logs()
+            ->select(DB::raw('count(*) as count '),
+             DB::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),  
+             DB::raw('YEAR(created_at) year, MONTH(created_at) months'))
+            ->groupBy('year','months')
+            ->get();
+        $all_data = $logs->pluck('count');
+        $all_data_label = $logs->pluck('label');
+        
+        return compact( 'data', 'data_label');
+    }
+    
+    
+    
     
     
     

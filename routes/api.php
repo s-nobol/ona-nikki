@@ -28,19 +28,38 @@ Route::get('/login/{OAuth}', 'Auth\OAuthController@redirectToProvider');
 Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback');
 
 
-
 // home logs
-Route::get('/log/{year}', 'AppController@year');
-Route::get('/log/{year}/{month}', 'AppController@month');
-// Route::get('/log/{year}', 'AppController@year');
-// Route::get('/log/{year}/{month}', 'AppController@month');
-
-// user logs
-// Route::resource('log', 'LogController');
-Route::post('/logs', 'LogController@store');
-Route::put('/logs/{log}', 'LogController@update');
-Route::delete('/logs/{log}', 'LogController@destroy');
-Route::get('/mypage/logs/{year}', 'LogController@year');
+// 後日変更を検討する？
+// Route::get('/app/logs/{year}', 'AppController@year');
+// Route::get('/app/logs/{year}/{month}', 'AppController@month');
+Route::get('/logs/{year}', 'AppController@year');
+Route::get('/logs/{year}/{month}', 'AppController@month');
 
 
+// milage ログイン後のユーザーページ
+Route::get('/mypage', 'MypageController@mypage');
+Route::get('/mypage/logs/{year}', 'MypageController@year');
+Route::get('/mypage/logs', 'MypageController@logs');
+Route::get('/mypage/quest', 'MypageController@quest');
+
+
+Route::get('/mypage/month/data', 'MypageController@month_data');
+Route::get('/mypage/year/data', 'MypageController@year_data');
+Route::get('/mypage/all/data', 'MypageController@all_data');
+
+
+// user logs ( 作成 / 編集 / 削除 のみ)
+Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
+
+
+// モーダルの修正
+// モーダルはMainVViewより下にすると起動する
+// モーダル表示を別に作成するか・？
+
+// マイページ/に　Monthデータ
+// マイページ/yearに　Yearデータ
+// マイページ/Profile　Alldataデータ
+
+// year.vue 線グラフに変更
+// 48.72kcal 男性の消費カロリ-

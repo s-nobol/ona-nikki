@@ -17,6 +17,11 @@ class Url_Log_Test extends TestCase
     private $user;
     private $log;
     
+    /**
+    *
+    * / store / edit  / delete のみ利用
+    * 
+    */
     
     public function setUp():void
     {
@@ -25,48 +30,8 @@ class Url_Log_Test extends TestCase
         $this->log = factory(Log::class)->create(['user_id' => $this->user->id ,]);  
     }
     
-        
-    // urlのテストなので中身については問わない
-    public function test__api__Yeas__Log()
-    {  
-        $current_user = User::where('id', $this->user->id )->first();
-      
-        
-        // ログインせずにアクセス
-        $response = $this->get('/api/logs/2019' );
-        $response->assertStatus(200);
-        
-        // ログインしてにアクセス
-        $this->actingAs($current_user);
-        $this->assertTrue(Auth::check());
-        
-        // ログインしてにアクセス
-        $response = $this->get('/api/logs/2019' );
-        $response->assertStatus(200);
-    }
     
-    
-    public function test__api__month__Log()
-    {  
-        $current_user = User::where('id', $this->user->id )->first();
-      
-        
-        // ログインせずにアクセス
-        $response = $this->get('/api/logs/2019/1' );
-        $response->assertStatus(200);
-        
-        // ログインしてにアクセス
-        $this->actingAs($current_user);
-        $this->assertTrue(Auth::check());
-        
-        // ログインしてにアクセス
-        $response = $this->get('/api/logs/2019/1' );
-        $response->assertStatus(200);
-    }
-    
-    
-    
-    // urlのテストなので中身については問わない
+    // Log作成
     public function test__api__create()
     {  
       
@@ -85,8 +50,7 @@ class Url_Log_Test extends TestCase
     }
     
     
-    
-    // urlのテストなので中身については問わない
+    // Log編集
     public function test__api__update()
     {  
       
@@ -106,8 +70,7 @@ class Url_Log_Test extends TestCase
     }
     
     
-    
-    // urlのテストなので中身については問わない
+    // Log削除
     public function test__api__destroy()
     {  
       

@@ -45,35 +45,38 @@
     </div>
     
     
-    <ul class="list-group">   
-        <li class="list-group-item">
-            <RouterLink  to="/notification">お知らせ</RouterLink>
-        </li>
-        <li class="list-group-item">年代
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/logs/2017">2017</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/logs/2018">2018</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/logs/2019">2019</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/sex">性別</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/age">年齢</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/location">地域（都道府県）</RouterLink>
-        </li>
-        <li class="list-group-item">
-            <RouterLink  to="/about">おな日記について</RouterLink>
-        </li>
-    </ul>
-        
+        <ul class="list-group">   
+            <li class="list-group-item">
+                <RouterLink  to="/notification">お知らせ</RouterLink>
+            </li>
+            <li class="list-group-item">年代
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/logs/2017">2017</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/logs/2018">2018</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/logs/2019">2019</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/home">ホーム</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/sex">性別</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/age">年齢</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/location">地域（都道府県）</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/about">おな日記について</RouterLink>
+            </li>
+        </ul>
+            
 </div>
 </template>
 

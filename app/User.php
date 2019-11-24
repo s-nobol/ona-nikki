@@ -48,6 +48,5 @@ class User extends Authenticatable
     
     public function logs(){
         return $this->hasMany('App\Log');
-        // return $this->belongsTo('App\Category');
     }
 }
