@@ -48,9 +48,9 @@ class UserEditTest extends TestCase
         // 有効なデータでログイン
         $response = $this->json('PUT', '/api/users/'.$this->user->id, [
             'name' => 'name', 
-            'age' => '15', 
+            'age' => 15, 
             'sex' => 'man', 
-            'address' => 'tokyo', 
+            'location' => 'tokyo', 
             'theme' => 'red', 
             'receive_email' => true, 
         ]);

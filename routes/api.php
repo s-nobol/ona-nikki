@@ -32,6 +32,7 @@ Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallba
 // 後日変更を検討する？
 // Route::get('/app/logs/{year}', 'AppController@year');
 // Route::get('/app/logs/{year}/{month}', 'AppController@month');
+Route::get('/home', 'AppController@home');
 Route::get('/logs/{year}', 'AppController@year');
 Route::get('/logs/{year}/{month}', 'AppController@month');
 
@@ -63,3 +64,8 @@ Route::resource('users', 'UserController');
 
 // year.vue 線グラフに変更
 // 48.72kcal 男性の消費カロリ-
+
+// itme
+// Loction設定
+//  php artisan make:test Sex_Api_Test
+//  php artisan make:test Location_Api_Test

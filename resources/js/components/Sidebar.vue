@@ -66,11 +66,11 @@
             <li class="list-group-item">
                 <RouterLink  to="/sex">性別</RouterLink>
             </li>
+            <!--<li class="list-group-item">-->
+            <!--    <RouterLink  to="/age">年齢</RouterLink>-->
+            <!--</li>-->
             <li class="list-group-item">
-                <RouterLink  to="/age">年齢</RouterLink>
-            </li>
-            <li class="list-group-item">
-                <RouterLink  to="/location">地域（都道府県）</RouterLink>
+                <RouterLink  to="/location">都道府県</RouterLink>
             </li>
             <li class="list-group-item">
                 <RouterLink  to="/about">おな日記について</RouterLink>

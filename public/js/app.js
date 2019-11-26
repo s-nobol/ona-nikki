@@ -2147,9 +2147,11 @@ __webpack_require__.r(__webpack_exports__);
               }
             }],
             yAxes: [{
-              display: false,
+              display: true,
               gridLines: {
-                drawBorder: false
+                color: 'white',
+                offsetGridLines: true // drawBorder: false
+
               }
             }]
           }
@@ -2639,6 +2641,108 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    // エラーが出るので配列は一行まで
+    dataSet: {
+      type: Array,
+      required: false,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
+  watch: {
+    dataSet: function dataSet(_dataSet) {
+      console.log(_dataSet);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Rightbar.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Rightbar.vue?vue&type=script&lang=js& ***!
@@ -3051,6 +3155,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/Bar.vue */ "./resources/js/charts/Bar.vue");
+/* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
+/* harmony import */ var _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/Line.vue */ "./resources/js/charts/Line.vue");
+/* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
+/* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
+/* harmony import */ var _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Table.vue */ "./resources/js/components/Table.vue");
+/* harmony import */ var _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Ranker.vue */ "./resources/js/components/Ranker.vue");
 //
 //
 //
@@ -3123,12 +3234,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
+  components: {
+    Bar: _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Lines: _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Table: _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Ranker: _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
-  methods: {},
-  created: function created() {}
+  data: function data() {
+    return {
+      data: [],
+      data_label: [],
+      location_data: [],
+      location_data_label: [],
+      sex_data: [],
+      sex_data_label: [],
+      time_data: [],
+      time_data_label: [],
+      week_data: [],
+      week_data_label: [],
+      ranking_data: []
+    };
+  },
+  methods: {
+    get_data: function get_data() {
+      var _this = this;
+
+      axios.get("/api/home").then(function (response) {
+        console.log(response);
+        _this.data = response.data.data;
+        _this.data_label = response.data.data_label;
+        _this.location_data = response.data.location_data;
+        _this.location_data_label = response.data.location_data_label;
+        _this.sex_data = response.data.sex_data;
+        _this.sex_data_label = response.data.sex_data_label;
+        _this.time_data = response.data.time_data;
+        _this.time_data_label = response.data.time_data_label;
+        _this.week_data = response.data.week_data;
+        _this.week_data_label = response.data.week_data_label;
+        _this.ranking_data = response.data.ranking_data;
+      });
+    },
+    // 配列の合計値をだす
+    get_sum: function get_sum(data) {
+      return data.reduce(function (prev, current, i, data) {
+        return prev + current;
+      });
+    },
+    // 配列の平均値
+    get_ave: function get_ave(data) {
+      return this.get_sum(data) / data.length;
+    }
+  },
+  created: function created() {
+    this.get_data();
+  }
 });
 
 /***/ }),
@@ -3327,28 +3520,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -4647,6 +4818,25 @@ exports.push([module.i, "\n.fade-leave-active,.fade-enter-active{\n  -webkit-tra
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.ranker{\n}\n.ranker__item{\n    text-align: left;\n    padding: 0px;\n    margin: 0px;\n    cursor: pointer;\n    border-bottom: solid gainsboro 1px;\n}\n.ranker__item__number{\n  display: inline-block;\n  padding: 14px;\n}\n.ranker__item__image{\n    display: inline-block;\n}\n.ranker__item__image img{\n    border-radius: 35px;\n    /*overflow: hidden;*/\n    width: 35px;\n}\n.ranker__item__user{\n  display: inline-block;\n  padding: 14px;\n  position: relative;\n}\n.user_name{\n    position: absolute;\n    top: 30%;\n    font-size:16px;\n    margin: 0px;\n    font-weight: bold;\n    width:100px;\n}\n.user_level{\n    margin: 0px;\n    position: absolute;\n    top: 90%;\n    margin-left: 5px;\n    width:100px;\n}\n.ranker__item__count{\n  display: inline-block;\n  padding: 14px;\n  float: right;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Level.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal/Level.vue?vue&type=style&index=0&lang=css& ***!
@@ -4678,7 +4868,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.map__image{\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.map__image{\n    width: 100%;\n}\n.bg_indigo{\n    background-color: mediumseagreen;\n    color:white;\n}\n", ""]);
 
 // exports
 
@@ -6030,6 +6220,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranker.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/modal/Level.vue?vue&type=style&index=0&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/modal/Level.vue?vue&type=style&index=0&lang=css& ***!
@@ -7135,6 +7355,65 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.dataSet
+      ? _c(
+          "div",
+          { staticClass: "ranker" },
+          _vm._l(_vm.dataSet, function(user, index) {
+            return _c("ul", { staticClass: "ranker__item" }, [
+              _c("li", { staticClass: "ranker__item__number" }, [
+                _c("span", [_vm._v(_vm._s(index + 1))])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "ranker__item__image" }, [
+                user.image
+                  ? _c("img", { attrs: { src: "/image/noimage.jpg" } })
+                  : _c("img", { attrs: { src: "/image/noimage.jpg" } })
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "ranker__item__user" }, [
+                _c("h3", { staticClass: "user_name" }, [
+                  _vm._v(_vm._s(user.name))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "user_level" }, [
+                  _vm._v("Lev." + _vm._s(user.level))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "ranker__item__count" }, [
+                _c("span", [_vm._v(_vm._s(user.count))])
+              ])
+            ])
+          }),
+          0
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Rightbar.vue?vue&type=template&id=1c913662&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Rightbar.vue?vue&type=template&id=1c913662& ***!
@@ -7341,17 +7620,8 @@ var render = function() {
       _c(
         "li",
         { staticClass: "list-group-item" },
-        [_c("RouterLink", { attrs: { to: "/age" } }, [_vm._v("年齢")])],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
         [
-          _c("RouterLink", { attrs: { to: "/location" } }, [
-            _vm._v("地域（都道府県）")
-          ])
+          _c("RouterLink", { attrs: { to: "/location" } }, [_vm._v("都道府県")])
         ],
         1
       ),
@@ -7794,78 +8064,143 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "row " }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 card bg-primary text-white" }, [
+        _c("h3", [_vm._v("男性の利用者")]),
+        _vm._v(" "),
+        _vm.sex_data ? _c("span", [_vm._v(_vm._s(_vm.sex_data[0]))]) : _vm._e()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 card bg__red" }, [
+        _c("h3", [_vm._v("女性の利用者")]),
+        _vm._v(" "),
+        _vm.sex_data ? _c("span", [_vm._v(_vm._s(_vm.sex_data[1]))]) : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "row " }, [
+        _c("div", { staticClass: "col-4 " }, [
+          _c(
+            "div",
+            [
+              _c("BarHorizontal", {
+                attrs: {
+                  dataSet: _vm.location_data,
+                  labels: _vm.location_data_label
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("span", [_vm._v("男女別割合")]),
+              _vm._v(" "),
+              _c("Doughnut", {
+                attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row " }, [
+      _c(
+        "div",
+        { staticClass: "col-4 card p-4" },
+        [
+          _c("span", [_vm._v("総合ランキング")]),
+          _vm._v(" "),
+          _c("Ranker", { attrs: { dataSet: _vm.ranking_data } })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4)
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row " }, [
+      _c(
+        "div",
+        { staticClass: "col-8 card " },
+        [
+          _c("h4", [_vm._v("7日間の伸び率（折れ線グラフ）")]),
+          _vm._v(" "),
+          _c("Lines", {
+            attrs: { dataSet: _vm.week_data, labels: _vm.week_data_label }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-4 card " },
+        [
+          _c("h4", [_vm._v("利用が多い時間帯（棒グラフ）")]),
+          _vm._v(" "),
+          _c("Bar", {
+            attrs: { dataSet: _vm.time_data, labels: _vm.time_data_label }
+          })
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-4 " }, [
-            _c("h5", [_c("b", [_vm._v("地図")])]),
-            _vm._v(" "),
-            _c("h5", [_c("b", [_vm._v("横グラフ")])])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-7 pt-5 pb-5" }, [
-            _c("img", {
-              staticClass: "map__image",
-              attrs: { src: "/image/map.png" }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row " }, [
-        _c("div", { staticClass: "col-4 card HomeStatusCard" }, [
-          _c("span", [_vm._v("今日の合計射精回数")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 card HomeStatusCard" }, [
-          _c("span", [_vm._v("今日の平均射精回数")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 card HomeStatusCard" }, [
-          _c("span", [_vm._v("総合募金額")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row " }, [
-        _c("div", { staticClass: "col-8 card " }, [
-          _c("span", [_vm._v("総合ランキング")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 card " }, [
-          _c("span", [_vm._v("日別ランキング")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row " }, [
-        _c("div", { staticClass: "col-6 card " }, [
-          _c("h4", [_vm._v("7日間の伸び率（折れ線グラフ）")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6 card " }, [
-          _c("h4", [_vm._v("利用が多い時間帯（棒グラフ）")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row " }, [
-        _c("div", { staticClass: "col-6 card " }, [
-          _c("h4", [_vm._v("利用が多い時間帯（棒グラフ）")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3 card bg-primary" }, [
-          _c("h3", [_vm._v("男性の割合")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3 card bg__red" }, [
-          _c("h3", [_vm._v("女性の割合")])
-        ])
-      ])
+    return _c("div", { staticClass: "col-3 card bg_indigo " }, [
+      _c("h3", [_vm._v("今日の合計射精回数")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 card bg-success" }, [
+      _c("h3", [_vm._v("今日の平均射精回数")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-7 pt-5 pb-5" }, [
+      _c("img", { staticClass: "map__image", attrs: { src: "/image/map.png" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 card p-5" }, [
+      _c("span", [_vm._v("利用ユーザー　最新5件")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 card p-5" }, [
+      _c("span", [_vm._v("利用ユーザー　最新5件")])
     ])
   }
 ]
@@ -8013,54 +8348,18 @@ var staticRenderFns = [
       _c("h5", [_c("b", [_vm._v("sex")])]),
       _vm._v(" "),
       _c("div", [
-        _c("h4", [_vm._v("円グラフ")]),
+        _c("div", { staticClass: "col-8" }, [_c("h4", [_vm._v("円グラフ")])]),
         _vm._v(" "),
-        _c("div", { staticClass: "SexPage__title" }, [
-          _c("span", [_vm._v("男")]),
-          _vm._v(" "),
-          _c("span", [_vm._v("女")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "SexPage__content text-center" }, [
-          _c("img", { attrs: { src: "/image/chart.jpg" } })
-        ])
+        _c("div", { staticClass: "col-4" }, [_c("div", [_vm._v("説明 ")])])
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("性別ごとの割合(折れ線グラフ)")]),
-      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("img", { attrs: { src: "/image/chart.jpg" } })
-        ]),
+        _c("div", { staticClass: "col-6" }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "man card p-5" }, [
-            _c("span", [_vm._v("男")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "woman card p-5" }, [
-            _c("span", [_vm._v("女")])
-          ])
-        ])
+        _c("div", { staticClass: "col-6" })
       ]),
       _vm._v(" "),
-      _c("h4", [_vm._v("性別ごとの利用時間（1～24時間）")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "man card p-5" }, [
-            _c("span", [_vm._v("男")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "woman card p-5" }, [
-            _c("span", [_vm._v("女")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
-          _c("img", { attrs: { src: "/image/chart.jpg" } })
-        ])
-      ])
+      _c("div", {})
     ])
   }
 ]
@@ -26554,6 +26853,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_1f42fb90___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Header_vue_vue_type_template_id_1f42fb90___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Ranker.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/Ranker.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Ranker.vue?vue&type=template&id=3a33d0f8& */ "./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8&");
+/* harmony import */ var _Ranker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ranker.vue?vue&type=script&lang=js& */ "./resources/js/components/Ranker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ranker.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Ranker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Ranker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Ranker.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Ranker.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranker.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranker.vue?vue&type=template&id=3a33d0f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=template&id=3a33d0f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranker_vue_vue_type_template_id_3a33d0f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

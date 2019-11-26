@@ -23,13 +23,15 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             
+            // Level設定
+            $table->integer('level')->default(1); //level
+            $table->integer('experience_point')->default(0);  //経験値
+            $table->integer('point')->default(0);  //経験値(現在)
             
             // ユーザー設定
-            $table->integer('level')->default(1); //level
-            $table->integer('experience_point')->default(1);  //経験値
             $table->string('age')->nullable();     //年齢
             $table->string('sex')->nullable();     //性別
-            $table->string('address')->nullable(); //住所
+            $table->string('location')->nullable(); //住所 Locationに変更する
             $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する？
             $table->string('theme')->default("red");  //テーマ
             

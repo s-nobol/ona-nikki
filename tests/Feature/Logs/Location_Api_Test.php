@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 use App\User;
 use App\Log;
-class Home_Api_Test extends TestCase
+class Location_Api_Test extends TestCase
 {
     use RefreshDatabase;
     private $user;
@@ -23,7 +23,7 @@ class Home_Api_Test extends TestCase
     private $time;
     /**
      * A basic feature test example.
-     *      ./vendor/bin/phpunit tests/Feature/Logs/Home_Api_Test.php
+     *      ./vendor/bin/phpunit tests/Feature/Logs/Location_Api_Test.php
      * @return void
      */    
     public function setUp():void
@@ -70,7 +70,7 @@ class Home_Api_Test extends TestCase
      * 
      * data data_label
     **/
-    public function test_Api_home正しい値を取得できるか？()
+    public function test_Api_location正しい値を取得できるか？()
     {   
         
         $response = $this->get('/api/home');
@@ -94,40 +94,8 @@ class Home_Api_Test extends TestCase
     
     
     
-    // メソッドの確認
-    public function test_DB_days日付のデータ取得できるか()
-    {   
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('logs.created_at as created_time'))
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        $this->assertEquals(10, $logs->count());
-    }
-     
-    public function test_DB_time日付のデータ取得できるか()
-    {   
-        $string = "time"; 
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count,'.$string.' as label'), DB::raw(' logs.created_at as created_time'))
-            ->groupBy($string)
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        $this->assertEquals(count($this->time), $logs->count());
-    }
     
-    
-    public function test_DB_Sexのデータ取得できるか()
-    {   
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
-            ->groupBy('sex')
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        
-        $this->assertEquals(count($this->sex) , $logs->count());
-    }
-    
-    public function test_DB_Locationのデータ取得できるか()
+    public function test_DBデータ取得できるか()
     {   
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select(DB::raw('count(*) as count, location as label'), DB::raw(' logs.created_at as created_time'))

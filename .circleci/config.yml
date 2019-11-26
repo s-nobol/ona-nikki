@@ -58,13 +58,14 @@ jobs:
             - node_modules
 
       # prepare the database
-      - run: touch database/database.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite
+      # #テストまでコメントアウト
+      # - run: touch database/database.sqlite
+      # - run: php artisan migrate --env=testing --database=sqlite
 
-      - run: composer require codeception/codeception --dev
-      - run: ./vendor/bin/codecept bootstrap
-      - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run
+      # - run: composer require codeception/codeception --dev
+      # - run: ./vendor/bin/codecept bootstrap
+      # - run: ./vendor/bin/codecept build
+      # - run: ./vendor/bin/codecept run
       
       
       # run テスト

@@ -65,9 +65,11 @@ export default {
                             }
                         }],
                         yAxes: [{
-                            display: false,
+                            display: true,
                             gridLines: {
-                                drawBorder: false
+                                color:'white',
+                                offsetGridLines: true,
+                                // drawBorder: false
                             }
                         }]
                     },

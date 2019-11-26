@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'name' => 'required|max:50',
             'age' => 'required',
             'sex' => 'required',
-            'address' => 'required',
+            'location' => 'required',
             'theme' => 'required',
             'receive_email' => 'required',
         ];
