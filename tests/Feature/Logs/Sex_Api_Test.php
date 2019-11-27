@@ -32,7 +32,7 @@ class Sex_Api_Test extends TestCase
     {
         parent::setUp();
         
-        $age = [1,2,3,4];
+        $age = [1,2,3,4,5];
         $sex =["男","女"];
         $address = ["大阪","東京","名古屋"];
         $time = [1,2,3,4];
@@ -40,11 +40,11 @@ class Sex_Api_Test extends TestCase
         $date = new Carbon('2019-11-25');
         
         for ($i = 1; $i < 30; $i++) {
-            if ($i % 2 == 0) { $id = 0 ;}else{ $id = 1; }
             
             $this->user = factory(User::class)->create([
-                'age' => rand(1,4),
-                'sex' => $sex[$id], 
+                // 'age' => rand(1,4),
+                'age' => $age[$i%5],
+                'sex' => $sex[$i%2], 
                 'location'=> $address[$i%3]
                 ]);
             
@@ -78,19 +78,19 @@ class Sex_Api_Test extends TestCase
     public function test_Api_sex正しい値を取得できるか？()
     {   
         
-        $response = $this->get('/api/home');
+        $response = $this->get('/api/sex');
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
         $response->assertJson([
             'data' => [],
             'data_label' => [],
-            'time_data' => [],
-            'time_data_label' => [],
-            'location_data' => [],
-            'location_data_label' => [],
-            'sex_data' => [],
-            'sex_data_label' => []
+            'man_data' => [],
+            'man_data_label' => [],
+            'woman_data' => [],
+            'woman_data_label' => [],
+            'age_data' => [],
+            'age_data_label' => []
         ]);
         
         
@@ -123,9 +123,27 @@ class Sex_Api_Test extends TestCase
             ->groupBy('sex','age')
             ->get();
             
+        $this->assertEquals(count($this->age) , $logs->count());
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->where( 'sex', '女')
+            ->groupBy('sex','age')
+            ->get();
+            
         // 半分にする
         $this->assertEquals(count($this->age) , $logs->count());
     }
     
+    // データベースで実装できるか検証
+    public function test_DB_age_dataデータ取得できるか()
+    {   
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->groupBy('age')
+            ->get();
+        $count = $logs->pluck('count');
+        $label= $logs->pluck('label');
+        $this->assertEquals(count($this->age) ,count($label));
+    }  
     
 }

@@ -3343,14 +3343,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 // 初めに複数のチャートのデータを取得
 // まとめて表示する
 // chartディレクｓトリに素材ごとのチャートをいれておく
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      msgs: []
+    };
   },
-  methods: {},
+  methods: {
+    onClickButton: function onClickButton() {
+      window.setTimeout(this.hanoi(3, 'A', 'B', 'C'), 500); // window.setTimeout(this.hanoi2(3), 500)
+    },
+    hanoi: function hanoi(n, from, to, task) {
+      if (n > 0) {
+        // this.msgs.push(`n=${n-1}の円盤  ${from} => ${to} へ移動 `)
+        this.hanoi(n - 1, from, task, to);
+        this.msgs.push("n=".concat(n - 1, "\u306E\u5186\u76E4  ").concat(from, " => ").concat(to, " \u3078\u79FB\u52D5 "));
+        this.hanoi(n - 1, task, to, from);
+      }
+    },
+    //n回繰り返す
+    hanoi2: function hanoi2(n) {
+      if (n > 0) {
+        this.hanoi2(n - 1);
+        this.msgs.push("n=".concat(n - 1, "\u306E\u5186\u76E4 "));
+      }
+    }
+  },
   created: function created() {}
 });
 
@@ -3482,6 +3506,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/Bar.vue */ "./resources/js/charts/Bar.vue");
 //
 //
 //
@@ -3520,12 +3545,161 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
+  components: {
+    Bar: _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {},
-  created: function created() {}
+  data: function data() {
+    return {
+      data: [],
+      data_label: [],
+      man_data: [],
+      man_data_label: [],
+      woman_data: [],
+      woman_data_label: [],
+      age_label: ['10代', '20代', '30代', '40代', '50代', '60代', 'その他'],
+      age_data: [],
+      age_data_label: []
+    };
+  },
+  methods: {
+    get_data: function get_data() {
+      var _this = this;
+
+      axios.get("/api/sex").then(function (response) {
+        console.log(response);
+        _this.data = response.data.data;
+        _this.data_label = response.data.data_label;
+        _this.man_data = response.data.man_data;
+        _this.man_data_label = response.data.man_data_label;
+        _this.woman_data = response.data.woman_data;
+        _this.woman_data_label = response.data.woman_data_label;
+        _this.age_data = response.data.age_data;
+        _this.age_data_label = response.data.age_label;
+
+        _this.pie_chart();
+
+        _this.man_chart();
+
+        _this.woman_chart();
+      });
+    },
+    pie_chart: function pie_chart() {
+      var PieChart = document.getElementById('pie').getContext('2d');
+      var chart = new Chart(PieChart, {
+        type: 'pie',
+        data: {
+          labels: this.data_label,
+          datasets: [{
+            // label: '月別集計',
+            borderColor: ['white'],
+            backgroundColor: ['deepskyblue', 'tomato', 'rgba(63, 55, 110, 0.1)'],
+            data: this.data
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          }
+        }
+      });
+    },
+    man_chart: function man_chart() {
+      var ManChart = document.getElementById('man').getContext('2d');
+      var chart = new Chart(ManChart, {
+        type: 'horizontalBar',
+        data: {
+          labels: this.age_label,
+          datasets: [{
+            // label: this.age_label,
+            borderColor: ['white'],
+            backgroundColor: ['deepskyblue', 'tomato', 'rgba(63, 55, 110, 0.1)'],
+            data: this.man_data
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                reverse: true,
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    },
+    woman_chart: function woman_chart() {
+      var WomanChart = document.getElementById('woman').getContext('2d');
+      var womanchart = new Chart(WomanChart, {
+        type: 'horizontalBar',
+        data: {
+          labels: this.age_label,
+          datasets: [{
+            // label: this.age_label,
+            borderColor: ['white'],
+            backgroundColor: ['deepskyblue', 'tomato', 'rgba(63, 55, 110, 0.1)'],
+            data: this.woman_data
+          }]
+        },
+        options: {
+          legend: {
+            display: false
+          }
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.get_data();
+  }
 });
 
 /***/ }),
@@ -4869,6 +5043,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.map__image{\n    width: 100%;\n}\n.bg_indigo{\n    background-color: mediumseagreen;\n    color:white;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.myimage{\n    width: 100px;\n}\n", ""]);
 
 // exports
 
@@ -6310,6 +6503,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Sex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Year.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Year.vue?vue&type=style&index=0&lang=css& ***!
@@ -7398,7 +7621,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "ranker__item__count" }, [
-                _c("span", [_vm._v(_vm._s(user.count))])
+                _c("span", { staticClass: "p-2 bg-danger" }, [
+                  _vm._v(_vm._s(user.count))
+                ])
               ])
             ])
           }),
@@ -8225,14 +8450,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm.msgs
+      ? _c(
+          "div",
+          _vm._l(_vm.msgs, function(msg) {
+            return _c("div", [_vm._v(_vm._s(msg))])
+          }),
+          0
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.onClickButton } },
+        [_vm._v("送信")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h5", [_c("b", [_vm._v("location")])])])
+    return _c("h5", [_c("b", [_vm._v("location")])])
   }
 ]
 render._withStripped = true
@@ -8337,29 +8582,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
+    _c("h4", [_vm._v("性別年代グラフ")]),
+    _vm._v(" "),
+    _vm._m(3),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-6 m-auto" },
+        [_c("bar", { attrs: { dataSet: _vm.age_data, labels: _vm.age_data } })],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(4)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h5", [_c("b", [_vm._v("sex")])]),
+    return _c("h5", [_c("b", [_vm._v("sex")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("h4", [_vm._v("円グラフ")]),
       _vm._v(" "),
-      _c("div", [
-        _c("div", { staticClass: "col-8" }, [_c("h4", [_vm._v("円グラフ")])]),
+      _c("canvas", { attrs: { id: "pie" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-50 m-auto" }, [
+      _c("div", { staticClass: "media" }, [
+        _c("img", {
+          staticClass: "align-self-start mr-3 myimage",
+          attrs: { src: "/image/kairakuten.png", alt: "" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-4" }, [_c("div", [_vm._v("説明 ")])])
+        _c("div", { staticClass: "media-body" }, [
+          _c("span", [
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("性別について")]),
+            _vm._v(
+              "\n                テストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテスト\n                "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("canvas", { attrs: { id: "man" } })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }),
+      _c("div", { staticClass: "col-6" }, [
+        _c("canvas", { attrs: { id: "woman" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-50 m-auto" }, [
+      _c("div", { staticClass: "media" }, [
+        _c("div", { staticClass: "media-body" }, [
+          _c("span", [
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
+            _vm._v(
+              "\n                テストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテスト\n                "
+            )
+          ])
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" })
-      ]),
-      _vm._v(" "),
-      _c("div", {})
+        _c("img", {
+          staticClass: "align-self-start mr-3 myimage",
+          attrs: { src: "/image/kairakuten.png", alt: "" }
+        })
+      ])
     ])
   }
 ]
@@ -27682,7 +28000,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Sex_vue_vue_type_template_id_7c224e94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sex.vue?vue&type=template&id=7c224e94& */ "./resources/js/home/Sex.vue?vue&type=template&id=7c224e94&");
 /* harmony import */ var _Sex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sex.vue?vue&type=script&lang=js& */ "./resources/js/home/Sex.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Sex.vue?vue&type=style&index=0&lang=css& */ "./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -27690,7 +28010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Sex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Sex_vue_vue_type_template_id_7c224e94___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Sex_vue_vue_type_template_id_7c224e94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -27719,6 +28039,22 @@ component.options.__file = "resources/js/home/Sex.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Sex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************!*\
+  !*** ./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Sex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Sex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

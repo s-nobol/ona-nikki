@@ -64,7 +64,6 @@ class AppController extends Controller
         
         $ranking_data = $this->DB_ranking('user_id',$week);
         return  compact(
-            'date',
             'data','data_label',
             'time_data', 'time_data_label',
             'location_data','location_data_label',
@@ -74,6 +73,66 @@ class AppController extends Controller
             );
     }
     
+    
+    
+    
+    public function sex()
+    {  
+        
+        // 性別データ
+        $date = Carbon::now()->subDays(500);
+        $string = 'sex';
+        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->groupBy($string)
+            ->orderBy('sex','desc')
+            ->get();
+        $data = $logs->pluck('count');  
+        $data_label = $logs->pluck('label');
+        
+        
+        // 男性の年代別利用データ
+        $man_logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->where( 'sex', '男')
+            ->groupBy('sex','age')
+            ->get();
+        $man_data = $man_logs->pluck('count');  
+        $man_data_label = $man_logs->pluck('label');
+        
+        
+        // 女性の年代別利用データ
+        $woman_logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->where( 'sex', '女')
+            ->groupBy('sex','age')
+            ->get();
+        $woman_data = $woman_logs->pluck('count');  
+        $woman_data_label = $woman_logs->pluck('label');
+        
+        
+        // 女性の年代別利用データ
+        $age_logs = $this->DB_abstract('age', $date);
+        $age_data = $age_logs->pluck('count');  
+        $age_data_label = $age_logs->pluck('label');
+        
+        return  compact(
+            'data','data_label',
+            'man_data','man_data_label',
+            'woman_data','woman_data_label',
+            'age_data','age_data_label'
+        );
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // 抽象的なデータベースの取得
     public function DB_abstract($string, $date)
     {   
@@ -82,6 +141,11 @@ class AppController extends Controller
             ->groupBy($string)
             ->where( 'created_time', '>', $date)
             ->get();
+    }
+    
+    public function ranking()
+    {
+        return view('app.ranking');
     }
     
     public function DB_ranking($string, $date)
@@ -95,10 +159,6 @@ class AppController extends Controller
             ->get();
     }
     
-    public function ranking()
-    {
-        return view('app.ranking');
-    }
     
     
     // 月別での集計を行う
@@ -166,6 +226,10 @@ class AppController extends Controller
     
     
     
+    
+    
+    
+    
     // Urlパラメータが正しいのか検証
     private function carbon_try($year, $month){
         try{
@@ -175,10 +239,3 @@ class AppController extends Controller
         }
     }
 }
-
-// 日付ごとの集計
-// $logs = Log::whereYear('created_at', $year)
-//     ->whereMonth('created_at', $month)
-//     ->select(DB::raw('count(*) as count , id'))
-//     ->groupBy('day') 
-//     ->get();

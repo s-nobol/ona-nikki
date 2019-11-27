@@ -15,7 +15,7 @@
                     <span class="user_level">Lev.{{ user.level }}</span>
                 </li>
                 <li class="ranker__item__count">
-                    <span>{{ user.count }}</span>
+                    <span class="p-2 bg-danger">{{ user.count }}</span>
                 </li>
             </ul>
         </div>
