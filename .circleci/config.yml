@@ -32,7 +32,12 @@ jobs:
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
-
+      
+      #postgras用のインストール
+      - run: sudo apt-get install postgresql-client-9.6
+      # - run: apt-get update && apt-get -y install git unzip zlib1g-dev libpq-dev
+      
+      
       # Download and cache dependencies
       - restore_cache:
           keys:

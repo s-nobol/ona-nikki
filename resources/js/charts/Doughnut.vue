@@ -16,6 +16,11 @@ export default {
             require  : false,
             default: () => []
         },
+        labels: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
     },
     methods: {
         // チャートの作成
@@ -26,7 +31,7 @@ export default {
                 type: 'doughnut',
     
                 data: {
-                    labels: this.dataSet,
+                    labels: this.labels,
                     datasets: [{
                         backgroundColor: ['rgba(255, 74, 74, 0.9)', 'rgba(220, 220, 220, 0.9)' ],
                         data: this.dataSet,
@@ -44,8 +49,8 @@ export default {
         },
     },
     watch: {
-      dataSet: function(dataSet){
-          console.log(dataSet)
+      labels: function(labels){
+          console.log(labels)
           this.create_chart()
       }
     },

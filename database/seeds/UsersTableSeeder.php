@@ -20,6 +20,6 @@ class UsersTableSeeder extends Seeder
             // 'role' => 3 ,//ユーザーにレベル3の権限
         ]);
         // Log 50個
-        factory(App\User::class, 10)->create()->each(function ($log) {});
+        factory(App\User::class, 100)->create()->each(function ($log) {});
     }
 }

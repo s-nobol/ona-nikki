@@ -13,6 +13,6 @@ class LogssTableSeeder extends Seeder
     {
     
         // Log 50個
-        factory(App\Log::class, 3000)->create()->each(function ($log) {});
+        factory(App\Log::class, 5000)->create()->each(function ($log) {});
     }
 }

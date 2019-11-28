@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 $factory->define(Log::class, function (Faker $faker) {
    return [
-        'user_id' => rand(1,10),
+        'user_id' => rand(1,99),
         'month' => rand(1,12),
         'day' => rand(1,30),
         'category' => rand(1,5),

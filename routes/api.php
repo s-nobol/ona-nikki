@@ -34,6 +34,8 @@ Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallba
 // Route::get('/app/logs/{year}/{month}', 'AppController@month');
 Route::get('/home', 'AppController@home');
 Route::get('/sex', 'AppController@sex');
+Route::get('/locations', 'AppController@locations');
+Route::get('/location/{name}', 'AppController@location');
 Route::get('/logs/{year}', 'AppController@year');
 Route::get('/logs/{year}/{month}', 'AppController@month');
 
@@ -63,9 +65,6 @@ Route::resource('users', 'UserController');
 // マイページ/yearに　Yearデータ
 // マイページ/Profile　Alldataデータ
 
-// year.vue 線グラフに変更
-// 48.72kcal 男性の消費カロリ-
 
-// itme
-// Loction設定
-//  sev vue 作成
+
+// location　全国との比較

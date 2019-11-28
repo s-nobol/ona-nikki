@@ -33,20 +33,30 @@ class Location_Api_Test extends TestCase
         $sex =["男","女"];
         $address = ["大阪","東京","名古屋"];
         $time = [1,2,3,4];
-        $id=0;
-        for ($i = 1; $i < 11; $i++) {
+        $id = 0;
+        
+        for ($i = 0; $i < 10; $i++) {
             $date = new Carbon('2019-11-25');
-            $date->hour = $i; 
-            if ($i % 2 == 0) { $id = 0 ;}else{ $id = 1; }
-            $this->user = factory(User::class)->create([ 'sex' => $sex[$id], 'location'=> $address[$i%3]]);
+            $date->hour = $i+1; 
+            
+            $this->user = factory(User::class)->create([ 
+                'sex' => $sex[$id%2], 
+                // 'location'=> $address[$i%3]
+                'location'=> $address[0]
+            ]);
+            
             $this->Log = factory(Log::class)->create([ 
-                'user_id' => $i,   'created_at' => $date ,'time' =>$time[$i%4] 
-                ]);
+                'user_id' => $i,  
+                'created_at' => $date ,
+                'time' =>$time[$i%4] 
+            ]);
         }
+        
         
         // 2019年11月24日のデータ作成
         $date = new Carbon('2019-11-24 01:00:00');
         $this->Log = factory(Log::class)->create([  'user_id' => 1 ,  'created_at' => $date ,]);
+                
                 
         // 2018年のデータ作成
         $date = new Carbon('2018-11-25 01:00:00');
@@ -72,18 +82,14 @@ class Location_Api_Test extends TestCase
     **/
     public function test_Api_location正しい値を取得できるか？()
     {   
-        
-        $response = $this->get('/api/home');
+        $name = $this->address[0];
+        $response = $this->get('/api/location/'.$name);
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
         $response->assertJson([
-            'data' => [],
-            'data_label' => [],
-            'time_data' => [],
-            'time_data_label' => [],
-            'location_data' => [],
-            'location_data_label' => [],
+            'age_data' => [],
+            'age_data_label' => [],
             'sex_data' => [],
             'sex_data_label' => []
         ]);
@@ -100,9 +106,10 @@ class Location_Api_Test extends TestCase
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select(DB::raw('count(*) as count, location as label'), DB::raw(' logs.created_at as created_time'))
             ->groupBy('location')
-            ->where( 'created_time', '>', $this->date)
+            ->where( 'location',$this->address[0])
             ->get();
-        $this->assertEquals(count($this->address) , $logs->count());
+        $this->assertEquals(1 , $logs->count());
+        // $this->assertEquals(count($this->address) , $logs->count());
     }
     
     

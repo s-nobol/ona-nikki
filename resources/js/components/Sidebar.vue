@@ -4,7 +4,7 @@
     <!--<div>サイドバー</div>-->
     
     
-    <div v-if="currentUser">
+    <div v-if="currentUser" class="sidebar">
         
         <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
         <ul class="list-group">
@@ -12,23 +12,23 @@
             年代
             </li>
             <li class="list-group-item ">
-                <RouterLink  to="/mypage/logs/2018">2018</RouterLink>
+                <RouterLink  to="/mypage/logs/2018" class="sidebar_item" >2018</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/mypage/logs/2019">2019</RouterLink>
+                <RouterLink  to="/mypage/logs/2019" class="sidebar_item" >2019</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/mypage/logs">Logs</RouterLink>
+                <RouterLink  to="/mypage/logs" class="sidebar_item" >Logs</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/users/1">プロフィール</RouterLink>
+                <RouterLink  to="/users/1" class="sidebar_item" >プロフィール</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/mypage">マイページ</RouterLink>
+                <RouterLink  to="/mypage" class="sidebar_item" >マイページ</RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/quest">クエスト</RouterLink>
+                <RouterLink  to="/mypage/quest" class="sidebar_item" >クエスト</RouterLink>
             </li>
             
             
@@ -47,39 +47,45 @@
     
         <ul class="list-group">   
             <li class="list-group-item">
-                <RouterLink  to="/notification">お知らせ</RouterLink>
+                <RouterLink  to="/notification" class="sidebar_item" >お知らせ</RouterLink>
             </li>
             <li class="list-group-item">年代
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/logs/2017">2017</RouterLink>
+                <RouterLink  to="/logs/2017" class="sidebar_item" >2017</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/logs/2018">2018</RouterLink>
+                <RouterLink  to="/logs/2018" class="sidebar_item" >2018</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/logs/2019">2019</RouterLink>
+                <RouterLink  to="/logs/2019" class="sidebar_item" >2019</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/home">ホーム</RouterLink>
+                <RouterLink  to="/home" class="sidebar_item" >ホーム</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/sex">性別</RouterLink>
-            </li>
-            <!--<li class="list-group-item">-->
-            <!--    <RouterLink  to="/age">年齢</RouterLink>-->
-            <!--</li>-->
-            <li class="list-group-item">
-                <RouterLink  to="/location">都道府県</RouterLink>
+                <RouterLink  to="/sex" class="sidebar_item" >年齢・性別</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/about">おな日記について</RouterLink>
+                <RouterLink  to="/location" class="sidebar_item" >都道府県</RouterLink>
+            </li>
+            <li class="list-group-item">
+                <RouterLink  to="/about" class="sidebar_item" >おな日記について</RouterLink>
             </li>
         </ul>
             
 </div>
 </template>
+<style type="text/css">
+.sidebar_item{
+    color: black;
+}
+.sidebar_item:hover{
+    color: gray;
+    text-decoration: none;
+}
 
+</style>
 <script>
 // 初めに複数のチャートのデータを取得
 // まとめて表示する

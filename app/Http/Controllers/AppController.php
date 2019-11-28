@@ -63,6 +63,7 @@ class AppController extends Controller
         $week_data_label = $week_logs->pluck('label');
         
         $ranking_data = $this->DB_ranking('user_id',$week);
+        
         return  compact(
             'data','data_label',
             'time_data', 'time_data_label',
@@ -125,12 +126,89 @@ class AppController extends Controller
     }
     
     
+    public function locations()
+    {  
+        // 年齢別データ
+        $logs = User::select(DB::raw('count(*) as count, location as label'))
+            ->groupBy('location')
+            ->get(); 
+        $location = $logs->pluck('label');
+        return compact('location');
+    }
+    // ユーザーが一人しかいないのでデータが取れない
+    public function location($name)
+    {  
+        
+        // 年齢別データ
+        $date = Carbon::now()->subDays(500);
+        $string = 'age';
+        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->groupBy($string)
+            ->where('location', $name)
+            ->get();
+        $age_data = $logs->pluck('count');;  
+        $age_data_label = $logs->pluck('label');
+        
+        
+        // 性別データ
+        $string = 'sex';
+        $sex_logs = User::where('location', $name)
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
+            ->groupBy($string)
+            ->get();
+        $sex_data = $sex_logs->pluck('count');  
+        $sex_data_label = $sex_logs->pluck('label');
+        
+        
+        // 月別データ
+        $date = Carbon::now()->subDays(90);
+        $string = 'month';
+        $month_logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->groupBy($string)
+            ->where('location', $name)
+            ->where( 'created_time', '>', $date)
+            ->get();
+        $month_data = $month_logs->pluck('count');  
+        $month_data_label = $month_logs->pluck('label');
+        
+        // 全国の利用率平均利用
+        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) / 8 as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->groupBy($string)
+            ->where( 'created_time', '>', $date)
+            ->get();;
+        $month_data_all = $logs->pluck('count');  
+        
+        
+        // 年齢別データ
+        $date = Carbon::now()->subDays(500);
+        $logs = $this->DB_abstract('location', $date);
+        $location_data = $logs->pluck('label');
+        
+        
+        return  compact(
+            'age_data','age_data_label',
+            'sex_data','sex_data_label',
+            'location_data',
+            'month_data', 'month_data_label',
+            'month_data_all'
+        );
+    }
     
     
     
     
     
-    
+    public function ranking()
+    {   
+        $date = Carbon::now()->subDays(500);
+        $logs = $this->DB_ranking('user_id', $date);
+        $data = $logs->pluck('count');  
+        $data_label = $logs->pluck('label');
+        return  compact('data','data_label');
+    }
     
     
     // 抽象的なデータベースの取得
@@ -143,15 +221,11 @@ class AppController extends Controller
             ->get();
     }
     
-    public function ranking()
-    {
-        return view('app.ranking');
-    }
     
     public function DB_ranking($string, $date)
     {   
         return  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select('*', DB::raw('count(*) as count, user_id as label'), DB::raw(' logs.created_at as created_time'))
+            ->select('*', DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
             ->groupBy($string)
             ->where( 'created_time', '>', $date)
             ->orderBy('count','desc')
