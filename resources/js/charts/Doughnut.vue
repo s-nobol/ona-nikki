@@ -34,6 +34,7 @@ export default {
                     labels: this.labels,
                     datasets: [{
                         backgroundColor: ['rgba(255, 74, 74, 0.9)', 'rgba(220, 220, 220, 0.9)' ],
+                        // backgroundColor: 'rgba(255, 74, 74, 0.9)',
                         data: this.dataSet,
                         borderWidth: 1.1,
                         // borderAlign: 'inner',
@@ -50,7 +51,6 @@ export default {
     },
     watch: {
       labels: function(labels){
-          console.log(labels)
           this.create_chart()
       }
     },

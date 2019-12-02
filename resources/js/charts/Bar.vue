@@ -18,6 +18,11 @@ export default {
             require  : false,
             default: () => []
         },
+        dataTime: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
         labels: {
             type: Array,
             require  : false,
@@ -43,6 +48,16 @@ export default {
                         borderColor: ['rgba(63, 55, 110, 0.9)'],
                         backgroundColor: 'rgba(63, 55, 110,  0.9)',
                         data: this.dataSet
+                    },{
+                        label: '月別集計',
+                        borderColor: ['rgba(63, 55, 110, 0.9)'],
+                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
+                        data: this.dataSet2
+                    },{
+                        label: '月別集計',
+                        borderColor: ['rgba(63, 55, 110, 0.9)'],
+                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
+                        data: this.dataTime
                     }]
                 },  
                 // laberuの非表示

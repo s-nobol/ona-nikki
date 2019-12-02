@@ -284,22 +284,62 @@ class AppController extends Controller
             ->groupBy('day')
             ->get();
             
-            
         $month_count = $logs->pluck('count'); 
         $month_label = $logs->pluck('label');
         $month_count_ave = "";
         
         
+        // 平均データ
         $all_logs = Log::selectRaw('count(*) / ? as count', [24])
                 ->groupBy('day')
                 ->get();
         $month_count_ave = $all_logs->pluck('count');
         
-        return compact('month','logs','month_count','month_count_ave','month_label');
+        
+        // sexデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
+            ->groupBy('sex')
+            ->get();
+        $sex_data = $logs->pluck('count'); 
+        $sex_data_label = $logs->pluck('label');
+        
+        
+        // categoryデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
+            ->groupBy('category')
+            ->get();
+        
+        $category_data = $logs->pluck('count'); 
+        $category_data_label = $logs->pluck('label');
+        
+        
+        // categoryデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
+            ->groupBy('day')
+            ->get();
+        
+        $coin_data = $logs->pluck('count'); 
+        $coin_data_label = $logs->pluck('label');
+        
+        return compact(
+            'month',
+            'month_count','month_count_ave','month_label',
+            'sex_data','sex_data_label',
+            'category_data','category_data_label',
+            'coin_data','coin_data_label' 
+        );
+            
+            
     }
-    
-    
-    
     
     
     

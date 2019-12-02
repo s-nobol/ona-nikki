@@ -1,19 +1,29 @@
 <template>
     <div>
-        <!--線グラフ-->
-        <canvas id="Line_Chart" ></canvas>
+       <!--帯グラフ-->
+        <canvas :id="id" ></canvas>
     </div>
 </template>
 
 <script>
 export default {
     props: {
+        id: {
+            type: String,
+            require  : false,
+            default: 'LineChart',
+        },
         dataSet: {
             type: Array,
             require  : false,
             default: () => []
         },
-        dataSet2: {
+        Calories: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
+        Coins: {
             type: Array,
             require  : false,
             default: () => []
@@ -24,12 +34,16 @@ export default {
             default: () => []
         },
     },
+    data(){
+        return{
+            chart: null
+            }
+    },
     methods: {
         // チャートの作成
         create_chart(){
-
-            var Line_Chart = document.getElementById('Line_Chart').getContext('2d');
-             new Chart(Line_Chart, {
+            var LineChart = document.getElementById(this.id).getContext('2d');
+             this.chart = new Chart(LineChart, {
                 type: 'line',
     
                 data: {
@@ -52,15 +66,34 @@ export default {
                         pointBorderWidth: 2,
                         pointRadius:5,
                         data: this.dataSet
+                    },{
+                        label: '支援金用のチャート',
+                        backgroundColor: 'mintcream',
+                        borderColor: 'mediumaquamarine',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'mediumaquamarine',
+                        pointBorderWidth: 2,
+                        pointRadius:3,
+                        data: this.Coins
+                    },{
+                        label: 'カロリーのチャート',
+                        backgroundColor: 'mistyrose',
+                        borderColor: 'tomato',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'tomato',
+                        pointBorderWidth: 2,
+                        pointRadius:3,
+                        data: this.Calories
                     }]
-                },
+                },  
+                // laberuの非表示
                 options: { 
                     legend: {
                         display: false
                      }, 
-                    scales: {
+                     scales: {
                         xAxes: [{
-                            display: true,
+                            display: false,
                             stacked: false,
                             gridLines: {
                                 display: false
@@ -68,22 +101,26 @@ export default {
                             barPercentage: 0.5
                         }],
                         yAxes: [{
-                            display: true,
+                            display: false,
                             gridLines: {
+                                // display: false,
                                 drawBorder: false
                             }
                         }]
                     },
+                      
                 }
-                
             });
         },
     },
     watch: {
         labels: function(labels){
-            console.log("起動")
+            console.log("BarChart")
+            if(this.chart){this.chart.destroy()}
             this.create_chart()
         }
-    }
+    },
 }
 </script>
+
+      

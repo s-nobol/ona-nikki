@@ -20,14 +20,14 @@
             </div>
             
             <!--メイン-->
-            <main  class="col-8 pl-4 pr-4">
+            <main  class="col-10 pl-4 pr-4">
                  <RouterView />
             </main>
         
             <!--サイドバー-->
-            <div class="col-2">
-                <Rightbar />
-            </div>
+            <!--<div class="col-2">-->
+            <!--    <Rightbar />-->
+            <!--</div>-->
         </div>
         
         

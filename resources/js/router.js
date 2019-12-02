@@ -4,6 +4,7 @@ import Router from 'vue-router'
 
 // // view
 import index from './pages/Index.vue'
+import test from './pages/Test.vue'
 
 //home
 import home from './home/Home.vue'
@@ -22,6 +23,7 @@ import oauth from './pages/Oauth.vue'
 
 //mypage
 import mypage from './user/Mypage.vue'
+import profile from './user/Profile.vue'
 import show from './user/Show.vue'
 import logs from './user/Logs.vue'
 import user_year from './user/Year.vue'
@@ -50,10 +52,14 @@ export default new Router({
         
         // mypage
         { path: '/mypage', component: mypage  },
+        { path: '/mypage/profile', component: profile  },
         { path: '/users/:id', component: show, props: true   },
         { path: '/mypage/logs', component: logs  },
         { path: '/mypage/logs/:year', component: user_year, props: true  },
         // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
+        
+        
+        { path: '/test', component: test },
     ],
     
     base: process.env.BASE_URL,  // これ

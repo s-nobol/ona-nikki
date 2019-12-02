@@ -15,7 +15,7 @@
                     <span class="user_level">Lev.{{ user.level }}</span>
                 </li>
                 <li class="ranker__item__count">
-                    <span class="p-2 bg-danger">{{ user.count }}</span>
+                    <span class="p-2  ranker__count">{{ user.count }}</span>
                 </li>
             </ul>
         </div>
@@ -69,6 +69,11 @@
   padding: 14px;
   float: right;
     
+}
+.ranker__count{
+    border-radius: 25px;
+    background-color:tomato;
+    color: white;
 }
 </style>
 <script>

@@ -57,14 +57,5 @@ Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
 
 
-// モーダルの修正
-// モーダルはMainVViewより下にすると起動する
-// モーダル表示を別に作成するか・？
-
-// マイページ/に　Monthデータ
-// マイページ/yearに　Yearデータ
-// マイページ/Profile　Alldataデータ
-
-
-
-// location　全国との比較
+// home/month.vueをLocatorVueと同じように設定する
+// Mypageは実装する

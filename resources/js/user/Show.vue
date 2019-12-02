@@ -115,84 +115,49 @@
             </transition>
             
         </div>
+    
+        <!--<div class="row">-->
+        <!--    <div class="col-4 card p-5">-->
+        <!--        <span>名前</span>-->
+        <!--    </div>-->
+        <!--    <div class="col-4 card p-5">-->
+        <!--        <span>レベルゲージ</span>-->
+        <!--    </div>-->
+        <!--    <div class="col-3 card p-5">-->
+        <!--        <span>グラフ</span>-->
+        <!--    </div>-->
+        <!--</div>-->
         
-            
-        <div class="card mt-3">
-            <div class="row ">
-                <div class="col-9 ">
-                    <h4>グラフ折れ線グラフ（プロフィールページなのでグラフは多くなくていかも）</h4>
-                    <img src="/image/chart.jpg"></img>
-                </div>
-                <div class="col-3 ">
-                    データ
-                </div>
+        
+        <h4>Mypageと同じようにする</h4>
+        
+        
+        
+        <div class="row">
+            <div class="col-9 card p-5">
+                <span>せんぐらふ</span>
+            </div>
+            <div class="col-3 card p-5">
+                <span>円グラフ</span>
             </div>
         </div>
         
         
-            
-        <div class="row  mt-3">
-            <div class="col-4 card">
-                <h4>グラフ折れ線グラフ</h4>
-                <img src="/image/chart.jpg"></img>
+        <div class="row ">
+            <div class="col-3  card p-5">
+                <h4>円グラフ）</h4>
             </div>
-            <div class="col-4 card">
-                <h4>グラフ折れ線グラフ</h4>
-                <img src="/image/chart.jpg"></img>
+            <div class="col-3  card p-5">
+                <h4>円グラフ）</h4>
             </div>
-            <div class="col-4 card">
-                データ
+            <div class="col-3  card p-5">
+                <h4>円グラフ）</h4>
+            </div>
+            <div class="col-3  card p-5">
+                <h4>円グラフ）</h4>
             </div>
         </div>
         
-        <!--チャート-->
-        <div class="row mt-3">
-            <div class="col-6 card">
-                <h4>絶対いるグラフ</h4>
-                <img src="/image/chart.jpg"></img>
-            </div>
-            <div class="col-6 card">
-                <table class="table ">
-                    <thead>
-                        <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">日付</th>
-                        <th scope="col">エリア</th>
-                        <th scope="col">コメント</th>
-                        <th scope="col">カテゴリー</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>日付</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>日付</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td></td>
-                        </tr>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td>日付</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td>内容</td>
-                        <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            
-            
             
        
     </div>

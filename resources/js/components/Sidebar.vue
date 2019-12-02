@@ -9,31 +9,35 @@
         <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
         <ul class="list-group">
             <li class="list-group-item bg__menu">
+            <i class="far fa-chart-bar fa-lg"></i>
             年代
             </li>
-            <li class="list-group-item ">
+            <li class="list-group-item  pl-5">
                 <RouterLink  to="/mypage/logs/2018" class="sidebar_item" >2018</RouterLink>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item pl-5">
                 <RouterLink  to="/mypage/logs/2019" class="sidebar_item" >2019</RouterLink>
             </li>
-            <li class="list-group-item">
+            <li class="list-group-item  pl-5">
                 <RouterLink  to="/mypage/logs" class="sidebar_item" >Logs</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/users/1" class="sidebar_item" >プロフィール</RouterLink>
+                <i class="far fa-address-card fa-lg"></i>
+                <RouterLink  to="/mypage/profile" class="sidebar_item" >プロフィール</RouterLink>
             </li>
             <li class="list-group-item">
+                <i class="fas fa-home fa-lg"></i>
                 <RouterLink  to="/mypage" class="sidebar_item" >マイページ</RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/quest" class="sidebar_item" >クエスト</RouterLink>
+                <i class="fas fa-envelope fa-lg"></i>
+                <RouterLink  to="/mypage/notify" class="sidebar_item" >お知らせ</RouterLink>
             </li>
             
             
-            <li class="list-group-item">
-            <a href="/donation">貢献施設</a>
+            <li class="list-group-item pl-5">
+                <span>ログアウト</span>
             </li>
             
         </ul>
@@ -47,13 +51,13 @@
     
         <ul class="list-group">   
             <li class="list-group-item">
-                <RouterLink  to="/notification" class="sidebar_item" >お知らせ</RouterLink>
-            </li>
-            <li class="list-group-item">年代
+                <RouterLink  to="/notification" class="sidebar_item" >ホーム</RouterLink>
             </li>
             <li class="list-group-item">
-                <RouterLink  to="/logs/2017" class="sidebar_item" >2017</RouterLink>
+            <i class="far fa-chart-bar fa-lg"></i>年代
             </li>
+            
+            
             <li class="list-group-item">
                 <RouterLink  to="/logs/2018" class="sidebar_item" >2018</RouterLink>
             </li>
@@ -64,12 +68,15 @@
                 <RouterLink  to="/home" class="sidebar_item" >ホーム</RouterLink>
             </li>
             <li class="list-group-item">
+                <i class="fas fa-venus-mars  fa-lg"></i>
                 <RouterLink  to="/sex" class="sidebar_item" >年齢・性別</RouterLink>
             </li>
             <li class="list-group-item">
+                <i class="fas fa-thumbtack fa-lg"></i>
                 <RouterLink  to="/location" class="sidebar_item" >都道府県</RouterLink>
             </li>
             <li class="list-group-item">
+                <!--<i class="fas fa-ban fa-lg"></i>-->
                 <RouterLink  to="/about" class="sidebar_item" >おな日記について</RouterLink>
             </li>
         </ul>
@@ -84,7 +91,8 @@
     color: gray;
     text-decoration: none;
 }
-
+.list-group-item{ padding: 10px 0px;}
+.list-group-item i{ color: gray;}
 </style>
 <script>
 // 初めに複数のチャートのデータを取得

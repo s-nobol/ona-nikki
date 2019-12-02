@@ -2,123 +2,198 @@
     <div>
        
        
-       <div class="card ">
+       <!--<div class="card ">-->
        <!--チャートを入力-->
-       <h5><b>year</b></h5>
-           <h4>{{ year }} 年月別射精回数グラフ(自分のデータとみんなのデータを比較)</h4>
+       <!--<h5><b>year</b></h5>-->
+       <!--    <h4>{{ year }} 年月別射精回数グラフ(自分のデータとみんなのデータを比較)</h4>-->
            <!--<img src="/image/chart.jpg"></img>-->
             
-            <LineChart 
-                :dataSet="month_data_count"
-                :dataSet2="other_user_month_data_count"
-                :labels="month_data_label"
-            />
+       <!--     <LineChart -->
+       <!--         :dataSet="month_data_count"-->
+       <!--         :dataSet2="other_user_month_data_count"-->
+       <!--         :labels="month_data_label"-->
+       <!--     />-->
                     
-            <!--後日検討-->
-            <!--<div class="row">-->
-            <!--    <div class="col-10">-->
-            <!--    </div>-->
-            <!--    <div class="col-2">-->
-            <!--    </div>-->
-            <!--</div>-->
-       </div>
-   
-        <div class="row">
-            <div class="card col-4 ">
+       <!--</div>-->
+       
+        <div class="card">
+            <h1>2019年のデータ</h1>
+        </div>
+        <!--メインA-->
+        <div class="card">
             
-                <div class="chart_title">
-                    <span ><i class="fas fa-plus"></i></span>
-                    <span>課金指数</span>
-                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
-                </div>
+            
+            <h1>ログ（後日モーダルに変更する）</h1>
+            
+            
+           <h4>{{ year }}年の記録</h4>
+        
+            <div class="row "> 
+            
+                <div class="col-7  p-5">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <h3 class="d-inline-block">月別利用推移（比較）</h3>
+                        
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item ">
+                                    <span @click="selectTab('month')">今月</span>
+                                </li>
+                                <li class="nav-item ">
+                                    <span @click="selectTab('year')">年間</span>
+                                </li>
+                                <li class="nav-item ">
+                                    <span @click="selectTab('all')">すべて</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 
-                <div class="chart_content">
-                <Bar
-                    :dataSet="time_data"
-                    :labels="time_data_label"
-                    />
-                </div>
                     
-            </div>
-            <div class="card col-4">
-            
-                <div class="chart_title">
-                    <span ><i class="fas fa-plus"></i></span>
-                    <span>年間割合</span>
-                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
-                </div>
-                
-                <div class="chart_content">
-                    <Doughnut 
-                        :dataSet="month_data_label" class="Doughnut_Chart"
+                    <LineChart 
+                        :dataSet="month_data_count"
+                        :dataSet2="other_user_month_data_count"
+                        :labels="month_data_label"
                     />
+                    
                 </div>
-                
+                <div class="col-5  p-5">
+                    <h5>2019年合計射精回数</h5>
+                        <span>15</span>
+                    <h5>2019年平均射精回数</h5>
+                        <span>145</span>
+                    <h5>2019年合計消費カロリー</h5>
+                        <span>145</span>
+                    <h5>2019年合計支援金</h5>
+                        <span>8515</span>
+                    <h5>2019年今月の射精回数</h5>
+                    <span>(可変するように設定する)</span>
+                    <div class="media">
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">ログコメント</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
             </div>
-            <div class="card col-4">
-            
-                <div class="chart_title">
-                    <span ><i class="fas fa-plus"></i></span>
-                    <span>時間帯別割合</span>
-                    <span class="float-right"><i class="fas fa-minus-circle"></i></span>
-                </div>
                 
-                <div class="chart_content">
-                    <Bar
-                        id="time"
-                        :dataSet="time_data"
-                        :labels="time_data_label"
+            
+            <div class="row">
+    
+                <div class="col-7">                         <div class="media">
+                            <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                            <div class="media-body">
+                                <span>
+                                <h5 class="mt-0">ログコメント</h5>
+                                テストテストテストテストテストテストテスト
+                                テストテストテストテストテストテストテストテスト
+                                テストテストテストテストテストテストテストテスト
+                                テストテストテストテストテスト
+                                </span>
+                            </div>
+                        </div></div>
+                <div class="col-5">
+                
+                        <Doughnut 
+                            :dataSet="time_data"
+                            :labels="time_data_label"
                         />
                 </div>
             </div>
-        </div>
-       
-       
-       <!--今月と先月の比較-->
-        <div class="row ">
-            <div class="col-3 card StatusCard">
             
-                <div class="StatusCard__title">
-                    <span class="">最高射精回数</span>
-                    <strong>{{ msg }}回</strong>
+            <div class="row">
+                <div class="col-4">
+                
+                    
+                        <span>ラインチャート（月別課金推移）</span>
+                        <Bar 
+                            id="line"
+                            :dataSet="time_data"
+                            :labels="time_data_label"
+                        /> 
+                        <span>ラインチャート（消費カロリー推移）</span>
+                        <BarLine 
+                            :dataSet="time_data"
+                            :lineDataSet="time_data"
+                            :labels="time_data_label"
+                        />
                 </div>
-                <div class="StatusCard__content">
-                    <span>{{ msg }}<small>回</small></span>
+    
+                <div class="col-7">                         
+                    <div class="media">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">ログコメント</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            </span>
+                        </div>
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                    </div>
                 </div>
             </div>
             
-            <div class="col-3 card StatusCard">
-                <div class="StatusCard__title">
-                    <span>最低射精回数</span>
-                    <strong>{{ msg }}回</strong>
+            
+            
+            <div class="row">
+            
+                <!--なんかのグラフ-->
+                <div class="col-4">
+                    <div class="card">
+                    </div>
                 </div>
-                <div class="StatusCard__content">
-                    <span>￥{{ msg }}<small>%</small></span>
-                </div>
+                
+                <!--合計支援金-->
+            <!--    <div class="col-4">-->
+            <!--        <div class="card">-->
+            <!--            <h4>円グラフ（365日の内どれくらい利用したか？）</h4>-->
+                        
+                        <!--<Doughnut -->
+                        <!--    :dataSet="time_data"-->
+                        <!--    :labels="time_data_label"-->
+                        <!--/>-->
+            <!--            <div class="col-6">当月日数</div>-->
+            <!--            <div class="col-6">利用日数</div>-->
+            <!--        </div>-->
+            <!--    </div>-->
+                
+            <!--    <div class="col-4">-->
+            <!--        <div class="card  bg-success">-->
+                        
+            <!--            <span>ラインチャート（月別課金推移）</span>-->
+            <!--            <Bar -->
+            <!--                id="line"-->
+            <!--                :dataSet="time_data"-->
+            <!--                :labels="time_data_label"-->
+            <!--            />-->
+            <!--        </div>-->
+                    
+            <!--        <div class="card bg-danger">-->
+                             
+            <!--            <span>ラインチャート（消費カロリー推移）</span>-->
+            <!--            <Lines -->
+            <!--                :dataSet="time_data"-->
+            <!--                :dataSet2="time_data"-->
+            <!--                :labels="time_data_label"-->
+            <!--            />-->
+            <!--        </div>-->
+            <!--    </div>-->
             </div>
-            <div class="col-3 card StatusCard">
-                <div class="StatusCard__title">
-                    <span>合計消費カロリー</span>
-                    <strong>{{ msg }}cal</strong>
-                </div>
-                <div class="StatusCard__content">
-                    <small>15位</small><i class="fas fa-arrow-right "></i><small>8位</small>
-                </div>
-            </div>
-            <div class="col-3 card StatusCard">
-                <div class="StatusCard__title">
-                    <span>累計支援金額</span>
-                    <strong>Lv.{{ msg }}</strong>
-                </div>
-                <div class="StatusCard__content">
-                    <span>{{ msg }}<small>.Lv</small></span>
-                </div>
-            </div>
-        </div>
+           
         
-        <div>
-            <img src="/image/ona-nikki5.jpg"></img>
         </div>
+       
+        
        
     </div>
 </template>
@@ -136,11 +211,13 @@
 }
 </style>
 <script>
+import BarLine from '../charts/BarLine.vue'
 import LineChart from '../charts/Line.vue'
+import Lines from '../charts/Line.vue'
 import Bar from '../charts/Bar.vue'
 import Doughnut from '../charts/Doughnut.vue'
 export default {
-    components: { LineChart,Bar,Doughnut , },
+    components: { LineChart,Bar,Doughnut , BarLine, Lines},
     props: {
          year: String,
     },

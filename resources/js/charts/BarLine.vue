@@ -82,7 +82,7 @@ export default {
     },
     watch: {
         labels: function(labels){
-            console.log("BarLine",this.labels)
+            console.log("BarLine")
             if(this.chart){this.chart.destroy()}
             this.create_chart()
         }

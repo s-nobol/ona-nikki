@@ -35,8 +35,12 @@ export default {
                 data: {
                     labels: this.labels,
                     datasets: [{
-                        borderColor: ['rgba(255, 74, 74, 0.9)'],
-                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
+                        backgroundColor: 'rgba(255, 74, 74, 0.3)',
+                        borderColor: 'rgba(255, 74, 74, 0.9)',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'rgba(255, 74, 74, 0.8)',
+                        pointBorderWidth: 2,
+                        pointRadius:3,
                         data: this.dataSet
                     }]
                 },  

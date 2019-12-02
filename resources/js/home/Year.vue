@@ -9,15 +9,24 @@
                 @click="onClickMonth(monthdata.month)"
                 class="HomeMonth__item card">
                 
+                
+                <div>
+                    <h3><b>{{ monthdata.month }}月のデータ</b></h3>
+                </div>
+            
+                <div>
+                    <span>利用数　15人</span>  
+                </div>
+                <div>
+                    <span>累計射精回数　148回</span>
+                </div>
+                
                 <!--棒グラフ-->
                 <YearBar  　
                 :month="monthdata.month" 
                 :dataSet="monthdata.data" 
                 :labels="monthdata.label" />
                 
-                <div>
-                    <span>{{ monthdata.month }}月のデータ</span>
-                </div>
             
             </div>
             
@@ -32,7 +41,7 @@
 .HomeMonth__item{
     width: 32.5%;
     display: inline-block;
-    padding: 10px;
+    padding: 15px;
     margin: 2px;
     cursor:pointer;
 }
