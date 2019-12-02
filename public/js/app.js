@@ -2969,6 +2969,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // 初めに複数のチャートのデータを取得
 // まとめて表示する
 // chartディレクｓトリに素材ごとのチャートをいれておく
@@ -2976,6 +3060,75 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     currentUser: function currentUser() {
       return this.$store.getters['currentUser'];
+    }
+  },
+  data: function data() {
+    return {
+      select: '現時点で状態を保存することができない',
+      homeItems: [{
+        name: 'ホーム',
+        key: 'home',
+        url: '/home',
+        iconClass: 'fas fa-home  fa-lg'
+      }, {
+        name: '年代',
+        key: '',
+        url: '',
+        iconClass: 'far fa-chart-bar fa-lg'
+      }, {
+        name: '2019年',
+        key: '',
+        url: '/logs/2019',
+        iconClass: null
+      }, {
+        name: '2018年',
+        key: '',
+        url: '/logs/2018',
+        iconClass: null
+      }, {
+        name: '性別・年齢',
+        key: 'sex',
+        url: '/sex',
+        iconClass: ' fas fa-street-view '
+      }, {
+        name: '都道府県',
+        key: 'locatoin',
+        url: '/location',
+        iconClass: 'fas fa-globe-americas'
+      }, {
+        name: 'おな日記について',
+        key: 'about',
+        url: '/about',
+        iconClass: null
+      }],
+      currentItems: [{
+        name: 'プロフィール',
+        key: 'profile',
+        url: '/mypage/profile',
+        iconClass: 'fas fa-home  fa-lg'
+      }, {
+        name: 'マイページ',
+        key: 'mypage',
+        url: '/mypage',
+        iconClass: 'fas fa-envelope fa-lg'
+      }, {
+        name: 'おしらせ',
+        key: 'notification',
+        url: '/notification',
+        iconClass: 'far fa-address-card  fa-lg'
+      }, {
+        name: 'ログアウト',
+        key: 'logout',
+        url: '/logout',
+        iconClass: null
+      }]
+    };
+  },
+  methods: {
+    onClickButton: function onClickButton(item) {
+      this.select = item.key;
+      this.$router.push(item.url);
+      console.log(this.select);
     }
   }
 });
@@ -5985,7 +6138,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.sidebar_item{\n    color: black;\n}\n.sidebar_item:hover{\n    color: gray;\n    text-decoration: none;\n}\n.list-group-item{ padding: 10px 0px;}\n.list-group-item i{ color: gray;}\n", ""]);
+exports.push([module.i, "\n.sidebar_item{\n    display: inline-block;\n    color: black;\n    width:100%;\n    height: 100%;\n}\n.sidebar_item:hover{\n    color: black;\n    text-decoration: none;\n}\n.ml_50px{\n    margin-left: 52px;\n}\n.list-group-item{ \n    \n    padding: 0px; \n    height: 50px;\n    line-height:50px;\n    cursor: pointer;\n    -webkit-transition-duration:0.3s;\n            transition-duration:0.3s;\n}\n.list-group-item:hover{\n    background-color:  whitesmoke;\n    text-decoration: none;\n}\n.list-group-item i{ \n    display: inline-block;\n    width: 50px;\n    text-align: center;\n    color: gray;\n}\n.select_item{\n    background-color: whitesmoke;\n}\n", ""]);
 
 // exports
 
@@ -8997,7 +9150,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "li",
-              { staticClass: "list-group-item  pl-5" },
+              { staticClass: "list-group-item  " },
               [
                 _c(
                   "RouterLink",
@@ -9005,7 +9158,7 @@ var render = function() {
                     staticClass: "sidebar_item",
                     attrs: { to: "/mypage/logs/2018" }
                   },
-                  [_vm._v("2018")]
+                  [_c("span", { staticClass: "ml_50px" }, [_vm._v("2018")])]
                 )
               ],
               1
@@ -9013,7 +9166,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "li",
-              { staticClass: "list-group-item pl-5" },
+              { staticClass: "list-group-item " },
               [
                 _c(
                   "RouterLink",
@@ -9021,7 +9174,7 @@ var render = function() {
                     staticClass: "sidebar_item",
                     attrs: { to: "/mypage/logs/2019" }
                   },
-                  [_vm._v("2019")]
+                  [_c("span", { staticClass: "ml_50px" }, [_vm._v("2019")])]
                 )
               ],
               1
@@ -9029,7 +9182,27 @@ var render = function() {
             _vm._v(" "),
             _c(
               "li",
-              { staticClass: "list-group-item  pl-5" },
+              { staticClass: "list-group-item" },
+              [
+                _c(
+                  "RouterLink",
+                  {
+                    staticClass: "sidebar_item",
+                    attrs: { to: "/mypage/profile" }
+                  },
+                  [
+                    _c("i", { staticClass: "far fa-address-card fa-lg" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("プロフィール")])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "list-group-item  " },
               [
                 _c(
                   "RouterLink",
@@ -9037,7 +9210,7 @@ var render = function() {
                     staticClass: "sidebar_item",
                     attrs: { to: "/mypage/logs" }
                   },
-                  [_vm._v("Logs")]
+                  [_c("span", { staticClass: "ml_50px" }, [_vm._v("logs")])]
                 )
               ],
               1
@@ -9047,30 +9220,14 @@ var render = function() {
               "li",
               { staticClass: "list-group-item" },
               [
-                _c("i", { staticClass: "far fa-address-card fa-lg" }),
-                _vm._v(" "),
-                _c(
-                  "RouterLink",
-                  {
-                    staticClass: "sidebar_item",
-                    attrs: { to: "/mypage/profile" }
-                  },
-                  [_vm._v("プロフィール")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "list-group-item" },
-              [
-                _c("i", { staticClass: "fas fa-home fa-lg" }),
-                _vm._v(" "),
                 _c(
                   "RouterLink",
                   { staticClass: "sidebar_item", attrs: { to: "/mypage" } },
-                  [_vm._v("マイページ")]
+                  [
+                    _c("i", { staticClass: "fas fa-home fa-lg" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("マイページ")])
+                  ]
                 )
               ],
               1
@@ -9080,15 +9237,17 @@ var render = function() {
               "li",
               { staticClass: "list-group-item" },
               [
-                _c("i", { staticClass: "fas fa-envelope fa-lg" }),
-                _vm._v(" "),
                 _c(
                   "RouterLink",
                   {
                     staticClass: "sidebar_item",
                     attrs: { to: "/mypage/notify" }
                   },
-                  [_vm._v("お知らせ")]
+                  [
+                    _c("i", { staticClass: "fas fa-envelope fa-lg" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("お知らせ")])
+                  ]
                 )
               ],
               1
@@ -9108,8 +9267,8 @@ var render = function() {
         [
           _c(
             "RouterLink",
-            { staticClass: "sidebar_item", attrs: { to: "/notification" } },
-            [_vm._v("ホーム")]
+            { staticClass: "sidebar_item ", attrs: { to: "/notification" } },
+            [_c("span", { staticClass: "ml_50px" }, [_vm._v("ホーム")])]
           )
         ],
         1
@@ -9123,8 +9282,8 @@ var render = function() {
         [
           _c(
             "RouterLink",
-            { staticClass: "sidebar_item", attrs: { to: "/logs/2018" } },
-            [_vm._v("2018")]
+            { staticClass: "sidebar_item ", attrs: { to: "/logs/2018" } },
+            [_c("span", { staticClass: "ml_50px" }, [_vm._v("2018")])]
           )
         ],
         1
@@ -9137,7 +9296,7 @@ var render = function() {
           _c(
             "RouterLink",
             { staticClass: "sidebar_item", attrs: { to: "/logs/2019" } },
-            [_vm._v("2019")]
+            [_c("span", { staticClass: "ml_50px" }, [_vm._v("2018")])]
           )
         ],
         1
@@ -9149,8 +9308,8 @@ var render = function() {
         [
           _c(
             "RouterLink",
-            { staticClass: "sidebar_item", attrs: { to: "/home" } },
-            [_vm._v("ホーム")]
+            { staticClass: "sidebar_item ", attrs: { to: "/home" } },
+            [_c("span", { staticClass: "ml_50px" }, [_vm._v("ホーム")])]
           )
         ],
         1
@@ -9160,12 +9319,14 @@ var render = function() {
         "li",
         { staticClass: "list-group-item" },
         [
-          _c("i", { staticClass: "fas fa-venus-mars  fa-lg" }),
-          _vm._v(" "),
           _c(
             "RouterLink",
             { staticClass: "sidebar_item", attrs: { to: "/sex" } },
-            [_vm._v("年齢・性別")]
+            [
+              _c("i", { staticClass: "fas fa-venus-mars  fa-lg" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("年齢・性別")])
+            ]
           )
         ],
         1
@@ -9175,12 +9336,14 @@ var render = function() {
         "li",
         { staticClass: "list-group-item" },
         [
-          _c("i", { staticClass: "fas fa-thumbtack fa-lg" }),
-          _vm._v(" "),
           _c(
             "RouterLink",
             { staticClass: "sidebar_item", attrs: { to: "/location" } },
-            [_vm._v("都道府県")]
+            [
+              _c("i", { staticClass: "fas fa-thumbtack fa-lg" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("都道府県")])
+            ]
           )
         ],
         1
@@ -9192,8 +9355,12 @@ var render = function() {
         [
           _c(
             "RouterLink",
-            { staticClass: "sidebar_item", attrs: { to: "/about" } },
-            [_vm._v("おな日記について")]
+            { staticClass: "sidebar_item ", attrs: { to: "/about" } },
+            [
+              _c("span", { staticClass: "ml_50px" }, [
+                _vm._v("おな日記について")
+              ])
+            ]
           )
         ],
         1
@@ -9206,7 +9373,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item bg__menu" }, [
+    return _c("li", { staticClass: "list-group-item " }, [
       _c("i", { staticClass: "far fa-chart-bar fa-lg" }),
       _vm._v("\n            年代\n            ")
     ])
@@ -30723,33 +30890,42 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     component: _pages_Index_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: '/home',
-    component: _home_Home_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _home_Home_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    name: 'home'
   }, {
     path: '/about',
-    component: _pages_About_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    component: _pages_About_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    name: 'about'
   }, {
     path: '/notification',
-    component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _pages_Notification_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    name: 'notification'
   }, {
     path: '/sex',
-    component: _home_Sex_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _home_Sex_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    name: 'sex'
   }, {
     path: '/age',
-    component: _home_Age_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _home_Age_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    name: 'age'
   }, {
     path: '/location',
-    component: _home_Location_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _home_Location_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    name: 'location'
   }, {
     path: '/ranking',
-    component: _home_Ranking_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _home_Ranking_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    name: 'ranking'
   }, {
     path: '/logs/:year',
     component: _home_Year_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    props: true
+    props: true,
+    name: 'home-year'
   }, {
     path: '/logs/:year/:month',
     component: _home_Month_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    props: true
+    props: true,
+    name: 'home-month'
   }, //login && Oauth
   {
     path: '/login',
@@ -30761,21 +30937,25 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, // mypage
   {
     path: '/mypage',
-    component: _user_Mypage_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _user_Mypage_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    name: 'mypage'
   }, {
     path: '/mypage/profile',
-    component: _user_Profile_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _user_Profile_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+    name: 'profile'
   }, {
     path: '/users/:id',
     component: _user_Show_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
     props: true
   }, {
     path: '/mypage/logs',
-    component: _user_Logs_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _user_Logs_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    name: 'mypage-logs'
   }, {
     path: '/mypage/logs/:year',
     component: _user_Year_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-    props: true
+    props: true,
+    name: 'mypage-year'
   }, // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
   {
     path: '/test',

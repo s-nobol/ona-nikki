@@ -1,6 +1,17 @@
 
+
 $mein_color: #ff4a4a;
 
+
+
+// fontの設定
+h1 h2,h3,h4,h5,h6,ul, li ,p, div,span, strong, b,  a{
+    font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', 
+    Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+
+// カードの設定
 .card{
     // padding: 20;
     margin-bottom: 20px;

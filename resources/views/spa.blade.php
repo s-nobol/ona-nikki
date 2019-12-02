@@ -8,7 +8,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
         <title>{{ config('app.name', 'Laravel') }}</title>
-        
+
         <!-- Scripts -->
         <!--<script src="{{ secure_asset('js/app.js') }}" defer></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
@@ -19,6 +19,7 @@
         
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Noto+Sans+JP:400,700" rel="stylesheet">
         
         <!-- Styles -->
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">

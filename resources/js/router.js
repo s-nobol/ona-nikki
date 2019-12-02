@@ -36,26 +36,26 @@ export default new Router({
     routes: [
         // home
         { path: '/', component: index  },
-        { path: '/home', component: home  },
-        { path: '/about', component: about  },
-        { path: '/notification', component: notification  },
-        { path: '/sex', component: sex  },
-        { path: '/age', component: age  },
-        { path: '/location', component: location  },
-        { path: '/ranking', component: ranking  },
-        { path: '/logs/:year', component: home_year, props: true  },
-        { path: '/logs/:year/:month', component: home_month,  props: true },　
+        { path: '/home', component: home , name: 'home' },
+        { path: '/about', component: about  , name: 'about'  },
+        { path: '/notification', component: notification  , name: 'notification'  },
+        { path: '/sex', component: sex  , name: 'sex'  },
+        { path: '/age', component: age  , name: 'age'  },
+        { path: '/location', component: location  , name: 'location'  },
+        { path: '/ranking', component: ranking   , name: 'ranking' },
+        { path: '/logs/:year', component: home_year, props: true  , name: 'home-year' },
+        { path: '/logs/:year/:month', component: home_month,  props: true , name: 'home-month' },　
         
         //login && Oauth
         { path: '/login', component: login  },
         { path: '/login/:string/callback', component: oauth , props: true },
         
         // mypage
-        { path: '/mypage', component: mypage  },
-        { path: '/mypage/profile', component: profile  },
+        { path: '/mypage', component: mypage , name: 'mypage'  },
+        { path: '/mypage/profile', component: profile , name: 'profile'  },
         { path: '/users/:id', component: show, props: true   },
-        { path: '/mypage/logs', component: logs  },
-        { path: '/mypage/logs/:year', component: user_year, props: true  },
+        { path: '/mypage/logs', component: logs  , name: 'mypage-logs' },
+        { path: '/mypage/logs/:year', component: user_year, props: true , name: 'mypage-year'  },
         // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
         
         

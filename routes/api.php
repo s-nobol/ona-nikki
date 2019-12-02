@@ -59,3 +59,8 @@ Route::resource('users', 'UserController');
 
 // home/month.vueをLocatorVueと同じように設定する
 // Mypageは実装する
+
+// サイドバーの修正
+// git checkout -b edit-sidebar
+
+// sidebar router-link 修正
