@@ -18,7 +18,7 @@ import home_year from './home/Year.vue'
 import home_month from './home/Month.vue'
 
 //login & Oauth
-import login from './pages/Login.vue'
+import signup from './pages/Signup.vue'
 import oauth from './pages/Oauth.vue'
 
 //mypage
@@ -47,7 +47,8 @@ export default new Router({
         { path: '/logs/:year/:month', component: home_month,  props: true , name: 'home-month' },　
         
         //login && Oauth
-        { path: '/login', component: login  },
+        { path: '/signup', component: signup, name: 'signup'   },
+        // { path: '/login', component: login  },
         { path: '/login/:string/callback', component: oauth , props: true },
         
         // mypage

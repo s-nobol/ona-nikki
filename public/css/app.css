@@ -11147,6 +11147,18 @@ body {
   color: white;
 }
 
+.login_button {
+  color: black;
+  margin-right: 15px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.login_button:hover {
+  color: gray;
+}
+
 .Statusbar {
   list-style: none;
   font-size: 0px;
@@ -11282,14 +11294,14 @@ body {
 }
 
 .LoginForm {
-  padding: 0px 30px;
+  padding: 30px;
   height: 450px;
   width: 340px;
   margin: auto;
 }
 
 .LoginForm__title {
-  margin-top: 35px;
+  padding: 5px 0px;
 }
 
 .LoginForm label {
@@ -11309,10 +11321,16 @@ body {
   width: 100%;
   text-align: center;
   padding: 10px;
-  background-color: crimson;
+  background-color: #ff4a4a;
   color: white;
   border: 2px solid white;
   border-radius: 5px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.LoginForm__button button:hover {
+  background-color: #ff6969;
 }
 
 .LoginForm i {

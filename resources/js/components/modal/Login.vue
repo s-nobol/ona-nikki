@@ -9,17 +9,28 @@
                     <span v-for="msg in errors.email" :key="msg" class="text-danger">該当するユーザーが見つかりません</span>
                 </div>
             
+            
+                <!--メールアドレス-->
                 <div>
                     <label for="login-email">Email</label><br>
                     <input type="text" v-model="loginForm.email" >
                 </div>
+                
+                
+                <!--パスワード-->
                 <div>
                     <label for="login-password">Password</label><br>
                     <input type="password" v-model="loginForm.password">
                 </div>
-                <div class="LoginForm__button">
-                    <button type="submit" class="button button--inverse"><strong>Login</strong></button>
+                
+                
+                <!--ログインボタン-->
+                <div class="LoginForm__button ">
+                    <button type="submit" class="button button--inverse ">
+                        <strong>Login</strong>
+                    </button>
                 </div>
+                
                 
                 <div class="text-center pt-3 pb-3 LoginForm__border">
                     <span>または</span>
@@ -40,6 +51,9 @@
     </div>
 </div>
 </template>
+<style type="text/css">
+
+</style>
 <script>
 
 export default {
@@ -85,6 +99,10 @@ export default {
             })
         }
     },
+    created(){
+        
+            console.log("login")
+    }
     
 }
 </script>

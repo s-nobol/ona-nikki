@@ -41,7 +41,16 @@ body{
     background-color: $mein_color;
     color: white; 
 }
-
+.login_button{
+    color: black;
+    // padding: 10px 15px;
+    margin-right: 15px;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+.login_button:hover{
+    color: gray;
+}
 // mypage　上部　ステータスバー
 .Statusbar{
     list-style: none;

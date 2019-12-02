@@ -57,10 +57,11 @@ Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
 
 
-// home/month.vueをLocatorVueと同じように設定する
-// Mypageは実装する
+// ブラウザを開いたと同時に起動(後日)
+// git checkout -b browsing-log-create
 
-// サイドバーの修正
-// git checkout -b edit-sidebar
 
-// sidebar router-link 修正
+
+// モーダルの変更
+
+// サインアップ機能の修正
