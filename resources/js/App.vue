@@ -54,7 +54,12 @@
         
         <!--モーダル-->
         <transition name="fade" >
-            <LevelModal v-if="levelModal" @close="onCloseModal" />
+            <LevelModal v-if="levelModal" @close="onCloseModal" 
+                :before_level="before_level" 
+                :before_point="before_point"
+                :sizeing="sizeing"
+                :value_point="value_point"
+            />
         </transition >
         
         
@@ -94,6 +99,11 @@ export default {
             nowTime: new Date().getHours() + ':' +  new Date().getMinutes() ,
             loginModal: false,
             levelModal: false,
+            
+            sizeing: 0 ,
+            value_point: 0,
+            before_point: 0 ,
+            before_level: 0,
         }
     },
     
@@ -129,13 +139,22 @@ export default {
             }
         },
         createLog(){
-            // axios.post(`/api/logs`).then(response => {
-            //     console.log(response); 
-            //     if(response.status === 200){
-            //         this.$store.commit('currentUser', null)
-            //     }
-            // })
-            this.levelModal = true
+            axios.post(`/api/logs`).then(response => {
+                    console.log(response)
+                    
+                if(response.status === 200){
+                    this.sizeing =  response.data.sizeing
+                    this.value_point = response.data.value_point 
+                    // 現在のポイント
+                    this.before_level =  response.data.before_level
+                    this.before_point =  response.data.before_point * this.sizeing 
+                    
+                    // 難しい
+                    this.levelModal = true
+                }
+                
+                
+            })
         },
         onLoginModal(){
             this.loginModal = true

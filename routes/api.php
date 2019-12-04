@@ -56,12 +56,12 @@ Route::get('/mypage/all/data', 'MypageController@all_data');
 Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
 
+Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
+Route::post('/users/{user}/levelup', 'UserController@levelup');
 
-// ブラウザを開いたと同時に起動(後日)
+
+// レベルアップ　機能は後日修正(後日)
+// git checkout -b level-up-edit
+
+// ブラウザを開いたと同時に起動
 // git checkout -b browsing-log-create
-
-
-
-// モーダルの変更
-
-// サインアップ機能の修正

@@ -1936,6 +1936,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1949,7 +1954,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       nowTime: new Date().getHours() + ':' + new Date().getMinutes(),
       loginModal: false,
-      levelModal: false
+      levelModal: false,
+      sizeing: 0,
+      value_point: 0,
+      before_point: 0,
+      before_level: 0
     };
   },
   computed: {
@@ -1987,13 +1996,21 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createLog: function createLog() {
-      // axios.post(`/api/logs`).then(response => {
-      //     console.log(response); 
-      //     if(response.status === 200){
-      //         this.$store.commit('currentUser', null)
-      //     }
-      // })
-      this.levelModal = true;
+      var _this2 = this;
+
+      axios.post("/api/logs").then(function (response) {
+        console.log(response);
+
+        if (response.status === 200) {
+          _this2.sizeing = response.data.sizeing;
+          _this2.value_point = response.data.value_point; // 現在のポイント
+
+          _this2.before_level = response.data.before_level;
+          _this2.before_point = response.data.before_point * _this2.sizeing; // 難しい
+
+          _this2.levelModal = true;
+        }
+      });
     },
     onLoginModal: function onLoginModal() {
       this.loginModal = true;
@@ -3210,21 +3227,134 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-  methods: {
-    onCreate: function onCreate() {
-      var _this = this;
-
-      setTimeout(function () {
-        return _this.$emit('close');
-      }, 10000);
+  props: {
+    value_point: {
+      type: Number,
+      require: true,
+      "default": 0
+    },
+    before_level: {
+      type: Number,
+      require: true,
+      "default": 1
+    },
+    before_point: {
+      type: Number,
+      require: true,
+      "default": 0
+    },
+    sizeing: {
+      type: Number,
+      require: true,
+      "default": 1
     }
   },
-  created: function created() {
-    this.onCreate();
+  data: function data() {
+    return {
+      experience_point: 300,
+      level: 1,
+      point: 1,
+      after_point: 0
+    };
+  },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters['currentUser'];
+    }
+  },
+  methods: {
+    addPoint: function addPoint() {
+      var MAX_TIME = Math.round(this.value_point * this.sizeing); // レベルアップするとき
+
+      if (this.point + MAX_TIME > this.experience_point) {
+        this.after_point = this.point + MAX_TIME - this.experience_point;
+        MAX_TIME = this.experience_point - this.point;
+      }
+
+      this.time(MAX_TIME);
+    },
+    time: function time(MAX_TIME) {
+      var _this = this;
+
+      for (var time = 0; time < MAX_TIME; time++) {
+        setTimeout(function () {
+          return _this.gerge();
+        }, 10 * time);
+      }
+    },
+    gerge: function gerge() {
+      this.point++;
+      var point_bar = document.getElementById("point_bar");
+      point_bar.style.width = "".concat(this.point, "px");
+
+      if (this.point === this.experience_point) {
+        this.levelUp();
+      }
+    },
+    // レベルアップしたときのみ起動
+    levelUp: function levelUp() {
+      this.level++;
+      this.point = 0;
+      var point_bar = document.getElementById("point_bar");
+      point_bar.style.width = "".concat(this.point, "px");
+      var sizeing = this.experience_point / (this.currentUser.experience_point + 50);
+      alert("レベルアップしました");
+      axios.post("/api/users/".concat(this.currentUser.id, "/levelup"), {
+        point: this.after_point
+      }).then(function (response) {
+        console.log("レベルアップ", response); // userをcommit
+      });
+      this.time(this.after_point * sizeing);
+    },
+    // レベルリセット
+    resetLevel: function resetLevel() {
+      axios.post("/api/users/".concat(this.currentUser.id, "/resetlevel")).then(function (response) {});
+    }
+  },
+  // 初めにポイントを入れておく
+  mounted: function mounted() {
+    var _this2 = this;
+
+    var point_bar = document.getElementById("point_bar");
+    point_bar.style.width = "".concat(this.before_point, "px");
+    this.level = this.before_level;
+    this.point = Math.round(this.before_point);
+    setTimeout(function () {
+      return _this2.addPoint();
+    }, 500);
   }
 });
 
@@ -3302,16 +3432,14 @@ __webpack_require__.r(__webpack_exports__);
         email: '123@example.com',
         password: '123123123'
       },
-      errors: {
-        email: [],
-        password: []
-      }
+      errors: ''
     };
   },
   methods: {
     login: function login() {
       var _this = this;
 
+      this.errors = '';
       axios.post("/api/login", this.loginForm).then(function (response) {
         console.log('ログイン成功', response);
 
@@ -4721,10 +4849,7 @@ __webpack_require__.r(__webpack_exports__);
         email: '123@example.com',
         password: '123123123'
       },
-      errors: {
-        email: [],
-        password: []
-      }
+      errors: []
     };
   },
   computed: {
@@ -4736,6 +4861,7 @@ __webpack_require__.r(__webpack_exports__);
     signup: function signup() {
       var _this = this;
 
+      this.errors = [];
       axios.post("api/register", this.loginForm).then(function (response) {
         console.log('ログイン成功', response);
 
@@ -6198,7 +6324,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.levelForm{\n    width:350px;\n    padding: 30px;\n    background-color: white;\n    text-align: center;\n}\n.levelForm__content__level{\n    font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "\n.levelForm{\n    width:350px;\n    padding: 30px;\n    background-color: white;\n    text-align: center;\n}\n.levelForm__content__level{\n    font-weight: bold;\n}\n.derge{\n    width:300px;\n    height:25px;\n    background-color: whitesmoke;\n}\n.derge__bar{\n    width: 0px;\n    height: 25px;\n    background-color: aquamarine;\n}\n", ""]);
 
 // exports
 
@@ -8890,7 +9016,15 @@ var render = function() {
         { attrs: { name: "fade" } },
         [
           _vm.levelModal
-            ? _c("LevelModal", { on: { close: _vm.onCloseModal } })
+            ? _c("LevelModal", {
+                attrs: {
+                  before_level: _vm.before_level,
+                  before_point: _vm.before_point,
+                  sizeing: _vm.sizeing,
+                  value_point: _vm.value_point
+                },
+                on: { close: _vm.onCloseModal }
+              })
             : _vm._e()
         ],
         1
@@ -9584,22 +9718,42 @@ var render = function() {
           _c("div", { staticClass: "levelForm modal-content" }, [
             _vm._m(0),
             _vm._v(" "),
+            _c("div", { staticClass: "levelForm__content" }, [
+              _c(
+                "span",
+                { staticClass: "levelForm__content__level before__level" },
+                [_vm._v(_vm._s(_vm.level))]
+              ),
+              _vm._v(" "),
+              _c("span", {}, [_vm._v("→")]),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "levelForm__content__level after__level" },
+                [_vm._v("Lv.15")]
+              )
+            ]),
+            _vm._v(" "),
             _vm._m(1),
             _vm._v(" "),
-            _c("div", { staticClass: "levelForm__gerge" }),
-            _vm._v(" "),
-            _c("div", { staticClass: "levelForm__Confirmation" }, [
+            _c("div", { staticClass: "levelForm__Confirmation mt-3" }, [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-danger",
+                  staticClass: "btn btn-dark",
                   on: {
                     click: function($event) {
                       return _vm.$emit("close")
                     }
                   }
                 },
-                [_vm._v("確認しました")]
+                [_vm._v("close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-dark", on: { click: _vm.resetLevel } },
+                [_vm._v("reset")]
               )
             ]),
             _vm._v(" "),
@@ -9623,15 +9777,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "levelForm__content" }, [
-      _c("span", { staticClass: "levelForm__content__level before__level" }, [
-        _vm._v("Lv.15")
-      ]),
-      _vm._v(" "),
-      _c("span", {}, [_vm._v("→")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "levelForm__content__level after__level" }, [
-        _vm._v("Lv.15")
+    return _c("div", { staticClass: "levelForm__gerge" }, [
+      _c("div", { staticClass: "derge", attrs: { id: "point" } }, [
+        _c("div", { staticClass: "derge__bar", attrs: { id: "point_bar" } })
       ])
     ])
   }
@@ -9690,17 +9838,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm.errors
-                ? _c(
-                    "div",
-                    _vm._l(_vm.errors.email, function(msg) {
-                      return _c(
-                        "span",
-                        { key: msg, staticClass: "text-danger" },
-                        [_vm._v("該当するユーザーが見つかりません")]
-                      )
-                    }),
-                    0
-                  )
+                ? _c("div", [
+                    _c("span", { staticClass: "text-danger" }, [
+                      _vm._v("該当するユーザーが見つかりません")
+                    ])
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _c("div", [

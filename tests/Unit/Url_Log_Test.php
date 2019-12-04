@@ -46,7 +46,7 @@ class Url_Log_Test extends TestCase
         
         // ログインしてにアクセス
         $response = $this->post('/api/logs');
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
     
     

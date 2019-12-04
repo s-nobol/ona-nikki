@@ -14,19 +14,22 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            
+            
             $table->bigIncrements('id');
             $table->string('name');
-            
             
             
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             
+            
             // Level設定
             $table->integer('level')->default(1); //level
-            $table->integer('experience_point')->default(0);  //経験値
             $table->integer('point')->default(0);  //経験値(現在)
+            $table->integer('experience_point')->default(0);  //経験値(あるレベルにおいて必要なポイント)
+            
             
             // ユーザー設定
             $table->string('age')->nullable();     //年齢
@@ -35,8 +38,8 @@ class CreateUsersTable extends Migration
             $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する？
             $table->string('theme')->default("red");  //テーマ
             
-            // クエスト    
             
+            // クエスト  
             
              // ソーシャルログイン用(name email は初期設定でいいかも？)
             $table->boolean('oauth_check')->default(false);; //ソーシャルユーザーでログインしているか？

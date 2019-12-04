@@ -6,7 +6,7 @@
         
                 <h4 class="LoginForm__title">ログイン</h4>
                 <div v-if="errors">
-                    <span v-for="msg in errors.email" :key="msg" class="text-danger">該当するユーザーが見つかりません</span>
+                    <span class="text-danger">該当するユーザーが見つかりません</span>
                 </div>
             
             
@@ -63,14 +63,12 @@ export default {
                 email: '123@example.com',
                 password: '123123123'
             },
-            errors: {
-                email: [],
-                password: [],
-            },
+            errors: '',
         }
     },
     methods: {
         login(){
+            this.errors = ''
             axios.post(`/api/login`, this.loginForm).then(response => {
                 
                 console.log('ログイン成功', response);

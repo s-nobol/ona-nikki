@@ -105,10 +105,7 @@ export default {
                 email: '123@example.com',
                 password: '123123123'
             },
-            errors: {
-                email: [],
-                password: [],
-            },
+            errors: [],
         }
     },
     computed: {
@@ -118,6 +115,8 @@ export default {
     },
     methods: {
         signup(){
+            
+            this.errors = []
             axios.post(`api/register`, this.loginForm).then(response => {
                 
                 console.log('ログイン成功', response);

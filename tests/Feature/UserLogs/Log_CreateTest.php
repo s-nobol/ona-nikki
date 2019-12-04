@@ -47,16 +47,14 @@ class Log_CreateTest extends TestCase
         $time = Carbon::create()->hour;
         
         $response = $this->json('post', '/api/logs' );
-        // $response = $this->post('/api/logs');
-        $response->assertStatus(201);
+        $response->assertStatus(200);
         
         // Logが新しく作成されているか・
         $this->assertEquals($log_count+1,  Log::all()->count());
         
         // Jsonに希望の値が帰ってきているか？
         $response->assertJson([
-            'month' => $month,
-            'day' => $day,
+            'logs' => [],
         ]);
     }
     

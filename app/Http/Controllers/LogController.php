@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 use App\Log;
+use App\User;
 use Auth;
 use DB;
 use Exception;
@@ -28,8 +29,7 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-        // month 削除
-        
+        // Logの作成
         $logs = new Log();
         $logs->user_id =  Auth::user()->id; 
         $logs->month =  Carbon::now()->month;
@@ -37,8 +37,37 @@ class LogController extends Controller
         $logs->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
         $logs->save();
         
-        return $logs;
+        // ユーザーの更新
+        $user = User::where('id',Auth::user()->id)->first();
+        $before_level= $user->level;
+        $before_point = $user->point;
+        
+        // 初期設定
+        $value_point = 130; 
+        $gerge_width = 300;
+        
+        //ユーザーの経験値上げる
+        $user = $this->addPoint($user);
+        
+        $sizeing =  $gerge_width / $user->experience_point;
+        $sizeing = round($sizeing, 5 );
+        
+        
+        return compact( 
+            'logs',
+            'user',
+            'value_point',
+            'before_level','before_point',
+            'sizeing'
+        );
+    }  
+    public function addPoint(User $user){
+        $user->point = $user->point + 130;
+        $user->save();
+        return $user;
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -62,6 +91,7 @@ class LogController extends Controller
      */
     public function destroy(Log $log)
     {
+        $log->delete();
         return "Log削除成功";
     }
     

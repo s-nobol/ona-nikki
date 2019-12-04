@@ -74,36 +74,36 @@
 }
 </style>
 <script>
-
+// テスト用のLevel.vue
 export default {
     props:{
-        value_point: {
-            type: Number,
-            require: true,
-            default: 0,
-        },
-        before_level: {
-            type: Number,
-            require: true,
-            default: 1,
-        },
-        before_point: {
-            type: Number,
-            require: true,
-            default: 0,
+        //追加するポイント
+        value: {
+            type: Number, default: 0,
         },
         sizeing: {
-            type: Number,
-            require  : true,
-            default: 1,
+            type: Number,  default: 1,
+        },
+        //更新する前のユーザーレベル
+        before_level: {
+            type: Number,  default: 1,
+        },
+        //更新する前のユーザーポイント（　this.point を追加する）
+        before_point: {
+            type: Number,  default: 0,
+        },
+        //レベルアップ後の残りのポイント
+        remain_point: {
+            type: Number,  default: 0,
         },
     },
     data(){
         return{
-            experience_point: 300,
             level: 1,
             point: 1,
-            after_point: 0,
+            time: 0, //(いらないかも？)
+            experience_point: 300,
+            point_gerge: null,
         }
     },
     
@@ -113,70 +113,59 @@ export default {
         },   
     },
     methods: {
+        createData(){
+            this.level = this.before_level
+            this.time = Math.round( this.value * this.sizeing )  //例  50 * 0.85  =>  43
+            this.point =Math.round( this.before_point * this.sizeing )  //例 150 * 0.85  => 129
+            
+            this.point_gerge = document.getElementById("point_bar");
+            this.point_gerge.style.width = `${this.point}px`; 
+            
+            //例 43 + 129 => 172  (43回くりかして172にさせる)
+            setTimeout(() => ( this.Looping(this.time) ), 500)
+        },
+        
+        
+        // ポイントの回数分だけ実行させる
+        Looping(Max_Time){
+            for(var time = 0; time< Max_Time ; time++){
+                 setTimeout(() => (  this.addPoint() ), 10*time)
+            }
+        },
+        
         
         addPoint(){
-            
-            var MAX_TIME =Math.round( this.value_point *  this.sizeing  )
-            
-            // レベルアップするとき
-            if(this.point + MAX_TIME > this.experience_point){
-                this.after_point = this.point + MAX_TIME - this.experience_point
-                MAX_TIME =  this.experience_point-this.point
-            }
-            this.time(MAX_TIME)
-        },
-        
-        time(MAX_TIME){
-            for(var time = 0; time< MAX_TIME ; time++){
-                 setTimeout(() => (  this.gerge() ), 10*time)
-            }
-        },
-        
-        gerge(){
-            this.point ++ 
-            var point_bar = document.getElementById("point_bar");
-            point_bar.style.width = `${this.point}px`; 
-            
-            if( this.point === this.experience_point){
+            this.point ++   //ポイントを一づつ増やしていく
+            this.point_gerge.style.width = `${this.point}px`;
+            if( this.point >= this.experience_point){
                 this.levelUp()
             }
         },
         
         // レベルアップしたときのみ起動
         levelUp(){
-            this.level ++
-            this.point = 0
-            var point_bar = document.getElementById("point_bar");
-            point_bar.style.width = `${this.point}px`; 
-            var sizeing = this.experience_point / (this.currentUser.experience_point+50)
+            this.level ++ 
+            this.point = 0 
+            this.point_gerge.style.width = `${this.point}px`;
             alert("レベルアップしました")
             
-            axios.post(`/api/users/${this.currentUser.id}/levelup`,  { point: this.after_point }).then(response => {
-                console.log("レベルアップ",response)
-                // userをcommit
-            })
-            this.time( this.after_point*sizeing )
+            // 残りのポイント分繰り返す
+            var time = Math.round( this.remain_point * this.sizeing )
+            this.Looping(time)
         },
-        
-        // レベルリセット
-        resetLevel(){
-            axios.post(`/api/users/${this.currentUser.id}/resetlevel`).then(response => { })
-        },
+    
     },
-    
-    
-    
-    // 初めにポイントを入れておく
     mounted(){
-        var point_bar = document.getElementById("point_bar");
-        point_bar.style.width = `${this.before_point}px`; 
-        
-        this.level = this.before_level
-        this.point = Math.round(this.before_point)
-        
-        
-        setTimeout(() => ( this.addPoint() ), 500)
+        this.createData()
     }
+    
+    // 予定
+    // props{
+    //     value: 50
+    //     sizeing: 0.86 
+    //     before_point: 150
+    //     before_level: 2
+    // }
     
 }
 </script>

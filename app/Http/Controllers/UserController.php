@@ -93,4 +93,51 @@ class UserController extends Controller
     {
         //
     }
+    
+    // リセット
+    public function resetlevel(User $user)
+    {
+        $user->level = 1;
+        $user->point = 0;
+        $user->experience_point = 300;
+        $user->save();
+        return "ユーザーレベルリセットしました";
+    }
+    
+    // レベルアップ
+    public function levelup(Request $request, User $user)
+    {   
+        // ゲージの残りを返却
+        $user->level = $user->level + 1; 
+        $user->point = $request->point;
+        $user->experience_point = $user->experience_point + 50 ;
+        $user->save();
+        return $user;
+    }
+    
+    
+    
+    // レベルアップ
+    public function addPoint(Request $request, User $user)
+    {   
+        // ゲージの残りを返却
+        $point = 50;
+        $before_point = $user->point;
+        $before_experience_point = $user->experience_point;
+        $before_level = $user->level;
+        
+        // ポイントを追加
+        $user->point = $before_point + $point ;
+        
+        // レベルアップの場合
+        if ($before_point+$point > $before_experience_point ) {
+            $user->level = $user->level + 1 ;  //level-up
+            $user->point = $before_point+$point - $before_experience_point; //( 300+50 ) - 300 => 50 
+            $user->experience_point = $before_experience_point + 50 ;
+            $point = $before_experience_point - $before_point;
+        }
+        $user->save();
+    }
+    
+    
 }
