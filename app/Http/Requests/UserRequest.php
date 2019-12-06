@@ -27,18 +27,21 @@ class UserRequest extends FormRequest
             // 'email' => 'required|max:250',
             
             'name' => 'required|max:50',
+            'email' => 'required|email|max:256',
             'age' => 'required',
             'sex' => 'required',
             'location' => 'required',
-            'theme' => 'required',
-            'receive_email' => 'required',
+            // 'theme' => 'required',
+            'browsing_log' => 'boolean',
+            'receive_email' => 'boolean',
         ];
     }
     public function messages() {
         return [
-        "required" => "必須項目です。",
-        "name.max" => "50文字以内で入力してください。",
-        "unique" => "メールアドレスはすでにしています"
+        // "required" => "必須項目です。",
+        // "name.max" => "50文字以内で入力してください。",
+        // "unique" => "メールアドレスはすでにしています",
+        // "boolean" => "入力が正しくありません"
         ];
     }
 }

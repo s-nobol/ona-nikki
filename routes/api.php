@@ -63,6 +63,5 @@ Route::post('/users/{user}/levelup', 'UserController@levelup');
 // レベルアップ　機能は後日修正(後日)
 // git checkout -b level-up-edit
 
-// ブラウザを開いたと同時に起動
-// blowesing_logを編集出来るようにする
 // ProfieとLogの合体
+// git checkout -b edit-profile

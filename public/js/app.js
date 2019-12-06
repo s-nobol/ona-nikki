@@ -3026,6 +3026,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 // 初めに複数のチャートのデータを取得
 // まとめて表示する
 // chartディレクｓトリに素材ごとのチャートをいれておく
@@ -5634,10 +5641,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    id: String
-  },
   data: function data() {
     return {
       user: [],
@@ -5645,37 +5685,40 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters['currentUser'];
+    }
+  },
   methods: {
-    getUser: function getUser() {
+    userEdit: function userEdit(id) {
       var _this = this;
 
-      axios.get("/api/users/".concat(this.id)).then(function (response) {
+      axios.put("/api/users/".concat(id), this.user).then(function (response) {
         console.log(response);
 
         if (response.status === 200) {
-          _this.user = response.data;
-        }
-      });
-    },
-    userEdit: function userEdit() {
-      var _this2 = this;
+          _this.$store.commit('currentUser', response.data);
 
-      axios.put("/api/users/".concat(this.id), this.user).then(function (response) {
-        console.log(response);
-
-        if (response.status === 200) {
-          _this2.user = response.data;
-
-          _this2.$store.commit('message', {
+          _this.$store.commit('message', {
             type: 'edit',
-            content: 'ユーザーが編集されました'
+            content: 'ユーザーが情報が更新されました'
           });
+        }
+
+        if (response.status === 422) {
+          _this.errors = response.data.errors;
         }
       });
     }
   },
+  watch: {
+    currentUser: function currentUser() {
+      this.user = this.currentUser;
+    }
+  },
   created: function created() {
-    this.getUser();
+    this.user = this.currentUser;
   }
 });
 
@@ -6508,7 +6551,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.profile_form{\n    width: 75%;\n}\n.col-5{ \n    text-align: right;\n    padding-right: 15px;\n}\n.col-7 input{\n    padding: 5px;\n    width: 50%;\n}\n.profile_image{\n    width: 150px;\n    border-radius:150px;\n}\n", ""]);
+exports.push([module.i, "\n.profile_form{\n    width: 75%;\n}\n.profile_form input{\n    padding: 5px;\n    width: 50%;\n}\n.profile_form span{\n    display: inline-block;\n    padding: 5px;\n}\n.col-5{ \n    text-align: right;\n    padding-right: 15px;\n}\n.profile_image{\n    width: 150px;\n    border-radius:150px;\n}\n", ""]);
 
 // exports
 
@@ -9448,6 +9491,26 @@ var render = function() {
               1
             ),
             _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "list-group-item" },
+              [
+                _c(
+                  "RouterLink",
+                  {
+                    staticClass: "sidebar_item",
+                    attrs: { to: "/mypage/ranking" }
+                  },
+                  [
+                    _c("i", { staticClass: "fas fa-crown fa-lg" }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("ランキング")])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
             _vm._m(1)
           ])
         ])
@@ -11807,43 +11870,500 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h2", [_vm._v("プロフィール")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-4 " }, [
-          _c("div", { staticClass: "media Profile_image p-3" }, [
-            _c("img", {
-              attrs: { src: "/image/myuser.jpg", alt: "ユーザー画像" }
-            }),
+  return _vm.currentUser
+    ? _c("div", [
+        _c("h2", [_vm._v("プロフィール")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-4 " }, [
+              _c("div", { staticClass: "media Profile_image p-3" }, [
+                _c("img", {
+                  attrs: { src: "/image/myuser.jpg", alt: "ユーザー画像" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "media-body m-0 mt-3 pl-4 text-left" },
+                  [
+                    _c("h6", { staticClass: "m-0 " }, [
+                      _vm._v(_vm._s(_vm.currentUser.name) + " "),
+                      _c("a", { attrs: { href: "/" } }, [
+                        _vm._v("自分と比較する")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: { click: function($event) {} }
+                      },
+                      [_vm._v("編集")]
+                    )
+                  ]
+                )
+              ])
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "media-body m-0 mt-3 pl-4 text-left" }, [
-              _c("h6", { staticClass: "m-0 " }, [
-                _vm._v(_vm._s(_vm.user.name) + " "),
-                _c("a", { attrs: { href: "/" } }, [_vm._v("自分と比較する")])
-              ]),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: { click: _vm.changeMode }
-                },
-                [_vm._v("編集")]
-              )
-            ])
+            _vm._m(1)
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm.user
+          ? _c(
+              "form",
+              {
+                staticClass: "profile_form card p-5",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.userEdit(_vm.user.id)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "row mb-3" }, [
+                  _c("div", { staticClass: "col-5" }),
+                  _vm._v(" "),
+                  _vm.errors
+                    ? _c("div", { staticClass: "errors text-danger col-7" }, [
+                        _vm.errors.name
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.name, function(msg) {
+                                return _c(
+                                  "span",
+                                  { staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.email
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.email, function(msg) {
+                                return _c(
+                                  "span",
+                                  { staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.age
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.age, function(msg) {
+                                return _c(
+                                  "span",
+                                  { staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.sex
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.sex, function(msg) {
+                                return _c(
+                                  "span",
+                                  { key: msg, staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.location
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.location, function(msg) {
+                                return _c(
+                                  "span",
+                                  { key: msg, staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.browsing_log
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.browsing_log, function(msg) {
+                                return _c(
+                                  "span",
+                                  { key: msg, staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.errors.receive_email
+                          ? _c(
+                              "div",
+                              _vm._l(_vm.errors.receive_email, function(msg) {
+                                return _c(
+                                  "span",
+                                  { key: msg, staticClass: "errors_item" },
+                                  [_vm._v(_vm._s(msg))]
+                                )
+                              }),
+                              0
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      attrs: { type: "text", name: "name" },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.email,
+                          expression: "user.email"
+                        }
+                      ],
+                      attrs: { type: "text", name: "email" },
+                      domProps: { value: _vm.user.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.age,
+                            expression: "user.age"
+                          }
+                        ],
+                        domProps: { value: _vm.user.age },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.user,
+                              "age",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "10代" } }, [
+                          _vm._v("10代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "20代" } }, [
+                          _vm._v("20代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "30代" } }, [
+                          _vm._v("30代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "40代" } }, [
+                          _vm._v("40代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "50代" } }, [
+                          _vm._v("50代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "60代" } }, [
+                          _vm._v("60代")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "その他" } }, [
+                          _vm._v("その他")
+                        ])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.sex,
+                          expression: "user.sex"
+                        }
+                      ],
+                      attrs: { type: "text", name: "sex" },
+                      domProps: { value: _vm.user.sex },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "sex", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.location,
+                            expression: "user.location"
+                          }
+                        ],
+                        domProps: { value: _vm.user.location },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.user,
+                              "location",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "北海道エリア" } }, [
+                          _vm._v("北海道エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "東北エリア" } }, [
+                          _vm._v("東北エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "関東エリア" } }, [
+                          _vm._v("関東エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "関東エリア" } }, [
+                          _vm._v("中部エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "関西エリア" } }, [
+                          _vm._v("関西エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "中国エリア" } }, [
+                          _vm._v("中国エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "四国エリア" } }, [
+                          _vm._v("四国エリア")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "九州エリア" } }, [
+                          _vm._v("九州エリア")
+                        ])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.browsing_log,
+                          expression: "user.browsing_log"
+                        }
+                      ],
+                      attrs: { type: "checkbox", name: "browsing_log" },
+                      domProps: {
+                        checked: Array.isArray(_vm.user.browsing_log)
+                          ? _vm._i(_vm.user.browsing_log, null) > -1
+                          : _vm.user.browsing_log
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.user.browsing_log,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.user,
+                                  "browsing_log",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.user,
+                                  "browsing_log",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.user, "browsing_log", $$c)
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-3" }, [
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-7" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.receive_email,
+                          expression: "user.receive_email"
+                        }
+                      ],
+                      attrs: { type: "checkbox", name: "receive_email" },
+                      domProps: {
+                        checked: Array.isArray(_vm.user.receive_email)
+                          ? _vm._i(_vm.user.receive_email, null) > -1
+                          : _vm.user.receive_email
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.user.receive_email,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.user,
+                                  "receive_email",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.user,
+                                  "receive_email",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.user, "receive_email", $$c)
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(9),
+                _vm._v(" "),
+                _vm._m(10)
+              ]
+            )
+          : _vm._e()
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(2)
-  ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -11908,85 +12428,70 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "profile_form card p-5" }, [
-      _c("div", { staticClass: "text-center pl-5 pr-5  pb-5" }, [
-        _c("img", {
-          staticClass: "profile_image",
-          attrs: { src: "/image/myuser.jpg", alt: "ユーザー画像" }
-        })
+    return _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("名前")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("span", [_vm._v("メールアドレス")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("年齢")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("性別")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("住所")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("span", [_vm._v("ブラウザの起動と同時にログ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("span", [_vm._v("メールアドレスの同意")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-5" }, [
+        _c("span", [_vm._v("アカウントポリシーについて")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("名前")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _c("input", { attrs: { type: "text", name: "name" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [
-          _c("span", [_vm._v("メールアドレス")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _c("input", { attrs: { type: "text", name: "name" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("年齢")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _c("input", { attrs: { type: "text", name: "name" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("性別")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _c("input", { attrs: { type: "text", name: "name" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("住所")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _c("input", { attrs: { type: "text", name: "name" } })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [_c("span", [_vm._v("テーマ")])]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [
-          _c("span", [_vm._v("メールアドレスの同意")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _vm._v("\n                同意する\n            ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row mb-3" }, [
-        _c("div", { staticClass: "col-5" }, [
-          _c("span", [_vm._v("アカウントポリシーについて")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-7" }, [
-          _vm._v("\n                同意する\n            ")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c("button", { staticClass: "btn btn-primary" }, [_vm._v("送信")])
+      _c("div", { staticClass: "col-7" }, [
+        _vm._v("\n                同意する\n            ")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("送信")])
     ])
   }
 ]
@@ -31213,10 +31718,11 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
 
               case 2:
                 response = _context.sent;
+                console.log("currentUser", response);
                 user = response.data || null;
                 state.user = user;
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }

@@ -25,6 +25,7 @@ const store = new Vuex.Store({
         },
         async sessionCurrentUser(state) {
             const response = await axios.get('/api/currentUser')
+            console.log("currentUser",response)
             const user = response.data || null
             state.user = user
         },

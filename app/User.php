@@ -19,7 +19,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password',
-        'level','experience_point','age','address','sex',
+        'level','experience_point',
+        'age','location','sex',
+        'browsing_log','',
         'receive_email','theme',
     ];
     
@@ -46,6 +48,7 @@ class User extends Authenticatable
         'level' => 'integer',
         'point' => 'integer',
         'experience_point' => 'integer',
+        'browsing_log' => 'boolean',
     ];
     
     
