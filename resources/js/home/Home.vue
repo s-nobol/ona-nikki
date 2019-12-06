@@ -91,7 +91,7 @@
         <div class="row ">
             <div class="col-9">
                     
-                <!--ランキング-->
+                    
                 <div class="card">
                    
                     <div class="row ">
@@ -276,10 +276,9 @@ import Lines from '../charts/Line.vue'
 import Doughnut from '../charts/Doughnut.vue'
 import BarHorizontal from '../charts/BarHorizontal.vue'
 import Table from '../components/Table.vue'
-import Rightbar from '../components/Rightbar.vue'
 import Ranker from '../components/Ranker.vue'
 export default {
-    components: { Bar, BarLine ,Doughnut, Lines, BarHorizontal, Table, Rightbar, Ranker},
+    components: { Bar, BarLine ,Doughnut, Lines, BarHorizontal, Table, Ranker},
     data(){
         return{
             data: [],

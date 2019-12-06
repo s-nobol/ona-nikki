@@ -24,9 +24,9 @@ import oauth from './pages/Oauth.vue'
 //mypage
 import mypage from './user/Mypage.vue'
 import profile from './user/Profile.vue'
-import show from './user/Show.vue'
 import logs from './user/Logs.vue'
 import user_year from './user/Year.vue'
+// import show from './user/Show.vue'
 // import user_month from './user/Month.vue'
 
 
@@ -54,7 +54,7 @@ export default new Router({
         // mypage
         { path: '/mypage', component: mypage , name: 'mypage'  },
         { path: '/mypage/profile', component: profile , name: 'profile'  },
-        { path: '/users/:id', component: show, props: true   },
+        // { path: '/users/:id', component: show, props: true   },
         { path: '/mypage/logs', component: logs  , name: 'mypage-logs' },
         { path: '/mypage/logs/:year', component: user_year, props: true , name: 'mypage-year'  },
         // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?

@@ -88,8 +88,10 @@ class LogController extends Controller
      */
     public function update(Request $request, Log $log)
     {
-        $log = $log->fill($request->all());
+        $log->fill($request->all());
+        if ($log->category) {  $log->check = true;  }
         $log->save();
+        
         return $log;
     }
 

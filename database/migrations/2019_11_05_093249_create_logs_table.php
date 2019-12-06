@@ -22,6 +22,7 @@ class CreateLogsTable extends Migration
             
             $table->string('category')->nullable();
             $table->string('comment')->nullable();
+            $table->boolean('check')->default(false); //もしカテゴリーが入力されていたらチェック
             // $table->integer('')->nullable(); 費やした時間
             
             

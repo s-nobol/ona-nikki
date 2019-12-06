@@ -33,11 +33,7 @@
                     <span>プロフィール</span>
                 </RouterLink>
             </li>
-            <li class="list-group-item  ">
-                <RouterLink  to="/mypage/logs" class="sidebar_item" >
-                    <span class="ml_50px">logs</span>
-                </RouterLink>
-            </li>
+            
             
             <li class="list-group-item">
                 <RouterLink  to="/mypage" class="sidebar_item" >
