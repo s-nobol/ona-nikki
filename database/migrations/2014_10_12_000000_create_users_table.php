@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
             // Level設定
             $table->integer('level')->default(1); //level
             $table->integer('point')->default(0);  //経験値(現在)
-            $table->integer('experience_point')->default(0);  //経験値(あるレベルにおいて必要なポイント)
-            
+            $table->integer('experience_point')->default(300);  //経験値(あるレベルにおいて必要なポイント)
+            $table->boolean('browsing_log')->default(false); //ブラウザを開いた瞬間にCreateLog
             
             // ユーザー設定
             $table->string('age')->nullable();     //年齢

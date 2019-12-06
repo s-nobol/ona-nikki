@@ -2002,13 +2002,19 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
 
         if (response.status === 200) {
+          // 現在のポイント
           _this2.sizeing = response.data.sizeing;
-          _this2.value_point = response.data.value_point; // 現在のポイント
-
+          _this2.value_point = response.data.value_point;
           _this2.before_level = response.data.before_level;
-          _this2.before_point = response.data.before_point * _this2.sizeing; // 難しい
-
+          _this2.before_point = response.data.before_point * _this2.sizeing;
           _this2.levelModal = true;
+        }
+
+        if (response.status === 404) {
+          _this2.$store.commit('message', {
+            type: 'danger',
+            content: response.data.message
+          });
         }
       });
     },
@@ -2021,28 +2027,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    errorCode: {// async handler (val) {
-      //     // サーバーエラー1
-      //     if (val === INTERNAL_SERVER_ERROR) {
-      //         this.$router.push('/500')
-      //     // ログインエラー
-      //     } else if (val === UNAUTHORIZED) {
-      //         await axios.get('/api/refresh-token')
-      //         this.$store.commit('auth/setUser', null)
-      //         this.$router.push('/401')
-      //     // クライアントユーザーエラー
-      //     } else if( val === 401 ){
-      //         this.$router.push('/401')
-      //     } else if(val === 403 ){
-      //         this.$router.push('/403')
-      //     // ページエラー
-      //     } else if (val === NOT_FOUND) {
-      //         this.$router.push('/not-found')
-      //     }else{
-      //     }
-      //     this.$store.commit('error/setCode', null)
-      // },
-      // immediate: true
+    // ブラウジングログ起動
+    currentUser: function currentUser() {
+      // 初回ログインの時は外す(ログイン時にメッセージあり)
+      if (this.message) {
+        return false;
+      }
+
+      if (this.currentUser && this.currentUser.browsing_log) {
+        this.createLog();
+      }
     }
   }
 });
@@ -8988,7 +8982,7 @@ var render = function() {
         _vm.message
           ? _c("div", { staticClass: "flash__form", class: _vm.messageType }, [
               _c("div", { staticClass: " container alert" }, [
-                _vm._v(_vm._s(_vm.message) + _vm._s(_vm.messageType))
+                _vm._v(_vm._s(_vm.message))
               ])
             ])
           : _vm._e()

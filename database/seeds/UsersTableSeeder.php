@@ -17,6 +17,8 @@ class UsersTableSeeder extends Seeder
             'name' => '123123123',
             'email' => '123@example.com',
             'password' => bcrypt('123123123'),
+            
+            'browsing_log' => true,
             // 'role' => 3 ,//ユーザーにレベル3の権限
         ]);
         // Log 50個

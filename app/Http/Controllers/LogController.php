@@ -29,6 +29,17 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
+        // 1時間に一回に変更する
+        $user = User::where('id',Auth::user()->id)->first();
+        $last_log = Log::where('user_id', Auth::user()->id )->orderBy('created_at','desc')->first();
+        $last_time =  Carbon::now()->subHour();
+        if($last_log && $last_log->created_at > $last_time ){
+            if($user->browsing_log){
+                abort(403);
+            }
+            abort(404, '前回の記録からまだ1時間以上たっていません  ( Logの記録には一時間以上開けておく必要があります )');
+        }
+        
         // Logの作成
         $logs = new Log();
         $logs->user_id =  Auth::user()->id; 
@@ -38,7 +49,6 @@ class LogController extends Controller
         $logs->save();
         
         // ユーザーの更新
-        $user = User::where('id',Auth::user()->id)->first();
         $before_level= $user->level;
         $before_point = $user->point;
         

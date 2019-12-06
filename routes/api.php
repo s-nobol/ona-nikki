@@ -64,4 +64,5 @@ Route::post('/users/{user}/levelup', 'UserController@levelup');
 // git checkout -b level-up-edit
 
 // ブラウザを開いたと同時に起動
-// git checkout -b browsing-log-create
+// blowesing_logを編集出来るようにする
+// ProfieとLogの合体

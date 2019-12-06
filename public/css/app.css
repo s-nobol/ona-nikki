@@ -11369,3 +11369,20 @@ body {
   color: white;
 }
 
+.flash-success {
+  background-color: white;
+}
+
+.flash-info {
+  background-color: azure;
+}
+
+.flash-warnig {
+  background-color: #ffff80;
+}
+
+.flash-danger {
+  background-color: tomato;
+  color: white;
+}
+
