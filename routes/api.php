@@ -59,10 +59,12 @@ Route::resource('users', 'UserController');
 Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 Route::post('/users/{user}/levelup', 'UserController@levelup');
 
-// ranking (後日)
 
 // レベルアップ　機能は後日修正(後日)
 // git checkout -b level-up-edit
 
-// ProfieとLogの合体
 // about(今日)
+// ranking (後日)
+
+// 学歴ついか　
+// viewの幅変更(location sex-age month yearの見た目変更 )
