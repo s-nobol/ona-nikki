@@ -62,7 +62,7 @@ class AppController extends Controller
         $week_data = $week_logs->pluck('count');  
         $week_data_label = $week_logs->pluck('label');
         
-        $ranking_data = $this->DB_ranking('user_id',$week);
+        $ranking_data = $this->DB_ranking('user_id',$week, 5);
         
         return  compact(
             'data','data_label',
@@ -201,13 +201,20 @@ class AppController extends Controller
     
     
     
-    public function ranking()
+    public function ranking($name)
     {   
-        $date = Carbon::now()->subDays(500);
-        $logs = $this->DB_ranking('user_id', $date);
-        $data = $logs->pluck('count');  
-        $data_label = $logs->pluck('label');
-        return  compact('data','data_label');
+        $date;
+        if ($name == "week") {
+            $date = Carbon::now()->subDays(7);
+        }else if ($name == "month") {
+            $date = Carbon::now()->subDays(30);
+        }else if ($name == "all") {
+            $date = Carbon::now()->subDays(500);
+        }
+        
+        $logs = $this->DB_ranking('user_id', $date, 20);
+        return $logs;
+        // return  compact( 'logs', 'currentUser_Ranking');
     }
     
     
@@ -222,14 +229,14 @@ class AppController extends Controller
     }
     
     
-    public function DB_ranking($string, $date)
+    public function DB_ranking($string, $date, $take)
     {   
         return  User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select('*', DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
             ->groupBy($string)
             ->where( 'created_time', '>', $date)
             ->orderBy('count','desc')
-            ->take(5)
+            ->take($take)
             ->get();
     }
     

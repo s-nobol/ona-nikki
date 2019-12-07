@@ -3363,6 +3363,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 // 初めに複数のチャートのデータを取得
 // まとめて表示する
 // chartディレクｓトリに素材ごとのチャートをいれておく
@@ -4605,15 +4606,172 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      select: "week",
+      rankingUsers: []
+    };
   },
-  methods: {},
-  created: function created() {}
+  methods: {
+    getRankingUser: function getRankingUser() {
+      var _this = this;
+
+      axios.get("/api/ranking/".concat(this.select)).then(function (response) {
+        console.log('rankig', response);
+
+        if (response.status === 200) {
+          _this.rankingUsers = [];
+          _this.rankingUsers = response.data;
+        }
+      });
+    },
+    changeSelect: function changeSelect(name) {
+      if (this.select !== name) {
+        console.log("変更");
+        this.select = name;
+        this.getRankingUser();
+      }
+    }
+  },
+  created: function created() {
+    this.getRankingUser();
+  }
 });
 
 /***/ }),
@@ -6421,6 +6579,25 @@ exports.push([module.i, "\n.month_center{\n    width: 90%;\n    margin: auto;\n 
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.ranking__tab{\n    text-align: center;\n}\n.ranking__tab__item{\n    cursor:pointer;\n}\n.select__ranking{\n    border-bottom: 2px solid coral;\n    padding-bottom:  15px;\n    color: coral;\n}\n.rankig__page{\n    width: 65%;\n    margin: auto;\n}\n.ranking__title{\n    margin: 50px;\n    text-align: center;\n}\n\n/*ランキングカード・順番*/\n.rank__1{color: gold;}\n.rank__2{color: silver;}\n.rank__3{color: #cc7a7a;}\n\n/*ランキングカード*/\n.ranking__card{\n    list-style:none;\n    height: 150px;\n    margin-bottom: 30px;\n    /*box-shadow: 0 2px 4px rgba(0,0,0,0.3);*/\n    font-size: 0px;\n    padding: 0px;\n}\n.ranking__card li{\n    display: inline-block;\n    vertical-align: middle;\n}\n.rankig__card__number {\n    display: inline-block;\n    line-height: 150px;\n    width: 150px;\n    font-size: 45px;\n    text-align: center;\n}\n.rankig__card__user {\n    vertical-align: middle;\n    display: inline-block;\n    font-size: 18px;\n    width: 250px;\n}\n.rankig__card__user img {\n    width: 80px;\n    border-radius: 80px;\n}\n.rankig__card__user span {\n    vertical-align: middle;\n}\n.rankig__card__count{\n    text-align: center;\n}\n.rankig__card__count__span{\n    display: inline-block;\n    padding: 5px 10px;\n    border-radius: 50px;\n    font-size: 23px;\n}\n.rankig__card__count__small{\n    font-size: 18px;\n}\n.rankig__card__point {\n    display: inline-block;\n    line-height: 150px;\n    float: right;\n    margin-right: auto;\n    vertical-align: middle;\n    font-size: 28px;\n    /*width: 30%;*/\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css& ***!
@@ -8080,6 +8257,36 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Month.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Month.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -10263,19 +10470,6 @@ var render = function() {
     _vm._m(2),
     _vm._v(" "),
     _c("ul", { staticClass: "list-group" }, [
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _c(
-            "RouterLink",
-            { staticClass: "sidebar_item ", attrs: { to: "/notification" } },
-            [_c("span", { staticClass: "ml_50px" }, [_vm._v("ホーム")])]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
       _vm._m(3),
       _vm._v(" "),
       _c(
@@ -10345,6 +10539,23 @@ var render = function() {
               _c("i", { staticClass: "fas fa-thumbtack fa-lg" }),
               _vm._v(" "),
               _c("span", [_vm._v("都道府県")])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "list-group-item" },
+        [
+          _c(
+            "RouterLink",
+            { staticClass: "sidebar_item", attrs: { to: "/ranking" } },
+            [
+              _c("i", { staticClass: "fas fa-crown fa-lg" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("ランキング")])
             ]
           )
         ],
@@ -11568,14 +11779,137 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "rankig__page" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mb-5" }, [
+        _c(
+          "div",
+          {
+            staticClass: "col-4 ranking__tab ",
+            class: { select__ranking: _vm.select === "week" }
+          },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "ranking__tab__item",
+                on: {
+                  click: function($event) {
+                    return _vm.changeSelect("week")
+                  }
+                }
+              },
+              [_vm._v("今週")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-4 ranking__tab",
+            class: { select__ranking: _vm.select === "month" }
+          },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "ranking__tab__item",
+                on: {
+                  click: function($event) {
+                    return _vm.changeSelect("month")
+                  }
+                }
+              },
+              [_vm._v("今月")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "col-4 ranking__tab",
+            class: { select__ranking: _vm.select === "all" }
+          },
+          [
+            _c(
+              "span",
+              {
+                staticClass: "ranking__tab__item",
+                on: {
+                  click: function($event) {
+                    return _vm.changeSelect("all")
+                  }
+                }
+              },
+              [_vm._v("トータル")]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm.rankingUsers
+        ? _c(
+            "div",
+            _vm._l(_vm.rankingUsers, function(user, index) {
+              return _c("ul", { staticClass: "ranking__card" }, [
+                _c("li", { staticClass: "rankig__card__number " }, [
+                  index + 1 < 4
+                    ? _c("i", {
+                        staticClass: "fas fa-crown",
+                        class: "rank__" + (index + 1)
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(index + 1))])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "rankig__card__user" }, [
+                  _c("img", { attrs: { src: "/image/myuser.jpg" } }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "ml-2" }, [
+                    _vm._v(_vm._s(user.name) + " ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "rankig__card__count" }, [
+                  _c("span", { staticClass: "rankig__card__count__span" }, [
+                    _vm._v(
+                      "\n                   " +
+                        _vm._s(user.count) +
+                        "\n                   "
+                    ),
+                    _c("small", { staticClass: "rankig__card__count__small" }, [
+                      _vm._v("回")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "rankig__card__point" }, [
+                  _c("span", [
+                    _vm._v(_vm._s(user.point) + " "),
+                    _c("small", [_vm._v("EXP")])
+                  ])
+                ])
+              ])
+            }),
+            0
+          )
+        : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h5", [_c("b", [_vm._v("ランキング")])])])
+    return _c("h2", { staticClass: "ranking__title" }, [
+      _c("b", [_vm._v("ランキング ")])
+    ])
   }
 ]
 render._withStripped = true
@@ -30583,7 +30917,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Ranking.vue?vue&type=template&id=7a1c8938& */ "./resources/js/home/Ranking.vue?vue&type=template&id=7a1c8938&");
 /* harmony import */ var _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ranking.vue?vue&type=script&lang=js& */ "./resources/js/home/Ranking.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ranking.vue?vue&type=style&index=0&lang=css& */ "./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -30591,7 +30927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -30620,6 +30956,22 @@ component.options.__file = "resources/js/home/Ranking.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************!*\
+  !*** ./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

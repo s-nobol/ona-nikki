@@ -72,11 +72,6 @@
     
     
         <ul class="list-group">   
-            <li class="list-group-item" >
-                <RouterLink  to="/notification" class="sidebar_item " >
-                    <span class="ml_50px">ホーム</span>
-                </RouterLink>                
-            </li>
             
             <li class="list-group-item">
                 <i class="far fa-chart-bar fa-lg"></i>年代
@@ -115,6 +110,12 @@
                 </RouterLink>
             </li>
             
+            <li class="list-group-item">
+                <RouterLink  to="/ranking" class="sidebar_item" >
+                    <i class="fas fa-crown fa-lg"></i>
+                    <span>ランキング</span>
+                </RouterLink>
+            </li>
             
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->

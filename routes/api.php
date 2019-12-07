@@ -36,6 +36,9 @@ Route::get('/home', 'AppController@home');
 Route::get('/sex', 'AppController@sex');
 Route::get('/locations', 'AppController@locations');
 Route::get('/location/{name}', 'AppController@location');
+Route::get('/ranking', 'AppController@ranking');
+Route::get('/ranking/{name}', 'AppController@ranking');
+
 Route::get('/logs/{year}', 'AppController@year');
 Route::get('/logs/{year}/{month}', 'AppController@month');
 
@@ -63,8 +66,10 @@ Route::post('/users/{user}/levelup', 'UserController@levelup');
 // レベルアップ　機能は後日修正(後日)
 // git checkout -b level-up-edit
 
-// about(今日)
+
 // ranking (後日)
+// プロげートを模したランキングユーザーの作成
+// git checkout -b ranking
 
 // 学歴ついか　
 // viewの幅変更(location sex-age month yearの見た目変更 )
