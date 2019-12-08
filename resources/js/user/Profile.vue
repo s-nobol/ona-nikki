@@ -1,7 +1,7 @@
 <template>
 <div v-if="currentUser">
 
-    <h2>プロフィール</h2>
+    <!--<h2>プロフィール</h2>-->
     
     <div class="card">
        <div class="row p-3">
@@ -82,7 +82,7 @@
     height: 15px;
 }
 .user__gerge__bar{
-    background-color: coral;
+    background-color: mediumaquamarine;
     height: 15px;
     width: 0px;
 }
@@ -115,9 +115,9 @@ export default {
         onGergeWidth(){
             if(this.currentUser){
                 var point_gerge = document.getElementById("gerge_bar");
-                var currentUser_gerge = this.currentUser.point /  this.currentUser.experience_point
-                // console.log("UserLogs",currentUser_gerge)
-                point_gerge.style.width = `${currentUser_gerge}px`
+                var currentUser_gerge = this.currentUser.point /  this.currentUser.experience_point *100
+                console.log("UserLogs",currentUser_gerge)
+                point_gerge.style.width = `${currentUser_gerge}%`
             }
         }
     },

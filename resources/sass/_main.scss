@@ -11,6 +11,24 @@ h1 h2,h3,h4,h5,h6,ul, li ,p, div,span, strong, b,  a{
 }
 
 
+//メインコンテナの幅
+.main__continer {
+        width: 95%;
+}
+
+
+.about__continer__bg{
+    padding: 50px;
+}
+
+.about__continer{
+    width: 90%;
+    margin: auto;
+}
+.about__title{
+    text-align: center;
+}
+
 // カードの設定
 .card{
     // padding: 20;
@@ -155,4 +173,52 @@ body{
     font-weight: bold;
     color: rgba(255, 74, 74, 0.9);
     
+}
+
+
+
+
+// Home.vue
+.card_item{
+    display: inline-block;
+    /*background-color:  rgba(69, 204,130, 0.9);*/
+    /*color:  rgba(69, 204,130, 0.9);*/
+    background-color:  white;
+    color: black;
+    border: solid 1px white;
+    width:20%; 
+    margin-left:  -3px;
+}
+.card_item i{
+    line-height: 100px;
+}
+.card-title b{
+    font-size: 35px; 
+}
+.bg__green{
+    
+    background-color:  rgba(69, 204,130, 0.9);
+    color:  white;
+}
+.bg__blue{
+    background-color:  rgba(30 ,144,255, 0.9);
+    color:  white;
+}
+.bg__woman{
+   background-color:  rgba(255,77,112,0.9);
+    color:  white;
+}
+
+
+.ranking_card{
+    padding: 15px;
+    background-color: coral;
+    color: white; 
+}
+.map__image{
+    width: 100%;
+}
+.bg_indigo{
+    background-color: mediumseagreen;
+    color:white;
 }

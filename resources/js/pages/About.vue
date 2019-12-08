@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="card p-5">
+    <div class="card about__continer__bg">
        <!--ランキング-->
        <h1 class="text-center mb-5"><b>オナ日記について</b></h1>
        

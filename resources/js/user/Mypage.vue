@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="">
     
     
         
@@ -158,7 +158,6 @@
     </div>
 </template>
 <style type="text/css">
-.home{width:95%;}
 .Chart_title{
     padding: 12px;
     background-color: #fafafa;

@@ -11,7 +11,8 @@ class Log extends Model
         'time', 'category', 'comment',
     ];    
     protected $casts = [
-        'count' => 'int',
+        'count' => 'integer',
+        'check' => 'boolean',
         'created_at' => 'datetime:Y年m月d日',
     ];
     

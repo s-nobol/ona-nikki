@@ -1,11 +1,11 @@
 <template>
-    <div>
-       <!--ランキング-->
-       <h5><b>location</b></h5>
-       <!--<div v-if="msgs">-->
-       <!--    <div v-for="msg in msgs">{{ msg }}</div>-->
-       <!--</div>-->
-       <!--<div><button class="btn btn-primary" @click="onClickButton">送信</button></div>-->
+<div>
+        <!--ランキング-->
+        <h5><b>location</b></h5>
+        <!--<div v-if="msgs">-->
+        <!--    <div v-for="msg in msgs">{{ msg }}</div>-->
+        <!--</div>-->
+        <!--<div><button class="btn btn-primary" @click="onClickButton">送信</button></div>-->
        
        <div class="">
            <span v-for=" item in location" @click="onchangeSelect(item)" class="location_item ">{{ item }}</span>
@@ -24,12 +24,24 @@
            まだ何も選択されていません
        </div>
        
-       <div v-if="select" class="card">
-           <h3 class="text-center">九州地方の事情について</h3>
-           <div class="row">
+       
+       
+       <!--ロケーションメイン-->
+       <div v-if="select" class="card about__continer__bg">
+       
+           <div class="about__continer">
+           
+           
+            <h3 class="about__title mb-5">
+               <b>{{ select }}の自慰事情について</b>
+            </h3>
+           
+           
+           <div class="row mb-5">
                <div class="col-6 ">
                    <img src="/image/kyushu.png" class="location_image"alt="">
                </div>
+               
                <div class="col-6">
                    <h5>年齢と相関図</h5>
                    <BarHorizontal 
@@ -56,39 +68,49 @@
                </div>
            </div>
             
-           <h3 class="text-center">全国との比較</h3>
-           <div class="row">
+           <!--<h3 class="about__title mb-5">全国との比較</h3>-->
+           
+            <h3 class="about__title mb-5">
+               <b>全国との比較</b>
+            </h3>
+            
+            
+           <div class="row ">
                <div class="col-6">
-                   <h5>利用率の推移</h5>
-                   <span>利用者数の推移と平均利用率</span>
+                   <h5>利用者数の推移と平均利用率</h5>
+                   <!--<span>利用者数の推移と平均利用率</span>-->
                    <BarLine 
                        :lineDataSet="month_data_all"
                        :barDataSet="month_data"
                        :labels="month_data_label"
                    />
             <!--<div class="w-50 m-auto">-->
-                <div class="media">
-                    <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
-                    <div class="media-body">
-                        <span>
-                        <h5 class="mt-0">年齢について</h5>
-                        テストテストテストテストテストテストテスト
-                        テストテストテストテストテストテストテストテスト
-                        テストテストテストテストテストテストテストテスト
-                        テストテストテストテストテスト
-                        </span>
+                    <div class="media">
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">利用者数の推移について</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            </span>
+                        </div>
                     </div>
+                <!--</div>-->
                 </div>
-            <!--</div>-->
-               </div>
-               <div class="col-6 ">
-                   <img src="/image/kyushu.png" class="location_image"alt="">
-               </div>
-           </div>
                
-            
+                <div class="col-6 ">
+                    <img src="/image/kyushu.png" class="location_image"alt="">
+                </div>
+            </div>
+               
+           
        </div>
-    </div>
+       
+       
+   </div>
+</div>
 </template>
 <style type="text/css">
 .location_image{

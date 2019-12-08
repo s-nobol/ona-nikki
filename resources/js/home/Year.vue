@@ -1,8 +1,6 @@
 <template>
     <div>
        
-       
-        
         <div v-if="monthDatas" class="HomeMonth">
             <div v-for=" (monthdata, index)  in monthDatas" 
                 :key="index"　  
@@ -39,7 +37,7 @@
     color:gray;
 }
 .HomeMonth__item{
-    width: 32.5%;
+    width: 32.9%;
     display: inline-block;
     padding: 15px;
     margin: 2px;

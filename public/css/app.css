@@ -11116,6 +11116,23 @@ a {
   font-family: "Lato", "Noto Sans JP", "\6E38\30B4\30B7\30C3\30AF   Medium", "\6E38\30B4\30B7\30C3\30AF\4F53", "Yu Gothic Medium", YuGothic, "\30D2\30E9\30AE\30CE\89D2\30B4   ProN", "Hiragino Kaku Gothic ProN", "\30E1\30A4\30EA\30AA", Meiryo, "\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF", "MS PGothic", sans-serif;
 }
 
+.main__continer {
+  width: 95%;
+}
+
+.about__continer__bg {
+  padding: 50px;
+}
+
+.about__continer {
+  width: 90%;
+  margin: auto;
+}
+
+.about__title {
+  text-align: center;
+}
+
 .card {
   margin-bottom: 20px;
 }
@@ -11274,6 +11291,55 @@ body {
   color: rgba(255, 74, 74, 0.9);
 }
 
+.card_item {
+  display: inline-block;
+  /*background-color:  rgba(69, 204,130, 0.9);*/
+  /*color:  rgba(69, 204,130, 0.9);*/
+  background-color: white;
+  color: black;
+  border: solid 1px white;
+  width: 20%;
+  margin-left: -3px;
+}
+
+.card_item i {
+  line-height: 100px;
+}
+
+.card-title b {
+  font-size: 35px;
+}
+
+.bg__green {
+  background-color: rgba(69, 204, 130, 0.9);
+  color: white;
+}
+
+.bg__blue {
+  background-color: rgba(30, 144, 255, 0.9);
+  color: white;
+}
+
+.bg__woman {
+  background-color: rgba(255, 77, 112, 0.9);
+  color: white;
+}
+
+.ranking_card {
+  padding: 15px;
+  background-color: coral;
+  color: white;
+}
+
+.map__image {
+  width: 100%;
+}
+
+.bg_indigo {
+  background-color: mediumseagreen;
+  color: white;
+}
+
 .model {
   position: fixed;
   top: 0;
@@ -11384,5 +11450,108 @@ body {
 .flash-danger {
   background-color: tomato;
   color: white;
+}
+
+.ranking__tab {
+  text-align: center;
+}
+
+.ranking__tab__item {
+  cursor: pointer;
+}
+
+.select__ranking {
+  border-bottom: 2px solid coral;
+  padding-bottom: 15px;
+  color: coral;
+}
+
+.rankig__page {
+  width: 65%;
+  margin: auto;
+}
+
+.ranking__title {
+  margin: 50px;
+  text-align: center;
+}
+
+/*ランキングカード・順番*/
+
+.rank__1 {
+  color: gold;
+}
+
+.rank__2 {
+  color: silver;
+}
+
+.rank__3 {
+  color: #cc7a7a;
+}
+
+/*ランキングカード*/
+
+.ranking__card {
+  list-style: none;
+  height: 150px;
+  margin-bottom: 30px;
+  /*box-shadow: 0 2px 4px rgba(0,0,0,0.3);*/
+  font-size: 0px;
+  padding: 0px;
+}
+
+.ranking__card li {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rankig__card__number {
+  display: inline-block;
+  line-height: 150px;
+  width: 150px;
+  font-size: 45px;
+  text-align: center;
+}
+
+.rankig__card__user {
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 18px;
+  width: 250px;
+}
+
+.rankig__card__user img {
+  width: 80px;
+  border-radius: 80px;
+}
+
+.rankig__card__user span {
+  vertical-align: middle;
+}
+
+.rankig__card__count {
+  text-align: center;
+}
+
+.rankig__card__count__span {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 23px;
+}
+
+.rankig__card__count__small {
+  font-size: 18px;
+}
+
+.rankig__card__point {
+  display: inline-block;
+  line-height: 150px;
+  float: right;
+  margin-right: auto;
+  vertical-align: middle;
+  font-size: 28px;
+  /*width: 30%;*/
 }
 

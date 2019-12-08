@@ -35,11 +35,12 @@ class CreateUsersTable extends Migration
             $table->string('age')->nullable();     //年齢
             $table->string('sex')->nullable();     //性別
             $table->string('location')->nullable(); //住所 Locationに変更する
+            $table->string('career')->nullable(); //住所 Locationに変更する
             $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する？
-            $table->string('theme')->default("red");  //テーマ
+            
+            $table->string('theme')->default("red");  //テーマ(いらない)
             
             
-            // クエスト  
             
              // ソーシャルログイン用(name email は初期設定でいいかも？)
             $table->boolean('oauth_check')->default(false);; //ソーシャルユーザーでログインしているか？
@@ -51,6 +52,8 @@ class CreateUsersTable extends Migration
             
             // 管理者
             $table->smallInteger('role')->default(0); //管理者権限3以上
+            
+            
             
             $table->rememberToken();
             $table->timestamps();

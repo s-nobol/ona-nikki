@@ -67,9 +67,16 @@ Route::post('/users/{user}/levelup', 'UserController@levelup');
 // git checkout -b level-up-edit
 
 
-// ranking (後日)
-// プロげートを模したランキングユーザーの作成
-// git checkout -b ranking
 
-// 学歴ついか　
+
 // viewの幅変更(location sex-age month yearの見た目変更 )
+// git checkout -b edit-view-width
+
+
+
+// タスクスケジューラ（新技術）
+//　おしらせ（不明いらないかも？）
+
+
+
+// タイムライン

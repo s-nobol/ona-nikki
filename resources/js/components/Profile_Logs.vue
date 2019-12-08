@@ -27,6 +27,7 @@
                         <th scope="row">{{ log.id }} </th>
                         <td v-if="editNumber !== log.id " content="category">
                             <span v-if="log.category">{{ log.category }}</span>
+                            <span v-else>null</span>
                         </td>
                         <td v-if="editNumber === log.id " content="category">
                             <select v-model="log.category" :value="log.category">
@@ -36,7 +37,7 @@
                                 <option value="ぶどう">ぶどう</option>
                             </select>
                         </td>
-                        <td content="comment">テストコメント</td>
+                        <td content="comment">作成中</td>
                         <td content="status">
                             <i class="fas fa-check-circle fa-lg text__gray" :class="{ 'text-success' : log.check }"></i>
                         </td>
@@ -79,13 +80,13 @@ export default {
                 // console.log('ログの削除',item);
             axios.put(`/api/logs/${item.id}`, item).then(response => {
                 console.log('ログの編集',response);
-          
                 if(response.status === 200){
                     this.editNumber = null
                     this.$store.commit('message',{
                         type: 'edit',
                         content: '記録Logを編集しました',
                     })
+                    if(response.data.check){ item.check = true }
                 }      
                 if (response.status !== 200) {
                     if(alert('編集できませんでした')){}

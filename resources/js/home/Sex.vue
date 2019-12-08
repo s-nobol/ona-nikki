@@ -1,22 +1,21 @@
 <template>
-    <div class="card">
-       <!--ランキング-->
-       <h5><b>sex</b></h5>
-       
-       <div class="row">
-            <!--<div class="col-10">-->
-                <h4>円グラフ</h4>
+<div class="card about__continer__bg">
+
+
+
+    <!--<h2 class="about__title mb-5"><b>性別について </b></h2>-->
                 
+    <h3 class="about__title">
+        <b>性別ごとの利用者グラフ</b>
+    </h3>
+    
+    
+    <div class="about__continer">
+        <div class="row  mb-5">
                 <canvas id="pie" ></canvas>
-            <!--</div>-->
-            
-            <!--説明-->
-            <!--<div class="col-2">-->
-            <!--    <div>説明 </div>-->
-            <!--</div>-->
-       </div>
-       
-       <div class="w-50 m-auto">
+        </div>
+        
+        <div class="w-50 m-auto ">
             <div class="media">
                 <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                 <div class="media-body">
@@ -29,12 +28,15 @@
                     </span>
                 </div>
             </div>
-       </div>
-       
-       
-       <!--性別ごとの利用割合（いらない？）-->
-           <h4>性別年代グラフ</h4>
-       <div class="row">
+        </div>
+        
+        
+        <!--性別ごとの利用割合（いらない？）-->
+        <h3 class="mt-5 about__title">
+            <b>年代ごとの利用者グラフ</b>
+        </h3>
+        
+        <div class="row mb-5">
            <div class="col-6">
                <!--男*年齢横グラフ-->
                 <canvas id="man" ></canvas>
@@ -43,11 +45,11 @@
                <!--女*年齢横棒グラフ-->
                 <canvas id="woman" ></canvas>
            </div>
-       </div>
-       
-       
-       <!--年齢別の利用すいい棒グラフ-->
-        <div class="row">
+        </div>
+        
+        
+        <!--年齢別の利用すいい棒グラフ-->
+        <div class="row ">
             <div class="col-6 m-auto">
                     
                <bar 
@@ -55,9 +57,9 @@
                :labels="age_data"
                />
             </div>
-       </div>
-       
-       <div class="w-50 m-auto">
+        </div>
+        
+        <div class="w-50 m-auto">
             <div class="media">
                 <div class="media-body">
                     <span>
@@ -70,9 +72,10 @@
                 </div>
                 <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
             </div>
-       </div>
-       
+        </div>
+        
     </div>
+</div>
 </template>
 <style type="text/css">
     .myimage{

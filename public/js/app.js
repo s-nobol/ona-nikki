@@ -1941,6 +1941,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2750,6 +2752,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2783,6 +2786,10 @@ __webpack_require__.r(__webpack_exports__);
             type: 'edit',
             content: '記録Logを編集しました'
           });
+
+          if (response.data.check) {
+            item.check = true;
+          }
         }
 
         if (response.status !== 200) {
@@ -4074,54 +4081,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4203,6 +4162,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
 /* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
 /* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4530,6 +4511,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4660,87 +4650,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4786,6 +4695,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/Bar.vue */ "./resources/js/charts/Bar.vue");
+//
+//
+//
 //
 //
 //
@@ -4993,8 +4905,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_YearBar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/YearBar.vue */ "./resources/js/charts/YearBar.vue");
-//
-//
 //
 //
 //
@@ -5879,7 +5789,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6115,9 +6024,9 @@ __webpack_require__.r(__webpack_exports__);
     onGergeWidth: function onGergeWidth() {
       if (this.currentUser) {
         var point_gerge = document.getElementById("gerge_bar");
-        var currentUser_gerge = this.currentUser.point / this.currentUser.experience_point; // console.log("UserLogs",currentUser_gerge)
-
-        point_gerge.style.width = "".concat(currentUser_gerge, "px");
+        var currentUser_gerge = this.currentUser.point / this.currentUser.experience_point * 100;
+        console.log("UserLogs", currentUser_gerge);
+        point_gerge.style.width = "".concat(currentUser_gerge, "%");
       }
     }
   },
@@ -6145,54 +6054,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_Line_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/Line.vue */ "./resources/js/charts/Line.vue");
 /* harmony import */ var _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/Bar.vue */ "./resources/js/charts/Bar.vue");
 /* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -6522,25 +6383,6 @@ exports.push([module.i, "\n.levelForm{\n    width:350px;\n    padding: 30px;\n  
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.card_item{\n    display: inline-block;\n    /*background-color:  rgba(69, 204,130, 0.9);*/\n    /*color:  rgba(69, 204,130, 0.9);*/\n    background-color:  white;\n    color: black;\n    border: solid 1px white;\n    width:20%; \n    margin-left:  -3px;\n}\n.card_item i{\n    line-height: 100px;\n}\n.card-title b{\n    font-size: 35px;\n}\n.bg__green{\n    \n    background-color:  rgba(69, 204,130, 0.9);\n    color:  white;\n}\n.bg__blue{\n    background-color:  rgba(30 ,144,255, 0.9);\n    color:  white;\n}\n.bg__woman{\n   background-color:  rgba(255,77,112,0.9);\n    color:  white;\n}\n.ranking_card{\n    padding: 15px;\n    background-color: coral;\n    color: white;\n}\n.home{\n        width: 90%;\n}\n.map__image{\n    width: 100%;\n}\n.bg_indigo{\n    background-color: mediumseagreen;\n    color:white;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Location.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Location.vue?vue&type=style&index=0&lang=css& ***!
@@ -6579,25 +6421,6 @@ exports.push([module.i, "\n.month_center{\n    width: 90%;\n    margin: auto;\n 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.ranking__tab{\n    text-align: center;\n}\n.ranking__tab__item{\n    cursor:pointer;\n}\n.select__ranking{\n    border-bottom: 2px solid coral;\n    padding-bottom:  15px;\n    color: coral;\n}\n.rankig__page{\n    width: 65%;\n    margin: auto;\n}\n.ranking__title{\n    margin: 50px;\n    text-align: center;\n}\n\n/*ランキングカード・順番*/\n.rank__1{color: gold;}\n.rank__2{color: silver;}\n.rank__3{color: #cc7a7a;}\n\n/*ランキングカード*/\n.ranking__card{\n    list-style:none;\n    height: 150px;\n    margin-bottom: 30px;\n    /*box-shadow: 0 2px 4px rgba(0,0,0,0.3);*/\n    font-size: 0px;\n    padding: 0px;\n}\n.ranking__card li{\n    display: inline-block;\n    vertical-align: middle;\n}\n.rankig__card__number {\n    display: inline-block;\n    line-height: 150px;\n    width: 150px;\n    font-size: 45px;\n    text-align: center;\n}\n.rankig__card__user {\n    vertical-align: middle;\n    display: inline-block;\n    font-size: 18px;\n    width: 250px;\n}\n.rankig__card__user img {\n    width: 80px;\n    border-radius: 80px;\n}\n.rankig__card__user span {\n    vertical-align: middle;\n}\n.rankig__card__count{\n    text-align: center;\n}\n.rankig__card__count__span{\n    display: inline-block;\n    padding: 5px 10px;\n    border-radius: 50px;\n    font-size: 23px;\n}\n.rankig__card__count__small{\n    font-size: 18px;\n}\n.rankig__card__point {\n    display: inline-block;\n    line-height: 150px;\n    float: right;\n    margin-right: auto;\n    vertical-align: middle;\n    font-size: 28px;\n    /*width: 30%;*/\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Sex.vue?vue&type=style&index=0&lang=css& ***!
@@ -6629,7 +6452,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.StatusCard{\n    color:gray;\n}\n.HomeMonth__item{\n    width: 32.5%;\n    display: inline-block;\n    padding: 15px;\n    margin: 2px;\n    cursor:pointer;\n}\n", ""]);
+exports.push([module.i, "\n.StatusCard{\n    color:gray;\n}\n.HomeMonth__item{\n    width: 32.9%;\n    display: inline-block;\n    padding: 15px;\n    margin: 2px;\n    cursor:pointer;\n}\n", ""]);
 
 // exports
 
@@ -6724,7 +6547,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.home{width:95%;}\n.Chart_title{\n    padding: 12px;\n    background-color: #fafafa;\n    color:gray;\n    font-weight: bold;\n    border-bottom: 1px solid whitesmoke ;\n}\n.Chart_title i{\n    margin-right: 15px;\n}\n.Chart_content{\n    padding: 10px;\n}\n.MyBar{}\n.MyBar__item{\n    color:gray;\n}\n.MyBar__content{\n    text-align: right;\n    font-size: 35px;\n    font-weight: bold;\n    color: black;\n    /*position:relative;*/\n}\n.MyBar__content2{\n    text-align: right;\n}\n", ""]);
+exports.push([module.i, "\n.Chart_title{\n    padding: 12px;\n    background-color: #fafafa;\n    color:gray;\n    font-weight: bold;\n    border-bottom: 1px solid whitesmoke ;\n}\n.Chart_title i{\n    margin-right: 15px;\n}\n.Chart_content{\n    padding: 10px;\n}\n.MyBar{}\n.MyBar__item{\n    color:gray;\n}\n.MyBar__content{\n    text-align: right;\n    font-size: 35px;\n    font-weight: bold;\n    color: black;\n    /*position:relative;*/\n}\n.MyBar__content2{\n    text-align: right;\n}\n", ""]);
 
 // exports
 
@@ -6743,7 +6566,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.user_image{\n    width: 55px;\n    border-radius:55px;\n}\n.Status__user{\n    vertical-align: middle;\n    display: inline-block;\n    padding-left: 15px;\n}\n.Status__user__name{\n    font-size: 18px;\n    font-weight: bold;\n}\n.Status__user__edit{\n    color: mediumseagreen;\n    cursor: pointer;\n}\n.Status__user__level{\n    font-weight: bold;\n}\n.Status__gerge small{\n    color: gray;\n}\n.user__gerge{\n    background-color: whitesmoke;\n    height: 15px;\n}\n.user__gerge__bar{\n    background-color: coral;\n    height: 15px;\n    width: 0px;\n}\n.status__subtitle{\n    color:gray;\n    text-align: center;\n}\n.plr-2{ padding: 0px 20px;\n}\n", ""]);
+exports.push([module.i, "\n.user_image{\n    width: 55px;\n    border-radius:55px;\n}\n.Status__user{\n    vertical-align: middle;\n    display: inline-block;\n    padding-left: 15px;\n}\n.Status__user__name{\n    font-size: 18px;\n    font-weight: bold;\n}\n.Status__user__edit{\n    color: mediumseagreen;\n    cursor: pointer;\n}\n.Status__user__level{\n    font-weight: bold;\n}\n.Status__gerge small{\n    color: gray;\n}\n.user__gerge{\n    background-color: whitesmoke;\n    height: 15px;\n}\n.user__gerge__bar{\n    background-color: mediumaquamarine;\n    height: 15px;\n    width: 0px;\n}\n.status__subtitle{\n    color:gray;\n    text-align: center;\n}\n.plr-2{ padding: 0px 20px;\n}\n", ""]);
 
 // exports
 
@@ -8188,36 +8011,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&":
-/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css& ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Location.vue?vue&type=style&index=0&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Location.vue?vue&type=style&index=0&lang=css& ***!
@@ -8257,36 +8050,6 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Month.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Month.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -9267,7 +9030,9 @@ var render = function() {
       _c("div", { staticClass: "row " }, [
         _c("div", { staticClass: "col-2" }, [_c("Sidebar")], 1),
         _vm._v(" "),
-        _c("main", { staticClass: "col-10 pl-4 pr-4" }, [_c("RouterView")], 1)
+        _c("main", { staticClass: "col-10 pl-4 pr-4 pt-1" }, [
+          _c("div", { staticClass: "main__continer" }, [_c("RouterView")], 1)
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -9516,7 +9281,7 @@ var render = function() {
                       ? _c("td", { attrs: { content: "category" } }, [
                           log.category
                             ? _c("span", [_vm._v(_vm._s(log.category))])
-                            : _vm._e()
+                            : _c("span", [_vm._v("null")])
                         ])
                       : _vm._e(),
                     _vm._v(" "),
@@ -9577,7 +9342,7 @@ var render = function() {
                       : _vm._e(),
                     _vm._v(" "),
                     _c("td", { attrs: { content: "comment" } }, [
-                      _vm._v("テストコメント")
+                      _vm._v("作成中")
                     ]),
                     _vm._v(" "),
                     _c("td", { attrs: { content: "status" } }, [
@@ -10448,10 +10213,7 @@ var render = function() {
               [
                 _c(
                   "RouterLink",
-                  {
-                    staticClass: "sidebar_item",
-                    attrs: { to: "/mypage/ranking" }
-                  },
+                  { staticClass: "sidebar_item", attrs: { to: "/ranking" } },
                   [
                     _c("i", { staticClass: "fas fa-crown fa-lg" }),
                     _vm._v(" "),
@@ -11032,7 +10794,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "home" }, [
+  return _c("div", {}, [
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row " }, [
@@ -11384,66 +11146,68 @@ var render = function() {
     !_vm.select
       ? _c("div", { staticClass: "card" }, [
           _vm._m(1),
-          _vm._v("\n       \n       まだ何も選択されていません\n   ")
+          _vm._v(
+            "\n           \n           まだ何も選択されていません\n       "
+          )
         ])
       : _vm._e(),
     _vm._v(" "),
     _vm.select
-      ? _c("div", { staticClass: "card" }, [
-          _c("h3", { staticClass: "text-center" }, [
-            _vm._v("九州地方の事情について")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _vm._m(2),
+      ? _c("div", { staticClass: "card about__continer__bg" }, [
+          _c("div", { staticClass: "about__continer" }, [
+            _c("h3", { staticClass: "about__title mb-5" }, [
+              _c("b", [_vm._v(_vm._s(_vm.select) + "の自慰事情について")])
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-6" },
-              [
-                _c("h5", [_vm._v("年齢と相関図")]),
-                _vm._v(" "),
-                _c("BarHorizontal", {
-                  attrs: { dataSet: _vm.age_data, labels: _vm.age_data_label }
-                }),
-                _vm._v(" "),
-                _c("h5", [_vm._v("性別ごとの利用割合")]),
-                _vm._v(" "),
-                _c("Doughnut", {
-                  attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
-                }),
-                _vm._v(" "),
-                _vm._m(3)
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("h3", { staticClass: "text-center" }, [_vm._v("全国との比較")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-6" },
-              [
-                _c("h5", [_vm._v("利用率の推移")]),
-                _vm._v(" "),
-                _c("span", [_vm._v("利用者数の推移と平均利用率")]),
-                _vm._v(" "),
-                _c("BarLine", {
-                  attrs: {
-                    lineDataSet: _vm.month_data_all,
-                    barDataSet: _vm.month_data,
-                    labels: _vm.month_data_label
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(4)
-              ],
-              1
-            ),
+            _c("div", { staticClass: "row mb-5" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-6" },
+                [
+                  _c("h5", [_vm._v("年齢と相関図")]),
+                  _vm._v(" "),
+                  _c("BarHorizontal", {
+                    attrs: { dataSet: _vm.age_data, labels: _vm.age_data_label }
+                  }),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v("性別ごとの利用割合")]),
+                  _vm._v(" "),
+                  _c("Doughnut", {
+                    attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
-            _vm._m(5)
+            _vm._m(4),
+            _vm._v(" "),
+            _c("div", { staticClass: "row " }, [
+              _c(
+                "div",
+                { staticClass: "col-6" },
+                [
+                  _c("h5", [_vm._v("利用者数の推移と平均利用率")]),
+                  _vm._v(" "),
+                  _c("BarLine", {
+                    attrs: {
+                      lineDataSet: _vm.month_data_all,
+                      barDataSet: _vm.month_data,
+                      labels: _vm.month_data_label
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
           ])
         ])
       : _vm._e()
@@ -11491,7 +11255,7 @@ var staticRenderFns = [
         _c("span", [
           _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
           _vm._v(
-            "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
+            "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        "
           )
         ])
       ]),
@@ -11506,6 +11270,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "about__title mb-5" }, [
+      _c("b", [_vm._v("全国との比較")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "media" }, [
       _c("img", {
         staticClass: "align-self-start mr-3 myimage",
@@ -11514,9 +11286,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "media-body" }, [
         _c("span", [
-          _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
+          _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者数の推移について")]),
           _vm._v(
-            "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
+            "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
           )
         ])
       ])
@@ -11557,93 +11329,95 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.month_data_label
-      ? _c("div", { staticClass: "card p-4" }, [
-          _c("h2", { staticClass: "text-center" }, [
+      ? _c("div", { staticClass: "card about__continer__bg" }, [
+          _c("h2", { staticClass: "text-center mb-5" }, [
             _c("b", [
               _vm._v(_vm._s(_vm.year) + "年" + _vm._s(_vm.month) + "月のデータ")
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row month_center" }, [
-            _c(
-              "div",
-              { staticClass: "col-8" },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("BarLine", {
-                  attrs: {
-                    labels: _vm.month_data_label,
-                    barDataSet: _vm.month_data_count,
-                    lineDataSet: _vm.month_data_ave
-                  }
-                })
-              ],
-              1
-            ),
+          _c("div", { staticClass: "about__continer" }, [
+            _c("div", { staticClass: "row mb-5" }, [
+              _c(
+                "div",
+                { staticClass: "col-8" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("BarLine", {
+                    attrs: {
+                      labels: _vm.month_data_label,
+                      barDataSet: _vm.month_data_count,
+                      lineDataSet: _vm.month_data_ave
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(1)
+            ]),
             _vm._v(" "),
-            _vm._m(1)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row month_center" }, [
-            _vm._m(2),
+            _c("div", { staticClass: "row mb-5" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _c("h4", [_vm._v("性別ごとの利用割合（円グラフ）")]),
+                  _vm._v(" "),
+                  _c("Doughnut", {
+                    attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
+                  })
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-5" },
-              [
-                _c("h4", [_vm._v("性別ごとの利用割合（円グラフ）")]),
-                _vm._v(" "),
-                _c("Doughnut", {
-                  attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row month_center" }, [
-            _c(
-              "div",
-              { staticClass: "col-5" },
-              [
-                _c("h4", [_vm._v("カテゴリーの比率（棒グラフ）")]),
-                _vm._v(" "),
-                _c("BarHorizontal", {
-                  attrs: {
-                    dataSet: _vm.category_data,
-                    labels: _vm.category_data_label
-                  }
-                })
-              ],
-              1
-            ),
+            _c("div", { staticClass: "row mb-5" }, [
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _c("h4", [_vm._v("カテゴリーの比率（棒グラフ）")]),
+                  _vm._v(" "),
+                  _c("BarHorizontal", {
+                    attrs: {
+                      dataSet: _vm.category_data,
+                      labels: _vm.category_data_label
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(3)
+            ]),
             _vm._v(" "),
-            _vm._m(3)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row month_center" }, [
-            _vm._m(4),
+            _c("div", { staticClass: "row mb-5" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _c("h4", [_vm._v("募金額推移（棒グラフ）")]),
+                  _vm._v(" "),
+                  _c("LineChart", {
+                    attrs: {
+                      id: "month",
+                      Coins: _vm.coin_data,
+                      labels: _vm.coin_data_label
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-5" },
-              [
-                _c("h4", [_vm._v("募金額推移（棒グラフ）")]),
-                _vm._v(" "),
-                _c("LineChart", {
-                  attrs: {
-                    id: "month",
-                    Coins: _vm.coin_data,
-                    labels: _vm.coin_data_label
-                  }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm._m(5)
+            _vm._m(5)
+          ])
         ])
       : _vm._e()
   ])
@@ -11665,7 +11439,7 @@ var staticRenderFns = [
           _c("span", [
             _c("h5", { staticClass: "mt-0" }, [_vm._v("利用推移について")]),
             _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        "
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
             )
           ])
         ]),
@@ -11692,7 +11466,7 @@ var staticRenderFns = [
           _c("span", [
             _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者の割合")]),
             _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        先月と比較してXXXX％の伸びました\n                        "
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
             )
           ])
         ])
@@ -11711,7 +11485,7 @@ var staticRenderFns = [
               _vm._v("O月のカテゴリーについて")
             ]),
             _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        先月と比較してXXXX％の伸びました\n                        "
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
             )
           ])
         ]),
@@ -11738,7 +11512,7 @@ var staticRenderFns = [
           _c("span", [
             _c("h5", { staticClass: "mt-0" }, [_vm._v("募金額推移 について")]),
             _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        先月と比較してXXXX％の伸びました\n                        "
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
             )
           ])
         ])
@@ -11933,27 +11707,33 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "card about__continer__bg" }, [
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _vm._m(2),
-    _vm._v(" "),
-    _c("h4", [_vm._v("性別年代グラフ")]),
-    _vm._v(" "),
-    _vm._m(3),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-6 m-auto" },
-        [_c("bar", { attrs: { dataSet: _vm.age_data, labels: _vm.age_data } })],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(4)
+    _c("div", { staticClass: "about__continer" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4),
+      _vm._v(" "),
+      _c("div", { staticClass: "row " }, [
+        _c(
+          "div",
+          { staticClass: "col-6 m-auto" },
+          [
+            _c("bar", {
+              attrs: { dataSet: _vm.age_data, labels: _vm.age_data }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(5)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -11961,15 +11741,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", [_c("b", [_vm._v("sex")])])
+    return _c("h3", { staticClass: "about__title" }, [
+      _c("b", [_vm._v("性別ごとの利用者グラフ")])
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("h4", [_vm._v("円グラフ")]),
-      _vm._v(" "),
+    return _c("div", { staticClass: "row  mb-5" }, [
       _c("canvas", { attrs: { id: "pie" } })
     ])
   },
@@ -11977,7 +11757,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-50 m-auto" }, [
+    return _c("div", { staticClass: "w-50 m-auto " }, [
       _c("div", { staticClass: "media" }, [
         _c("img", {
           staticClass: "align-self-start mr-3 myimage",
@@ -11988,7 +11768,7 @@ var staticRenderFns = [
           _c("span", [
             _c("h5", { staticClass: "mt-0" }, [_vm._v("性別について")]),
             _vm._v(
-              "\n                テストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテスト\n                "
+              "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
             )
           ])
         ])
@@ -11999,7 +11779,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
+    return _c("h3", { staticClass: "mt-5 about__title" }, [
+      _c("b", [_vm._v("年代ごとの利用者グラフ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-5" }, [
       _c("div", { staticClass: "col-6" }, [
         _c("canvas", { attrs: { id: "man" } })
       ]),
@@ -12019,7 +11807,7 @@ var staticRenderFns = [
           _c("span", [
             _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
             _vm._v(
-              "\n                テストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテスト\n                "
+              "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
             )
           ])
         ]),
@@ -12140,7 +11928,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("div", { staticClass: "card p-5" }, [
+      _c("div", { staticClass: "card about__continer__bg" }, [
         _c("h1", { staticClass: "text-center mb-5" }, [
           _c("b", [_vm._v("オナ日記について")])
         ]),
@@ -12673,7 +12461,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "home" }, [
+  return _c("div", {}, [
     _c("div", { staticClass: "row MyBar" }, [
       _c("div", { staticClass: "col-3 card p-3 MyBar__item" }, [
         _vm._m(0),
@@ -12988,8 +12776,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.currentUser
     ? _c("div", [
-        _c("h2", [_vm._v("プロフィール")]),
-        _vm._v(" "),
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "row p-3" }, [
             _c("div", { staticClass: "col-3" }, [
@@ -13089,139 +12875,98 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "card" }, [
-      _c("h1", [_vm._v("ログ（後日モーダルに変更する）")]),
-      _vm._v(" "),
-      _c("h4", [_vm._v(_vm._s(_vm.year) + "年の記録")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row " }, [
-        _c(
-          "div",
-          { staticClass: "col-7  p-5" },
-          [
-            _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-              _c("h3", { staticClass: "d-inline-block" }, [
-                _vm._v("月別利用推移（比較）")
-              ]),
+    _vm.month_data_label
+      ? _c("div", { staticClass: "card about__continer__bg" }, [
+          _c("h2", { staticClass: "text-center mb-5" }, [
+            _c("b", [_vm._v(_vm._s(_vm.year) + "年のデータ")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "about__continer" }, [
+            _c("div", { staticClass: "row mb-5" }, [
+              _c(
+                "div",
+                { staticClass: "col-8" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("BarLine", {
+                    attrs: {
+                      labels: _vm.month_data_label,
+                      barDataSet: _vm.month_data_count,
+                      lineDataSet: _vm.month_data_ave
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(1)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row mb-5" }, [
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "collapse navbar-collapse",
-                  attrs: { id: "navbarText" }
-                },
+                { staticClass: "col-5" },
                 [
-                  _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                    _c("li", { staticClass: "nav-item " }, [
-                      _c(
-                        "span",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.selectTab("month")
-                            }
-                          }
-                        },
-                        [_vm._v("今月")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item " }, [
-                      _c(
-                        "span",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.selectTab("year")
-                            }
-                          }
-                        },
-                        [_vm._v("年間")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("li", { staticClass: "nav-item " }, [
-                      _c(
-                        "span",
-                        {
-                          on: {
-                            click: function($event) {
-                              return _vm.selectTab("all")
-                            }
-                          }
-                        },
-                        [_vm._v("すべて")]
-                      )
-                    ])
-                  ])
-                ]
+                  _c("h4", [
+                    _vm._v("年間利用割合（一年間のうちどれだけ利用したか？）")
+                  ]),
+                  _vm._v(" "),
+                  _c("Doughnut", {
+                    attrs: { dataSet: _vm.sex_data, labels: _vm.sex_data_label }
+                  })
+                ],
+                1
               )
             ]),
             _vm._v(" "),
-            _c("LineChart", {
-              attrs: {
-                dataSet: _vm.month_data_count,
-                dataSet2: _vm.other_user_month_data_count,
-                labels: _vm.month_data_label
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(1)
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-5" },
-          [
-            _c("Doughnut", {
-              attrs: { dataSet: _vm.time_data, labels: _vm.time_data_label }
-            })
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-4" },
-          [
-            _c("span", [_vm._v("ラインチャート（月別課金推移）")]),
+            _c("div", { staticClass: "row mb-5" }, [
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _c("h4", [_vm._v("カテゴリーの比率（棒グラフ）")]),
+                  _vm._v(" "),
+                  _c("BarHorizontal", {
+                    attrs: {
+                      dataSet: _vm.category_data,
+                      labels: _vm.category_data_label
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(3)
+            ]),
             _vm._v(" "),
-            _c("Bar", {
-              attrs: {
-                id: "line",
-                dataSet: _vm.time_data,
-                labels: _vm.time_data_label
-              }
-            }),
+            _c("div", { staticClass: "row mb-5" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _c("h4", [_vm._v("募金額推移（棒グラフ）")]),
+                  _vm._v(" "),
+                  _c("LineChart", {
+                    attrs: {
+                      id: "month",
+                      Coins: _vm.coin_data,
+                      labels: _vm.coin_data_label
+                    }
+                  })
+                ],
+                1
+              )
+            ]),
             _vm._v(" "),
-            _c("span", [_vm._v("ラインチャート（消費カロリー推移）")]),
-            _vm._v(" "),
-            _c("BarLine", {
-              attrs: {
-                dataSet: _vm.time_data,
-                lineDataSet: _vm.time_data,
-                labels: _vm.time_data_label
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(3)
-      ]),
-      _vm._v(" "),
-      _vm._m(4)
-    ])
+            _vm._m(5)
+          ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -13229,85 +12974,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("h1", [_vm._v("2019年のデータ")])
-    ])
+    return _c("h5", [_c("b", [_vm._v("月別利用推移")])])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-5  p-5" }, [
-      _c("h5", [_vm._v("2019年合計射精回数")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("15")]),
-      _vm._v(" "),
-      _c("h5", [_vm._v("2019年平均射精回数")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("145")]),
-      _vm._v(" "),
-      _c("h5", [_vm._v("2019年合計消費カロリー")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("145")]),
-      _vm._v(" "),
-      _c("h5", [_vm._v("2019年合計支援金")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("8515")]),
-      _vm._v(" "),
-      _c("h5", [_vm._v("2019年今月の射精回数")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("(可変するように設定する)")]),
-      _vm._v(" "),
+    return _c("div", { staticClass: "col-4" }, [
       _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
         _c("div", { staticClass: "media-body" }, [
           _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("ログコメント")]),
-            _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("ログコメント")]),
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用推移について")]),
             _vm._v(
               "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("ログコメント")]),
-            _vm._v(
-              "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        "
             )
           ])
         ]),
@@ -13323,8 +13002,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-4" }, [_c("div", { staticClass: "card" })])
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "media" }, [
+        _c("img", {
+          staticClass: "align-self-start mr-3 myimage",
+          attrs: { src: "/image/kairakuten.png", alt: "" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "media-body" }, [
+          _c("span", [
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者の割合")]),
+            _vm._v(
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "media" }, [
+        _c("div", { staticClass: "media-body" }, [
+          _c("span", [
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("カテゴリーについて")]),
+            _vm._v(
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "align-self-start mr-3 myimage",
+          attrs: { src: "/image/kairakuten.png", alt: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "media" }, [
+        _c("img", {
+          staticClass: "align-self-start mr-3 myimage",
+          attrs: { src: "/image/kairakuten.png", alt: "" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "media-body" }, [
+          _c("span", [
+            _c("h5", { staticClass: "mt-0" }, [_vm._v("募金額推移 について")]),
+            _vm._v(
+              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c("span", [_vm._v("合計射精回数　555回")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("合計消費カロリー　555cal")]),
+      _vm._v(" "),
+      _c("span", [_vm._v("合計募金額　532円")])
     ])
   }
 ]
@@ -30656,9 +30405,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Home_vue_vue_type_template_id_dacc1fbe___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.vue?vue&type=template&id=dacc1fbe& */ "./resources/js/home/Home.vue?vue&type=template&id=dacc1fbe&");
 /* harmony import */ var _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home.vue?vue&type=script&lang=js& */ "./resources/js/home/Home.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Home.vue?vue&type=style&index=0&lang=css& */ "./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -30666,7 +30413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Home_vue_vue_type_template_id_dacc1fbe___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Home_vue_vue_type_template_id_dacc1fbe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -30695,22 +30442,6 @@ component.options.__file = "resources/js/home/Home.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Home.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Home.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&":
-/*!*********************************************************************!*\
-  !*** ./resources/js/home/Home.vue?vue&type=style&index=0&lang=css& ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Home.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Home.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Home_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -30917,9 +30648,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Ranking.vue?vue&type=template&id=7a1c8938& */ "./resources/js/home/Ranking.vue?vue&type=template&id=7a1c8938&");
 /* harmony import */ var _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ranking.vue?vue&type=script&lang=js& */ "./resources/js/home/Ranking.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ranking.vue?vue&type=style&index=0&lang=css& */ "./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -30927,7 +30656,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Ranking_vue_vue_type_template_id_7a1c8938___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -30956,22 +30685,6 @@ component.options.__file = "resources/js/home/Ranking.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&":
-/*!************************************************************************!*\
-  !*** ./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css& ***!
-  \************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/home/Ranking.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

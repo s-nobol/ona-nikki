@@ -1,137 +1,33 @@
 <template>
-    <div>
-       
-       
-       <!--<div class="card ">-->
-       <!--チャートを入力-->
-       <!--<h5><b>year</b></h5>-->
-       <!--    <h4>{{ year }} 年月別射精回数グラフ(自分のデータとみんなのデータを比較)</h4>-->
-           <!--<img src="/image/chart.jpg"></img>-->
-            
-       <!--     <LineChart -->
-       <!--         :dataSet="month_data_count"-->
-       <!--         :dataSet2="other_user_month_data_count"-->
-       <!--         :labels="month_data_label"-->
-       <!--     />-->
-                    
-       <!--</div>-->
-       
-        <div class="card">
-            <h1>2019年のデータ</h1>
-        </div>
-        <!--メインA-->
-        <div class="card">
-            
-            
-            <h1>ログ（後日モーダルに変更する）</h1>
-            
-            
-           <h4>{{ year }}年の記録</h4>
-        
-            <div class="row "> 
-            
-                <div class="col-7  p-5">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <h3 class="d-inline-block">月別利用推移（比較）</h3>
-                        
-                        <div class="collapse navbar-collapse" id="navbarText">
-                            <ul class="navbar-nav ml-auto">
-                                <li class="nav-item ">
-                                    <span @click="selectTab('month')">今月</span>
-                                </li>
-                                <li class="nav-item ">
-                                    <span @click="selectTab('year')">年間</span>
-                                </li>
-                                <li class="nav-item ">
-                                    <span @click="selectTab('all')">すべて</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                
-                    
-                    <LineChart 
-                        :dataSet="month_data_count"
-                        :dataSet2="other_user_month_data_count"
-                        :labels="month_data_label"
-                    />
-                    
-                </div>
-                <div class="col-5  p-5">
-                    <h5>2019年合計射精回数</h5>
-                        <span>15</span>
-                    <h5>2019年平均射精回数</h5>
-                        <span>145</span>
-                    <h5>2019年合計消費カロリー</h5>
-                        <span>145</span>
-                    <h5>2019年合計支援金</h5>
-                        <span>8515</span>
-                    <h5>2019年今月の射精回数</h5>
-                    <span>(可変するように設定する)</span>
-                    <div class="media">
-                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
-                        <div class="media-body">
-                            <span>
-                            <h5 class="mt-0">ログコメント</h5>
-                            テストテストテストテストテストテストテスト
-                            テストテストテストテストテストテストテストテスト
-                            テストテストテストテストテストテストテストテスト
-                            テストテストテストテストテスト
-                            </span>
-                        </div>
-                    </div>
 
-                    
-                </div>
-            </div>
-                
-            
-            <div class="row">
+<div>
+    <div v-if="month_data_label" class="card about__continer__bg">
     
-                <div class="col-7">                         <div class="media">
-                            <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
-                            <div class="media-body">
-                                <span>
-                                <h5 class="mt-0">ログコメント</h5>
-                                テストテストテストテストテストテストテスト
-                                テストテストテストテストテストテストテストテスト
-                                テストテストテストテストテストテストテストテスト
-                                テストテストテストテストテスト
-                                </span>
-                            </div>
-                        </div></div>
-                <div class="col-5">
-                
-                        <Doughnut 
-                            :dataSet="time_data"
-                            :labels="time_data_label"
-                        />
-                </div>
-            </div>
+        <h2 class="text-center mb-5"><b>{{ year }}年のデータ</b></h2>
+        
+        <div class="about__continer">
+        
             
-            <div class="row">
+            <!--利用推移-->
+            <div class="row mb-5">
+            
+            
+                <div class="col-8">
+                    <!--月別集計-->
+                    <h5><b>月別利用推移</b></h5>
+                    
+                    <BarLine 
+                        :labels="month_data_label"
+                        :barDataSet="month_data_count" 
+                        :lineDataSet="month_data_ave" 
+                    />
+                </div>
+                
                 <div class="col-4">
-                
-                    
-                        <span>ラインチャート（月別課金推移）</span>
-                        <Bar 
-                            id="line"
-                            :dataSet="time_data"
-                            :labels="time_data_label"
-                        /> 
-                        <span>ラインチャート（消費カロリー推移）</span>
-                        <BarLine 
-                            :dataSet="time_data"
-                            :lineDataSet="time_data"
-                            :labels="time_data_label"
-                        />
-                </div>
-    
-                <div class="col-7">                         
                     <div class="media">
                         <div class="media-body">
                             <span>
-                            <h5 class="mt-0">ログコメント</h5>
+                            <h5 class="mt-0">利用推移について</h5>
                             テストテストテストテストテストテストテスト
                             テストテストテストテストテストテストテストテスト
                             テストテストテストテストテストテストテストテスト
@@ -140,62 +36,118 @@
                         </div>
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                     </div>
+                    
                 </div>
             </div>
             
             
+            <!--性別割合-->
+            <div class="row mb-5">
             
-            <div class="row">
-            
-                <!--なんかのグラフ-->
-                <div class="col-4">
-                    <div class="card">
+                <!--性別ごとの利用推移-->
+                <div class="col-7">
+                    <div class="media">
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">利用者の割合</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            先月と比較してXXXX％の伸びました
+                            </span>
+                        </div>
                     </div>
                 </div>
                 
-                <!--合計支援金-->
-            <!--    <div class="col-4">-->
-            <!--        <div class="card">-->
-            <!--            <h4>円グラフ（365日の内どれくらい利用したか？）</h4>-->
-                        
-                        <!--<Doughnut -->
-                        <!--    :dataSet="time_data"-->
-                        <!--    :labels="time_data_label"-->
-                        <!--/>-->
-            <!--            <div class="col-6">当月日数</div>-->
-            <!--            <div class="col-6">利用日数</div>-->
-            <!--        </div>-->
-            <!--    </div>-->
+                <div class="col-5">
+                    <h4>年間利用割合（一年間のうちどれだけ利用したか？）</h4>
+                    <Doughnut
+                        :dataSet="sex_data"
+                        :labels="sex_data_label"
+                    />
+                </div>
                 
-            <!--    <div class="col-4">-->
-            <!--        <div class="card  bg-success">-->
-                        
-            <!--            <span>ラインチャート（月別課金推移）</span>-->
-            <!--            <Bar -->
-            <!--                id="line"-->
-            <!--                :dataSet="time_data"-->
-            <!--                :labels="time_data_label"-->
-            <!--            />-->
-            <!--        </div>-->
-                    
-            <!--        <div class="card bg-danger">-->
-                             
-            <!--            <span>ラインチャート（消費カロリー推移）</span>-->
-            <!--            <Lines -->
-            <!--                :dataSet="time_data"-->
-            <!--                :dataSet2="time_data"-->
-            <!--                :labels="time_data_label"-->
-            <!--            />-->
-            <!--        </div>-->
-            <!--    </div>-->
+                
             </div>
-           
-        
+            
+            
+            <!--カテゴリー別割合-->
+            <div class="row mb-5">
+            
+                <div class="col-5">
+                    <h4>カテゴリーの比率（棒グラフ）</h4>
+                    <BarHorizontal 
+                        :dataSet="category_data"
+                        :labels="category_data_label"
+                    />
+                </div>
+                
+                <!--カテゴリーの比率-->
+                <div class="col-7">
+                    <div class="media">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">カテゴリーについて</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            先月と比較してXXXX％の伸びました
+                            </span>
+                        </div>
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            <!--募金推移    -->
+            <div class="row mb-5">
+            
+            
+                <div class="col-7">
+                    <div class="media">
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">募金額推移 について</h5>
+                            テストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテストテストテストテスト
+                            テストテストテストテストテスト
+                            先月と比較してXXXX％の伸びました
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-5">
+                    <h4>募金額推移（棒グラフ）</h4>
+                    <LineChart
+                        id="month"
+                        :Coins="coin_data"
+                        :labels="coin_data_label"
+                    />
+                </div>
+                    
+            </div>
+            
+            
+            
+            <div class="text-center">
+                <span>合計射精回数　555回</span>
+                <span>合計消費カロリー　555cal</span>
+                <span>合計募金額　532円</span>
+            </div>
+            
         </div>
-       
         
-       
     </div>
+</div>
 </template>
 <style type="text/css">
     .Doughnut_Chart{

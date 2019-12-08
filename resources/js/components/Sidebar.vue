@@ -51,7 +51,7 @@
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/ranking" class="sidebar_item" >
+                <RouterLink  to="/ranking" class="sidebar_item" >
                     <i class="fas fa-crown fa-lg"></i>
                     <span>ランキング</span>
                 </RouterLink>

@@ -1,5 +1,5 @@
 <template>
-<div class="home">
+<div class="">
         
         <div >
             <div class="card_item card">
@@ -220,54 +220,6 @@
     
 </div>
 </template>
-<style type="text/css">
-.card_item{
-    display: inline-block;
-    /*background-color:  rgba(69, 204,130, 0.9);*/
-    /*color:  rgba(69, 204,130, 0.9);*/
-    background-color:  white;
-    color: black;
-    border: solid 1px white;
-    width:20%; 
-    margin-left:  -3px;
-}
-.card_item i{
-    line-height: 100px;
-}
-.card-title b{
-    font-size: 35px; 
-}
-.bg__green{
-    
-    background-color:  rgba(69, 204,130, 0.9);
-    color:  white;
-}
-.bg__blue{
-    background-color:  rgba(30 ,144,255, 0.9);
-    color:  white;
-}
-.bg__woman{
-   background-color:  rgba(255,77,112,0.9);
-    color:  white;
-}
-
-
-.ranking_card{
-    padding: 15px;
-    background-color: coral;
-    color: white; 
-}
-.home{
-        width: 90%;
-}
-.map__image{
-    width: 100%;
-}
-.bg_indigo{
-    background-color: mediumseagreen;
-    color:white;
-}
-</style>
 
 <script>
 import Bar from '../charts/Bar.vue'
