@@ -28,10 +28,11 @@ Route::get('/login/{OAuth}', 'Auth\OAuthController@redirectToProvider');
 Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallback');
 
 
-// home logs
 // 後日変更を検討する？
 // Route::get('/app/logs/{year}', 'AppController@year');
 // Route::get('/app/logs/{year}/{month}', 'AppController@month');
+
+// home 
 Route::get('/home', 'AppController@home');
 Route::get('/sex', 'AppController@sex');
 Route::get('/locations', 'AppController@locations');
@@ -69,12 +70,9 @@ Route::post('/users/{user}/levelup', 'UserController@levelup');
 
 
 
-// viewの幅変更(location sex-age month yearの見た目変更 )
-// git checkout -b edit-view-width
-
-
 
 // タスクスケジューラ（新技術）
+// git checkout -b task-schedule
 //　おしらせ（不明いらないかも？）
 
 

@@ -36,7 +36,7 @@ class Level_Up_Test extends TestCase
             'level' => $this->level ,
             'point' => $this->point ,
             'experience_point' => $this->experience_point ,
-            ]);
+        ]);
         
         // ログイン
         $current_user = User::where('id', $this->user->id )->first();
