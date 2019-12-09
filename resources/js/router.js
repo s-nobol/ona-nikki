@@ -13,7 +13,7 @@ import age from './home/Age.vue'
 import location from './home/Location.vue'
 import ranking from './home/Ranking.vue'
 import about from './pages/About.vue'
-import notification from './pages/Notification.vue'
+import notify from './pages/Notify.vue'
 import home_year from './home/Year.vue'
 import home_month from './home/Month.vue'
 
@@ -38,7 +38,7 @@ export default new Router({
         { path: '/', component: index  },
         { path: '/home', component: home , name: 'home' },
         { path: '/about', component: about  , name: 'about'  },
-        { path: '/notification', component: notification  , name: 'notification'  },
+        { path: '/notify', component: notify  , name: 'notify'  },
         { path: '/sex', component: sex  , name: 'sex'  },
         { path: '/age', component: age  , name: 'age'  },
         { path: '/location', component: location  , name: 'location'  },
@@ -48,15 +48,15 @@ export default new Router({
         
         //login && Oauth
         { path: '/signup', component: signup, name: 'signup'   },
-        // { path: '/login', component: login  },
         { path: '/login/:string/callback', component: oauth , props: true },
+        
         
         // mypage
         { path: '/mypage', component: mypage , name: 'mypage'  },
         { path: '/mypage/profile', component: profile , name: 'profile'  },
-        // { path: '/users/:id', component: show, props: true   },
         { path: '/mypage/logs', component: logs  , name: 'mypage-logs' },
         { path: '/mypage/logs/:year', component: user_year, props: true , name: 'mypage-year'  },
+        { path: '/mypage/notify', component: notify  , name: 'notify'  },
         // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?
         
         

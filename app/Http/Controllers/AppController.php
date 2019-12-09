@@ -13,10 +13,6 @@ use Exception;
 class AppController extends Controller
 {
     
-    public function information()
-    {
-        return view('home');
-    }
     
     
     public function home()
@@ -199,6 +195,9 @@ class AppController extends Controller
     
     
     
+    // お知らせ
+    public function notify(){
+    }
     
     
     public function ranking($name)

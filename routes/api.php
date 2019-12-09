@@ -34,12 +34,11 @@ Route::get('/login/{OAuth}/callback', 'Auth\OAuthController@handleProviderCallba
 
 // home 
 Route::get('/home', 'AppController@home');
+Route::get('/notify', 'AppController@notify');
 Route::get('/sex', 'AppController@sex');
 Route::get('/locations', 'AppController@locations');
 Route::get('/location/{name}', 'AppController@location');
-Route::get('/ranking', 'AppController@ranking');
 Route::get('/ranking/{name}', 'AppController@ranking');
-
 Route::get('/logs/{year}', 'AppController@year');
 Route::get('/logs/{year}/{month}', 'AppController@month');
 
@@ -59,22 +58,17 @@ Route::get('/mypage/all/data', 'MypageController@all_data');
 // user logs ( 作成 / 編集 / 削除 のみ)
 Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
+Route::resource('notifies', 'NotifyController');
 
 Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 Route::post('/users/{user}/levelup', 'UserController@levelup');
 
 
-// レベルアップ　機能は後日修正(後日)
+// お知らせペーじネーション
+
+// レベルアップ　修正
 // git checkout -b level-up-edit
+// Chartの修正
 
-
-
-
-
-// タスクスケジューラ（新技術）
-// git checkout -b task-schedule
-//　おしらせ（不明いらないかも？）
-
-
-
-// タイムライン
+// php artisan make:test Url_Notify_Test --unit 
+// タイムライン(最後)

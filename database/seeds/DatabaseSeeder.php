@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             LogssTableSeeder::class,
+            NotifiesTableSeeder::class,
         ]);
         
 // $ php artisan make:seed LogssTableSeeder

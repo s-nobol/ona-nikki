@@ -70,7 +70,10 @@ class LogController extends Controller
             'before_level','before_point',
             'sizeing'
         );
-    }  
+    } 
+    
+    
+    // ポイントの追加
     public function addPoint(User $user){
         $user->point = $user->point + 130;
         $user->save();

@@ -51,8 +51,9 @@ class UserEditTest extends TestCase
             'age' => 15, 
             'sex' => 'man', 
             'location' => 'tokyo', 
-            'theme' => 'red', 
+            'browsing_log' => false, 
             'receive_email' => true, 
+            'theme' => 'red', 
         ]);
         
 

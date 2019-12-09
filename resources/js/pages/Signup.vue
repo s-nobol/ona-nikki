@@ -117,7 +117,7 @@ export default {
         signup(){
             
             this.errors = []
-            axios.post(`api/register`, this.loginForm).then(response => {
+            axios.post(`/api/register`, this.loginForm).then(response => {
                 
                 console.log('ログイン成功', response);
                 if(response.status === 200){
