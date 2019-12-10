@@ -14,6 +14,11 @@ use Exception;
 
 class LogController extends Controller
 {
+    
+    // private $point;
+    // private $point;
+    
+    
     public function __construct()
     {
         $this->middleware('auth')->except(['index']);
@@ -29,42 +34,43 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-        // 1時間に一回に変更する
-        $user = User::where('id',Auth::user()->id)->first();
-        $last_log = Log::where('user_id', Auth::user()->id )->orderBy('created_at','desc')->first();
-        $last_time =  Carbon::now()->subHour();
-        if($last_log && $last_log->created_at > $last_time ){
-            if($user->browsing_log){
-                abort(403);
-            }
-            abort(404, '前回の記録からまだ1時間以上たっていません  ( Logの記録には一時間以上開けておく必要があります )');
-        }
-        
-        // Logの作成
-        $logs = new Log();
-        $logs->user_id =  Auth::user()->id; 
-        $logs->month =  Carbon::now()->month;
-        $logs->day =  Carbon::now()->day;
-        $logs->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
-        $logs->save();
-        
-        // ユーザーの更新
-        $before_level= $user->level;
-        $before_point = $user->point;
-        
         // 初期設定
         $value_point = 130; 
         $gerge_width = 300;
         
-        //ユーザーの経験値上げる
-        $user = $this->addPoint($user);
         
+        // 1時間に一回に変更する
+        $user = User::where('id',Auth::user()->id)->first();
+        
+        // ログの作成はなし
+        // $last_log = Log::where('user_id', Auth::user()->id )->orderBy('created_at','desc')->first();
+        // $last_time =  Carbon::now()->subHour();
+        // if($last_log && $last_log->created_at > $last_time ){
+        //     if($user->browsing_log){
+        //         abort(403);
+        //     }
+        //     abort(404, '前回の記録からまだ1時間以上たっていません  ( Logの記録には一時間以上開けておく必要があります )');
+        // }
+        
+        // Logの作成
+        $log = new Log();
+        $log->user_id =  Auth::user()->id; 
+        $log->month =  Carbon::now()->month;
+        $log->day =  Carbon::now()->day;
+        $log->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
+        $log->save();
+        
+        // ユーザーの設定取得
+        $before_level= $user->level;
+        $before_point = $user->point;
         $sizeing =  $gerge_width / $user->experience_point;
         $sizeing = round($sizeing, 5 );
         
+        //ユーザーの経験値上げる
+        $user = $this->addPoint($user);
         
         return compact( 
-            'logs',
+            'log',
             'user',
             'value_point',
             'before_level','before_point',
@@ -75,7 +81,20 @@ class LogController extends Controller
     
     // ポイントの追加
     public function addPoint(User $user){
-        $user->point = $user->point + 130;
+        
+        $point = 130;
+        $before_point = $user->point;
+        $before_experience_point = $user->experience_point;
+        // ポイントを追加
+        $user->point = $before_point + $point ;
+        
+        // レベルアップの場合
+        if ($before_point+$point >= $before_experience_point ) {
+            $user->level = $user->level + 1 ;  //level-up
+            $user->point = $before_point+$point - $before_experience_point; //( 300+50 ) - 300 => 50 
+            $user->experience_point = $before_experience_point + 50 ;
+            $point = $before_experience_point - $before_point;
+        }
         $user->save();
         return $user;
     }

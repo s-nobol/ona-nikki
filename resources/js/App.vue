@@ -57,10 +57,14 @@
         <!--モーダル-->
         <transition name="fade" >
             <LevelModal v-if="levelModal" @close="onCloseModal" 
+                :id="log_id"
+                :value="value"
+                :sizeing="sizeing"
                 :before_level="before_level" 
                 :before_point="before_point"
-                :sizeing="sizeing"
-                :value_point="value_point"
+                :after_level="after_level" 
+                :after_point="after_point"
+                :after_experience_point="after_experience_point"
             />
         </transition >
         
@@ -91,7 +95,7 @@
 <script>
 import Sidebar from './components/Sidebar.vue'
 import LoginModal from './components/modal/Login.vue'
-import LevelModal from './components/modal/Level.vue'
+import LevelModal from './components/modal/TestLevel.vue'
 
 
 export default {
@@ -102,10 +106,15 @@ export default {
             loginModal: false,
             levelModal: false,
             
+            // レベルアップ
+            log_id: null,
+            value: 0,
             sizeing: 0 ,
-            value_point: 0,
             before_point: 0 ,
             before_level: 0,
+            after_point: 0 ,
+            after_level: 0,
+            after_experience_point: 0,
         }
     },
     
@@ -146,10 +155,14 @@ export default {
                 if(response.status === 200){
                     
                     // 現在のポイント
+                    this.log_id = response.data.log.id
+                    this.value = response.data.value_point 
                     this.sizeing =  response.data.sizeing
-                    this.value_point = response.data.value_point 
                     this.before_level =  response.data.before_level
-                    this.before_point =  response.data.before_point * this.sizeing 
+                    this.before_point =  response.data.before_point 
+                    this.after_level =  response.data.user.level
+                    this.after_point =  response.data.user.point 
+                    this.after_experience_point =  response.data.user.experience_point 
                     
                     this.levelModal = true
                 }

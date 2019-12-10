@@ -64,11 +64,9 @@ Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 Route::post('/users/{user}/levelup', 'UserController@levelup');
 
 
-// お知らせペーじネーション
-
-// レベルアップ　修正
-// git checkout -b level-up-edit
+// 募金システムの作成
+// git checkout -b donation
 // Chartの修正
 
-// php artisan make:test Url_Notify_Test --unit 
+
 // タイムライン(最後)

@@ -57,7 +57,7 @@ class Log_CreateTest extends TestCase
         
         // Jsonに希望の値が帰ってきているか？
         $response->assertJson([
-            'logs' => [],
+            'log' => [],
         ]);
     }
     
@@ -81,13 +81,15 @@ class Log_CreateTest extends TestCase
     
     
         
-    // ログの作成から一時間以上経過しているか？
-    public function test__create_log_1hor()
+    // 募金機能確認
+    public function test__create_log_一時間以内にログを作成できます()
     {  
         
         $current_user = User::where('id', $this->user->id )->first();
         $this->actingAs($current_user);
         $this->assertTrue(Auth::check());
+        
+        
         $logs_count_old = Log::where('user_id', $this->user->id )->get()->count();
         
         $response = $this->json('post', '/api/logs' );
@@ -107,4 +109,39 @@ class Log_CreateTest extends TestCase
         $new_logs = Log::orderBy('id','desc')->first();
         
     }
+    
+        
+    // ログの作成から一時間以上経過しているか？
+    public function test__log__donation()
+    {  
+        
+        $current_user = User::where('id', $this->user->id )->first();
+        $this->actingAs($current_user);
+        $this->assertTrue(Auth::check());
+        
+        // 変更前のログ
+        $logs_count_old = Log::where('id',$this->log->id);
+        $old_coin = $logs_count_old->coin;
+        
+        
+        // コインを作成
+        $response = $this->json('put', '/api/logs/123/donation'  );
+        $response->assertStatus(404);
+        
+        // コインの数に変化なし
+        $logs = Log::where('id',$this->log->id);
+        $this->assertEquals($old_coin , $logs->coin);
+        
+        
+        // コインを作成
+        $response = $this->json('put', '/api/logs/'.$this->log->id.'/donation'  );
+        $response->assertStatus(200);
+        
+        // コインの数に変化なし
+        $logs = Log::where('id',$this->log->id);
+        $this->assertEquals($old_coin , $logs->coin);
+        
+    }
+    
+    
 }

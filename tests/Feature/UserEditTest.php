@@ -28,7 +28,7 @@ class UserEditTest extends TestCase
     * ./vendor/bin/phpunit tests/Feature/UserEditTest.php
     * @test
     */
-    public function Api_でユーザー編集()
+    public function Api_users_edit_ユーザー編集()
     {
         $this->assertTrue(Auth::check());
         
@@ -48,6 +48,7 @@ class UserEditTest extends TestCase
         // 有効なデータでログイン
         $response = $this->json('PUT', '/api/users/'.$this->user->id, [
             'name' => 'name', 
+            'email' => 'test@example.com', 
             'age' => 15, 
             'sex' => 'man', 
             'location' => 'tokyo', 

@@ -17,6 +17,7 @@ class Url_Notify_Test extends TestCase
     use RefreshDatabase;
     private $user;
     private $notify;
+    private $data;
     
     /**
     *
@@ -30,6 +31,9 @@ class Url_Notify_Test extends TestCase
         parent::setUp();
         $this->user = factory(User::class)->create([  'role' => 3  ]);
         $this->notify = factory(Notify::class)->create();
+        
+        // $data ={}  //お知らせ機能のデータ
+        $this->data = [ 'title'=>'test_title', 'description'=>'test_description', ];
     }
     
     
@@ -38,7 +42,8 @@ class Url_Notify_Test extends TestCase
     {  
       
         // ログインせずにアクセス
-        $response = $this->post('/api/notify');
+        
+        $response = $this->json('post', '/api/notifies',$this->data );
         $response->assertStatus(401);
         
         // ログインしてにアクセス
@@ -47,27 +52,10 @@ class Url_Notify_Test extends TestCase
         $this->assertTrue(Auth::check());
         
         // ログインしてにアクセス
-        $response = $this->post('/api/notify');
-        $response->assertStatus(200);
+        $response = $this->json('post', '/api/notifies',$this->data );
+        $response->assertStatus(201);
     }   
     
-    // notify作成
-    public function test__api__edit()
-    {  
-      
-        // ログインせずにアクセス
-        $response = $this->post('/api/notify');
-        $response->assertStatus(401);
-        
-        // ログインしてにアクセス
-        $current_user = User::where('id', $this->user->id )->first();
-        $this->actingAs($current_user);
-        $this->assertTrue(Auth::check());
-        
-        // ログインしてにアクセス
-        $response = $this->post('/api/notify');
-        $response->assertStatus(200);
-    }
     
     
     // notify編集
@@ -75,17 +63,17 @@ class Url_Notify_Test extends TestCase
     {  
       
         // ログインせずにアクセス
-        $response = $this->put('/api/notify/'.$this->notify->id);
+        // $response = $this->put('/api/notify/'.$this->notify->id);
+        $response = $this->json('put', '/api/notifies/'.$this->notify->id ,$this->data );
         $response->assertStatus(401);
         
         // ログインしてにアクセス
         $current_user = User::where('id', $this->user->id )->first();
-        // print_r($current_user->id , $this->notify->user());
         $this->actingAs($this->user);
         $this->assertTrue(Auth::check());
         
         // ログインしてにアクセス
-        $response = $this->put('/api/notify/'.$this->notify->id);
+        $response = $this->json('put', '/api/notifies/'.$this->notify->id ,$this->data );
         $response->assertStatus(200);
     }
     
@@ -95,7 +83,7 @@ class Url_Notify_Test extends TestCase
     {  
       
         // ログインせずにアクセス
-        $response = $this->delete('/api/notify/'.$this->notify->id);
+        $response = $this->json('delete', '/api/notifies/'.$this->notify->id );
         $response->assertStatus(401);
         
         // ログインしてにアクセス
@@ -104,7 +92,7 @@ class Url_Notify_Test extends TestCase
         $this->assertTrue(Auth::check());
         
         // ログインしてにアクセス
-        $response = $this->delete('/api/notify/'.$this->notify->id);
+        $response = $this->json('delete', '/api/notifies/'.$this->notify->id );
         $response->assertStatus(200);
     }
 }
