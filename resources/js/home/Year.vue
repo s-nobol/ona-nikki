@@ -13,10 +13,13 @@
                 </div>
             
                 <div>
-                    <span>利用数　15人</span>  
+                    <span>合計射精回数　{{ monthdata.count }}回</span>
                 </div>
                 <div>
-                    <span>累計射精回数　148回</span>
+                    <span>利用数　{{ monthdata.user_count }}人</span>  
+                </div>
+                <div>
+                    <span>募金額　{{ monthdata.donation_count }}円</span>  
                 </div>
                 
                 <!--棒グラフ-->
@@ -64,8 +67,8 @@ export default {
     methods: {
         get_data(){
             
-            axios.get(`/api/logs/${this.year}`).then(response => {
-                console.log(response); 
+            axios.get(`/api/home/logs/${this.year}`).then(response => {
+                console.log('year',response); 
                 if(response.status === 200){
                     this.monthDatas = response.data.month_data
                 }

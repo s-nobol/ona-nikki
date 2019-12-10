@@ -44,6 +44,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'count' => 'integer',
         'email_verified_at' => 'datetime',
         'level' => 'integer',
         'point' => 'integer',

@@ -119,9 +119,18 @@ export default {
                 console.log("UserLogs",currentUser_gerge)
                 point_gerge.style.width = `${currentUser_gerge}%`
             }
+        },
+        
+        getDonation(){
+            axios.get(`/api/users/logs/donation`).then(response => {
+                console.log('user_donation',response); 
+                if(response.status === 200){
+                }
+            })
         }
     },
     mounted(){
+        this.getDonation()
         setTimeout(() => ( this.onGergeWidth() ), 500)
     }
 }

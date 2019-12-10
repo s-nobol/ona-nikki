@@ -43,14 +43,14 @@ class LogController extends Controller
         $user = User::where('id',Auth::user()->id)->first();
         
         // ログの作成はなし
-        // $last_log = Log::where('user_id', Auth::user()->id )->orderBy('created_at','desc')->first();
-        // $last_time =  Carbon::now()->subHour();
-        // if($last_log && $last_log->created_at > $last_time ){
-        //     if($user->browsing_log){
-        //         abort(403);
-        //     }
-        //     abort(404, '前回の記録からまだ1時間以上たっていません  ( Logの記録には一時間以上開けておく必要があります )');
-        // }
+        $last_log = Log::where('user_id', Auth::user()->id )->orderBy('created_at','desc')->first();
+        $last_time =  Carbon::now()->subHour();
+        if($last_log && $last_log->created_at > $last_time ){
+            if($user->browsing_log){
+                abort(403);
+            }
+            abort(404, '前回の記録からまだ1時間以上たっていません  ( Logの記録には一時間以上開けておく必要があります )');
+        }
         
         // Logの作成
         $log = new Log();
@@ -100,14 +100,7 @@ class LogController extends Controller
     }
 
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
+    // ログの更新
     public function update(Request $request, Log $log)
     {
         $log->fill($request->all());
@@ -117,81 +110,144 @@ class LogController extends Controller
         return $log;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Log  $log
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Log $log)
     {
         $log->delete();
         return "Log削除成功";
     }
     
-    /**
-    *
-    * MtpageControllerにも同じもの作った
-    * 
-    */
-    // 月ごとのデータ
-    public function my_month_data()
+    
+    // 募金機能
+    public function donation(Request $request, Log $log)
     {
-        $carbon = new Carbon();
-        $year = $carbon->year;
-        $month = $carbon->month;
-        $month_logs = Auth::user()->logs()
-            ->whereYear('created_at', $year)
-            ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count, day as label '))
-            ->groupBy('day')
-            ->get();
+        $log->coin = 50;
+        $log->save();
+        return $log;
+    }
+    
+    
+    // 月別での集計を行う
+    //コード汚いし重いから一部削除してもいいかも
+    public function year($year)
+    {
+        $this->carbon_try($year, 1);
         
-        $monht_data = $month_logs->pluck('count');
-        $month_data_label = $month_logs->pluck('label');
+        $month_data = [];
+        
+        for ($i = 1; $i < 13; $i++) {
             
-        return compact( 'data', 'data_label');
+            $month_logs = Log::whereYear('created_at', $year)->whereMonth('created_at', $i);
+            
+            // 日付ごとのデータ
+            $logs = $month_logs->select(DB::raw('count(*) as count , day as label'))->groupBy('day')->get();
+            
+            //再度設定
+            $month_logs = Log::whereYear('created_at', $year)->whereMonth('created_at', $i);
+            
+            // 募金額 利用者数 利用者数(複数のクエリを防ぐため実行)
+            $count =  $month_logs->count();
+            $donation_count = $month_logs->sum('coin');
+            $user_count = $month_logs->select(DB::raw('count(*) as count , user_id as label'))
+                            ->groupBy('user_id')
+                            ->get()
+                            ->count('count');
+                
+            if (count($logs)) {
+                array_push($month_data,[ 
+                    'month' => $i, 
+                    'data' => $logs->pluck('count') ,
+                    'label' => $logs->pluck('label') ,
+                    
+                    
+                    'donation_count' => $donation_count,
+                    'user_count' => $user_count,
+                    'count' => $count,
+                ]);
+            }
+        }
+        return  compact('month_data');
     }
     
     
-    // 一年間のデータ
-    public function my_year_data()
+    
+    
+    // ログの取得
+    public function month($year,  $month)
     {
-        $carbon = new Carbon();
-        $month = $carbon->month;
-        $year = $carbon->subYear();
+        $this->carbon_try($year, $month);
         
-        $year_logs = Auth::user()->logs()
-            ->whereYear('created_at', $year)
+        // 2020/XX/1 ~ 2020/XX/1
+        $date_start = Carbon::create($year,$month);
+        $date_end = Carbon::create($year,$month+1);
+        
+        
+        // あとで削除
+        $logs = Log::whereYear('created_at', $year)
             ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count, day as label '))
+            ->select(DB::raw('count(*) as count , day as label'))
+            ->groupBy('day')
+            ->get();
+            
+        $month_count = $logs->pluck('count'); 
+        $month_label = $logs->pluck('label');
+        $month_count_ave = "";
+        
+        
+        // 平均データ
+        $all_logs = Log::selectRaw('count(*) / ? as count', [24])
+                ->groupBy('day')
+                ->get();
+        $month_count_ave = $all_logs->pluck('count');
+        
+        
+        // sexデータ (エラーの可能あり)
+        //回数に対しての利用人数
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(DISTINCT user_id) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
+            ->groupBy('sex')
+            ->get();
+        $sex_data = $logs->pluck('count'); 
+        $sex_data_label = $logs->pluck('label');
+        $sex_data_user = $logs->pluck('user_count');
+        
+        
+        // categoryデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
+            ->groupBy('category')
+            ->get();
+        
+        $category_data = $logs->pluck('count'); 
+        $category_data_label = $logs->pluck('label');
+        
+        
+        // coinデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('sum(coin) as count, day as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month)
             ->groupBy('day')
             ->get();
         
-        $year_data = $year_logs->pluck('count');
-        $year_data_label = $year_logs->pluck('label');
+        $coin_data = $logs->pluck('count'); 
+        $coin_data_label = $logs->pluck('label');
         
-        return compact( 'data', 'data_label');
+        
+        return compact(
+            'month',
+            'month_count','month_count_ave','month_label',
+            'sex_data','sex_data_label',
+            'sex_data_user',
+            'category_data','category_data_label',
+            'coin_data','coin_data_label' 
+        );
+            
+            
     }
-    
-    
-    // すべてのデータ
-    public function my_all_data()
-    {
-        
-        $logs = Auth::user()->logs()
-            ->select(DB::raw('count(*) as count '),
-             DB::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),  
-             DB::raw('YEAR(created_at) year, MONTH(created_at) months'))
-            ->groupBy('year','months')
-            ->get();
-        $all_data = $logs->pluck('count');
-        $all_data_label = $logs->pluck('label');
-        
-        return compact( 'data', 'data_label');
-    }
-    
-    
     
     
     
@@ -201,9 +257,10 @@ class LogController extends Controller
         try{
             return Carbon::create($year,$month);
         }catch(Exception $e){
-            abort(404);
-            return false;
+            return abort(404);
         }
     }
     
+    
 }
+

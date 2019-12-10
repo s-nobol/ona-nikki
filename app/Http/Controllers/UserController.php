@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use DB;
 use App\Http\Requests\UserRequest;
 class UserController extends Controller
 {
@@ -14,37 +15,6 @@ class UserController extends Controller
         $this->middleware('auth')->except(['index']);
         $this->authorizeResource(User::class, 'user');  
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
@@ -94,50 +64,24 @@ class UserController extends Controller
         //
     }
     
-    // リセット
-    public function resetlevel(User $user)
+    
+    // コインの合計を抽出する
+    public function donation()
     {
-        $user->level = 1;
-        $user->point = 0;
-        $user->experience_point = 300;
-        $user->save();
-        return "ユーザーレベルリセットしました";
-    }
-    
-    // レベルアップ
-    public function levelup(Request $request, User $user)
-    {   
-        // ゲージの残りを返却
-        $user->level = $user->level + 1; 
-        $user->point = $request->point;
-        $user->experience_point = $user->experience_point + 50 ;
-        $user->save();
-        return $user;
-    }
-    
-    
-    
-    // レベルアップ
-    public function addPoint(Request $request, User $user)
-    {   
-        // ゲージの残りを返却
-        $point = 50;
-        $before_point = $user->point;
-        $before_experience_point = $user->experience_point;
-        $before_level = $user->level;
+        $string = 'coin';
+        $logs = Auth::user()->logs()
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
+            ->groupBy($string)
+            // ->sum('coin');
+            // ->orderBy('sex','desc')
+            ->get();
+            
+        $logs_sum = Auth::user()->logs()->sum('coin');
         
-        // ポイントを追加
-        $user->point = $before_point + $point ;
         
-        // レベルアップの場合
-        if ($before_point+$point > $before_experience_point ) {
-            $user->level = $user->level + 1 ;  //level-up
-            $user->point = $before_point+$point - $before_experience_point; //( 300+50 ) - 300 => 50 
-            $user->experience_point = $before_experience_point + 50 ;
-            $point = $before_experience_point - $before_point;
-        }
-        $user->save();
+        return  compact('logs_sum','logs');
     }
+    
     
     
 }

@@ -95,7 +95,7 @@
 <script>
 import Sidebar from './components/Sidebar.vue'
 import LoginModal from './components/modal/Login.vue'
-import LevelModal from './components/modal/TestLevel.vue'
+import LevelModal from './components/modal/Level.vue'
 
 
 export default {

@@ -112,7 +112,7 @@ class Log_CreateTest extends TestCase
     
         
     // ログの作成から一時間以上経過しているか？
-    public function test__log__donation()
+    public function test__log__donation_募金できません()
     {  
         
         $current_user = User::where('id', $this->user->id )->first();
@@ -120,7 +120,7 @@ class Log_CreateTest extends TestCase
         $this->assertTrue(Auth::check());
         
         // 変更前のログ
-        $logs_count_old = Log::where('id',$this->log->id);
+        $logs_count_old = Log::where('id',$this->log->id)->first();
         $old_coin = $logs_count_old->coin;
         
         
@@ -129,7 +129,7 @@ class Log_CreateTest extends TestCase
         $response->assertStatus(404);
         
         // コインの数に変化なし
-        $logs = Log::where('id',$this->log->id);
+        $logs = Log::where('id',$this->log->id)->first();
         $this->assertEquals($old_coin , $logs->coin);
         
         
@@ -138,8 +138,8 @@ class Log_CreateTest extends TestCase
         $response->assertStatus(200);
         
         // コインの数に変化なし
-        $logs = Log::where('id',$this->log->id);
-        $this->assertEquals($old_coin , $logs->coin);
+        $logs = Log::where('id',$this->log->id)->first();
+        $this->assertNotEquals($old_coin , $logs->coin);
         
     }
     

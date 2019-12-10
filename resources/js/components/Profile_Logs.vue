@@ -17,6 +17,7 @@
                         <!--<th scope="col">エリア</th>-->
                         <th scope="col">カテゴリー</th>
                         <th scope="col" >コメント</th>
+                        <th scope="col" >募金額</th>
                         <th scope="col" >ステータス⇩</th>
                         <th scope="col">詳細</th>
                         <th scope="col">日付⇩</th>
@@ -24,7 +25,10 @@
                 </thead>
                 <tbody v-for="log in logs" class="text-center">
                     <tr>
-                        <th scope="row">{{ log.id }} </th>
+                        <!--id-->
+                        <th scope="row">{{ log.id }}</th>
+                        
+                        <!--カテゴリー-->
                         <td v-if="editNumber !== log.id " content="category">
                             <span v-if="log.category">{{ log.category }}</span>
                             <span v-else>null</span>
@@ -37,15 +41,26 @@
                                 <option value="ぶどう">ぶどう</option>
                             </select>
                         </td>
+                        
+                        <!--コメント-->
                         <td content="comment">作成中</td>
+                        
+                        <!--コイン-->
+                        <td content="coin">{{ log.coin }}円</td>
+                        
+                        <!--ステータス-->
                         <td content="status">
                             <i class="fas fa-check-circle fa-lg text__gray" :class="{ 'text-success' : log.check }"></i>
                         </td>
+                        
+                        <!--編集-->
                         <td content="delete">
                             <button v-if="editNumber !== log.id "class="btn btn-success pt-1 pb-1" @click="onEditMode(log)">編集</button>
                             <button v-if="editNumber === log.id " class="btn btn-primary pt-1 pb-1" @click="onEditLog(log)">保存</button>
                             <button class="btn btn-danger pt-1 pb-1" @click="onDeleteLog(log)">削除</button>
                         </td>
+                        
+                        <!--作成時間-->
                         <td content="created_at">{{ log.created_at }}</td>
                     </tr>
                 </tbody>

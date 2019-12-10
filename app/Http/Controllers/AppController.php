@@ -131,6 +131,8 @@ class AppController extends Controller
         $location = $logs->pluck('label');
         return compact('location');
     }
+    
+    
     // ユーザーが一人しかいないのでデータが取れない
     public function location($name)
     {  
@@ -194,12 +196,6 @@ class AppController extends Controller
     }
     
     
-    
-    // お知らせ
-    public function notify(){
-    }
-    
-    
     public function ranking($name)
     {   
         $date;
@@ -217,6 +213,7 @@ class AppController extends Controller
     }
     
     
+    
     // 抽象的なデータベースの取得
     public function DB_abstract($string, $date)
     {   
@@ -226,6 +223,7 @@ class AppController extends Controller
             ->where( 'created_time', '>', $date)
             ->get();
     }
+    
     
     
     public function DB_ranking($string, $date, $take)
@@ -240,122 +238,4 @@ class AppController extends Controller
     }
     
     
-    
-    // 月別での集計を行う
-    public function year($year)
-    {
-        $this->carbon_try($year, 1);
-        
-        $month_data = [];
-        
-        for ($i = 1; $i < 13; $i++) {
-            
-            //日付ごとに集計
-            $logs = Log::whereYear('created_at', $year)
-                ->whereMonth('created_at', $i)
-                ->select(DB::raw('count(*) as count , day as label'))
-                ->groupBy('day')
-                ->get();
-            
-            
-            if (count($logs)) {
-                array_push($month_data,[ 
-                    'month' => $i, 
-                    'data' => $logs->pluck('count') ,
-                    'label' => $logs->pluck('label') 
-                ]);
-            }
-        }
-        return  compact('month_data');
-    }
-    
-    
-    
-    
-    // ログの取得
-    
-    public function month($year,  $month)
-    {
-        $this->carbon_try($year, $month);
-        
-        // 2020/XX/1 ~ 2020/XX/1
-        $date_start = Carbon::create($year,$month);
-        $date_end = Carbon::create($year,$month+1);
-        
-        
-        // あとで削除
-        $logs = Log::whereYear('created_at', $year)
-            ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count , day as label'))
-            ->groupBy('day')
-            ->get();
-            
-        $month_count = $logs->pluck('count'); 
-        $month_label = $logs->pluck('label');
-        $month_count_ave = "";
-        
-        
-        // 平均データ
-        $all_logs = Log::selectRaw('count(*) / ? as count', [24])
-                ->groupBy('day')
-                ->get();
-        $month_count_ave = $all_logs->pluck('count');
-        
-        
-        // sexデータ
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
-            ->groupBy('sex')
-            ->get();
-        $sex_data = $logs->pluck('count'); 
-        $sex_data_label = $logs->pluck('label');
-        
-        
-        // categoryデータ
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
-            ->groupBy('category')
-            ->get();
-        
-        $category_data = $logs->pluck('count'); 
-        $category_data_label = $logs->pluck('label');
-        
-        
-        // categoryデータ
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
-            ->groupBy('day')
-            ->get();
-        
-        $coin_data = $logs->pluck('count'); 
-        $coin_data_label = $logs->pluck('label');
-        
-        return compact(
-            'month',
-            'month_count','month_count_ave','month_label',
-            'sex_data','sex_data_label',
-            'category_data','category_data_label',
-            'coin_data','coin_data_label' 
-        );
-            
-            
-    }
-    
-    
-    
-    
-    // Urlパラメータが正しいのか検証
-    private function carbon_try($year, $month){
-        try{
-            return Carbon::create($year,$month);
-        }catch(Exception $e){
-            return abort(404);
-        }
-    }
 }

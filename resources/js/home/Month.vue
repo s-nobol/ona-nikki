@@ -16,9 +16,9 @@
                     <h5><b>month</b></h5>
                     
                     <BarLine 
+                        :barDataSet="month_data" 
+                        :lineDataSet="month_data" 
                         :labels="month_data_label"
-                        :barDataSet="month_data_count" 
-                        :lineDataSet="month_data_ave" 
                     />
                 </div>
                 
@@ -61,7 +61,7 @@
                 </div>
                 
                 <div class="col-5">
-                    <h4>性別ごとの利用割合（円グラフ）</h4>
+                    <h4>性別ごとの利用割合 {{ sex_data_sum }}人</h4>
                     <Doughnut
                         :dataSet="sex_data"
                         :labels="sex_data_label"
@@ -76,7 +76,7 @@
             <div class="row mb-5">
             
                 <div class="col-5">
-                    <h4>カテゴリーの比率（棒グラフ）</h4>
+                    <h4>カテゴリーの比率</h4>
                     <BarHorizontal 
                         :dataSet="category_data"
                         :labels="category_data_label"
@@ -125,7 +125,7 @@
                 
                 
                 <div class="col-5">
-                    <h4>募金額推移（棒グラフ）</h4>
+                    <h4>募金額推移 合計{{ coin_data_sum }}円</h4>
                     <LineChart
                         id="month"
                         :Coins="coin_data"
@@ -173,45 +173,72 @@ export default {
     },
     data(){
         return{
-            // 月別データ
+            
+            
+            // 月別利用データ
+            month_data: [],
             month_data_label: [],
-            month_data_count: [],
+            month_data_sum:[],
             month_data_ave: [],
             
+            // 性別割合データ
             sex_data: [],
             sex_data_label:[],
+            sex_data_sum:[],
             
+            // 性別割合データ
             category_data:[],
             category_data_label:[],
             
             
+            // 募金推移データ
             coin_data:[],
             coin_data_label:[],
+            coin_data_sum:[],
         }
     },
     methods: {
          get_data(){
             
-            axios.get(`/api/logs/${this.year}/${this.month}`).then(response => {
-                console.log(response); 
+            axios.get(`/api/home/logs/${this.year}/${this.month}`).then(response => {
+                console.log('month',response); 
                 if(response.status === 200){
-                    this.month_data_count = response.data.month_count
-                    this.month_data_ave = response.data.month_count_ave
+                    
+                    this.month_data = response.data.month_count
                     this.month_data_label = response.data.month_label 
+                    this.month_data_sum = this.sum(this.month_data) 
+                    this.month_data_ave = response.data.month_count_ave
                     
                     this.sex_data = response.data.sex_data
                     this.sex_data_label = response.data.sex_data_label
+                    this.sex_data_sum = this.sum(this.sex_data) 
                     
                     this.category_data = response.data.category_data
                     this.category_data_label = response.data.category_data_label
                     
                     this.coin_data = response.data.coin_data
                     this.coin_data_label = response.data.coin_data_label
+                    this.coin_data_sum = this.sum(this.coin_data) 
                     
                 }
             })
             
+        },    
+        // 配列の合計値をだす
+        sum(data){
+            return  data.reduce(function(prev, current, i, data) {
+                return prev+current;
+            });
         },
+        // 配列の平均値
+        ave(data){
+            return this.get_sum(data)/data.length;
+        },
+        // どのくらい利用しているか？
+        active_data(data){
+            var days = 30 - data
+            return [data, days];
+        }
         
     },
     created(){
