@@ -58,22 +58,22 @@ class Url_Home_Test extends TestCase
     public function test__api__home__year()
     {
         //エラーデータ
-        $response = $this->json('get', '/api/logs/test2019' );
+        $response = $this->json('get', '/api/home/logs/test2019' );
         $response->assertStatus(404);
         
         //成功
-        $response = $this->json('get', '/api/logs/2019' );
+        $response = $this->json('get', '/api/home/logs/2019' );
         $response->assertStatus(200);
     }
     
     public function test__api__home__month()
     {
         //エラーデータ
-        $response = $this->json('get', '/api/logs/2019/test' );
+        $response = $this->json('get', '/api/home/logs/2019/test' );
         $response->assertStatus(404);
         
         //成功
-        $response = $this->json('get', '/api/logs/2019/5' );
+        $response = $this->json('get', '/api/home/logs/2019/5' );
         $response->assertStatus(200);
     }
     

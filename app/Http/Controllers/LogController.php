@@ -21,7 +21,7 @@ class LogController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index','year','month']);
         $this->authorizeResource(Log::class, 'log');  
     }
 
@@ -57,7 +57,8 @@ class LogController extends Controller
         $log->user_id =  Auth::user()->id; 
         $log->month =  Carbon::now()->month;
         $log->day =  Carbon::now()->day;
-        $log->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
+        $log->time =  Carbon::now()->hour;
+        // $log->time =  Carbon::now()->nowWithSameTz()->format('H:i:s');
         $log->save();
         
         // ユーザーの設定取得
@@ -207,10 +208,12 @@ class LogController extends Controller
             ->whereYear('created_time', $year)
             ->whereMonth('created_time', $month)
             ->groupBy('sex')
+            ->orderBy('count', 'desc' )
             ->get();
         $sex_data = $logs->pluck('count'); 
         $sex_data_label = $logs->pluck('label');
         $sex_data_user = $logs->pluck('user_count');
+        
         
         
         // categoryデータ

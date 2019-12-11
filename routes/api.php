@@ -61,22 +61,28 @@ Route::resource('users', 'UserController');
 Route::resource('notifies', 'NotifyController');
 
 Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
-// Route::post('/users/{user}/levelup', 'UserController@levelup');
 
 // 募金
 Route::put('/logs/{log}/donation', 'LogController@donation');
 Route::get('/users/logs/donation', 'UserController@donation');
 
+/***
+ * @danger 警告
+ * LogController/monthで disint クエリ使用する
+ * Mypage_controller/all_data strftime('%Y-%m') クエリ使用する
+ * 
+**/
 
 
-
-
-// 募金システムの作成
-// 募金データの取得
-//home year Montの募金作成
-
-// Chartの修正
-
-
-//募金のランキング
+//募金のランキング（後日）
 // タイムライン(最後)
+
+
+// カテゴリの作成
+// git checkout -b chart-edit
+// Chartの修正
+//home.vue sex_chart
+// Categoryの色変更
+
+
+

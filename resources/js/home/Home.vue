@@ -99,6 +99,7 @@
                             <div>
                                 <!--<h5><b>横グラフ</b></h5>-->
                                 <BarHorizontal 
+                                    id="location"
                                     :dataSet="location_data"
                                     :labels="location_data_label"
                                 />
@@ -106,7 +107,8 @@
                             <div>
                                 <span>男女別割合</span>
                                 <Doughnut 
-                                    :dataSet="sex_data"
+                                    :borderWidth="80"
+                                    :dataSetSex="sex_data"
                                     :labels="sex_data_label"
                                 />
                             </div>
@@ -171,7 +173,7 @@
                 <div class="card p-4">
                     <span>時間帯別利用利用推移</span>
                     <Bar
-                        :timeData="time_data"
+                        :dataTime="time_data"
                         :labels="time_data_label"
                     />
                 </div>
@@ -254,13 +256,21 @@ export default {
     methods: {
         get_data(){
             axios.get(`/api/home`).then(response => {
-                console.log(response);
+                console.log('home',response);
+                
+                // データ
                 this.data = response.data.data
                 this.data_label = response.data.data_label
+                
+                // 地域別
                 this.location_data = response.data.location_data
                 this.location_data_label = response.data.location_data_label
+                
+                //性別
                 this.sex_data = response.data.sex_data
                 this.sex_data_label = response.data.sex_data_label
+                
+                //時間別
                 this.time_data = response.data.time_data
                 this.time_data_label = response.data.time_data_label
                 

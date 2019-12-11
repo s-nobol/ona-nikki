@@ -9,10 +9,18 @@
         <b>性別ごとの利用者グラフ</b>
     </h3>
     
+            
+                <!--<canvas id="pie" ></canvas>  -->
     
     <div class="about__continer">
         <div class="row  mb-5">
-                <canvas id="pie" ></canvas>
+            <div class="col-12 p-0 m-0">
+                <Pie
+                    :dataSetSex="sex_data"
+                    :borderWidth="10"
+                    :labels="sex_data_label"
+                    />
+            </div>
         </div>
         
         <div class="w-50 m-auto ">
@@ -54,7 +62,7 @@
                     
                <bar 
                :dataSet="age_data"
-               :labels="age_data"
+               :labels="age_data_label"
                />
             </div>
         </div>
@@ -83,13 +91,17 @@
     }
 </style>
 <script>
+import Pie from '../charts/Pie.vue'
+import Doughnut from '../charts/Doughnut.vue'
 import Bar from '../charts/Bar.vue'
 export default {
-    components: { Bar, },
+    components: { Doughnut, Bar,Pie },
     data(){
         return{
-            data:[],
-            data_label:[],
+            
+            
+            sex_data:[],
+            sex_data_label:[],
             
             man_data: [],
             man_data_label: [],
@@ -106,9 +118,9 @@ export default {
     methods: {
         get_data(){
             axios.get(`/api/sex`).then(response => {
-                console.log(response);
-                this.data = response.data.data
-                this.data_label = response.data.data_label
+                console.log('sex',response);
+                this.sex_data = response.data.data
+                this.sex_data_label = response.data.data_label
                 
                 this.man_data = response.data.man_data
                 this.man_data_label = response.data.man_data_label
@@ -118,33 +130,33 @@ export default {
                 this.age_data = response.data.age_data
                 this.age_data_label = response.data.age_label
                 
-                this.pie_chart()
+                // this.pie_chart()
                 this.man_chart()
                 this.woman_chart()
             })
         },
         
-        pie_chart(){
-            var PieChart = document.getElementById('pie').getContext('2d');
-             var chart = new Chart(PieChart, {
-                type: 'pie',
+        // pie_chart(){
+        //     var PieChart = document.getElementById('pie').getContext('2d');
+        //      var chart = new Chart(PieChart, {
+        //         type: 'pie',
     
-                data: {
-                    labels: this.data_label,
-                    datasets: [{
-                        // label: '月別集計',
-                        borderColor: ['white',],
-                        backgroundColor:  ['deepskyblue',  'tomato', 'rgba(63, 55, 110, 0.1)',],
-                        data: this.data
-                    }]
-                },  
-                options: {
-                     legend: {
-                        display: false
-                     }
-                }
-            });
-        },
+        //         data: {
+        //             labels: this.data_label,
+        //             datasets: [{
+        //                 // label: '月別集計',
+        //                 borderColor: ['white',],
+        //                 backgroundColor:  ['deepskyblue',  'tomato', 'rgba(63, 55, 110, 0.1)',],
+        //                 data: this.data
+        //             }]
+        //         },  
+        //         options: {
+        //              legend: {
+        //                 display: false
+        //              }
+        //         }
+        //     });
+        // },
         man_chart(){
             var ManChart = document.getElementById('man').getContext('2d');
              var chart = new Chart(ManChart, {
@@ -155,7 +167,7 @@ export default {
                     datasets: [{
                         // label: this.age_label,
                         borderColor: ['white',],
-                        backgroundColor:  ['deepskyblue',  'tomato', 'rgba(63, 55, 110, 0.1)',],
+                        backgroundColor:  'deepskyblue',
                         data: this.man_data
                     }]
                 },  
@@ -184,7 +196,7 @@ export default {
                     datasets: [{
                         // label: this.age_label,
                         borderColor: ['white',],
-                        backgroundColor:  ['deepskyblue',  'tomato', 'rgba(63, 55, 110, 0.1)',],
+                        backgroundColor:  'tomato',
                         data: this.woman_data
                     }]
                 },  

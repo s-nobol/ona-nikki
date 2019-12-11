@@ -43,16 +43,27 @@
                </div>
                
                <div class="col-6">
+               
+                   <!--年代別グラフ-->
                    <h5>年齢と相関図</h5>
                    <BarHorizontal 
+                        id="age"
                        :dataSet="age_data"
                        :labels="age_data_label"
                    />
+                   
+                   
+                   <!--性別グラフ-->
                    <h5>性別ごとの利用割合</h5>
+                   <div class="pl-3 pr-3">
                    <Doughnut 
-                       :dataSet="sex_data"
-                       :labels="sex_data_label"
+                        :borderWidth="80"
+                        :dataSetSex="sex_data"
+                        :labels="sex_data_label"
                    />
+                   </div>
+                   
+                <!--コメント-->
                 <div class="media">
                     <div class="media-body">
                         <span>

@@ -106,9 +106,9 @@ class MypageController extends Controller
             ->groupBy('month')
             ->get();
           
-        $user_count = User::all()->count();
-        // return $user_count;
+          
         // みんなの平均値
+        $user_count = User::all()->count();
         $otherlogs = Log::whereYear('created_at', $year)
                 ->selectRaw('count(*) / ? as count', [$user_count])
             // ->select(DB::raw('count(*) / ? as count', [$user_count]))
@@ -118,6 +118,7 @@ class MypageController extends Controller
         $month_data_label  = $logs->pluck('label'); 
         $month_data_count = $logs->pluck('count') ;
         $otherlogs = $otherlogs->pluck('count');
+        
         
         // 時間帯別グラフ
         $time_logs = Auth::user()->logs()

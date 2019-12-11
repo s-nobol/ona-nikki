@@ -4,7 +4,14 @@
         <canvas :id="id" ></canvas>
     </div>
 </template>
-
+<style type="text/css">
+.remon{
+    background-color: green;
+}
+.apple{
+    background-color: red;
+}
+</style>
 <script>
 export default {
     props: {
@@ -18,16 +25,25 @@ export default {
             require  : false,
             default: () => []
         },
+        
+        // 背景色
+        dataBackgroundColor: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
         labels: {
             type: Array,
             require  : false,
             default: () => []
         },
+        
     },
     data(){
         return{
-            chart: null
-            }
+            chart: null,
+            sexBackgroundColor: 'rgba(63, 55, 110, 0.1)'
+        }
     },
     methods: {
         // チャートの作成
@@ -41,7 +57,8 @@ export default {
                     datasets: [{
                         label: '月別集計',
                         borderColor: 'rgba(255, 74, 74, 0.8)',
-                        backgroundColor: 'rgba(255, 74, 74, 0.8)',
+                        backgroundColor: this.sexBackgroundColor,
+                        // backgroundColor: 'rgba(255, 74, 74, 0.8)',
                         data: this.dataSet
                     }]
                 },  
@@ -77,11 +94,29 @@ export default {
                 }
             });
         },
+        
+        // バックグランドの変更
+        chengeColor(name){
+            if(name==="location"){
+                this.sexBackgroundColor = "mediumseagreen"
+                return false
+            }
+            if(name==="age"){
+                this.sexBackgroundColor = "rgba(255, 74, 74, 0.9)"
+                return false
+            }
+        }
     },
     watch: {
         labels: function(labels){
             console.log("BarHorizontalChart")
             if(this.chart){this.chart.destroy()}
+            
+            
+            if(this.id){
+                this.chengeColor(this.id)
+            }
+            
             this.create_chart()
         }
     },

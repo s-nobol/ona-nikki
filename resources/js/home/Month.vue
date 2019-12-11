@@ -61,9 +61,10 @@
                 </div>
                 
                 <div class="col-5">
-                    <h4>性別ごとの利用割合 {{ sex_data_sum }}人</h4>
+                    <h4 class="text-center">性別ごとの利用割合 {{ sex_data_sum }}人</h4>
                     <Doughnut
-                        :dataSet="sex_data"
+                        :dataSetSex="sex_data"
+                        :borderWidth="80"
                         :labels="sex_data_label"
                     />
                 </div>
@@ -77,7 +78,8 @@
             
                 <div class="col-5">
                     <h4>カテゴリーの比率</h4>
-                    <BarHorizontal 
+                    <BarHorizontal
+                        id="category"
                         :dataSet="category_data"
                         :labels="category_data_label"
                     />
@@ -88,7 +90,7 @@
                     <div class="media">
                         <div class="media-body">
                             <span>
-                            <h5 class="mt-0">O月のカテゴリーについて</h5>
+                            <h5 class="mt-0">カテゴリーについて</h5>
                             テストテストテストテストテストテストテスト
                             テストテストテストテストテストテストテストテスト
                             テストテストテストテストテストテストテストテスト
@@ -204,18 +206,23 @@ export default {
                 console.log('month',response); 
                 if(response.status === 200){
                     
+                    // 月別利用
                     this.month_data = response.data.month_count
                     this.month_data_label = response.data.month_label 
                     this.month_data_sum = this.sum(this.month_data) 
                     this.month_data_ave = response.data.month_count_ave
                     
+                    // 性別割合
                     this.sex_data = response.data.sex_data
                     this.sex_data_label = response.data.sex_data_label
                     this.sex_data_sum = this.sum(this.sex_data) 
                     
+                    // カテゴリー別割合
                     this.category_data = response.data.category_data
                     this.category_data_label = response.data.category_data_label
                     
+                    
+                    // 募金額
                     this.coin_data = response.data.coin_data
                     this.coin_data_label = response.data.coin_data_label
                     this.coin_data_sum = this.sum(this.coin_data) 
@@ -238,11 +245,12 @@ export default {
         active_data(data){
             var days = 30 - data
             return [data, days];
-        }
+        },
         
     },
     created(){
         this.get_data()   
     }
+
 }
 </script>

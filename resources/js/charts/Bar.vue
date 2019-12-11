@@ -44,17 +44,12 @@ export default {
                 data: {
                     labels: this.labels,
                     datasets: [{
-                        label: '月別集計',
-                        borderColor: ['rgba(63, 55, 110, 0.9)'],
-                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
+                        label: '',
+                        borderColor: 'rgba(63, 55, 110, 0.9)',
+                        backgroundColor: 'rgba(255, 74, 74, 0.9)',
                         data: this.dataSet
                     },{
-                        label: '月別集計',
-                        borderColor: ['rgba(63, 55, 110, 0.9)'],
-                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
-                        data: this.dataSet2
-                    },{
-                        label: '月別集計',
+                        label: '時間別',
                         borderColor: ['rgba(63, 55, 110, 0.9)'],
                         backgroundColor: 'rgba(63, 55, 110,  0.9)',
                         data: this.dataTime
@@ -75,14 +70,14 @@ export default {
                             gridLines: {
                                 display: true
                             },
-                            ticks: {
-                                beginAtZero: true
-                            }
                         }],
                         yAxes: [{
                             display: false,
                             gridLines: {
                                 drawBorder: false
+                            },
+                            ticks: {
+                                beginAtZero: true,
                             }
                         }]
                     },

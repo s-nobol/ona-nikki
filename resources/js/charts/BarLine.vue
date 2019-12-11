@@ -44,8 +44,8 @@ export default {
                         type: 'line',
                         label: '月別集計',
                         backgroundColor: 'rgba(255, 74, 74, 0.1)', 
-                        pointBackgroundColor: "rgba(192,192,192,0.9)",
-                        pointBorderColor: "rgba(75,192,192,1)",
+                        pointBackgroundColor: "white",
+                        pointBorderColor: "gba(255, 74, 74, 0.9)",
                         borderColor: 'rgba(255, 74, 74, 0.9)',
                         data: this.lineDataSet
                     },{ 

@@ -1,7 +1,7 @@
 <template>
     <div >
         <!--ドーナツグラフ-->
-        <canvas id="DoughnutChart" ></canvas>
+        <canvas id="PieChart" ></canvas>
        
     </div>
 </template>
@@ -43,26 +43,21 @@ export default {
         // チャートの作成
         create_chart(){
 
-            var DoughnutChart = document.getElementById('DoughnutChart').getContext('2d');
-            var DoughnutChart = new Chart(DoughnutChart, {
-                type: 'doughnut',
+            var PieChart = document.getElementById('PieChart').getContext('2d');
+            var PieChart = new Chart(PieChart, {
+                type: 'pie',
     
                 data: {
                     labels: this.labels,
                     datasets: [{
-                        backgroundColor: ['rgba(255, 74, 74, 0.9)', 'rgba(220, 220, 220, 0.9)' ],
-                        data: this.dataSet,
-                        borderWidth: 1.1,
-                        // borderAlign: 'inner',
-                    },{
                         backgroundColor: this.sexBackgroundColor,
                         data: this.dataSetSex,
-                        borderWidth: 1.8,
+                        borderWidth: 1.1,
                         // borderAlign: 'inner',
                     }]
                 }, 
                 options: {  
-                    cutoutPercentage: this.borderWidth,
+                    // cutoutPercentage: this.borderWidth,
                     legend: {
                         display: false
                     }
@@ -75,7 +70,7 @@ export default {
         
             //   もしSEXChartの時
             if(this.labels && this.labels[0] === "女"){
-                this.sexBackgroundColor = ['tomato','deepskyblue']
+                this.sexBackgroundColor = ['tomato','dodgerblue']
             }
             
             
