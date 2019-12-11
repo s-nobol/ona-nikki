@@ -17,9 +17,9 @@
                     <h5><b>月別利用推移</b></h5>
                     
                     <BarLine 
-                        :labels="month_data_label"
-                        :barDataSet="month_data_count" 
+                        :barDataSet="month_data" 
                         :lineDataSet="month_data_ave" 
+                        :labels="month_data_label"
                     />
                 </div>
                 
@@ -62,10 +62,10 @@
                 </div>
                 
                 <div class="col-5">
-                    <h4>年間利用割合（一年間のうちどれだけ利用したか？）</h4>
+                    <h4>年間利用割合 {{ day_data_count }}/365日</h4>
                     <Doughnut
-                        :dataSet="sex_data"
-                        :labels="sex_data_label"
+                        :dataSet="day_data"
+                        :labels="day_data_label"
                     />
                 </div>
                 
@@ -77,9 +77,11 @@
             <div class="row mb-5">
             
                 <div class="col-5">
-                    <h4>カテゴリーの比率（棒グラフ）</h4>
+                    <h4>カテゴリーの比率</h4>
                     <BarHorizontal 
+                        id="category"
                         :dataSet="category_data"
+                        :dataBackgroundColor="category_data_color"
                         :labels="category_data_label"
                     />
                 </div>
@@ -126,7 +128,7 @@
                 
                 
                 <div class="col-5">
-                    <h4>募金額推移（棒グラフ）</h4>
+                    <h4>募金額推移</h4>
                     <LineChart
                         id="month"
                         :Coins="coin_data"
@@ -167,23 +169,44 @@ import BarLine from '../charts/BarLine.vue'
 import LineChart from '../charts/Line.vue'
 import Lines from '../charts/Line.vue'
 import Bar from '../charts/Bar.vue'
+import BarHorizontal from '../charts/BarHorizontal.vue'
 import Doughnut from '../charts/Doughnut.vue'
 export default {
-    components: { LineChart,Bar,Doughnut , BarLine, Lines},
+    components: { LineChart,Bar,Doughnut , BarLine, Lines,BarHorizontal},
     props: {
          year: String,
     },
     data(){
         return{
+            msg: '150',
             count: [],
             month: [],
+            month_data:[],
             month_data_label:[],
-            month_data_count:[],
+            month_data_ave:[],
             other_user_month_data_count: [],
             doughnut: [],
+            
+            // 時間別
             time_data: [],
             time_data_label:[],
-            msg: '150'
+            
+            // 日付
+            day_data: null,
+            day_data_label: null,
+            day_data_count: null,
+            
+            
+            // カテゴリー別データ
+            category_data:[],
+            category_data_label:[],
+            category_data_color: [],
+            
+            
+            // 募金推移データ
+            coin_data:[],
+            coin_data_label:[],
+            coin_data_sum:[],
         }
     },
     methods: {
@@ -191,14 +214,45 @@ export default {
             console.log("チャートの取得")
             axios.get(`/api/mypage/logs/${this.year}`, ).then(response => {
               
-                console.log(response);
-                this.month_data_count = response.data.month_data_count
+                console.log('mypage-year',response);
+                
+                this.month_data = response.data.month_data
                 this.month_data_label = response.data.month_data_label
                 this.other_user_month_data_count = response.data.otherlogs
-                this.time_data = response.data.time_data
-                this.time_data_label = response.data.time_data_label
-                // otherlogs
+                
+                
+                //日付ごとのカウント
+                this.day_data = response.data.day_data
+                this.day_data_label = response.data.day_data_label
+                this.day_data_count = response.data.day_data_count
+                this.day_data = [ this.day_data_count, (365 - this.day_data_count)]
+                
+            
+                // カテゴリー別割合
+                this.category_data = response.data.category_data
+                this.category_data_label = response.data.category_data_label
+                this.category_data_color = response.data.category_data_color
+                
+                // 募金額
+                this.coin_data = response.data.coin_data
+                this.coin_data_label = response.data.coin_data_label
+                // this.coin_data_sum = this.sum(this.coin_data) 
             })
+        },
+        // 配列の合計値をだす
+        sum(data){
+            return  data.reduce(function(prev, current, i, data) {
+                return prev+current;
+            });
+        },
+        // 配列の平均値
+        ave(data){
+            return this.get_sum(data)/data.length;
+        },
+        // どのくらい利用しているか？
+        active_data(data){
+            var days = 30 - data
+            return [data, days];
         },
     },
     created(){

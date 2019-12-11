@@ -60,7 +60,7 @@ class Year_Api_Test extends TestCase
             ]); 
         }
         
-        $response = $this->get('/api/logs/2019');
+        $response = $this->get('/api/home/logs/2019');
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
@@ -97,7 +97,7 @@ class Year_Api_Test extends TestCase
             }
         }
         
-        $response = $this->get('/api/logs/2019');
+        $response = $this->get('/api/home/logs/2019');
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
@@ -124,7 +124,7 @@ class Year_Api_Test extends TestCase
         ]); 
         
         
-        $response = $this->get('/api/logs/2019');
+        $response = $this->get('/api/home/logs/2019');
         $response->assertStatus(200);
         // 1月のデータは増えているはず
         $response->assertJson([
@@ -154,7 +154,7 @@ class Year_Api_Test extends TestCase
         }
         
         
-        $response = $this->get('/api/logs/2019/1');
+        $response = $this->get('/api/home/logs/2019/1');
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？
@@ -209,7 +209,7 @@ class Year_Api_Test extends TestCase
         }
         
         
-        $response = $this->get('/api/logs/2019/1');
+        $response = $this->get('/api/home/logs/2019/1');
         $response->assertStatus(200);
         
         // Jsonに希望の値が帰ってきているか？

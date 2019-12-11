@@ -81,6 +81,7 @@
                     <BarHorizontal
                         id="category"
                         :dataSet="category_data"
+                        :dataBackgroundColor="category_data_color"
                         :labels="category_data_label"
                     />
                 </div>
@@ -188,9 +189,10 @@ export default {
             sex_data_label:[],
             sex_data_sum:[],
             
-            // 性別割合データ
+            // カテゴリー別データ
             category_data:[],
             category_data_label:[],
+            category_data_color: [],
             
             
             // 募金推移データ
@@ -220,7 +222,7 @@ export default {
                     // カテゴリー別割合
                     this.category_data = response.data.category_data
                     this.category_data_label = response.data.category_data_label
-                    
+                    this.category_data_color = response.data.category_data_color
                     
                     // 募金額
                     this.coin_data = response.data.coin_data

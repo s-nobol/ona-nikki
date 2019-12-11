@@ -50,15 +50,16 @@ Route::get('/mypage/logs', 'MypageController@logs');
 Route::get('/mypage/quest', 'MypageController@quest');
 
 
-Route::get('/mypage/month/data', 'MypageController@month_data');
-Route::get('/mypage/year/data', 'MypageController@year_data');
-Route::get('/mypage/all/data', 'MypageController@all_data');
+// Route::get('/mypage/month/data', 'MypageController@month_data');
+// Route::get('/mypage/year/data', 'MypageController@year_data');
+// Route::get('/mypage/all/data', 'MypageController@all_data');
 
 
 // user logs ( 作成 / 編集 / 削除 のみ)
 Route::resource('logs', 'LogController');
 Route::resource('users', 'UserController');
 Route::resource('notifies', 'NotifyController');
+Route::resource('categories', 'CategoryController');
 
 Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 
@@ -69,7 +70,7 @@ Route::get('/users/logs/donation', 'UserController@donation');
 /***
  * @danger 警告
  * LogController/monthで disint クエリ使用する
- * Mypage_controller/all_data strftime('%Y-%m') クエリ使用する
+ * Mypage_controller/Month strftime('%m-%d') クエリ使用する
  * 
 **/
 
@@ -78,11 +79,13 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // タイムライン(最後)
 
 
-// カテゴリの作成
-// git checkout -b chart-edit
-// Chartの修正
-//home.vue sex_chart
-// Categoryの色変更
+
+//Seedでカテゴリ-作成
+//　カテゴリ-Vueの修正
+// 編集削除を行えるようにする
+// Chartの修正(カテゴリが機能するようにする)
 
 
 
+// OauthでGooleアカウントログイン
+// サムネイルを表示できるように設定する

@@ -5,6 +5,7 @@ import Router from 'vue-router'
 // // view
 import index from './pages/Index.vue'
 import test from './pages/Test.vue'
+import category from './pages/Category.vue'
 
 //home
 import home from './home/Home.vue'
@@ -44,7 +45,11 @@ export default new Router({
         { path: '/location', component: location  , name: 'location'  },
         { path: '/ranking', component: ranking   , name: 'ranking' },
         { path: '/logs/:year', component: home_year, props: true  , name: 'home-year' },
-        { path: '/logs/:year/:month', component: home_month,  props: true , name: 'home-month' },　
+        { path: '/logs/:year/:month', component: home_month,  props: true , name: 'home-month' },
+        
+        
+        { path: '/category', component: category  , name: 'category'  },
+        
         
         //login && Oauth
         { path: '/signup', component: signup, name: 'signup'   },

@@ -105,6 +105,10 @@ export default {
                 this.sexBackgroundColor = "rgba(255, 74, 74, 0.9)"
                 return false
             }
+            if(name==="category"){
+                this.sexBackgroundColor = this.dataBackgroundColor
+                return false
+            }
         }
     },
     watch: {

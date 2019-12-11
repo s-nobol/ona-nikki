@@ -37,6 +37,8 @@ class CreateLogsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
+            //Category
+            $table->integer('category_id')->nullable();
         });
     }
 

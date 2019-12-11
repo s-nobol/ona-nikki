@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Log;
 use App\User;
+use App\Category;
 use Auth;
 use DB;
 use Exception;
@@ -217,15 +218,18 @@ class LogController extends Controller
         
         
         // categoryデータ
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, category as label'), DB::raw(' logs.created_at as created_time'))
+        $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
             ->whereYear('created_time', $year)
             ->whereMonth('created_time', $month)
-            ->groupBy('category')
+            ->groupBy('category_id')
+            ->orderBy('count', 'desc')
             ->get();
         
         $category_data = $logs->pluck('count'); 
         $category_data_label = $logs->pluck('label');
+        $category_data_color = $logs->pluck('color');
+        
         
         
         // coinデータ
@@ -245,7 +249,7 @@ class LogController extends Controller
             'month_count','month_count_ave','month_label',
             'sex_data','sex_data_label',
             'sex_data_user',
-            'category_data','category_data_label',
+            'category_data','category_data_label','category_data_color',
             'coin_data','coin_data_label' 
         );
             
