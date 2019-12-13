@@ -70,8 +70,8 @@
         
         
         
-        <footer>
-            <div>日本全国オワコンプロジェクト111</div>
+        <footer class="p-3 text-center">
+            <div>日本全国オワコン・プロジェクト</div>
         </footer>
     </div>
 </template>
@@ -138,7 +138,7 @@ export default {
         },
         logout(){
             axios.post(`/api/logout`).then(response => {
-                console.log(response); 
+                console.log('logout',response); 
                 if(response.status === 200){
                     this.$store.commit('currentUser', null)
                 }

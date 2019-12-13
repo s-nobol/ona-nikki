@@ -1,7 +1,9 @@
 <template>
 <div>
     <div class="card about__continer__bg">
-       <!--ランキング-->
+       
+       
+       <!--アバウト-->
        <h1 class="text-center mb-5"><b>オナ日記について</b></h1>
        
        <div class="about1__content">

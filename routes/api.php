@@ -80,10 +80,6 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // app.env のCallBack_Url修正
 
 
-
-// oauthTwitterのメールアドレスのみ取得できない　プライバシーポリシー作成
-// https://tech.innovator.jp.net/entry/2017/08/08/120555
-
-// プライバシーポリシー作成
 // プライバシーポリシー
 // 利用規約
+// 作成完了

@@ -59,7 +59,7 @@
             
             
             <li class="list-group-item pl-5">
-                <span>ログアウト</span>
+                <span @click="logout">ログアウト</span>
             </li>
             
         </ul>
@@ -117,6 +117,12 @@
                 </RouterLink>
             </li>
             
+            <li class="list-group-item">
+                <!--<i class="fas fa-ban fa-lg"></i>-->
+                <RouterLink  to="/policy" class="sidebar_item " >
+                    <span class="ml_50px">プライバシーポリシー</span>  
+                </RouterLink>
+            </li>
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->
                 <RouterLink  to="/about" class="sidebar_item " >
@@ -218,8 +224,16 @@ export default {
             this.select = item.key
             this.$router.push(item.url)
             console.log(this.select )
-            
-        }
+        },
+        
+        logout(){
+            axios.post(`/api/logout`).then(response => {
+                console.log('logout',response); 
+                if(response.status === 200){
+                    this.$store.commit('currentUser', null)
+                }
+            })
+        },
     }
 }
 </script>

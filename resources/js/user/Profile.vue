@@ -95,8 +95,8 @@
 </style>
 
 <script>
-import Profile_UserForm from '../components/Profile_UserForm.vue'
-import Profile_Logs from '../components/Profile_Logs.vue'
+import Profile_UserForm from '../components/user/UserForm.vue'
+import Profile_Logs from '../components/user/Logs.vue'
 export default {
     components: { Profile_UserForm, Profile_Logs },
     data(){

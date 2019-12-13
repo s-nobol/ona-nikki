@@ -13,8 +13,10 @@ import sex from './home/Sex.vue'
 import age from './home/Age.vue'
 import location from './home/Location.vue'
 import ranking from './home/Ranking.vue'
+
 import about from './pages/About.vue'
 import notify from './pages/Notify.vue'
+import policy from './pages/Policy.vue'
 import home_year from './home/Year.vue'
 import home_month from './home/Month.vue'
 
@@ -39,6 +41,7 @@ export default new Router({
         { path: '/', component: index  },
         { path: '/home', component: home , name: 'home' },
         { path: '/about', component: about  , name: 'about'  },
+        { path: '/policy', component: policy  , name: 'policy'  },
         { path: '/notify', component: notify  , name: 'notify'  },
         { path: '/sex', component: sex  , name: 'sex'  },
         { path: '/age', component: age  , name: 'age'  },
