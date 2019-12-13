@@ -57,18 +57,8 @@ class OAuthController extends Controller
             auth()->login($user, true);
         }
         
-        return $user;
+        return Auth::user();
     }
     
-    // Twitter用のユーザー作成
-    public function create_twitter_user(){
-            $user = User::create([
-                'name' => $socialUser->getName(),
-                'email' => $socialUser->getEmail(),
-                // 'password' => $socialUser->getEmail(),
-                'oauth_image' => $socialUser->avatar_original,
-                'oauth_check' => true,
-                'password' => Hash::make($socialUser->getName()),  // すべてのアカウントで共通する
-            ]);
-    }
+    
 }

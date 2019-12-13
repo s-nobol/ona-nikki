@@ -18,6 +18,9 @@ export default {
                 if(response.status === 201){
                     this.$store.commit('currentUser', response.data)
                 }
+                if(response.status === 200){
+                    this.$store.commit('currentUser', response.data)
+                }
             })
             
             this.$router.replace('/')

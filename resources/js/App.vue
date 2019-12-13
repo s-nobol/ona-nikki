@@ -53,6 +53,11 @@
             <LoginModal v-if="loginModal" @close="onCloseModal" />
         </transition >
         
+        <!--モーダル-->
+        <transition name="fade" >
+            <AlertModal v-if="alertModal" @close="onCloseModal" />
+        </transition >
+        
         
         <!--モーダル-->
         <transition name="fade" >
@@ -94,17 +99,20 @@
 </style>
 <script>
 import Sidebar from './components/Sidebar.vue'
+
 import LoginModal from './components/modal/Login.vue'
 import LevelModal from './components/modal/Level.vue'
+import AlertModal from './components/modal/Alert.vue'
 
 
 export default {
-    components: {Sidebar, LoginModal, LevelModal },
+    components: {Sidebar, LoginModal, LevelModal,AlertModal },
     data(){
         return{
             nowTime: new Date().getHours() + ':' +  new Date().getMinutes() ,
             loginModal: false,
             levelModal: false,
+            alertModal: false,
             
             // レベルアップ
             log_id: null,
@@ -150,6 +158,12 @@ export default {
             }
         },
         createLog(){
+            // ステータス確認
+            if(! this.currentUser.status_check){
+                this.alertModal = true
+                return false
+            }
+            
             axios.post(`/api/logs`).then(response => {
                 console.log(response)
                 if(response.status === 200){
@@ -181,6 +195,7 @@ export default {
         onCloseModal() {
             this.loginModal = false
             this.levelModal = false
+            this.alertModal = false
         },
     },
     watch: {

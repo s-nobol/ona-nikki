@@ -50,6 +50,7 @@ class User extends Authenticatable
         'level' => 'integer',
         'point' => 'integer',
         'experience_point' => 'integer',
+        'status_check' => 'boolean',
         'browsing_log' => 'boolean',
     ];
     

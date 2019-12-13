@@ -2,8 +2,8 @@
 <div >
     <div class="model" @click.self="$emit('close')">
         <div class="model__content">
-            <div  class="LoginForm" @submit.prevent="login">
-                <form>
+            <div  class="LoginForm">
+                <form @submit.prevent="login">
                 
                 <h4 class="LoginForm__title">ログイン</h4>
                 <div v-if="errors">

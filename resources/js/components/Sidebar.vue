@@ -31,6 +31,7 @@
                 <RouterLink  to="/mypage/profile" class="sidebar_item" >
                     <i class="far fa-address-card fa-lg"></i>
                     <span>プロフィール</span>
+                    <span v-if="! currentUser.status_check" class="sidebar_item_message_button">1</span>
                 </RouterLink>
             </li>
             
@@ -186,6 +187,13 @@
 }
 .select_item{
     background-color: whitesmoke;
+}
+.sidebar_item_message_button{
+    margin-left: 15px;
+    padding: 4px 8px;
+    background-color: #ff4a4a;
+    color: white;
+    border-radius: 50px;
 }
 </style>
 <script>

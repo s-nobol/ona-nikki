@@ -35,20 +35,20 @@ class CreateUsersTable extends Migration
             $table->string('age')->nullable();     //年齢
             $table->string('sex')->nullable();     //性別
             $table->string('location')->nullable(); //住所 Locationに変更する
-            $table->string('career')->nullable(); //住所 Locationに変更する
-            $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する？
+            $table->string('career')->nullable(); //住所 Locationに変更する？
+            $table->boolean('status_check')->default(false);
+            
+            
+          
+            // $table->string('oauth_id')->nullable();  // ソーシャルログイン用(name email は初期設定でいいかも？)
+            $table->boolean('oauth_check')->default(false); //ソーシャルユーザーでログインしているか？
+            $table->string('oauth_image')->nullable(); //画像
+            
+            
+            $table->boolean('receive_email')->default(true); //メール(月ごとの集計)を受信する
+            
             
             $table->string('theme')->default("red");  //テーマ(いらない)
-            
-            
-            
-             // ソーシャルログイン用(name email は初期設定でいいかも？)
-            $table->boolean('oauth_check')->default(false);; //ソーシャルユーザーでログインしているか？
-            $table->string('oauth_image')->nullable(); //画像
-            // $table->string('oauth_id')->nullable();
-            // $table->string('oauth_name')->nullable();
-            // $table->unique(['oauth_id', 'oauth_name']);
-            
             
             // 管理者
             $table->smallInteger('role')->default(0); //管理者権限3以上

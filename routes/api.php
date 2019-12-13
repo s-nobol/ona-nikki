@@ -61,6 +61,7 @@ Route::resource('users', 'UserController');
 Route::resource('notifies', 'NotifyController');
 Route::resource('categories', 'CategoryController');
 
+Route::put('/users/{user}/status_update', 'UserController@status_update');
 Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 
 // 募金
@@ -79,7 +80,6 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // タイムライン(最後)
 // app.env のCallBack_Url修正
 
-
-// プライバシーポリシー
-// 利用規約
-// 作成完了
+//ステータスが正しく入力されているか確認
+// ユーザーステータスが正しくないとログを作成できない
+// サイドバーにメッセージ表示
