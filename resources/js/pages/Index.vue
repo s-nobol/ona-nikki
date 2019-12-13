@@ -1,7 +1,7 @@
 <template>
     <div>
        <!--ランキング-->
-       <h5><b>ホーム</b></h5>
+       <!--<h5><b>ホーム</b></h5>-->
        
     </div>
 </template>
@@ -16,10 +16,21 @@ export default {
         return{
         }
     },
+
+    computed: {
+        currentUser(){
+            return this.$store.getters['currentUser']
+        }, 
+    },
     methods: {
     },
     created(){
-        console.log("インデックス")
+        if(this.currentUser){
+            this.$router.push('/mypage')
+        }else{
+            this.$router.push('/home')
+        }
+        
     }
 }
 </script>

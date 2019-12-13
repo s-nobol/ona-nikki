@@ -2,8 +2,9 @@
 <div >
     <div class="model" @click.self="$emit('close')">
         <div class="model__content">
-            <form  class="LoginForm" @submit.prevent="login">
-        
+            <div  class="LoginForm" @submit.prevent="login">
+                <form>
+                
                 <h4 class="LoginForm__title">ログイン</h4>
                 <div v-if="errors">
                     <span class="text-danger">該当するユーザーが見つかりません</span>
@@ -32,12 +33,14 @@
                 </div>
                 
                 
+                </form>
+                
                 <div class="text-center pt-3 pb-3 LoginForm__border">
                     <span>または</span>
                 </div>
                 
                 <div class="LoginForm__google">
-                    <button class="LoginForm__google__button">
+                    <button class="LoginForm__google__button" @click="googleLogin">
                         <i class="fab fa-google fa-lg "></i><span>sign up with <strong>Google</strong></span>
                     </button>
                 </div>
@@ -46,7 +49,7 @@
                         <i class="fab fa-twitter fa-lg "></i><span>sign up with <strong>Twitter</strong></span>
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -91,8 +94,13 @@ export default {
         },
         
         // ツイッターログイン
+        googleLogin(){
+            axios.get(`/api/login/google`).then(response => {
+                window.location.href = response.data
+            })
+        },
         twitterLogin(){
-            axios.get(`api/login/twitter`, this.loginForm).then(response => {
+            axios.get(`/api/login/twitter`).then(response => {
                 window.location.href = response.data
             })
         }

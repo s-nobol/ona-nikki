@@ -23,6 +23,7 @@ class User extends Authenticatable
         'age','location','sex',
         'browsing_log','',
         'receive_email','theme',
+        'oauth_image','oauth_check',
     ];
     
             

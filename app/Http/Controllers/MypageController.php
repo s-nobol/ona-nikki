@@ -127,7 +127,9 @@ class MypageController extends Controller
         //     ->select(DB::raw('count(*) as count, day as label, month'))
         //     ->groupBy('month','day')
         //     ->get();
-            
+        // $user = User::where('id',103)->first()->delete();
+        // $user->delete;
+        
         //エラーがでるかも？
         $logs = Log::
             whereYear('created_at', $year )

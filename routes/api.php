@@ -77,15 +77,13 @@ Route::get('/users/logs/donation', 'UserController@donation');
 
 //募金のランキング（後日）
 // タイムライン(最後)
+// app.env のCallBack_Url修正
 
 
 
-//Seedでカテゴリ-作成
-//　カテゴリ-Vueの修正
-// 編集削除を行えるようにする
-// Chartの修正(カテゴリが機能するようにする)
+// oauthTwitterのメールアドレスのみ取得できない　プライバシーポリシー作成
+// https://tech.innovator.jp.net/entry/2017/08/08/120555
 
-
-
-// OauthでGooleアカウントログイン
-// サムネイルを表示できるように設定する
+// プライバシーポリシー作成
+// プライバシーポリシー
+// 利用規約

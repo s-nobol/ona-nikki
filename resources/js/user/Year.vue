@@ -255,6 +255,12 @@ export default {
             return [data, days];
         },
     },
+    watch: {
+        $route() {
+            this.get_chart()
+            immediate: true
+        }
+    },
     created(){
         this.get_chart()
     }

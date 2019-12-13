@@ -3980,6 +3980,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4015,8 +4018,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     // ツイッターログイン
+    googleLogin: function googleLogin() {
+      axios.get("/api/login/google").then(function (response) {
+        window.location.href = response.data;
+      });
+    },
     twitterLogin: function twitterLogin() {
-      axios.get("api/login/twitter", this.loginForm).then(function (response) {
+      axios.get("/api/login/twitter").then(function (response) {
         window.location.href = response.data;
       });
     }
@@ -5549,9 +5557,18 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters['currentUser'];
+    }
+  },
   methods: {},
   created: function created() {
-    console.log("インデックス");
+    if (this.currentUser) {
+      this.$router.push('/mypage');
+    } else {
+      this.$router.push('/home');
+    }
   }
 });
 
@@ -5838,9 +5855,9 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/login/".concat(this.string, "/callback"), {
       params: this.$route.query
     }).then(function (response) {
-      console.log('ログイン成功', response);
+      console.log('OAoth-ログイン成功', response);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         _this.$store.commit('currentUser', response.data);
       }
     });
@@ -6984,6 +7001,13 @@ __webpack_require__.r(__webpack_exports__);
     active_data: function active_data(data) {
       var days = 30 - data;
       return [data, days];
+    }
+  },
+  watch: {
+    $route: function $route() {
+      this.get_chart();
+
+      immediate: true;
     }
   },
   created: function created() {
@@ -11471,7 +11495,7 @@ var render = function() {
       [
         _c("div", { staticClass: "model__content" }, [
           _c(
-            "form",
+            "div",
             {
               staticClass: "LoginForm",
               on: {
@@ -11482,79 +11506,90 @@ var render = function() {
               }
             },
             [
-              _c("h4", { staticClass: "LoginForm__title" }, [
-                _vm._v("ログイン")
-              ]),
-              _vm._v(" "),
-              _vm.errors
-                ? _c("div", [
-                    _c("span", { staticClass: "text-danger" }, [
-                      _vm._v("該当するユーザーが見つかりません")
+              _c("form", [
+                _c("h4", { staticClass: "LoginForm__title" }, [
+                  _vm._v("ログイン")
+                ]),
+                _vm._v(" "),
+                _vm.errors
+                  ? _c("div", [
+                      _c("span", { staticClass: "text-danger" }, [
+                        _vm._v("該当するユーザーが見つかりません")
+                      ])
                     ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div", [
-                _c("label", { attrs: { for: "login-email" } }, [
-                  _vm._v("Email")
-                ]),
-                _c("br"),
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.loginForm.email,
-                      expression: "loginForm.email"
-                    }
-                  ],
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.loginForm.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("div", [
+                  _c("label", { attrs: { for: "login-email" } }, [
+                    _vm._v("Email")
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.loginForm.email,
+                        expression: "loginForm.email"
                       }
-                      _vm.$set(_vm.loginForm, "email", $event.target.value)
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.loginForm.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.loginForm, "email", $event.target.value)
+                      }
                     }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c("label", { attrs: { for: "login-password" } }, [
-                  _vm._v("Password")
+                  })
                 ]),
-                _c("br"),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.loginForm.password,
-                      expression: "loginForm.password"
-                    }
-                  ],
-                  attrs: { type: "password" },
-                  domProps: { value: _vm.loginForm.password },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("div", [
+                  _c("label", { attrs: { for: "login-password" } }, [
+                    _vm._v("Password")
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.loginForm.password,
+                        expression: "loginForm.password"
                       }
-                      _vm.$set(_vm.loginForm, "password", $event.target.value)
+                    ],
+                    attrs: { type: "password" },
+                    domProps: { value: _vm.loginForm.password },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.loginForm, "password", $event.target.value)
+                      }
                     }
-                  }
-                })
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
               ]),
-              _vm._v(" "),
-              _vm._m(0),
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "LoginForm__google" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "LoginForm__google__button",
+                    on: { click: _vm.googleLogin }
+                  },
+                  [_c("i", { staticClass: "fab fa-google fa-lg " }), _vm._m(2)]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "LoginForm__twitter" }, [
                 _c(
@@ -11600,11 +11635,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "LoginForm__google" }, [
-      _c("button", { staticClass: "LoginForm__google__button" }, [
-        _c("i", { staticClass: "fab fa-google fa-lg " }),
-        _c("span", [_vm._v("sign up with "), _c("strong", [_vm._v("Google")])])
-      ])
+    return _c("span", [
+      _vm._v("sign up with "),
+      _c("strong", [_vm._v("Google")])
     ])
   },
   function() {
@@ -13126,16 +13159,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div")
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h5", [_c("b", [_vm._v("ホーム")])])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

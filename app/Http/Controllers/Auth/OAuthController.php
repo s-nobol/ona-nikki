@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Socialite;
 use App\User;
 use Hash;
-use Auth;
+// use Auth;
 
 class OAuthController extends Controller
 {
     
+    // use AuthenticatesUsers;
     
      /**
      * $OAuthの認証ページヘユーザーをリダイレクト
@@ -20,46 +22,53 @@ class OAuthController extends Controller
      */
     public function redirectToProvider($OAuth)
     {
-        // return Socialite::driver($OAuth)->redirect();
         return Socialite::driver($OAuth)->redirect()->getTargetUrl();
-
     }
 
 
 
     /**
      * $OAuthからユーザー情報を取得
-     *try今度いれる
+     *　try今度いれる
      * @return \Illuminate\Http\Response
      */
     public function handleProviderCallback($OAuth)
     {
         
-        $socialUser  = Socialite::driver($OAuth)->user();
+        $socialUser = Socialite::driver($OAuth)->user();
         
         $user = User::where([ 'email' => $socialUser->getEmail() ])->first();
-
+        
+        
 
         if ($user) {
-            Auth::login($user);
+            auth()->login($user, true);
+            // Auth::login($user);
         } else {
             $user = User::create([
                 'name' => $socialUser->getName(),
                 'email' => $socialUser->getEmail(),
+                // 'password' => $socialUser->getEmail(),
                 'oauth_image' => $socialUser->avatar_original,
                 'oauth_check' => true,
-                // 'password' => Hash::make($socialUser->getNickname()),  // すべてのアカウントで共通する
+                'password' => Hash::make($socialUser->getName()),  // すべてのアカウントで共通する
             ]);
             
-            Auth::login($user);
+            auth()->login($user, true);
         }
         
-        return Auth::user();
+        return $user;
+    }
+    
+    // Twitter用のユーザー作成
+    public function create_twitter_user(){
+            $user = User::create([
+                'name' => $socialUser->getName(),
+                'email' => $socialUser->getEmail(),
+                // 'password' => $socialUser->getEmail(),
+                'oauth_image' => $socialUser->avatar_original,
+                'oauth_check' => true,
+                'password' => Hash::make($socialUser->getName()),  // すべてのアカウントで共通する
+            ]);
     }
 }
-// getId()
-// getNickname()
-// getName()
-// getEmail()
-// getAvatar()
-// $user->token;

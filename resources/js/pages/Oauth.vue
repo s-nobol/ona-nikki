@@ -14,8 +14,8 @@ export default {
             axios.get(`/api/login/${this.string}/callback`, { params: this.$route.query })
             .then(response => {
                 
-                console.log('ログイン成功', response);
-                if(response.status === 200){
+                console.log('OAoth-ログイン成功', response);
+                if(response.status === 201){
                     this.$store.commit('currentUser', response.data)
                 }
             })
