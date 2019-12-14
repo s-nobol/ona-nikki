@@ -75,11 +75,15 @@ Route::get('/users/logs/donation', 'UserController@donation');
  * 
 **/
 
+// User::find(103)->delete();
 
 //募金のランキング（後日）
 // タイムライン(最後)
 // app.env のCallBack_Url修正
 
-//ステータスが正しく入力されているか確認
-// ユーザーステータスが正しくないとログを作成できない
-// サイドバーにメッセージ表示
+
+// カレンダー作成
+// npm install vuejs-datepicker --save
+// npm install v-calendar@next --save
+
+// created_atを乱数で作成する

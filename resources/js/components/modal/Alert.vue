@@ -13,10 +13,6 @@
                 <form @submit.prevent="onEditUser" class="text-left">
                     
                     
-                    <div v-if="errors">
-                        <span class="text-danger">該当するユーザーが見つかりません</span>
-                    </div>
-                
                     <div v-if="errors" class="errors text-danger">
                         <div v-if="errors.age">
                            <span v-for="msg in errors.age"  class="errors_item">{{ msg }}</span>

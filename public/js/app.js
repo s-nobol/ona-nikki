@@ -3457,10 +3457,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 // テスト用のLevel.vue
 // import UserForm from '../user/UserForm.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6801,22 +6797,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
 
 
+ // import Calendar from '../components/user/Calendar.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6847,8 +6833,9 @@ __webpack_require__.r(__webpack_exports__);
       //利用頻度
       category_data: [],
       category_data_label: [],
-      new_data: [] //最新の5件のデータ
-
+      new_data: [],
+      //最新の5件のデータ
+      day_data: []
     };
   },
   methods: {
@@ -6872,7 +6859,7 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("チャートの取得");
       axios.get("api/mypage").then(function (response) {
-        console.log(response); // 月別データ
+        console.log('mypage', response); // 月別データ
 
         _this2.month_data = response.data.month_data;
         _this2.month_data_label = response.data.month_data_label; // 先月のデータ
@@ -6881,16 +6868,18 @@ __webpack_require__.r(__webpack_exports__);
         _this2.last_month_data_label = response.data.last_month_data_label; // 時間別データ
 
         _this2.time_data = response.data.time_data;
-        _this2.time_data_label = response.data.time_data_label;
-        _this2.month_data_total = _this2.get_sum(_this2.month_data);
-        _this2.last_month_data_total = _this2.get_sum(_this2.last_month_data);
-        _this2.active_data = _this2.get_active_data(_this2.month_data_label.length); // カテゴリーデータ
+        _this2.time_data_label = response.data.time_data_label; // this.month_data_total = this.get_sum(this.month_data)
+        // this.last_month_data_total = this.get_sum(this.last_month_data)
+        // this.active_data = this.get_active_data(this.month_data_label.length)
+        // // カテゴリーデータ
+        // this.category_data = response.data.category_data
+        // this.category_data_label = response.data.category_data_label
+        // // 最新5件のデータ
+        // this.new_data = response.data.new_data
+        // console.log("マイページ",this.month_data_total , this.last_month_data_total, this.active_data)
+        // this.day_data = []
 
-        _this2.category_data = response.data.category_data;
-        _this2.category_data_label = response.data.category_data_label; // 最新5件のデータ
-
-        _this2.new_data = response.data.new_data;
-        console.log("マイページ", _this2.month_data_total, _this2.last_month_data_total, _this2.active_data);
+        _this2.day_data = _this2.get_change_date(response.data.day_data);
       });
     },
     // 配列の合計値をだす
@@ -6907,6 +6896,16 @@ __webpack_require__.r(__webpack_exports__);
     get_active_data: function get_active_data(data) {
       var days = 30 - data;
       return [data, days];
+    },
+    get_change_date: function get_change_date(data) {
+      var list = [];
+
+      for (var i = data.length; i--;) {
+        var time = new Date(data[i]);
+        list.push(time);
+      }
+
+      return list;
     }
   },
   created: function created() {
@@ -6928,6 +6927,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_user_UserForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/user/UserForm.vue */ "./resources/js/components/user/UserForm.vue");
 /* harmony import */ var _components_user_Logs_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/user/Logs.vue */ "./resources/js/components/user/Logs.vue");
+//
 //
 //
 //
@@ -11066,14 +11066,6 @@ var render = function() {
               },
               [
                 _vm.errors
-                  ? _c("div", [
-                      _c("span", { staticClass: "text-danger" }, [
-                        _vm._v("該当するユーザーが見つかりません")
-                      ])
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.errors
                   ? _c("div", { staticClass: "errors text-danger" }, [
                       _vm.errors.age
                         ? _c(
@@ -15000,7 +14992,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(5)
+        _c("div", { staticClass: "card_p-4" })
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-4 " }, [
@@ -15008,7 +15000,7 @@ var render = function() {
           "div",
           { staticClass: " card " },
           [
-            _vm._m(6),
+            _vm._m(5),
             _vm._v(" "),
             _c("Doughnut", {
               attrs: { dataSet: _vm.time_data, labels: _vm.time_data_label }
@@ -15025,7 +15017,7 @@ var render = function() {
           "div",
           { staticClass: " card p-5" },
           [
-            _vm._m(7),
+            _vm._m(6),
             _vm._v(" "),
             _c("Bar", {
               attrs: {
@@ -15047,9 +15039,7 @@ var render = function() {
           1
         )
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(8)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -15113,14 +15103,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " card p-5" }, [
-      _c("h5", [_c("b", [_vm._v("データ（カレンダー）")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("h4", [_c("b", [_vm._v("円グラフ（一か月の利用頻度")])])
   },
   function() {
@@ -15128,28 +15110,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", [_c("b", [_vm._v("時間帯別利用指数")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-50 m-auto card" }, [
-      _c("div", { staticClass: "media " }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
-            _vm._v(
-              "\n                テストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテストテストテストテスト\n                テストテストテストテストテスト\n                "
-            )
-          ])
-        ])
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -15178,10 +15138,22 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "row p-3" }, [
             _c("div", { staticClass: "col-3" }, [
-              _c("img", {
-                staticClass: "user_image",
-                attrs: { src: "/image/myuser.jpg", alt: "ユーザー画像" }
-              }),
+              _vm.currentUser.oauth_image
+                ? _c("img", {
+                    staticClass: "user_image",
+                    attrs: {
+                      src: _vm.currentUser.oauth_image,
+                      alt: "ユーザー画像"
+                    }
+                  })
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.currentUser.oauth_image
+                ? _c("img", {
+                    staticClass: "user_image",
+                    attrs: { src: "/image/noimage.jpg", alt: "ユーザー画像" }
+                  })
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "Status__user" }, [
                 _c("span", { staticClass: "Status__user__name" }, [
@@ -31672,7 +31644,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
-
+ // import VCalendar from 'v-calendar'
+// Vue.use(VCalendar) 
+// Vue.config.productionTip = false
 
 function createApp() {
   // セッションのデータを確認

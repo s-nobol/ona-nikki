@@ -9,7 +9,8 @@
        
                 <!--ユーザー名-->
                 <div class="col-3">
-                    <img class="user_image" src="/image/myuser.jpg" alt="ユーザー画像">
+                    <img v-if="currentUser.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
+                    <img v-if="! currentUser.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
                     <div class="Status__user">
                         <span class="Status__user__name">{{ currentUser.name }}</span>
                         <span class="Status__user__edit" @click="mode =! mode">編集</span><br>

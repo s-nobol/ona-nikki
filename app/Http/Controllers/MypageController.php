@@ -81,12 +81,23 @@ class MypageController extends Controller
             ->get();
             
         
+        // カレンダーのデータ
+        $logs = Log::
+            select(DB::raw('count(*) as count, day as label, created_at'))
+            ->where( 'created_at', '>', $select_month)
+            ->groupBy('day')
+            ->take(10)
+            ->get();
+        $day_data = $logs->pluck('created_at') ;
+            
+            
         return compact(
             'month_data','last_monnt_data',
             'month_data_label', 'last_month_data_label',
             'time_data', 'time_data_label',
             'category_data', 'category_data_label',
-            'new_data'
+            'new_data',
+            'day_data'
             );
     }
     

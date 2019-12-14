@@ -88,8 +88,13 @@
                      />
                 </div>
                 
-                <div class=" card p-5">
-                    <h5><b>データ（カレンダー）</b></h5>
+                
+                <!--カレンダー-->
+                <div  class="card_p-4">
+                
+                    <!--<Calendar v-if="day_data"-->
+                    <!--    :labels="day_data"-->
+                    <!--    />-->
                 </div>
                 
             </div>
@@ -97,7 +102,8 @@
             
             <div class="col-4 ">
             
-                <!--円グラフ-->
+            
+                <!--一か月の利用頻度（円グラフ）-->
                 <div class=" card ">                    
                     <h4><b>円グラフ（一か月の利用頻度</b></h4>  
                     <Doughnut 
@@ -107,6 +113,7 @@
                     <div class="col-6">当月日数</div>
                     <div class="col-6">利用日数</div>
                 </div>
+                
                 
                 <!--カテゴリーグラフ-->
                 <div class=" card p-5">
@@ -136,24 +143,6 @@
             </div>
         </div>
     
-        
-        
-        
-        
-        <div class="w-50 m-auto card">
-            <div class="media ">
-                <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
-                <div class="media-body">
-                    <span>
-                    <h5 class="mt-0">年齢について</h5>
-                    テストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテスト
-                    </span>
-                </div>
-            </div>
-        </div>
         
     </div>
 </template>
@@ -194,8 +183,12 @@ import Doughnut from '../charts/Doughnut.vue'
 import BarHorizontal from '../charts/BarHorizontal.vue'
 import Table from '../components/Table.vue'
 import Dateitem from './Date.vue'
+
+// import Calendar from '../components/user/Calendar.vue'
+
+
 export default {
-    components: { Bar, BarLine ,Doughnut, BarHorizontal, Table,Dateitem },
+    components: { Bar, BarLine ,Doughnut, BarHorizontal, Table, Dateitem,  },
     data(){
         return{
             msg: '5',
@@ -220,14 +213,15 @@ export default {
             category_data: [],
             category_data_label: [],
             
-            new_data: [] //最新の5件のデータ
+            new_data: [], //最新の5件のデータ
+            day_data: []
             
         }
     },
     methods: {
         selectTab(name){
-                this.data = []
-                this.data_label = []
+            this.data = []
+            this.data_label = []
             this.tab = name 
             this.get_data(name)
         },
@@ -242,7 +236,7 @@ export default {
             console.log("チャートの取得")
             axios.get(`api/mypage`).then(response => {
               
-                console.log(response);
+                console.log('mypage',response);
                 
                 // 月別データ
                 this.month_data = response.data.month_data
@@ -256,18 +250,24 @@ export default {
                 this.time_data = response.data.time_data
                 this.time_data_label = response.data.time_data_label
                 
-                this.month_data_total = this.get_sum(this.month_data)
-                this.last_month_data_total = this.get_sum(this.last_month_data)
                 
-                this.active_data = this.get_active_data(this.month_data_label.length)
                 
-                // カテゴリーデータ
-                this.category_data = response.data.category_data
-                this.category_data_label = response.data.category_data_label
+                // this.month_data_total = this.get_sum(this.month_data)
+                // this.last_month_data_total = this.get_sum(this.last_month_data)
                 
-                // 最新5件のデータ
-                this.new_data = response.data.new_data
-                console.log("マイページ",this.month_data_total , this.last_month_data_total, this.active_data)
+                // this.active_data = this.get_active_data(this.month_data_label.length)
+                
+                // // カテゴリーデータ
+                // this.category_data = response.data.category_data
+                // this.category_data_label = response.data.category_data_label
+                
+                // // 最新5件のデータ
+                // this.new_data = response.data.new_data
+                
+                // console.log("マイページ",this.month_data_total , this.last_month_data_total, this.active_data)
+                
+                // this.day_data = []
+                this.day_data = this.get_change_date( response.data.day_data)
             })
         },
         
@@ -285,6 +285,15 @@ export default {
         get_active_data(data){
             var days = 30 - data
             return [data, days];
+        },
+        
+        get_change_date(data){
+            var list =[]
+            for (var i = data.length; i--; ) {
+                let time = new Date(data[i])
+                list.push(time);
+            }
+            return list;
         }
         
     },
