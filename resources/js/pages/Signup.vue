@@ -144,5 +144,17 @@ export default {
             });
         }
     },
+    watch: {
+        currentUser(){
+            if(this.currentUser){
+                this.$router.push('/mypage')
+            }
+        }
+    },
+    created(){
+        if(this.currentUser){
+            this.$router.push('/mypage')
+        }
+    }
 }
 </script>

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 use Carbon\Carbon;
 
 $factory->define(Log::class, function (Faker $faker) {
-   return [
+    return [
         'user_id' => rand(1,99),
         'month' => rand(1,12),
         'day' => rand(1,30),

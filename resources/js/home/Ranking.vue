@@ -35,7 +35,9 @@
                
                <!--ユーザー名-->
                <li class="rankig__card__user">
-                   <img src="/image/myuser.jpg"></img>
+                    <img v-if="user.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
+                    <img v-if="! user.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
+                 
                    <span class="ml-2">{{ user.name }} </span>
                </li>
                

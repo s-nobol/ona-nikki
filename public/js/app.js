@@ -3451,12 +3451,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 // テスト用のLevel.vue
 // import UserForm from '../user/UserForm.vue'
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5136,6 +5130,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6346,6 +6342,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     }
+  },
+  watch: {
+    currentUser: function currentUser() {
+      if (this.currentUser) {
+        this.$router.push('/mypage');
+      }
+    }
+  },
+  created: function created() {
+    if (this.currentUser) {
+      this.$router.push('/mypage');
+    }
   }
 });
 
@@ -6927,6 +6935,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_user_UserForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/user/UserForm.vue */ "./resources/js/components/user/UserForm.vue");
 /* harmony import */ var _components_user_Logs_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/user/Logs.vue */ "./resources/js/components/user/Logs.vue");
+//
+//
 //
 //
 //
@@ -11350,68 +11360,6 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "AlertModal" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "AlertModal__label",
-                      attrs: { for: "login-career" }
-                    },
-                    [_vm._v("学歴")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.currentUser.career,
-                          expression: "currentUser.career"
-                        }
-                      ],
-                      domProps: { value: _vm.currentUser.career },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.currentUser,
-                            "career",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "高校" } }, [
-                        _vm._v("高校")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "大学" } }, [
-                        _vm._v("大学")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "大学院" } }, [
-                        _vm._v("大学院")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "その他" } }, [
-                        _vm._v("その他")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
                 _vm._m(0)
               ]
             )
@@ -11426,10 +11374,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "LoginForm__button " }, [
+    return _c("div", { staticClass: "text-center mt-2" }, [
       _c(
         "button",
-        { staticClass: "button button--inverse ", attrs: { type: "submit" } },
+        { staticClass: "btn btn-danger ", attrs: { type: "submit" } },
         [_c("strong", [_vm._v("送信")])]
       )
     ])
@@ -13467,7 +13415,25 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("li", { staticClass: "rankig__card__user" }, [
-                  _c("img", { attrs: { src: "/image/myuser.jpg" } }),
+                  user.oauth_image
+                    ? _c("img", {
+                        staticClass: "user_image",
+                        attrs: {
+                          src: _vm.currentUser.oauth_image,
+                          alt: "ユーザー画像"
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !user.oauth_image
+                    ? _c("img", {
+                        staticClass: "user_image",
+                        attrs: {
+                          src: "/image/noimage.jpg",
+                          alt: "ユーザー画像"
+                        }
+                      })
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("span", { staticClass: "ml-2" }, [
                     _vm._v(_vm._s(user.name) + " ")
@@ -14853,56 +14819,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
-    _c("div", { staticClass: "row MyBar" }, [
-      _c("div", { staticClass: "col-3 card p-3 MyBar__item" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content" }, [
-          _vm._v(_vm._s(_vm.msg))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content2" }, [
-          _vm._v("先月との比較　24%")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 card p-3 MyBar__item " }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content" }, [
-          _vm._v(_vm._s(_vm.msg))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content2" }, [
-          _vm._v("先月との比較　24%")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 card p-3 MyBar__item" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content" }, [
-          _vm._v(_vm._s(_vm.msg))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content2" }, [
-          _vm._v("先月との比較　24%")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3 card p-3 MyBar__item " }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content" }, [
-          _vm._v(_vm._s(_vm.msg))
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "MyBar__content2" }, [
-          _vm._v("先月との比較　24%")
-        ])
-      ])
-    ]),
-    _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "row " }, [
         _c(
@@ -14973,7 +14889,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(0)
       ])
     ]),
     _vm._v(" "),
@@ -15000,7 +14916,7 @@ var render = function() {
           "div",
           { staticClass: " card " },
           [
-            _vm._m(5),
+            _vm._m(1),
             _vm._v(" "),
             _c("Doughnut", {
               attrs: { dataSet: _vm.time_data, labels: _vm.time_data_label }
@@ -15017,7 +14933,7 @@ var render = function() {
           "div",
           { staticClass: " card p-5" },
           [
-            _vm._m(6),
+            _vm._m(2),
             _vm._v(" "),
             _c("Bar", {
               attrs: {
@@ -15043,38 +14959,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "MyBar__title" }, [
-      _c("b", [_vm._v("データ今月の射精回数")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "MyBar__title" }, [
-      _c("b", [_vm._v("データ平均射精回数")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "MyBar__title" }, [
-      _c("b", [_vm._v("データ消費カロリ-")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "MyBar__title" }, [
-      _c("b", [_vm._v("データ合計支援金")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -15138,7 +15022,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "row p-3" }, [
             _c("div", { staticClass: "col-3" }, [
-              _vm.currentUser.oauth_image
+              _vm.user.oauth_image
                 ? _c("img", {
                     staticClass: "user_image",
                     attrs: {
@@ -15148,7 +15032,7 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              !_vm.currentUser.oauth_image
+              !_vm.user.oauth_image
                 ? _c("img", {
                     staticClass: "user_image",
                     attrs: { src: "/image/noimage.jpg", alt: "ユーザー画像" }

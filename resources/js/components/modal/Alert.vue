@@ -72,25 +72,19 @@
                     </div>
                     
                     
-                    
-                    <!--学歴-->
-                    <div class="AlertModal">
-                        <label for="login-career" class="AlertModal__label">学歴</label>
-                        <select v-model="currentUser.career" :value="currentUser.career">
-                            <option value="高校">高校</option>
-                            <option value="大学">大学</option>
-                            <option value="大学院">大学院</option>
-                            <option value="その他">その他</option>
-                        </select>
-                    </div>
-                    
-                    
                     <!--送信-->
-                    <div class="LoginForm__button ">
-                        <button type="submit" class="button button--inverse ">
+                    <div class="text-center mt-2">
+                        <button type="submit" class="btn btn-danger ">
                             <strong>送信</strong>
                         </button>
                     </div>
+                    
+                    <!--送信-->
+                    <!--<div class="LoginForm__button ">-->
+                    <!--    <button type="submit" class="button button--inverse ">-->
+                    <!--        <strong>送信</strong>-->
+                    <!--    </button>-->
+                    <!--</div>-->
                     
                     
                 </form>

@@ -81,9 +81,5 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // タイムライン(最後)
 // app.env のCallBack_Url修正
 
-
-// カレンダー作成
-// npm install vuejs-datepicker --save
-// npm install v-calendar@next --save
-
-// created_atを乱数で作成する
+// vue_imageの修正
+// git checkout -b edit-myimage

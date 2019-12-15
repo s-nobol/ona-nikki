@@ -4,32 +4,32 @@
     
         
         <!--ヘッダー-->
-        <div class="row MyBar">
+        <!--<div class="row MyBar">-->
         
-            <div class="col-3 card p-3 MyBar__item">
-                <h5 class="MyBar__title"><b>データ今月の射精回数</b></h5>
-                <span  class="MyBar__content">{{ msg }}</span>
-                <span  class="MyBar__content2">先月との比較　24%</span>
-            </div>
+        <!--    <div class="col-3 card p-3 MyBar__item">-->
+        <!--        <h5 class="MyBar__title"><b>データ今月の射精回数</b></h5>-->
+        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
+        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
+        <!--    </div>-->
             
-            <div class="col-3 card p-3 MyBar__item ">
-                <h5 class="MyBar__title"><b>データ平均射精回数</b></h5>
-                <span  class="MyBar__content">{{ msg }}</span>
-                <span  class="MyBar__content2">先月との比較　24%</span>
-            </div>
+        <!--    <div class="col-3 card p-3 MyBar__item ">-->
+        <!--        <h5 class="MyBar__title"><b>データ平均射精回数</b></h5>-->
+        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
+        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
+        <!--    </div>-->
             
-            <div class="col-3 card p-3 MyBar__item">
-                <h5 class="MyBar__title"><b>データ消費カロリ-</b></h5>
-                <span  class="MyBar__content">{{ msg }}</span>
-                <span  class="MyBar__content2">先月との比較　24%</span>
-            </div>
+        <!--    <div class="col-3 card p-3 MyBar__item">-->
+        <!--        <h5 class="MyBar__title"><b>データ消費カロリ-</b></h5>-->
+        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
+        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
+        <!--    </div>-->
             
-            <div class="col-3 card p-3 MyBar__item ">
-                <h5 class="MyBar__title"><b>データ合計支援金</b></h5>
-                <span  class="MyBar__content">{{ msg }}</span>
-                <span  class="MyBar__content2">先月との比較　24%</span>
-            </div>
-        </div>
+        <!--    <div class="col-3 card p-3 MyBar__item ">-->
+        <!--        <h5 class="MyBar__title"><b>データ合計支援金</b></h5>-->
+        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
+        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
+        <!--    </div>-->
+        <!--</div>-->
         
         <!--メインA-->
         <div class="card">
