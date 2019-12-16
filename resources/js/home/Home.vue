@@ -1,223 +1,113 @@
 <template>
 <div class="">
         
-        <div >
-            <div class="card_item card">
-                <div class="row ">
-                    <div class="col-3 text-center">
-                        <i class="fas fa-globe-americas fa-3x "></i>
-                    </div>
-                    <div class="col-9">
-                        <div class="card-body">
-                            <span >合計射精回数</span> 
-                            <h4 class="card-title ">
-                                <b>1580</b><small>回</small>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!--ホーム用のヘッダー-->
+        <HomeBar id="test" />
         
-            
-            <div class="card_item card">
-                <div class="row ">
-                    <div class="col-3 text-center">
-                        <i class="fas fa-globe-americas fa-3x"></i>
-                    </div>
-                    <div class="col-9">
-                        <div class="card-body">
-                            <span >合計射精回数</span> 
-                            <h4 class="card-title">
-                                <b>548</b><small>回</small>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="card_item card bg__blue">
-                <div class="row ">
-                    <div class="col-3 text-center">
-                    <i class="fas fa-male fa-3x "></i>                    
-                    </div>
-                    <div class="col-9">
-                        <div class="card-body ">
-                            <span >男性利用数</span> 
-                            <h4 class="card-title ">
-                                <b>578</b><small>回</small>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <div class="card_item card bg__woman">
-                <div class="row ">
-                    <div class="col-3 text-center">
-                        <i class="fas fa-female fa-3x "></i>
-                    </div>
-                    <div class="col-9">
-                        <div class="card-body">
-                            <span >女性利用数</span> 
-                            <h4 class="card-title ">
-                                <b>78</b><small>回</small>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-            
-            <div class="card_item card bg__green">
-                <div class="row ">
-                    <div class="col-3 text-center ">
-                    <i class="fas fa-yen-sign  fa-3x"></i>                    
-                    </div>
-                    <div class="col-9">
-                        <div class="card-body">
-                            <span >合計支援金</span> 
-                            <h4 class="card-title ">
-                                <b>688</b><small>円</small>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-        </div>
+        <div class="card_w-75">
         
         
-        <div class="row ">
-            <div class="col-9">
-                    
-                    
-                <div class="card">
-                   
-                    <div class="row ">
-                        <div class="col-4 ">
-                            <div>
-                                <!--<h5><b>横グラフ</b></h5>-->
-                                <BarHorizontal 
-                                    id="location"
-                                    :dataSet="location_data"
-                                    :labels="location_data_label"
-                                />
-                            </div>
-                            <div>
-                                <span>男女別割合</span>
-                                <Doughnut 
-                                    :borderWidth="80"
-                                    :dataSetSex="sex_data"
-                                    :labels="sex_data_label"
-                                />
-                            </div>
-                        </div>
-                        <div class="col-7 pt-5 pb-5">
-                           <img src="/image/map.png" class="map__image"></img>
-                        </div>
-                    </div>
-                </div>
-            
-                 <div class="row ">
-                    <!--ここになにか　いれるかも？-->
-                    <div class="col-6 card p-4">
-                        <span>ここ一週間の利用者推移</span>
-                        <Lines 
-                            :dataSet="week_data"
-                            :labels="week_data_label"
+            <div class="row">
+                
+                
+                <div class="col-4 ">
+                
+                    <div class="card_">
+                        <h5 class="mt-5 text-center">地域ごとのデータ</h5 >
+                        <BarHorizontal 
+                            id="location"
+                            :dataSet="location_data"
+                            :labels="location_data_label"
                         />
                     </div>
                     
-                    <div class="col-6 card p-4">
-                        <span>カロリ-別推移</span> 
-                        <Lines 
-                            id="cal"
-                            :dataSet="week_data"
-                            :labels="week_data_label"
-                        />
-                    </div>
-                 </div>
-            
-            </div>
-            
-            
-            
-            <!--サイドバー-->
-            <div class="col-3 ">
-                <h4 class="card p-3">それでいい</h4>
-                <div class="card p-3">
-                      <h4 class="">タイムライン</h4>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                    <span>Twitterタイムライン</span>
-                </div>
-                <!--<Rightbar />    -->
-                <div class="card">
-                    <h4 class="ranking_card">総合ランキング</h4>
-                    <div class="pr-4 pl-4">
-                       <Ranker 
-                            :dataSet="ranking_data"
+                    <div class="card_">
+                        <h5  class="mt-5 text-center">性別ごとの利用割合</h5 >
+                        <Doughnut 
+                            :borderWidth="80"
+                            :dataSetSex="sex_data"
+                            :labels="sex_data_label"
                         />
                     </div>
                 </div>
                 
-                <div class="card p-4">
-                    <span>時間帯別利用利用推移</span>
-                    <Bar
-                        :dataTime="time_data"
-                        :labels="time_data_label"
-                    />
+                
+                <!--マップ-->
+                <div class="col-8  pl-5 pr-5 pt-3 pb-3">
+                    <!--<div class="  pl-5 pr-5">-->
+                       <img src="/image/map.png" class="location_image"></img>
+                    <!--</div>-->
                 </div>
-                
-                
+        
             </div>
         </div>
-    
-        
-        
-        
         
         
         <!--利用ユーザー　最新5件-->
         <div class="row">
-            <div class="col-3 card ">
-                    <h4 class="ranking_card">総合ランキング</h4>
-                <div class="pr-4 pl-4">
-                   <Ranker 
-                        :dataSet="ranking_data"
-                    />
-                </div>
-            </div>
-           
-            <div class="col-3 card p-5">
-                <span>利用ユーザー　年齢比率</span>    <Lines 
-                id="calories"
-                :Calories="week_data"
-                :labels="week_data"
-            />      
-            <Lines 
-                id="coin"
-                :Coins="week_data"
-                :labels="week_data"
-            />
+            <div class="col-5 card text-left">
+                <span>Week＿Data</span>
+                <Lines 
+                    id="test"
+                    :dataSet="week_data"
+                    :labels="week_data"
+                />
             </div>
             
-            <div class="col-6 card p-5">
+            <div class="col-3 card">
+                <span>天気？</span>
+                  <Doughnut 
+                        :borderWidth="80"
+                        :dataSet="sex_data"
+                        :labels="sex_data_label"
+                    />
+            </div>
+            <div class="col-4 card">
+                <span>募金推移</span>
+                <!--<Lines -->
+                <!--    id="coin2"-->
+                <!--    :Coins="week_data"-->
+                <!--    :labels="week_data"-->
+                <!--/>-->
+            </div>
+           
+        </div>
+        
+        <!--利用ユーザー　最新5件-->
+        <div class="row">
+            <div class="col-4 card p-5">
                 <span>利用ユーザー　最新5件</span>
         
             </div>
+            <div class="col-4 card p-5">
+                <span>カテゴリー別利用グラフ</span>
+                    <!--<h4 class="ranking_card">総合ランキング</h4>-->
+                    <!--<div class="pr-4 pl-4">-->
+                    <!--<Ranker :dataSet="ranking_data"   />-->
+                    <!--</div>-->
+                <BarHorizontal 
+                    id="category"
+                    :dataSet="location_data"
+                    :labels="location_data_label"
+                />
+            </div>
+            
+            <div class="col-4 card p-5">
+                <span>募金額推移</span>
+                <Lines 
+                    id="coin"
+                    :Coins="week_data"
+                    :labels="week_data"
+                />
+        
+            </div>
         </div>
+            
         
         
+        
+        
+        <img src="/image/home-image.jpg"></img>
         
     
 </div>
@@ -231,8 +121,14 @@ import Doughnut from '../charts/Doughnut.vue'
 import BarHorizontal from '../charts/BarHorizontal.vue'
 import Table from '../components/Table.vue'
 import Ranker from '../components/Ranker.vue'
+
+
+import HomeBar from '../components/home/HomeBar.vue'
+import TimeLine from '../components/home/TimeLine.vue'
+import TwitterFeed from '../components/home/TwitterFeed.vue'
 export default {
-    components: { Bar, BarLine ,Doughnut, Lines, BarHorizontal, Table, Ranker},
+    components: {HomeBar, Bar, BarLine ,Doughnut, Lines, BarHorizontal, 
+        Table, Ranker,TimeLine,TwitterFeed},
     data(){
         return{
             data: [],

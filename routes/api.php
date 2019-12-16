@@ -79,7 +79,9 @@ Route::get('/users/logs/donation', 'UserController@donation');
 
 //募金のランキング（後日）
 // タイムライン(最後)
-// app.env のCallBack_Url修正
 
-// vue_imageの修正
-// git checkout -b edit-myimage
+
+
+// home-vue 修正(内容については問わない、見た目のみ変更する)
+// git checkout -b home-vue-revise 
+// app.env のCallBack_Url修正

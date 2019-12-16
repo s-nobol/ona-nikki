@@ -141,6 +141,10 @@
                 <!--    />-->
                 <!--</div>-->
             </div>
+            
+            <div>
+                <img src="/image/mypage-image.jpg"></img>
+            </div>
         </div>
     
         

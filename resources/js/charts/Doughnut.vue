@@ -1,7 +1,7 @@
 <template>
     <div >
         <!--ドーナツグラフ-->
-        <canvas id="DoughnutChart" ></canvas>
+        <canvas :id="id" ></canvas>
        
     </div>
 </template>
@@ -10,6 +10,11 @@
 
 export default {
     props: {
+        id: {
+            type: String,
+            require  : false,
+            default: 'DoughnutChart',
+        },
         // エラーが出るので配列は一行まで
         dataSet: {
             type: Array,
@@ -43,8 +48,8 @@ export default {
         // チャートの作成
         create_chart(){
 
-            var DoughnutChart = document.getElementById('DoughnutChart').getContext('2d');
-            var DoughnutChart = new Chart(DoughnutChart, {
+            var DoughnutChart =  document.getElementById(this.id).getContext('2d');
+             this.chart = new Chart(DoughnutChart, {
                 type: 'doughnut',
     
                 data: {
@@ -78,6 +83,7 @@ export default {
                 this.sexBackgroundColor = ['tomato','deepskyblue']
             }
             
+            if(this.chart){this.chart.destroy()}
             
             this.create_chart()
         }

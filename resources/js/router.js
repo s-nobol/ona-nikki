@@ -9,6 +9,7 @@ import category from './pages/Category.vue'
 
 //home
 import home from './home/Home.vue'
+import home2 from './home/Home2.vue'
 import sex from './home/Sex.vue'
 import age from './home/Age.vue'
 import location from './home/Location.vue'
@@ -40,6 +41,7 @@ export default new Router({
         // home
         { path: '/', component: index  },
         { path: '/home', component: home , name: 'home' },
+        { path: '/home2', component: home2 , name: 'home2' },
         { path: '/about', component: about  , name: 'about'  },
         { path: '/policy', component: policy  , name: 'policy'  },
         { path: '/notify', component: notify  , name: 'notify'  },
