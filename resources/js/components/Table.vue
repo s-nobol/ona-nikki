@@ -2,17 +2,14 @@
     <div>
        <!--テーブル--> 
        <table  v-if="dataSet" class="table p-2" >
-            <thead class="text-center">
-                <tr>
-                    <th scope="col">id</th>
-                    <!--<th scope="col">エリア</th>-->
-                    <th scope="col">カテゴリー</th>
-                    <!--<th scope="col" >コメント</th>-->
-                    <th scope="col" >ステータス⇩</th>
-                    <!--<th scope="col">詳細</th>-->
-                    <th scope="col">日付⇩</th>
-                </tr>
-            </thead>
+            <!--<thead class="text-center">-->
+            <!--    <tr>-->
+            <!--        <th scope="col">id</th>-->
+            <!--        <th scope="col">カテゴリー</th>-->
+            <!--        <th scope="col" >ステータス⇩</th>-->
+            <!--        <th scope="col">日付⇩</th>-->
+            <!--    </tr>-->
+            <!--</thead>-->
             <tbody v-for="log in dataSet" class="text-center">
                 <tr>
                     <th scope="row">{{ log.id }}</th>

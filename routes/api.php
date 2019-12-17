@@ -50,9 +50,9 @@ Route::get('/mypage/logs', 'MypageController@logs');
 Route::get('/mypage/quest', 'MypageController@quest');
 
 
-// Route::get('/mypage/month/data', 'MypageController@month_data');
-// Route::get('/mypage/year/data', 'MypageController@year_data');
-// Route::get('/mypage/all/data', 'MypageController@all_data');
+Route::get('/mypage/month/data', 'MypageController@month_data');
+Route::get('/mypage/year/data', 'MypageController@year_data');
+Route::get('/mypage/all/data', 'MypageController@all_data');
 
 
 // user logs ( 作成 / 編集 / 削除 のみ)
@@ -82,6 +82,6 @@ Route::get('/users/logs/donation', 'UserController@donation');
 
 
 
-// home-vue 修正(内容については問わない、見た目のみ変更する)
-// git checkout -b home-vue-revise 
 // app.env のCallBack_Url修正
+// カテゴリーVueの修正
+// git checkout -b category-vue-create 

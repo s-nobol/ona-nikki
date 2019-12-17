@@ -64,15 +64,29 @@ class MypageController extends Controller
         $time_data_label  = $time_logs->pluck('label'); 
         
         // カテゴリーデータ
-        $logs = Auth::user()->logs()
-            ->where( 'created_at', '>', $select_month)
-            ->select(DB::raw('count(*) as count, category as label '))
-            ->groupBy('category')
-            ->orderBy('count','desc')
-            ->get(); 
+        // $logs = Auth::user()->logs()
+        //     ->where( 'created_at', '>', $select_month)
+        //     ->select(DB::raw('count(*) as count, category as label '))
+        //     ->groupBy('category')
+        //     ->orderBy('count','desc')
+        //     ->get(); 
             
-        $category_data = $logs->pluck('count') ;
-        $category_data_label  = $logs->pluck('label'); 
+        // $category_data = $logs->pluck('count') ;
+        // $category_data_label  = $logs->pluck('label'); 
+            
+        // カテゴリーデータ
+        $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->where('user_id', Auth::user()->id )
+            ->groupBy('category_id')
+            ->orderBy('count', 'desc')
+            ->take(7)
+            ->get();
+        
+        $category_data = $logs->pluck('count'); 
+        $category_data_label = $logs->pluck('label');
+        $category_data_color = $logs->pluck('color');
         
         // 最新のデータ
         $new_data = Auth::user()->logs()
@@ -95,7 +109,7 @@ class MypageController extends Controller
             'month_data','last_monnt_data',
             'month_data_label', 'last_month_data_label',
             'time_data', 'time_data_label',
-            'category_data', 'category_data_label',
+            'category_data', 'category_data_label','category_data_color',
             'new_data',
             'day_data'
             );
@@ -129,17 +143,6 @@ class MypageController extends Controller
             ->get();
         $otherlogs = $otherlogs->pluck('count');
         
-        
-        
-        
-        // // 日付ごとの利用日数グラフ
-        // $logs = Auth::user()->logs()
-        //     ->whereYear('created_at', $year)
-        //     ->select(DB::raw('count(*) as count, day as label, month'))
-        //     ->groupBy('month','day')
-        //     ->get();
-        // $user = User::where('id',103)->first()->delete();
-        // $user->delete;
         
         //エラーがでるかも？
         $logs = Log::
@@ -223,7 +226,22 @@ class MypageController extends Controller
                 DB::raw("strftime('%m', created_at) months"))
             ->groupBy('year','months')
             ->get();
-        return $logs;
+        $data = $logs->pluck('count'); 
+        $data_label = $logs->pluck('label');
+        return compact('data', 'data_label');
+    }
+    
+    public function year_data()
+    {
+        // 月ごとにソートすると2018年11月と2019年11月がかぶる
+        $logs = Auth::user()->logs()
+            ->whereYear('created_at', Carbon::now()->year )
+            ->select( DB::raw('count(*) as count , month as label') )
+            ->groupBy('month')
+            ->get();
+        $data = $logs->pluck('count'); 
+        $data_label = $logs->pluck('label');
+        return compact('data', 'data_label');
     }
     
     

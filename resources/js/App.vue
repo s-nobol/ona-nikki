@@ -40,9 +40,9 @@
             
             <!--メイン-->
             <main  class="col-10 pl-4 pr-4 pt-1">
-                <div class="main__continer">
+                <!--<div class="main__continer">-->
                     <RouterView />
-                </div>
+                <!--</div>-->
             </main>
         </div>
         

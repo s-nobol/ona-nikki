@@ -66,7 +66,10 @@
                                 <span>時間帯別利用利用推移</span>
                             </div>
                             <div class="col-6">
-                                <Lines   id="coin1"  :Coins="week_data"   :labels="week_data"  />
+                                <Lines   
+                                id="coin1"  
+                                :Coins="week_data"   
+                                :labels="week_data"  />
                             </div>
                         </div>
                     </div>

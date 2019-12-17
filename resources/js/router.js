@@ -11,7 +11,7 @@ import category from './pages/Category.vue'
 import home from './home/Home.vue'
 import home2 from './home/Home2.vue'
 import sex from './home/Sex.vue'
-import age from './home/Age.vue'
+// import age from './home/Age.vue'
 import location from './home/Location.vue'
 import ranking from './home/Ranking.vue'
 
@@ -46,7 +46,6 @@ export default new Router({
         { path: '/policy', component: policy  , name: 'policy'  },
         { path: '/notify', component: notify  , name: 'notify'  },
         { path: '/sex', component: sex  , name: 'sex'  },
-        { path: '/age', component: age  , name: 'age'  },
         { path: '/location', component: location  , name: 'location'  },
         { path: '/ranking', component: ranking   , name: 'ranking' },
         { path: '/logs/:year', component: home_year, props: true  , name: 'home-year' },
