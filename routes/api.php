@@ -85,3 +85,5 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // app.env のCallBack_Url修正
 // カテゴリーVueの修正
 // git checkout -b category-vue-create 
+// カレンダーの修正
+// 賢者崇める　（弟子入りボタン作成）

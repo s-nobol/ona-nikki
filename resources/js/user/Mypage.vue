@@ -2,36 +2,7 @@
     <div class="">
     
     
-        <!--<HomeBar />-->
-        <!--ヘッダー-->
-        <!--<div class="row MyBar">-->
-        
-        <!--    <div class="col-3 card p-3 MyBar__item">-->
-        <!--        <h5 class="MyBar__title"><b>データ今月の射精回数</b></h5>-->
-        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
-        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
-        <!--    </div>-->
-            
-        <!--    <div class="col-3 card p-3 MyBar__item ">-->
-        <!--        <h5 class="MyBar__title"><b>データ平均射精回数</b></h5>-->
-        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
-        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
-        <!--    </div>-->
-            
-        <!--    <div class="col-3 card p-3 MyBar__item">-->
-        <!--        <h5 class="MyBar__title"><b>データ消費カロリ-</b></h5>-->
-        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
-        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
-        <!--    </div>-->
-            
-        <!--    <div class="col-3 card p-3 MyBar__item ">-->
-        <!--        <h5 class="MyBar__title"><b>データ合計支援金</b></h5>-->
-        <!--        <span  class="MyBar__content">{{ msg }}</span>-->
-        <!--        <span  class="MyBar__content2">先月との比較　24%</span>-->
-        <!--    </div>-->
-        <!--</div>-->
-
-        
+ 
         <div class="row "> 
             <div class="col-9 ">
                 
@@ -95,7 +66,7 @@
                     
                     <div class="col-5 card">
                         <!--一か月の利用頻度（円グラフ）-->           
-                        <h4 class="text-center pt-2"><b>一か月の利用比率</b></h4>  
+                        <h4 class="text-center p-2"><b>一か月の利用比率</b></h4>  
                  
                         <div class="Mypage__Doughnut">
                             <Doughnut 
@@ -103,7 +74,7 @@
                                 :dataSet="time_data"
                                 :labels="time_data_label"
                             />
-                            <span class="Mypage__Doughnut__title">25/31</span>
+                            <span class="Mypage__Doughnut__title">25 <small>%</small></span>
                         </div>
                         <div class="text-center mt-4">
                             <span class="Chart__label"></span> <span>使用日数　15日</span>
@@ -115,17 +86,16 @@
                 
                 <div class="row">
                 
-                    <div class="col-4 card p-3">
-                        <span>何らかのグラフ・データ</span>
-                        <span>(グラフなし数値のみ？)</span>
+                    <div class="col-4 card p-3 text-center">
+                        <!--<span>何らかのグラフ・データ</span>-->
+                        <h4 class="text-center mt-5"><b>弟子入り数</b></h4>
+                        
+                        <h1 class="mt-1"><b>1,523</b><small>aces</small></h1>
+                        <span>Followers</span>
                     </div>
                     
-                    <div class="col-5 card">
-                        <h4 class="text-center"><b>カテゴリー別グラフ</b></h4>  
-                        <div class="text-left">
-                            <span class="Chart__label"></span> <span>カテゴリー1</span>
-                            <span class="Chart__label"></span> <span>カテゴリー2</span>
-                        </div>
+                    <div class="col-5 card p-3 ">
+                        <h4 class="text-center"><b>カテゴリー別グラフ</b></h4>
                         <BarHorizontal 
                             id="category"
                             :dataSet="category_data"
@@ -134,18 +104,17 @@
                         />
                     </div>
                     
-                    <div class="col-3 card p-3">
-                        <span>何らかのグラフ・データ</span>
-                        <span>(時間帯別？)</span>
-                        <span>(レベル？)</span>
+                    <div class="col-3 card p-3 text-center">
+                        <span class="rounded-pill bg__red p-1">平均利用時間</span>
+                        <h2 class="d-inline-block"><b>25</b>hour</h2>
                     </div>
                     
                 </div>
                     
                     
-                <!--<div>-->
-                <!--    <img src="/image/mypage-image.jpg"></img>-->
-                <!--</div>-->
+                <div>
+                    <img src="/image/mypage-image.jpg"></img>
+                </div>
                 
                     
             </div>
@@ -155,15 +124,24 @@
             <div class="col-3 pl-3">
         
                     <!--カレンダー-->
-                    <div class=" card p-5">
-                        <span>カレンダーのデータ</span>
+                    <div class=" card ">
+                        <CalendarTest  
+                        :dataSet="day_data"
+                        />
                     </div>
                     
                     <!--日付-->
-                    <div class=" card p-1">
-                        <span>日付のデータ</span>
-                        <Dateitem 　 :dataSet="month_data"　  :labels="month_data_label" 　/>
+                    <!--<div class=" card p-1">-->
+                    <!--    <span>日付のデータ</span>-->
+                    <!--    <Dateitem 　 :dataSet="month_data"　  :labels="month_data_label" 　/>-->
+                    <!--</div>-->
+                    
+                    <!--レベル・ユーザーステータスになるもの-->
+                    <div class=" card p-2 text-center">
+                        <h3 class=""><b>Lev.58</b></h3>
+                        <small>次のレベルまであと151pint</small>
                     </div>
+                    
                     
                     
                     
@@ -188,11 +166,11 @@
 .Mypage__Doughnut__title{
     position: absolute;
     display: inline-block;
-    font-size: 35px;
+    font-size: 45px;
     top:50%;
     left: 50%;
-    margin-left: -50px;
-    margin-top: -25px;
+    margin-left: -35px;
+    margin-top: -35px;
 }
 .Chart__label{
     display: inline-block;
@@ -216,11 +194,12 @@ import Dateitem from './Date.vue'
 // UserBar
 import HomeBar from '../components/home/HomeBar.vue'
 import UserBar from '../components/user/UserBar.vue'
+import CalendarTest from '../components/user/CalendarTest.vue'
 
 export default {
     components: { Bar, BarLine ,Doughnut, BarHorizontal,
     Table, Dateitem, HomeBar,Lines ,
-    UserBar},
+    UserBar,CalendarTest},
     data(){
         return{
             msg: '5',
@@ -265,11 +244,11 @@ export default {
             this.get_data(name)
         },
         get_data(name){
-            axios.get(`api/mypage/${name}/data`).then(response => {
-                console.log(response);
-                this.month_data = response.data.data
-                this.month_data_label = response.data.data_label
-            })
+            // axios.get(`api/mypage/${name}/data`).then(response => {
+            //     console.log(response);
+            //     this.month_data = response.data.data
+            //     this.month_data_label = response.data.data_label
+            // })
         },
         get_chart(){
             console.log("チャートの取得")
@@ -296,15 +275,9 @@ export default {
                 
                 // this.active_data = this.get_active_data(this.month_data_label.length)
                 
-                // // カテゴリーデータ
-                // this.category_data = response.data.category_data
-                // this.category_data_label = response.data.category_data_label
                 
                 // // 最新5件のデータ
                 this.new_data = response.data.new_data
-                
-                // console.log("マイページ",this.month_data_total , this.last_month_data_total, this.active_data)
-                
                 
                 // カテゴリー別割合
                 this.category_data = response.data.category_data
@@ -315,7 +288,7 @@ export default {
                 // this.coin_data = response.data.coin_data
                 // this.coin_data_label = response.data.coin_data_label
                 
-                // this.day_data = []
+                // this.day_data = response.data.day_data
                 this.day_data = this.get_change_date( response.data.day_data)
             })
         },
@@ -338,7 +311,7 @@ export default {
         
         get_change_date(data){
             var list =[]
-            for (var i = data.length; i--; ) {
+            for (var i = 0; i< data.length; i++ ) {
                 let time = new Date(data[i])
                 list.push(time);
             }

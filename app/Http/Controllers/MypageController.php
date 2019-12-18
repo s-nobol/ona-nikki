@@ -24,7 +24,7 @@ class MypageController extends Controller
     
     public function mypage()
     {
-        // 過去一か月のデータ取得
+        // 過去一か月のデータ取得(今月のデータにしたい)
         $select_month = Carbon::now()->subDays(30);
         
         // 過去一か月のデータ取得
@@ -100,7 +100,7 @@ class MypageController extends Controller
             select(DB::raw('count(*) as count, day as label, created_at'))
             ->where( 'created_at', '>', $select_month)
             ->groupBy('day')
-            ->take(10)
+            ->orderBy('created_at')
             ->get();
         $day_data = $logs->pluck('created_at') ;
             
