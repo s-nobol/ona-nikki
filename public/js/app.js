@@ -4529,32 +4529,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    total_count: {
-      type: Number,
-      required: false,
-      "default": null
-    },
     id: {
       type: String,
       required: false,
       "default": 'name'
     },
-    woman_count: {
+    total_all: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
     },
-    man_count: {
+    total_month: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
     },
-    donation_count: {
+    total_calorie: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
+    },
+    total_donation: {
+      type: Number,
+      required: false,
+      "default": 0
     }
   }
 });
@@ -6315,9 +6342,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7460,6 +7484,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7484,6 +7557,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Lines: _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     UserBar: _components_user_UserBar_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     CalendarTest: _components_user_CalendarTest_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+  },
+  computed: {
+    currentUser: function currentUser() {
+      return this.$store.getters['currentUser'];
+    }
   },
   data: function data() {
     var _ref;
@@ -8210,7 +8288,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.UserBaer{\n}\n.UserBaer i{ \n    display: inline-block;\n    vertical-align: top;\n    margin-top: 80%;\n}\n", ""]);
+exports.push([module.i, "\n.UserBaer{\n}\n.UserBar__icon{\n    text-align: center;\n    position: relative;\n}\n.UserBaer i{ \n    position: absolute;\n    top: 30%;\n    display: inline-block;\n    \n    padding: 10px;\n    border-radius: 30px;\n    color: white;\n    background-color: rgba(255,75,75,1) ;\n    \n    /*あとで削除？*/\n    /*color: rgba(255,75,75,1) ;*/\n}\n.card-body_title{\n    padding: 2px 10px;\n    border-radius: 15px;\n    \n    /*あとで削除？*/\n    /*color:rgba(255,75,75,1) ;*/\n    /*background-color: rgba(255,75,75,1) ;*/\n}\n.card-body{\n    text-align: center;\n    padding: 15px 0px;\n}\n.card-title {\n    padding-left: 25px;\n}\n", ""]);
 
 // exports
 
@@ -8457,7 +8535,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Mypage__Doughnut{\n    position: relative;\n}\n.Mypage__Doughnut__title{\n    position: absolute;\n    display: inline-block;\n    font-size: 45px;\n    top:50%;\n    left: 50%;\n    margin-left: -35px;\n    margin-top: -35px;\n}\n.Chart__label{\n    display: inline-block;\n    width: 25px;\n    height: 15px;\n    background-color: whitesmoke;\n}\n", ""]);
+exports.push([module.i, "\n.Mypage__Doughnut{\n    position: relative;\n}\n.Mypage__Doughnut__title{\n    position: absolute;\n    display: inline-block;\n    font-size: 45px;\n    top:50%;\n    left: 50%;\n    margin-left: -35px;\n    margin-top: -35px;\n}\n.Chart__label{\n    display: inline-block;\n    width: 25px;\n    height: 15px;\n    background-color: whitesmoke;\n}\n.new__date__item{\n    padding: 1px 5px;\n    border-radius: 15px;\n}\n", ""]);
 
 // exports
 
@@ -13057,91 +13135,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "row UserBaer" }, [
+      _c("div", { staticClass: "col-3 card" }, [
+        _c("div", { staticClass: "row " }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("span", { staticClass: "card-body_title bg__all" }, [
+                _vm._v("合計射精回数")
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-title " }, [
+                _c("span", [_vm._v(_vm._s(_vm.total_all))]),
+                _c("small", [_vm._v("回")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 card" }, [
+        _c("div", { staticClass: "row " }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("span", { staticClass: "card-body_title bg__month" }, [
+                _vm._v("月間射精回数")
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-title " }, [
+                _c("span", [_vm._v(_vm._s(_vm.total_month))]),
+                _c("small", [_vm._v("回")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 card" }, [
+        _c("div", { staticClass: "row " }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("span", { staticClass: "card-body_title " }, [
+                _vm._v("カロリー消費")
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-title " }, [
+                _c("span", [_vm._v(_vm._s(_vm.total_calorie))]),
+                _c("small", [_vm._v("cal")])
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3 card" }, [
+        _c("div", { staticClass: "row " }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-10" }, [
+            _c("div", { staticClass: "card-body" }, [
+              _c("span", { staticClass: "card-body_title " }, [
+                _vm._v("合計支援金")
+              ]),
+              _vm._v(" "),
+              _c("h4", { staticClass: "card-title" }, [
+                _c("span", [_vm._v(_vm._s(_vm.total_donation))]),
+                _c("small", [_vm._v("円")])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row UserBaer" }, [
-        _c("div", { staticClass: "col-3 card" }, [
-          _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "col-3 text-center" }, [
-              _c("i", { staticClass: "fas fa-globe-americas fa-2x bg__total" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("span", [_vm._v("合計射精回数")]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title " }, [
-                  _c("span", [_vm._v("1580")]),
-                  _c("small", [_vm._v("回")])
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3 card" }, [
-          _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "col-3 text-center" }, [
-              _c("i", { staticClass: "fas fa-clock  fa-2x bg__total" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("span", [_vm._v("月間射精回数")]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title " }, [
-                  _c("span", [_vm._v("180")]),
-                  _c("small", [_vm._v("回")])
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3 card" }, [
-          _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "col-3 text-center" }, [
-              _c("i", { staticClass: "fas fa-cheese  fa-2x bg__total" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("span", [_vm._v("カロリー")]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title " }, [
-                  _c("span", [_vm._v("68")]),
-                  _c("small", [_vm._v("cal")])
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-3 card" }, [
-          _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "col-3 text-center" }, [
-              _c("i", { staticClass: "fas  fa-yen-sign  fa-2x bg__total" })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-9" }, [
-              _c("div", { staticClass: "card-body" }, [
-                _c("span", [_vm._v("合計支援金")]),
-                _vm._v(" "),
-                _c("h4", { staticClass: "card-title " }, [
-                  _c("span", [_vm._v("688")]),
-                  _c("small", [_vm._v("円")])
-                ])
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-2 UserBar__icon" }, [
+      _c("i", { staticClass: "fas fa-globe-americas fa-2x text__all" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2 UserBar__icon" }, [
+      _c("i", { staticClass: "fas fa-clock  fa-2x text__month" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2 UserBar__icon" }, [
+      _c("i", { staticClass: "fas fa-cheese  fa-2x " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2 UserBar__icon" }, [
+      _c("i", { staticClass: "fas  fa-yen-sign  fa-2x" })
     ])
   }
 ]
@@ -16080,7 +16184,14 @@ var render = function() {
         "div",
         { staticClass: "col-9 " },
         [
-          _c("UserBar"),
+          _c("UserBar", {
+            attrs: {
+              total_all: 1562,
+              total_month: 85,
+              total_calorie: 456,
+              total_donation: 789
+            }
+          }),
           _vm._v(" "),
           _c(
             "div",
@@ -16248,11 +16359,49 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.new_data, function(item) {
             return _c("div", { staticClass: " card p-1" }, [
-              _c("span", [_vm._v("アイコン")]),
-              _vm._v(" "),
-              _c("span", [_vm._v("カテゴリー名")]),
-              _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(item.created_at))])
+              _c("div", { staticClass: "row p-0" }, [
+                _c("div", { staticClass: "col-9  p-0" }, [
+                  _c("div", { staticClass: "media mt-0 " }, [
+                    _vm.currentUser.oauth_image
+                      ? _c("img", {
+                          staticClass: "user_image",
+                          attrs: {
+                            src: _vm.currentUser.oauth_image,
+                            alt: "ユーザー画像"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.currentUser.oauth_image
+                      ? _c("img", {
+                          staticClass: "user_image",
+                          attrs: {
+                            src: "/image/noimage.jpg",
+                            alt: "ユーザー画像"
+                          }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "media-body" }, [
+                      _c("div", { staticClass: "mt-1" }, [
+                        _c("span", { staticClass: "new__date__item bg__red" }, [
+                          _c("i", { staticClass: "fas fa-sun mr-2" }),
+                          _vm._v(
+                            _vm._s(item.category) +
+                              "\n                                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("募金 50円")])
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(item.created_at))])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(10, true)
+              ])
             ])
           })
         ],
@@ -16386,7 +16535,36 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("span", [_vm._v("最新記録　（5件）")])])
+    return _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light p-0 mb-2" },
+      [
+        _c("span", [_vm._v("最新記録")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarText" }
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+              _c("li", { staticClass: "nav-item " }, [
+                _c("span", [_vm._v("（5件）")])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3  p-0 " }, [
+      _c("button", { staticClass: "btn btn-success mt-2" }, [_vm._v("編集")])
+    ])
   }
 ]
 render._withStripped = true

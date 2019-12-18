@@ -55,10 +55,47 @@ body{
     // margin: 0px;
     padding: 0px;
 }
+
+// テーマ用のバックグランドからー
 .bg__red{
     background-color: $mein_color;
     color: white; 
 }
+// .bg__all{
+//     background-color: $mein_color;
+//     color: white; 
+// }
+// .bg__month{
+//     background-color: #ff8080;
+//     color: white; 
+// }
+// .bg__calorie{
+//     background-color: #ff8f66;
+//     color: white; 
+// }
+// .bg__donation{
+//     background-color: mediumseagreen;
+//     color: white; 
+// }
+
+// .text__all{
+//     color: $mein_color; 
+// }
+// .text__month{
+//     color: #ff8080; 
+// }
+// .text__calorie{
+//     color: #ff8f66; 
+// }
+// .text__donation{
+//     color: mediumseagreen; 
+// }
+
+
+
+
+
+
 .login_button{
     color: black;
     // padding: 10px 15px;

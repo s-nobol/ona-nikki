@@ -80,9 +80,6 @@
 
 </div>
 </template>
-<style type="text/css">
-</style>
-
 <script>
 export default {
     data(){

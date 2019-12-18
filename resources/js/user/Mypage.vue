@@ -7,7 +7,13 @@
             <div class="col-9 ">
                 
                 <!--ユーザーばー-->
-                <UserBar />
+                <UserBar 
+                    :total_all="1562"
+                    :total_month="85"
+                    :total_calorie="456"
+                    :total_donation="789"
+                />
+                
             
                 <!--メインチャート-->
                 <div class="card">
@@ -34,6 +40,7 @@
                         :labels="month_data_label"
                     />
                 </div>
+                
                 
                 <!--サブチャート-->
                 <div class="row">
@@ -62,6 +69,7 @@
                             :labels="time_data_label"
                         />
                     </div>
+                    
                     
                     
                     <div class="col-5 card">
@@ -110,7 +118,12 @@
                     </div>
                     
                 </div>
-                    
+                
+                
+                <!--レスポンシブで表示されるようにする-->
+                <!--<div class="card">-->
+                <!--    <Table  :dataSet="new_data" />-->
+                <!--</div>-->
                     
                 <div>
                     <img src="/image/mypage-image.jpg"></img>
@@ -130,11 +143,7 @@
                         />
                     </div>
                     
-                    <!--日付-->
-                    <!--<div class=" card p-1">-->
-                    <!--    <span>日付のデータ</span>-->
-                    <!--    <Dateitem 　 :dataSet="month_data"　  :labels="month_data_label" 　/>-->
-                    <!--</div>-->
+                    
                     
                     <!--レベル・ユーザーステータスになるもの-->
                     <div class=" card p-2 text-center">
@@ -146,11 +155,46 @@
                     
                     
                     <!--ユーザーテーブル-->
-                    <div><span>最新記録　（5件）</span></div>
+                    <nav class="navbar navbar-expand-lg navbar-light p-0 mb-2">
+                        <span>最新記録</span>
+                        
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item ">
+                                    <span>（5件）</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    
+                    
                     <div v-for="item in new_data" class=" card p-1">
-                        <span>アイコン</span>
-                        <span>カテゴリー名</span>
-                        <span>{{ item.created_at }}</span>
+                        
+                        <div class="row p-0">
+                        
+                            <div class="col-9  p-0">  
+                                    
+                                <div class="media mt-0 ">
+                                    <img v-if="currentUser.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
+                                    <img v-if="! currentUser.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
+                       
+                                    <div class="media-body">
+                                        <div class="mt-1">
+                                            <span class="new__date__item bg__red">
+                                                <i class="fas fa-sun mr-2"></i>{{ item.category }}
+                                            </span>
+                                            <span>募金 50円</span>
+                                        </div>
+                                        <span>{{ item.created_at }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="col-3  p-0 ">
+                                <button class="btn btn-success mt-2">編集</button>
+                            </div>
+                        </div>
                     </div>
                     
             </div>
@@ -178,6 +222,11 @@
     height: 15px;
     background-color: whitesmoke;
 }
+.new__date__item{
+    padding: 1px 5px;
+    border-radius: 15px;
+    
+}
 </style>
 <script>
 
@@ -200,6 +249,12 @@ export default {
     components: { Bar, BarLine ,Doughnut, BarHorizontal,
     Table, Dateitem, HomeBar,Lines ,
     UserBar,CalendarTest},
+    
+    computed: {
+        currentUser(){
+            return this.$store.getters['currentUser']
+        },   
+    },
     data(){
         return{
             msg: '5',

@@ -77,13 +77,13 @@ Route::get('/users/logs/donation', 'UserController@donation');
 
 // User::find(103)->delete();
 
-//募金のランキング（後日）
-// タイムライン(最後)
-
-
-
-// app.env のCallBack_Url修正
-// カテゴリーVueの修正
-// git checkout -b category-vue-create 
-// カレンダーの修正
+//募金のランキング（なくていい？）
+// タイムライン(なくていい？)
 // 賢者崇める　（弟子入りボタン作成）
+
+
+
+// app.env のCallBack_Url修正（後日）
+
+// home.vueの修正
+// git checkout -b home-vue-revise2

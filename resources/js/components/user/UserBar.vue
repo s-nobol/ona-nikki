@@ -6,14 +6,14 @@
     
         <div class="col-3 card">
             <div class="row ">
-                <div class="col-3 text-center">
-                    <i class="fas fa-globe-americas fa-2x bg__total"></i>
+                <div class="col-2 UserBar__icon">
+                    <i class="fas fa-globe-americas fa-2x text__all"></i>
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <div class="card-body">
-                        <span >合計射精回数</span> 
+                        <span class="card-body_title bg__all" >合計射精回数</span> 
                         <h4 class="card-title ">
-                            <span>1580</span><small>回</small>
+                            <span>{{ total_all }}</span><small>回</small>
                         </h4>
                     </div>
                 </div>
@@ -24,33 +24,14 @@
     
         <div class="col-3 card">
             <div class="row ">
-                <div class="col-3 text-center">
-                    <i class="fas fa-clock  fa-2x bg__total"></i>
+                <div class="col-2 UserBar__icon">
+                    <i class="fas fa-clock  fa-2x text__month"></i>
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <div class="card-body">
-                        <span >月間射精回数</span> 
+                        <span class="card-body_title bg__month">月間射精回数</span> 
                         <h4 class="card-title ">
-                            <span>180</span><small>回</small>
-                        </h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        
-        
-    
-        <div class="col-3 card">
-            <div class="row ">
-                <div class="col-3 text-center">
-                    <i class="fas fa-cheese  fa-2x bg__total"></i>
-                </div>
-                <div class="col-9">
-                    <div class="card-body">
-                        <span >カロリー</span> 
-                        <h4 class="card-title ">
-                            <span>68</span><small>cal</small>
+                            <span>{{ total_month }}</span><small>回</small>
                         </h4>
                     </div>
                 </div>
@@ -62,14 +43,33 @@
     
         <div class="col-3 card">
             <div class="row ">
-                <div class="col-3 text-center">
-                    <i class="fas  fa-yen-sign  fa-2x bg__total"></i>
+                <div class="col-2 UserBar__icon">
+                    <i class="fas fa-cheese  fa-2x "></i>
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <div class="card-body">
-                        <span >合計支援金</span> 
+                        <span class="card-body_title ">カロリー消費</span> 
                         <h4 class="card-title ">
-                            <span>688</span><small>円</small>
+                            <span>{{ total_calorie }}</span><small>cal</small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        
+    
+        <div class="col-3 card">
+            <div class="row ">
+                <div class="col-2 UserBar__icon">
+                    <i class="fas  fa-yen-sign  fa-2x"></i>
+                </div>
+                <div class="col-10">
+                    <div class="card-body">
+                        <span class="card-body_title ">合計支援金</span> 
+                        <h4 class="card-title">
+                            <span>{{ total_donation }}</span><small>円</small>
                         </h4>
                     </div>
                 </div>
@@ -83,10 +83,37 @@
 <style type="text/css">
 .UserBaer{
 }
+.UserBar__icon{
+    text-align: center;
+    position: relative;
+}
 .UserBaer i{ 
+    position: absolute;
+    top: 30%;
     display: inline-block;
-    vertical-align: top;
-    margin-top: 80%;
+    
+    padding: 10px;
+    border-radius: 30px;
+    color: white;
+    background-color: rgba(255,75,75,1) ;
+    
+    /*あとで削除？*/
+    /*color: rgba(255,75,75,1) ;*/
+}
+.card-body_title{
+    padding: 2px 10px;
+    border-radius: 15px;
+    
+    /*あとで削除？*/
+    /*color:rgba(255,75,75,1) ;*/
+    /*background-color: rgba(255,75,75,1) ;*/
+}
+.card-body{
+    text-align: center;
+    padding: 15px 0px;
+}
+.card-title {
+    padding-left: 25px;
 }
 </style>
 <script>
@@ -94,11 +121,11 @@
 export default {
     props: {
         
-        total_count: { type: Number, required: false, default: null },
         id: { type: String, required: false, default: 'name' },
-        woman_count: { type: Number, required: false, default: null },
-        man_count: { type: Number, required: false, default: null },
-        donation_count: { type: Number, required: false, default: null },
+        total_all: { type: Number, required: false, default: 0 },
+        total_month: { type: Number, required: false, default: 0 },
+        total_calorie: { type: Number, required: false, default: 0 },
+        total_donation: { type: Number, required: false, default: 0 },
         
         
     },
