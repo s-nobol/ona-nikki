@@ -7,7 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-
+use Illuminate\Support\Facades\Auth;
+use App\Follow;
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;
@@ -52,10 +53,40 @@ class User extends Authenticatable
         'experience_point' => 'integer',
         'status_check' => 'boolean',
         'browsing_log' => 'boolean',
+        
+    ];
+     protected $appends = [
+         'followed_by_user',
     ];
     
     
     public function logs(){
         return $this->hasMany('App\Log');
+    }
+    
+    
+    //user.followers でuserがフォローしているユーザーを返す
+    public function followers(){
+        return $this->belongsToMany(self::class, 'App\Follow', 'user_id', 'followed_id');
+    }
+    
+    
+    
+    /**
+    * アクセサ - liked_by_user
+    * @return boolean
+    */
+    public function getFollowedByUserAttribute()
+    {
+        
+        if (Auth::guest()) {
+            return false;
+        }
+        
+        $follow = Follow::where('user_id',Auth::user()->id)->where('followed_id',$this->id)->first();
+        if($follow){
+            return true;
+        }
+        return false;
     }
 }

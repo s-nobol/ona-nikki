@@ -37,7 +37,6 @@ class MypageController extends Controller
         $month_data = $logs->pluck('count') ;
         $month_data_label  = $logs->pluck('label'); 
         
-        // 平均回数
             
         // 過去一か月のデータ取得
         $carbon = new Carbon();
@@ -105,6 +104,8 @@ class MypageController extends Controller
         $day_data = $logs->pluck('created_at') ;
             
             
+        // 平均回数
+        $user = User::where('id',Auth::user()->id)->with('followers')->first();
         return compact(
             'month_data','last_monnt_data',
             'month_data_label', 'last_month_data_label',
@@ -112,6 +113,7 @@ class MypageController extends Controller
             'category_data', 'category_data_label','category_data_color',
             'new_data',
             'day_data'
+            ,'user'
             );
     }
     

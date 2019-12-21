@@ -130,9 +130,9 @@
             </div>
         </div>
         
-        <div class="w-50">
-            <img src="/image/home-image.jpg"></img>
-        </div>
+        <!--<div class="w-50">-->
+        <!--    <img src="/image/home-image.jpg"></img>-->
+        <!--</div>-->
         
     
 </div>

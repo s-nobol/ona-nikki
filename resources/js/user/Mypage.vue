@@ -98,7 +98,7 @@
                         <!--<span>何らかのグラフ・データ</span>-->
                         <h4 class="text-center mt-5"><b>弟子入り数</b></h4>
                         
-                        <h1 class="mt-1"><b>1,523</b><small>aces</small></h1>
+                        <h1 class="mt-1"><b>1,523</b><small>pupil</small></h1>
                         <span>Followers</span>
                     </div>
                     
@@ -125,9 +125,9 @@
                 <!--    <Table  :dataSet="new_data" />-->
                 <!--</div>-->
                     
-                <div>
-                    <img src="/image/mypage-image.jpg"></img>
-                </div>
+                <!--<div>-->
+                <!--    <img src="/image/mypage-image.jpg"></img>-->
+                <!--</div>-->
                 
                     
             </div>

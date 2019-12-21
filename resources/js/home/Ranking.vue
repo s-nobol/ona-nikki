@@ -39,6 +39,13 @@
                     <img v-if="! user.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
                  
                    <span class="ml-2">{{ user.name }} </span>
+                   
+                   <!--フォローボタン-->
+                   <Follow 
+                       :id="user.user_id" 
+                       :followCheck="user.followed_by_user"
+                       @chengeData="changeUserData(user)"
+                   />
                </li>
                
                <!--ユーザーのログカウント-->
@@ -52,6 +59,7 @@
                <!--ポイント-->
                <li class="rankig__card__point">
                    <span >{{ user.point }} <small>EXP</small></span>
+                   
                </li>
            
            </ul>
@@ -63,7 +71,9 @@
 </div>
 </template>
 <script>
+import Follow from '../components/Follow.vue'
 export default {
+    components: {  Follow,  },
     data(){
         return{
             select: "week",
@@ -87,6 +97,11 @@ export default {
                 this.getRankingUser()
             }
         },
+        
+        // ユーザーデータ更新
+        changeUserData(user){
+            user.followed_by_user =! user.followed_by_user
+        }
     },
     created(){
         this.getRankingUser()

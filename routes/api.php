@@ -68,6 +68,10 @@ Route::post('/users/{user}/resetlevel', 'UserController@resetlevel');
 Route::put('/logs/{log}/donation', 'LogController@donation');
 Route::get('/users/logs/donation', 'UserController@donation');
 
+// フォロー
+Route::post('/follow/{user}', 'FollowController@store');
+Route::delete('/follow/{user}', 'FollowController@destroy');
+
 /***
  * @danger 警告
  * LogController/monthで disint クエリ使用する
@@ -85,6 +89,8 @@ Route::get('/users/logs/donation', 'UserController@donation');
 
 // app.env のCallBack_Url修正（後日）
 
-// home.vueの修正
-// git checkout -b home-vue-revise
-// home2 mypageと同じように設定する
+// 弟子入り機能の作成
+// git checkout -b follow
+// php artisan make:model Follow --all
+// php artisan make:test Follow_Test 
+// php artisan make:test Url_Follow_Test  --unit
