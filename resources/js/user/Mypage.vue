@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div >
     
     
  
@@ -160,9 +160,7 @@
                         
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav ml-auto">
-                                <li class="nav-item ">
-                                    <span>（5件）</span>
-                                </li>
+                                <li class="nav-item "><span>（5件）</span></li>
                             </ul>
                         </div>
                     </nav>
@@ -276,8 +274,6 @@ export default {
             
             active_data: [], //利用頻度
             
-            category_data: [],
-            category_data_label: [],
             
             new_data: [], //最新の5件のデータ
             day_data: [],

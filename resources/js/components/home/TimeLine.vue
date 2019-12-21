@@ -3,16 +3,11 @@
 
 
         <h4 class="">みんなの記録</h4>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        <span>大阪府XXX氏が1円貢献しました。</span>
-        
+        <div v-for="item in dataSet">
+            <!--<span >{{ item.location }}</span>-->
+            <span >{{ item.name }}氏</span>
+            <span >{{ item.coin }}円貢献しました</span>
+        </div>
         
 </div>
 </template>
@@ -24,7 +19,11 @@ export default {
     props: {
         
         id: { type: String, required: false, default: 'name' },
-        
+        dataSet: {
+            type: Array,
+            require  : false,
+            default: () => []
+        },
         
     },
     

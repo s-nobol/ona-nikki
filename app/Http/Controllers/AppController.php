@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use DB;
 use App\Log;
 use App\User;
+use App\Category;
 use Exception;
 class AppController extends Controller
 {
@@ -19,7 +20,7 @@ class AppController extends Controller
     {
         
         // 1日のデータ取得
-        $date = Carbon::now()->subDays(1);
+        $date = Carbon::now()->subDays(8);
         
         
         // 1日のデータ取得
@@ -58,6 +59,27 @@ class AppController extends Controller
         $week_data = $week_logs->pluck('count');  
         $week_data_label = $week_logs->pluck('label');
         
+              // カテゴリーデータ
+        $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $date)
+            ->groupBy('category_id')
+            ->orderBy('count', 'desc')
+            ->take(10)
+            ->get();
+        
+        $category_data = $logs->pluck('count'); 
+        $category_data_label = $logs->pluck('label');
+        $category_data_color = $logs->pluck('color');
+        
+        $new_data =  User::join('logs', 'users.id', '=', 'logs.user_id')
+        ->select(DB::raw('*,logs.created_at as created_time'))
+        ->orderBy('created_time','desc')
+        ->take(10)
+        ->get();
+
+        
+        
         $ranking_data = $this->DB_ranking('user_id',$week, 5);
         
         return  compact(
@@ -66,7 +88,8 @@ class AppController extends Controller
             'location_data','location_data_label',
             'sex_data','sex_data_label',
             'week_data','week_data_label',
-            'ranking_data'
+            'category_data', 'category_data_label', 'category_data_color',
+            'new_data'
             );
     }
     

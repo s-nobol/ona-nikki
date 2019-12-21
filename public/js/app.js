@@ -3482,15 +3482,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     total_count: {
@@ -3547,17 +3538,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     id: {
       type: String,
       required: false,
       "default": 'name'
+    },
+    dataSet: {
+      type: Array,
+      require: false,
+      "default": function _default() {
+        return [];
+      }
     }
   }
 });
@@ -4966,6 +4959,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4997,11 +5025,17 @@ __webpack_require__.r(__webpack_exports__);
       location_data_label: [],
       sex_data: [],
       sex_data_label: [],
+      // 時間帯別
       time_data: [],
       time_data_label: [],
+      // 7日間データ
       week_data: [],
       week_data_label: [],
-      ranking_data: []
+      ranking_data: [],
+      // カテゴリー別データ
+      category_data: [],
+      category_data_label: [],
+      category_data_color: []
     };
   },
   methods: {
@@ -5179,6 +5213,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5214,7 +5312,13 @@ __webpack_require__.r(__webpack_exports__);
       time_data_label: [],
       week_data: [],
       week_data_label: [],
-      ranking_data: []
+      ranking_data: [],
+      // カテゴリー別データ
+      category_data: [],
+      category_data_label: [],
+      category_data_color: [],
+      //now_data
+      new_data: []
     };
   },
   methods: {
@@ -5237,7 +5341,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.time_data_label = response.data.time_data_label;
         _this.week_data = response.data.week_data;
         _this.week_data_label = response.data.week_data_label;
-        _this.ranking_data = response.data.ranking_data;
+        _this.ranking_data = response.data.ranking_data; // カテゴリー別データ
+
+        _this.category_data = response.data.category_data;
+        _this.category_data_label = response.data.category_data_label;
+        _this.category_data_color = response.data.category_data_color; //now_data
+
+        _this.new_data = response.data.new_data;
       });
     },
     // 配列の合計値をだす
@@ -7301,10 +7411,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/home/HomeBar.vue */ "./resources/js/components/home/HomeBar.vue");
 /* harmony import */ var _components_user_UserBar_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/user/UserBar.vue */ "./resources/js/components/user/UserBar.vue");
 /* harmony import */ var _components_user_CalendarTest_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/user/CalendarTest.vue */ "./resources/js/components/user/CalendarTest.vue");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
 //
 //
 //
@@ -7564,9 +7670,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   data: function data() {
-    var _ref;
-
-    return _ref = {
+    return {
       msg: '5',
       tab: 'year',
       data: [],
@@ -7583,12 +7687,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       time_data_label: [],
       active_data: [],
       //利用頻度
-      category_data: [],
-      category_data_label: [],
       new_data: [],
       //最新の5件のデータ
-      day_data: []
-    }, _defineProperty(_ref, "category_data", []), _defineProperty(_ref, "category_data_label", []), _defineProperty(_ref, "category_data_color", []), _ref;
+      day_data: [],
+      // カテゴリー別データ
+      category_data: [],
+      category_data_label: [],
+      category_data_color: []
+    };
   },
   methods: {
     selectTab: function selectTab(name) {
@@ -8193,7 +8299,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.card_item{\n    display: inline-block;\n    width:19.8%;\n    height: 120px;\n    background-color:  white;\n    margin-left:  -1px;\n    color: gray;\n    /*text-align: center;*/\n}\n.card_item i{\n    margin-top: 35px;\n    margin-left: 25%;\n    padding: 10px 0px;\n    width: 50px;\n    color: white;\n    background-color: tomato;\n    border-radius: 55px;\n}\n.card-title{\n    text-align: center;\n}\n.card-title span{\n    color: black;\n    font-size: 35px; \n    font-weight: bold;\n}\n\n/*.bg__total{*/\n/*    background-color: dodgerblue;*/\n/*}*/\n/*.bg__man{*/\n/*    background-color: dodgerblue;*/\n/*}*/\n/*.bg__woman{*/\n/*    background-color: crimson;*/\n/*}*/\n/*.bg__green{*/\n/*    background-color: mediumseagreen;*/\n/*}*/\n\n", ""]);
+exports.push([module.i, "\n.card_item{\n    display: inline-block;\n    width:19.8%;\n    /*height: 100px;*/\n    background-color:  white;\n    margin-left:  -1px;\n    /*text-align: center;*/\n    padding: 0px;\n}\n.card_item i{\n    margin-top: 45%;\n    margin-left: 55%;\n    padding: 10px 0px;\n    width: 50px;\n    color: white;\n    background-color: rgba(255, 75, 75, 1);\n    border-radius: 55px;\n}\n.card-body{\n    text-align: left;\n}\n.card-body_title{\n    color: gray;\n}\n.card-title span{\n    color: black;\n    font-size: 35px; \n    font-weight: bold;\n}\n\n\n", ""]);
 
 // exports
 
@@ -11964,12 +12070,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "card_item card" }, [
         _c("div", { staticClass: "row " }, [
           _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-globe-americas fa-2x bg__total" })
+            _c("i", { staticClass: "fas fa-globe-americas fa-2x" })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-9" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("span", [_vm._v("月間射精回数")]),
+              _c("span", { staticClass: "card-body_title" }, [
+                _vm._v("月間射精回数")
+              ]),
               _vm._v(" "),
               _c("h4", { staticClass: "card-title " }, [
                 _c("span", [_vm._v("1580")]),
@@ -11988,7 +12096,9 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "col-9" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("span", [_vm._v("日別射精回数")]),
+              _c("span", { staticClass: "card-body_title" }, [
+                _vm._v("日別射精回数")
+              ]),
               _vm._v(" "),
               _c("h4", { staticClass: "card-title" }, [
                 _c("span", [_vm._v("548")]),
@@ -12002,12 +12112,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "card_item card " }, [
         _c("div", { staticClass: "row " }, [
           _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-male fa-2x bg__man " })
+            _c("i", { staticClass: "fas fa-male fa-2x  " })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-9" }, [
             _c("div", { staticClass: "card-body " }, [
-              _c("span", [_vm._v("男性利用数")]),
+              _c("span", { staticClass: "card-body_title" }, [
+                _vm._v("男性利用数")
+              ]),
               _vm._v(" "),
               _c("h4", { staticClass: "card-title " }, [
                 _c("span", [_vm._v("578")]),
@@ -12021,12 +12133,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "card_item card " }, [
         _c("div", { staticClass: "row " }, [
           _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-female fa-2x bg__woman" })
+            _c("i", { staticClass: "fas fa-female fa-2x " })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-9" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("span", [_vm._v("女性利用数")]),
+              _c("span", { staticClass: "card-body_title" }, [
+                _vm._v("女性利用数")
+              ]),
               _vm._v(" "),
               _c("h4", { staticClass: "card-title " }, [
                 _c("span", [_vm._v("78")]),
@@ -12040,12 +12154,14 @@ var staticRenderFns = [
       _c("div", { staticClass: "card_item card " }, [
         _c("div", { staticClass: "row " }, [
           _c("div", { staticClass: "col-3 text-center " }, [
-            _c("i", { staticClass: "fas fa-yen-sign fa-2x bg__green" })
+            _c("i", { staticClass: "fas fa-yen-sign fa-2x " })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("span", [_vm._v("合計支援金")]),
+            _c("div", { staticClass: "card-body  " }, [
+              _c("span", { staticClass: "card-body__title" }, [
+                _vm._v("合計支援金")
+              ]),
               _vm._v(" "),
               _c("h4", { staticClass: "card-title " }, [
                 _c("span", [_vm._v("688")]),
@@ -12079,36 +12195,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card p-3" }, [
+  return _c(
+    "div",
+    { staticClass: "card p-3" },
+    [
       _c("h4", {}, [_vm._v("みんなの記録")]),
       _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("大阪府XXX氏が1円貢献しました。")])
-    ])
-  }
-]
+      _vm._l(_vm.dataSet, function(item) {
+        return _c("div", [
+          _c("span", [_vm._v(_vm._s(item.name) + "氏")]),
+          _vm._v(" "),
+          _c("span", [_vm._v(_vm._s(item.coin) + "円貢献しました")])
+        ])
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -13857,122 +13961,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-10" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-7 card p-3 " },
-            [
-              _c("span", [_vm._v("データ　カテゴリー")]),
-              _vm._v(" "),
-              _c("BarHorizontal", {
-                attrs: {
-                  id: "location",
-                  dataSet: _vm.location_data,
-                  labels: _vm.location_data_label
-                }
-              })
-            ],
-            1
-          ),
+  return _c(
+    "div",
+    {},
+    [
+      _c("HomeBar", { attrs: { id: "test" } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-9" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-5 card p-0" },
-            [
-              _c("span", [_vm._v("データ　性別ごとの利用")]),
+          _c("div", { staticClass: "row" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-4 card" },
+              [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("BarHorizontal", {
+                  attrs: {
+                    id: "location",
+                    dataSet: _vm.location_data,
+                    labels: _vm.location_data_label
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(3)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              { staticClass: "col-7 card " },
+              [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("Lines", {
+                  attrs: {
+                    id: "coins",
+                    dataSet: _vm.week_data,
+                    labels: _vm.week_data
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-5 card p-0" }, [
+              _vm._m(5),
               _vm._v(" "),
-              _c("Doughnut", {
-                attrs: {
-                  borderWidth: 90,
-                  dataSetSex: _vm.sex_data,
-                  labels: _vm.sex_data_label
-                }
-              })
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-6 card " }, [
-            _c("div", { staticClass: "row" }, [
               _c(
                 "div",
-                { staticClass: "col-6" },
+                { staticClass: "Mypage__Doughnut" },
                 [
-                  _c("Bar", {
+                  _c("Doughnut", {
                     attrs: {
-                      dataTime: _vm.time_data,
-                      labels: _vm.time_data_label
+                      borderWidth: 80,
+                      dataSetSex: _vm.sex_data,
+                      labels: _vm.sex_data_label
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm._m(6)
                 ],
                 1
               ),
               _vm._v(" "),
-              _vm._m(1)
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-6" },
-                [
-                  _c("Lines", {
-                    attrs: {
-                      id: "coin1",
-                      Coins: _vm.week_data,
-                      labels: _vm.week_data
-                    }
-                  })
-                ],
-                1
-              )
+              _vm._m(7)
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-6 card " }, [
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-3 pl-4" },
+          [
+            _c("TimeLine"),
+            _vm._v(" "),
+            _c("TwitterFeed"),
+            _vm._v(" "),
             _c(
               "div",
               { staticClass: "Home__CoinChart" },
               [
+                _vm._m(8),
+                _vm._v(" "),
                 _c("Lines", {
                   attrs: {
                     id: "coin",
                     Coins: _vm.week_data,
                     labels: _vm.week_data
                   }
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "Home__CoinChart__title" }, [
-                  _vm._v("募金額推移")
-                ])
+                })
               ],
               1
             )
-          ])
-        ])
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-2" })
-    ]),
-    _vm._v(" "),
-    _vm._m(3)
-  ])
+      _vm._m(9)
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "card" }, [
       _c("iframe", {
         staticStyle: { border: "0" },
         attrs: {
@@ -13990,16 +14094,114 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
-      _c("span", [_vm._v("時間帯別利用利用推移")])
+    return _c("div", { staticClass: "col-4 card p-3 text-center" }, [
+      _c("h4", { staticClass: "text-center mt-4" }, [
+        _c("b", [_vm._v("弟子入り数")])
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "mt-1" }, [
+        _c("b", [_vm._v("1,523")]),
+        _c("small", [_vm._v("aces")])
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Followers")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6" }, [
-      _c("span", [_vm._v("時間帯別利用利用推移")])
+    return _c("h4", { staticClass: "text-center p-2" }, [
+      _c("b", [_vm._v("カテゴリー別推移")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-4 card p-3 text-center" }, [
+      _c("h4", { staticClass: "text-center mt-4" }, [
+        _c("b", [_vm._v("弟子入り数")])
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "mt-1" }, [
+        _c("b", [_vm._v("1,523")]),
+        _c("small", [_vm._v("aces")])
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Followers")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _c("h4", { staticClass: "d-inline-block" }, [
+        _c("b", [_vm._v("7日間の利用推移")])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarText" }
+        },
+        [
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("li", { staticClass: "nav-item " }, [
+              _c("span", { staticClass: "Chart__label" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("ユーザー")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item " }, [
+              _c("span", { staticClass: "Chart__label" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("みんな")])
+            ])
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center p-2" }, [
+      _c("b", [_vm._v("性別ごとの利用比率")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "Mypage__Doughnut__title" }, [
+      _vm._v("25 "),
+      _c("small", [_vm._v("%")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center mt-4" }, [
+      _c("span", { staticClass: "Chart__label" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("男性利用　19人")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "Chart__label" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("女性利用　10人")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center text-white" }, [
+      _c("b", [_vm._v("募金額推移")])
     ])
   },
   function() {
@@ -14038,125 +14240,166 @@ var render = function() {
     [
       _c("HomeBar", { attrs: { id: "test" } }),
       _vm._v(" "),
-      _c("div", { staticClass: "card_w-75" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-4 " }, [
+      _c("div", { staticClass: "row " }, [
+        _c("div", { staticClass: "col-9 " }, [
+          _c(
+            "div",
+            { staticClass: "card" },
+            [
+              _c(
+                "nav",
+                { staticClass: "navbar navbar-expand-lg navbar-light" },
+                [
+                  _c("h3", { staticClass: "d-inline-block" }, [
+                    _vm._v("日別利用推移")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "collapse navbar-collapse",
+                      attrs: { id: "navbarText" }
+                    },
+                    [
+                      _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+                        _c("li", { staticClass: "nav-item " }, [
+                          _c(
+                            "span",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.selectTab("month")
+                                }
+                              }
+                            },
+                            [_vm._v("今月")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item " }, [
+                          _c(
+                            "span",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.selectTab("year")
+                                }
+                              }
+                            },
+                            [_vm._v("年間")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "nav-item " }, [
+                          _c(
+                            "span",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.selectTab("all")
+                                }
+                              }
+                            },
+                            [_vm._v("すべて")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("Lines", {
+                attrs: {
+                  id: "line1",
+                  dataSet: _vm.time_data,
+                  labels: _vm.time_data_label
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              { staticClass: "card_" },
+              { staticClass: "col-7 card" },
               [
-                _c("h5", { staticClass: "mt-5 text-center" }, [
-                  _vm._v("地域ごとのデータ")
-                ]),
+                _vm._m(0),
                 _vm._v(" "),
-                _c("BarHorizontal", {
+                _c("Bar", {
                   attrs: {
-                    id: "location",
-                    dataSet: _vm.location_data,
-                    labels: _vm.location_data_label
+                    id: "bar",
+                    dataSet: _vm.time_data,
+                    labels: _vm.time_data_label
                   }
                 })
               ],
               1
             ),
             _vm._v(" "),
+            _c("div", { staticClass: "col-5 card" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "Mypage__Doughnut" },
+                [
+                  _c("Doughnut", {
+                    attrs: {
+                      borderWidth: 80,
+                      dataSetSex: _vm.sex_data,
+                      labels: _vm.sex_data_label
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(2)
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(3)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _vm._m(4),
+            _vm._v(" "),
             _c(
               "div",
-              { staticClass: "card_" },
+              { staticClass: "col-6 card" },
               [
-                _c("h5", { staticClass: "mt-5 text-center" }, [
-                  _vm._v("性別ごとの利用割合")
-                ]),
+                _vm._m(5),
                 _vm._v(" "),
-                _c("Doughnut", {
+                _c("BarHorizontal", {
                   attrs: {
-                    borderWidth: 80,
-                    dataSetSex: _vm.sex_data,
-                    labels: _vm.sex_data_label
+                    id: "category",
+                    dataSet: _vm.category_data,
+                    dataBackgroundColor: _vm.category_data_color,
+                    labels: _vm.category_data_label
                   }
                 })
               ],
               1
-            )
+            ),
+            _vm._v(" "),
+            _vm._m(6)
           ]),
           _vm._v(" "),
-          _vm._m(0)
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-5 card text-left" },
-          [
-            _c("span", [_vm._v("Week＿Data")]),
-            _vm._v(" "),
-            _c("Lines", {
-              attrs: {
-                id: "test",
-                dataSet: _vm.week_data,
-                labels: _vm.week_data
-              }
-            })
-          ],
-          1
-        ),
+          _vm._m(7)
+        ]),
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-3 card" },
+          { staticClass: "col-3 pl-3" },
           [
-            _c("span", [_vm._v("天気？")]),
+            _c("TimeLine", { attrs: { dataSet: _vm.new_data } }),
             _vm._v(" "),
-            _c("Doughnut", {
-              attrs: {
-                borderWidth: 80,
-                dataSet: _vm.sex_data,
-                labels: _vm.sex_data_label
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._m(1)
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-4 card p-5" },
-          [
-            _c("span", [_vm._v("カテゴリー別利用グラフ")]),
-            _vm._v(" "),
-            _c("BarHorizontal", {
-              attrs: {
-                id: "category",
-                dataSet: _vm.location_data,
-                labels: _vm.location_data_label
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-4 card p-5" },
-          [
-            _c("span", [_vm._v("募金額推移")]),
-            _vm._v(" "),
-            _c("Lines", {
-              attrs: { id: "coin", Coins: _vm.week_data, labels: _vm.week_data }
-            })
+            _c("TwitterFeed")
           ],
           1
         )
-      ]),
-      _vm._v(" "),
-      _c("img", { attrs: { src: "/image/home-image.jpg" } })
+      ])
     ],
     1
   )
@@ -14166,28 +14409,104 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8  pl-5 pr-5 pt-3 pb-3" }, [
-      _c("img", {
-        staticClass: "location_image",
-        attrs: { src: "/image/map.png" }
-      })
+    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
+      _c("h4", { staticClass: "d-inline-block" }, [
+        _c("b", [_vm._v("6か月の比較")])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "navbarText" }
+        },
+        [
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("li", { staticClass: "nav-item " }, [
+              _c("span", { staticClass: "Chart__label" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("ユーザー")])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item " }, [
+              _c("span", { staticClass: "Chart__label" }),
+              _vm._v(" "),
+              _c("span", [_vm._v("みんな")])
+            ])
+          ])
+        ]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 card" }, [
-      _c("span", [_vm._v("募金推移")])
+    return _c("h4", { staticClass: "text-center p-2" }, [
+      _c("b", [_vm._v("一か月の利用比率")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 card p-5" }, [
-      _c("span", [_vm._v("利用ユーザー　最新5件")])
+    return _c("span", { staticClass: "Mypage__Doughnut__title" }, [
+      _vm._v("25 "),
+      _c("small", [_vm._v("%")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center mt-4" }, [
+      _c("span", { staticClass: "Chart__label" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("使用日数　15日")]),
+      _vm._v(" "),
+      _c("span", { staticClass: "Chart__label" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("非利用日数　10日")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 card p-3 text-center" }, [
+      _c("h4", { staticClass: "text-center mt-3" }, [
+        _c("b", [_vm._v("弟子入り数")])
+      ]),
+      _vm._v(" "),
+      _c("h1", { staticClass: "mt-1" }, [
+        _c("b", [_vm._v("1,523")]),
+        _c("small", [_vm._v("aces")])
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Followers")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center" }, [
+      _c("b", [_vm._v("カテゴリー別グラフ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 card  text-center" }, [
+      _c("span", { staticClass: " p-1" }, [_vm._v("募金額推移")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("img", { attrs: { src: "/image/mypage-image.jpg" } })])
   }
 ]
 render._withStripped = true
@@ -16178,7 +16497,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", [
     _c("div", { staticClass: "row " }, [
       _c(
         "div",

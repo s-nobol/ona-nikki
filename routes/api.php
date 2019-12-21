@@ -86,4 +86,5 @@ Route::get('/users/logs/donation', 'UserController@donation');
 // app.env のCallBack_Url修正（後日）
 
 // home.vueの修正
-// git checkout -b home-vue-revise2
+// git checkout -b home-vue-revise
+// home2 mypageと同じように設定する
