@@ -11,6 +11,7 @@ use Exception;
 use App\Log;
 use App\User;
 use App\Category;
+use App\Follow;
 
 class MypageController extends Controller
 {
@@ -25,6 +26,7 @@ class MypageController extends Controller
     public function mypage()
     {
         // 過去一か月のデータ取得(今月のデータにしたい)
+        
         $select_month = Carbon::now()->subDays(30);
         
         // 過去一か月のデータ取得
@@ -37,43 +39,32 @@ class MypageController extends Controller
         $month_data = $logs->pluck('count') ;
         $month_data_label  = $logs->pluck('label'); 
         
-            
-        // 過去一か月のデータ取得
-        $carbon = new Carbon();
-        $year = $carbon->year;
-        $month = $carbon->month-1;
-        $last_monnt_logs = Auth::user()->logs()
-            ->whereYear('created_at', $year)
-            ->whereMonth('created_at', $month)
-            ->select(DB::raw('count(*) as count, day as label '))
-            ->groupBy('day')
+        
+        // 半年分のデータ（削除してもいいかも？）
+        $select_6_month = Carbon::now()->subDays(150);
+        $logs =Auth::user()->logs()
+            ->select(DB::raw('count(*) as count, month as label'))
+            ->where( 'created_at', '>', $select_6_month)
+            ->groupBy('month')
             ->get();
-        $last_monnt_data = $last_monnt_logs->pluck('count');
-        $last_month_data_label = $last_monnt_logs->pluck('label');
+        $six_month_data = $logs->pluck('count'); 
+        $six_month_data_label = $logs->pluck('label');
         
-        // 1年間の月別平均射精回数
-        
-        // timeデータ
-        $time_logs = Auth::user()->logs()
-            ->where( 'created_at', '>', $select_month)
-            ->select(DB::raw('count(*) as count, time  as label '))
-            ->groupBy('time')
-            ->get(); 
-        $time_data = $time_logs->pluck('count') ;
-        $time_data_label  = $time_logs->pluck('label'); 
-        
-        // カテゴリーデータ
-        // $logs = Auth::user()->logs()
-        //     ->where( 'created_at', '>', $select_month)
-        //     ->select(DB::raw('count(*) as count, category as label '))
-        //     ->groupBy('category')
-        //     ->orderBy('count','desc')
-        //     ->get(); 
+        // 6ヶ月のデータその他ユーザー
+        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) / count(users.id) as count, month as label'),
+                        DB::raw('logs.created_at as created_time '))
+            ->where( 'created_time', '>', $select_6_month)
+            ->groupBy('month')
+            ->get();
             
-        // $category_data = $logs->pluck('count') ;
-        // $category_data_label  = $logs->pluck('label'); 
+        $other_month_data= $logs->pluck('count'); 
+        $other_month_data_label = $logs->pluck('label');
+        
+        
             
         // カテゴリーデータ
+        $year = Carbon::now()->year;
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
             ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
             ->whereYear('created_time', $year)
@@ -87,6 +78,8 @@ class MypageController extends Controller
         $category_data_label = $logs->pluck('label');
         $category_data_color = $logs->pluck('color');
         
+        
+        
         // 最新のデータ
         $new_data = Auth::user()->logs()
             ->orderBy('created_at','desc')
@@ -95,8 +88,8 @@ class MypageController extends Controller
             
         
         // カレンダーのデータ
-        $logs = Log::
-            select(DB::raw('count(*) as count, day as label, created_at'))
+        $logs =Auth::user()->logs()
+            ->select(DB::raw('count(*) as count, day as label, created_at'))
             ->where( 'created_at', '>', $select_month)
             ->groupBy('day')
             ->orderBy('created_at')
@@ -104,16 +97,22 @@ class MypageController extends Controller
         $day_data = $logs->pluck('created_at') ;
             
             
-        // 平均回数
-        $user = User::where('id',Auth::user()->id)->with('followers')->first();
+        // 合計データ
+        $all_count = Auth::user()->logs()->count();
+        $month_count = Auth::user()->logs()->where( 'created_at', '>', $select_month)->count();
+        $donation_count = Auth::user()->logs()->select(DB::raw('sum(coin) as count'))->first();
+        $follower_count =Follow::where('followed_id', Auth::user()->id)->count();
+        
+        
+        
         return compact(
-            'month_data','last_monnt_data',
-            'month_data_label', 'last_month_data_label',
-            'time_data', 'time_data_label',
+            'month_data','month_data_label', 
+            'six_month_data','six_month_data_label',
+            'other_month_data','other_month_data_label',
+            
             'category_data', 'category_data_label','category_data_color',
-            'new_data',
-            'day_data'
-            ,'user'
+            'new_data','day_data',
+            'all_count', 'month_count', 'donation_count','follower_count'
             );
     }
     
@@ -193,7 +192,7 @@ class MypageController extends Controller
             
             'day_data','day_data_label','day_data_count',
             'category_data','category_data_label','category_data_color',
-            'coin_data','coin_data_label'         
+            'coin_data','coin_data_label'       
         );
     }
     

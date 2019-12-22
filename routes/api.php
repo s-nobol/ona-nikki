@@ -89,8 +89,6 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 
 // app.env のCallBack_Url修正（後日）
 
-// 弟子入り機能の作成
-// git checkout -b follow
-// php artisan make:model Follow --all
-// php artisan make:test Follow_Test 
-// php artisan make:test Url_Follow_Test  --unit
+
+// mypage.vue home.vueの合計データが正しく表示されるようにする
+// git checkout -b edit-total-ber

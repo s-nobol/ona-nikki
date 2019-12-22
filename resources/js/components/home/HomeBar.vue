@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <span class="card-body_title">月間射精回数</span> 
                             <h4 class="card-title ">
-                                <span >1580</span><small>回</small>
+                                <span >{{ total_month }}</span><small>回</small>
                             </h4>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="card-body">
                             <span class="card-body_title">日別射精回数</span> 
                             <h4 class="card-title">
-                                <span>548</span><small>回</small>
+                                <span>{{ total_day }}</span><small>回</small>
                             </h4>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="card-body ">
                             <span  class="card-body_title">男性利用数</span> 
                             <h4 class="card-title ">
-                                <span>578</span><small>人</small>
+                                <span>{{ total_man }}</span><small>人</small>
                             </h4>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <div class="card-body">
                             <span  class="card-body_title">女性利用数</span> 
                             <h4 class="card-title ">
-                                <span >78</span><small>人</small>
+                                <span>{{ total_woman }}</span><small>人</small>
                             </h4>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="card-body  ">
                             <span class="card-body__title">合計支援金</span> 
                             <h4 class="card-title ">
-                                <span >688</span><small>円</small>
+                                <span>{{ total_donation }}</span><small>円</small>
                             </h4>
                         </div>
                     </div>
@@ -135,14 +135,12 @@
 
 export default {
     props: {
-        
-        total_count: { type: Number, required: false, default: null },
         id: { type: String, required: false, default: 'name' },
-        woman_count: { type: Number, required: false, default: null },
-        man_count: { type: Number, required: false, default: null },
-        donation_count: { type: Number, required: false, default: null },
-        
-        
+        total_month: { type: Number, required: false, default: 0 },
+        total_day: { type: Number, required: false, default: 0 },
+        total_man: { type: Number, required: false, default: 0 },
+        total_woman: { type: Number, required: false, default: 0 },
+        total_donation: { type: Number, required: false, default: 0 },
     },
     
 }

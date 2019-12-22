@@ -24,14 +24,8 @@ class AppController extends Controller
         
         
         // 1日のデータ取得
-        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select('*', DB::raw('logs.created_at as created_time , day as label'))
-            ->where( 'created_time', '>', $date);
-        
-        // データべースのかぶりが発生している
-        
-        // 時間ごとの利用者
-        $data = $logs;  
+        $logs = Log::select(DB::raw('count(*) as count '))->where( 'created_at', '>', $date)->get();
+        $data = $logs->pluck('count');  
         $data_label = $logs->pluck('label'); 
         
         
@@ -48,7 +42,7 @@ class AppController extends Controller
         
         
         // 性別ごとのデータ
-        $sex_logs =  $this->DB_abstract('sex', $date);
+        $sex_logs =  $this->DB_abstract('sex', $date)->SortByDesc('count');
         $sex_data = $sex_logs->pluck('count');  
         $sex_data_label = $sex_logs->pluck('label');
         
@@ -59,25 +53,44 @@ class AppController extends Controller
         $week_data = $week_logs->pluck('count');  
         $week_data_label = $week_logs->pluck('label');
         
-              // カテゴリーデータ
+        
+        
+        // カテゴリーデータ
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '),
+            DB::raw(' logs.created_at as created_time'))
             ->whereYear('created_time', $date)
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
             ->take(10)
             ->get();
-        
         $category_data = $logs->pluck('count'); 
         $category_data_label = $logs->pluck('label');
         $category_data_color = $logs->pluck('color');
         
+        
+        //最新のデータ
         $new_data =  User::join('logs', 'users.id', '=', 'logs.user_id')
-        ->select(DB::raw('*,logs.created_at as created_time'))
-        ->orderBy('created_time','desc')
-        ->take(10)
-        ->get();
-
+            ->select(DB::raw('*,logs.created_at as created_time'))
+            ->orderBy('created_time','desc')
+            ->take(10)
+            ->get();
+        
+        
+   
+        // coinデータ
+        $logs =  Log::select(DB::raw('sum(coin) as count, day as label'))
+            ->where('created_at','>', $date)
+            ->groupBy('day')
+            ->get();
+        $donation_data = $logs->pluck('count'); 
+        $donation_data_label = $logs->pluck('label');
+        
+        
+        // 一か月のデータカウンター
+        $month_date = Carbon::now()->subDays(18);
+        $month_data_count = Log::where('created_at','>', $month_date)->get()->count();
+        
         
         
         return  compact(
@@ -87,7 +100,10 @@ class AppController extends Controller
             'sex_data','sex_data_label',
             'week_data','week_data_label',
             'category_data', 'category_data_label', 'category_data_color',
-            'new_data'
+            
+            'donation_data','donation_data_label',
+            'new_data',
+            'month_data_count'
             );
     }
     
@@ -145,7 +161,7 @@ class AppController extends Controller
     
     public function locations()
     {  
-        // 年齢別データ
+        // 年齢別デー��
         $logs = User::select(DB::raw('count(*) as count, location as label'))
             ->groupBy('location')
             ->get(); 

@@ -2628,7 +2628,7 @@ __webpack_require__.r(__webpack_exports__);
             pointRadius: 5,
             data: this.dataSet
           }, {
-            label: '支援金用のチャート',
+            label: '支援金',
             backgroundColor: 'mintcream',
             borderColor: 'mediumaquamarine',
             pointBackgroundColor: 'white',
@@ -2960,6 +2960,150 @@ __webpack_require__.r(__webpack_exports__);
           _this2.$emit('chengeData');
         }
       });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: {
+      type: String,
+      required: false,
+      "default": 'name'
+    },
+    hokkaido_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    tohoku_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    kanto_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    tyubu_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    kansai_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    tyugoku_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    shikoku_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    kyusyu_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    all_count: {
+      type: Number,
+      required: false,
+      "default": 0
+    }
+  },
+  watch: {
+    // データが更新されたら起動
+    all_count: function all_count(_all_count) {// this.hokkaido_count / all_count => で北海道の割合を求められる
     }
   }
 });
@@ -3575,30 +3719,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    total_count: {
-      type: Number,
-      required: false,
-      "default": null
-    },
     id: {
       type: String,
       required: false,
       "default": 'name'
     },
-    woman_count: {
+    total_month: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
     },
-    man_count: {
+    total_day: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
     },
-    donation_count: {
+    total_man: {
       type: Number,
       required: false,
-      "default": null
+      "default": 0
+    },
+    total_woman: {
+      type: Number,
+      required: false,
+      "default": 0
+    },
+    total_donation: {
+      type: Number,
+      required: false,
+      "default": 0
     }
   }
 });
@@ -4926,9 +5075,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
 /* harmony import */ var _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Table.vue */ "./resources/js/components/Table.vue");
 /* harmony import */ var _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Ranker.vue */ "./resources/js/components/Ranker.vue");
-/* harmony import */ var _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/home/HomeBar.vue */ "./resources/js/components/home/HomeBar.vue");
-/* harmony import */ var _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/home/TimeLine.vue */ "./resources/js/components/home/TimeLine.vue");
-/* harmony import */ var _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/home/TwitterFeed.vue */ "./resources/js/components/home/TwitterFeed.vue");
+/* harmony import */ var _components_Map_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Map.vue */ "./resources/js/components/Map.vue");
+/* harmony import */ var _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/home/HomeBar.vue */ "./resources/js/components/home/HomeBar.vue");
+/* harmony import */ var _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/home/TimeLine.vue */ "./resources/js/components/home/TimeLine.vue");
+/* harmony import */ var _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/home/TwitterFeed.vue */ "./resources/js/components/home/TwitterFeed.vue");
 //
 //
 //
@@ -5085,6 +5235,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5097,36 +5296,41 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    HomeBar: _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    HomeBar: _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     Bar: _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     Lines: _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Map: _components_Map_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     Table: _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     Ranker: _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    TimeLine: _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    TwitterFeed: _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    TimeLine: _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    TwitterFeed: _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
   data: function data() {
     return {
+      day_count: 0,
+      month_count: 0,
+      man_count: 0,
+      woman_count: 0,
+      donation_count: 0,
       data: [],
       data_label: [],
       location_data: [],
       location_data_label: [],
       sex_data: [],
       sex_data_label: [],
-      // 時間帯別
-      time_data: [],
-      time_data_label: [],
       // 7日間データ
       week_data: [],
       week_data_label: [],
-      ranking_data: [],
       // カテゴリー別データ
       category_data: [],
       category_data_label: [],
-      category_data_color: []
+      category_data_color: [],
+      // 募金データ
+      donation_data: [],
+      donation_data_label: []
     };
   },
   methods: {
@@ -5137,19 +5341,31 @@ __webpack_require__.r(__webpack_exports__);
         console.log('home', response); // データ
 
         _this.data = response.data.data;
-        _this.data_label = response.data.data_label; // 地域別
+        _this.data_label = response.data.data_label;
+        _this.day_count = _this.get_sum(_this.data); // 地域別
 
         _this.location_data = response.data.location_data;
         _this.location_data_label = response.data.location_data_label; //性別
 
         _this.sex_data = response.data.sex_data;
-        _this.sex_data_label = response.data.sex_data_label; //時間別
+        _this.sex_data_label = response.data.sex_data_label;
+
+        _this.set_sex_date(_this.sex_data, _this.sex_data_label); //時間別
+
 
         _this.time_data = response.data.time_data;
         _this.time_data_label = response.data.time_data_label;
         _this.week_data = response.data.week_data;
-        _this.week_data_label = response.data.week_data_label;
-        _this.ranking_data = response.data.ranking_data;
+        _this.week_data_label = response.data.week_data_label; // 募金額推移
+
+        _this.donation_data = response.data.donation_data;
+        _this.donation_data_label = response.data.donation_data_label;
+        _this.donation_count = _this.get_sum(_this.donation_data); // カテゴリー別割合
+
+        _this.category_data = response.data.category_data;
+        _this.category_data_label = response.data.category_data_label;
+        _this.category_data_color = response.data.category_data_color;
+        _this.month_count = response.data.month_data_count;
       });
     },
     // 配列の合計値をだす
@@ -5161,6 +5377,16 @@ __webpack_require__.r(__webpack_exports__);
     // 配列の平均値
     get_ave: function get_ave(data) {
       return this.get_sum(data) / data.length;
+    },
+    // 性別ごとの集計
+    set_sex_date: function set_sex_date(sex_data, sex_data_label) {
+      if (sex_data_label[0] === "男") {
+        this.man_count = sex_data[0];
+        this.woman_count = sex_data[1];
+      } else if (sex_data_label[0] === "女") {
+        this.man_count = sex_data[1];
+        this.woman_count = sex_data[0];
+      }
     }
   },
   created: function created() {
@@ -7747,6 +7973,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7783,10 +8015,13 @@ __webpack_require__.r(__webpack_exports__);
       tab: 'year',
       data: [],
       data_label: [],
+      today: new Date().getDate(),
       month_data: [],
       month_data_label: [],
-      last_month_data: [],
-      last_month_data_label: [],
+      //過去6ヶ月のデータ
+      six_month_data: [],
+      six_month_data_label: [],
+      other_month_data: [],
       month_data_total: 0,
       //1カ月の利用回数
       last_month_data_total: 0,
@@ -7795,13 +8030,21 @@ __webpack_require__.r(__webpack_exports__);
       time_data_label: [],
       active_data: [],
       //利用頻度
+      active_ratio: 0,
+      //利用頻度
       new_data: [],
       //最新の5件のデータ
       day_data: [],
       // カテゴリー別データ
       category_data: [],
       category_data_label: [],
-      category_data_color: []
+      category_data_color: [],
+      // UserBar1のデータ
+      all_count: 0,
+      month_count: 0,
+      calorie_count: 0,
+      donation_count: 0,
+      follower_count: 0
     };
   },
   methods: {
@@ -7811,13 +8054,13 @@ __webpack_require__.r(__webpack_exports__);
       this.tab = name;
       this.get_data(name);
     },
-    get_data: function get_data(name) {// axios.get(`api/mypage/${name}/data`).then(response => {
+    get_select_data: function get_select_data(name) {// axios.get(`api/mypage/${name}/data`).then(response => {
       //     console.log(response);
       //     this.month_data = response.data.data
       //     this.month_data_label = response.data.data_label
       // })
     },
-    get_chart: function get_chart() {
+    get_data: function get_data() {
       var _this = this;
 
       console.log("チャートの取得");
@@ -7825,27 +8068,27 @@ __webpack_require__.r(__webpack_exports__);
         console.log('mypage', response); // 月別データ
 
         _this.month_data = response.data.month_data;
-        _this.month_data_label = response.data.month_data_label; // 先月のデータ
+        _this.month_data_label = response.data.month_data_label; // 過去6ヶ月のデータ
 
-        _this.last_month_data = response.data.last_monnt_data;
-        _this.last_month_data_label = response.data.last_month_data_label; // 時間別データ
+        _this.six_month_data = response.data.six_month_data;
+        _this.six_month_data_label = response.data.six_month_data_label;
+        _this.other_month_data = response.data.other_month_data; // 一か月の利用データ推移
 
-        _this.time_data = response.data.time_data;
-        _this.time_data_label = response.data.time_data_label; // this.month_data_total = this.get_sum(this.month_data)
-        // this.last_month_data_total = this.get_sum(this.last_month_data)
-        // this.active_data = this.get_active_data(this.month_data_label.length)
-        // // 最新5件のデータ
-
-        _this.new_data = response.data.new_data; // カテゴリー別割合
+        _this.active_data = _this.get_active_data(_this.month_data_label.length); // カテゴリー別割合
 
         _this.category_data = response.data.category_data;
         _this.category_data_label = response.data.category_data_label;
-        _this.category_data_color = response.data.category_data_color; // 募金額
-        // this.coin_data = response.data.coin_data
-        // this.coin_data_label = response.data.coin_data_label
-        // this.day_data = response.data.day_data
+        _this.category_data_color = response.data.category_data_color; // // 最新5件のデータ
+
+        _this.new_data = response.data.new_data; // 日付のデータ
 
         _this.day_data = _this.get_change_date(response.data.day_data);
+        _this.all_count = response.data.all_count;
+        _this.month_count = response.data.month_count;
+        _this.calorie_count = response.data.month_count * 48.5;
+        _this.donation_count = response.data.donation_count.count; //ここだけ特殊
+
+        _this.follower_count = response.data.follower_count;
       });
     },
     // 配列の合計値をだす
@@ -7860,8 +8103,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     // どのくらい利用しているか？
     get_active_data: function get_active_data(data) {
-      var days = 30 - data;
-      return [data, days];
+      this.remain_day = this.today - data;
+      this.active_ratio = Math.round(data / this.today * 100);
+      return [data, this.remain_day];
     },
     get_change_date: function get_change_date(data) {
       var list = [];
@@ -7875,8 +8119,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.get_data(this.tab);
-    this.get_chart();
+    this.get_select_data(this.tab);
+    this.get_data();
   }
 });
 
@@ -8357,6 +8601,25 @@ exports.push([module.i, "\n.remon{\n    background-color: green;\n}\n.apple{\n  
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.Map{\n    position: relative;\n}\n.Map__item{\n    display: inline-block;\n    background-color: rgba(255,75,75,0.7);\n    color: white;\n    border-radius: 30px;\n    padding: 10px;\n}\n.Map-hokkaido{\n    position:absolute;\n    top: 13%;\n    right: 23%;\n    /*background-color: blue;*/\n}\n.Map-tohoku{\n    position:absolute;\n    top: 40%;\n    right: 32%;\n    /*background-color: gray;*/\n}\n.Map-kanto{\n    position:absolute;\n    top: 65%;\n    right: 38%;\n    /*background-color: gray;*/\n}\n.Map-tyubu{\n    position:absolute;\n    top: 58%;\n    right: 48%;\n    /*background-color: gray;*/\n}\n.Map-kansai{\n    position:absolute;\n    top: 70%;\n    right: 60%;\n    /*background-color: gray;*/\n}\n.Map-tyugoku{\n    position:absolute;\n    top: 66%;\n    right: 73%;\n    /*background-color: gray;*/\n}\n.Map-shikoku{\n    position:absolute;\n    top: 77%;\n    right: 70%;\n    /*background-color: gray;*/\n}\n.Map-kyusyu{\n    position:absolute;\n    top: 80%;\n    right: 85%;\n    /*background-color: gray;*/\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css& ***!
@@ -8749,7 +9012,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Mypage__Doughnut{\n    position: relative;\n}\n.Mypage__Doughnut__title{\n    position: absolute;\n    display: inline-block;\n    font-size: 45px;\n    top:50%;\n    left: 50%;\n    margin-left: -35px;\n    margin-top: -35px;\n}\n.Chart__label{\n    display: inline-block;\n    width: 25px;\n    height: 15px;\n    background-color: whitesmoke;\n}\n.new__date__item{\n    padding: 1px 5px;\n    border-radius: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.Mypage__Doughnut{\n    position: relative;\n}\n.Mypage__Doughnut__title{\n    position: absolute;\n    display: inline-block;\n    font-size: 45px;\n    top:50%;\n    left: 50%;\n    margin-left: -35px;\n    margin-top: -35px;\n}\n.Chart__label{\n    display: inline-block;\n    width: 25px;\n    height: 15px;\n}\n.bg__gray{\n    background-color: whitesmoke;\n}\n.new__date__item{\n    padding: 1px 5px;\n    border-radius: 15px;\n}\n", ""]);
 
 // exports
 
@@ -10093,6 +10356,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Map.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Ranker.vue?vue&type=style&index=0&lang=css& ***!
@@ -11396,7 +11689,7 @@ var render = function() {
             _c(
               "span",
               { staticClass: "header__title", on: { click: _vm.onHome } },
-              [_vm._v("おな 日記")]
+              [_vm._v("おな 日記 β")]
             ),
             _vm._v(" "),
             _c(
@@ -11762,6 +12055,55 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=template&id=479a2f41&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=template&id=479a2f41& ***!
+  \******************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "Map" }, [
+      _c("div", { staticClass: "Map__item Map-hokkaido" }, [_vm._v("北海道")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-tohoku" }, [_vm._v("東北")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-kanto" }, [_vm._v("関東")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-tyubu" }, [_vm._v("中部")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-kansai" }, [_vm._v("関西")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-tyugoku" }, [_vm._v("中国")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-shikoku" }, [_vm._v("四国")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "Map__item Map-kyusyu" }, [_vm._v("九州")]),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "/image/map.png" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -12207,118 +12549,142 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "card_item card" }, [
+      _c("div", { staticClass: "row " }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("span", { staticClass: "card-body_title" }, [
+              _vm._v("月間射精回数")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title " }, [
+              _c("span", [_vm._v(_vm._s(_vm.total_month))]),
+              _c("small", [_vm._v("回")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card_item card" }, [
+      _c("div", { staticClass: "row " }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("span", { staticClass: "card-body_title" }, [
+              _vm._v("日別射精回数")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title" }, [
+              _c("span", [_vm._v(_vm._s(_vm.total_day))]),
+              _c("small", [_vm._v("回")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card_item card " }, [
+      _c("div", { staticClass: "row " }, [
+        _vm._m(2),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "card-body " }, [
+            _c("span", { staticClass: "card-body_title" }, [
+              _vm._v("男性利用数")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title " }, [
+              _c("span", [_vm._v(_vm._s(_vm.total_man))]),
+              _c("small", [_vm._v("人")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card_item card " }, [
+      _c("div", { staticClass: "row " }, [
+        _vm._m(3),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c("span", { staticClass: "card-body_title" }, [
+              _vm._v("女性利用数")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title " }, [
+              _c("span", [_vm._v(_vm._s(_vm.total_woman))]),
+              _c("small", [_vm._v("人")])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card_item card " }, [
+      _c("div", { staticClass: "row " }, [
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "card-body  " }, [
+            _c("span", { staticClass: "card-body__title" }, [
+              _vm._v("合計支援金")
+            ]),
+            _vm._v(" "),
+            _c("h4", { staticClass: "card-title " }, [
+              _c("span", [_vm._v(_vm._s(_vm.total_donation))]),
+              _c("small", [_vm._v("円")])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card_item card" }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-globe-americas fa-2x" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("span", { staticClass: "card-body_title" }, [
-                _vm._v("月間射精回数")
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "card-title " }, [
-                _c("span", [_vm._v("1580")]),
-                _c("small", [_vm._v("回")])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_item card" }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "far fa-clock fa-2x" })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("span", { staticClass: "card-body_title" }, [
-                _vm._v("日別射精回数")
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "card-title" }, [
-                _c("span", [_vm._v("548")]),
-                _c("small", [_vm._v("回")])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_item card " }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-male fa-2x  " })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body " }, [
-              _c("span", { staticClass: "card-body_title" }, [
-                _vm._v("男性利用数")
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "card-title " }, [
-                _c("span", [_vm._v("578")]),
-                _c("small", [_vm._v("人")])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_item card " }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-3 text-center" }, [
-            _c("i", { staticClass: "fas fa-female fa-2x " })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("span", { staticClass: "card-body_title" }, [
-                _vm._v("女性利用数")
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "card-title " }, [
-                _c("span", [_vm._v("78")]),
-                _c("small", [_vm._v("人")])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card_item card " }, [
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-3 text-center " }, [
-            _c("i", { staticClass: "fas fa-yen-sign fa-2x " })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-9" }, [
-            _c("div", { staticClass: "card-body  " }, [
-              _c("span", { staticClass: "card-body__title" }, [
-                _vm._v("合計支援金")
-              ]),
-              _vm._v(" "),
-              _c("h4", { staticClass: "card-title " }, [
-                _c("span", [_vm._v("688")]),
-                _c("small", [_vm._v("円")])
-              ])
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-3 text-center" }, [
+      _c("i", { staticClass: "fas fa-globe-americas fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 text-center" }, [
+      _c("i", { staticClass: "far fa-clock fa-2x" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 text-center" }, [
+      _c("i", { staticClass: "fas fa-male fa-2x  " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 text-center" }, [
+      _c("i", { staticClass: "fas fa-female fa-2x " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 text-center " }, [
+      _c("i", { staticClass: "fas fa-yen-sign fa-2x " })
     ])
   }
 ]
@@ -14113,75 +14479,131 @@ var render = function() {
     "div",
     {},
     [
-      _c("HomeBar", { attrs: { id: "test" } }),
+      _c("HomeBar", {
+        attrs: {
+          total_month: _vm.month_count,
+          total_day: _vm.day_count,
+          total_man: _vm.man_count,
+          total_woman: _vm.woman_count,
+          total_donation: _vm.donation_count
+        }
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-9" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "row pt-5 pb-5" }, [
+              _c(
+                "div",
+                { staticClass: "col-5" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("BarHorizontal", {
+                    attrs: {
+                      id: "locatio4n",
+                      dataSet: _vm.location_data,
+                      labels: _vm.location_data_label
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "pl-5 pr-5" },
+                    [
+                      _c("Doughnut", {
+                        attrs: {
+                          borderWidth: 80,
+                          dataSetSex: _vm.sex_data,
+                          labels: _vm.sex_data_label
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center mt-4" }, [
+                    _c("span", { staticClass: "Chart__label" }),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v("男性利用　" + _vm._s(_vm.man_count) + "人")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "Chart__label" }),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v("女性利用　" + _vm._s(_vm.woman_count) + "人")
+                    ])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-7 p-4" }, [_c("Map")], 1)
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-4 card" },
+              { staticClass: "col-5 card" },
               [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("BarHorizontal", {
                   attrs: {
-                    id: "location",
-                    dataSet: _vm.location_data,
-                    labels: _vm.location_data_label
+                    id: "category2",
+                    dataSet: _vm.category_data,
+                    dataBackgroundColor: _vm.category_data_color,
+                    labels: _vm.category_data_label
                   }
                 })
               ],
               1
             ),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(4)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              { staticClass: "col-7 card " },
+              { staticClass: "col-6 card " },
               [
-                _vm._m(4),
+                _vm._m(5),
+                _vm._v(" "),
+                _c("BarHorizontal", {
+                  attrs: {
+                    id: "category2",
+                    dataSet: _vm.category_data,
+                    dataBackgroundColor: _vm.category_data_color,
+                    labels: _vm.category_data_label
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-6 card p-0" },
+              [
+                _vm._m(6),
                 _vm._v(" "),
                 _c("Lines", {
                   attrs: {
-                    id: "coins",
+                    id: "week",
                     dataSet: _vm.week_data,
                     labels: _vm.week_data
                   }
                 })
               ],
               1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-5 card p-0" }, [
-              _vm._m(5),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "Mypage__Doughnut" },
-                [
-                  _c("Doughnut", {
-                    attrs: {
-                      borderWidth: 80,
-                      dataSetSex: _vm.sex_data,
-                      labels: _vm.sex_data_label
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm._m(6)
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm._m(7)
-            ])
+            )
           ])
         ]),
         _vm._v(" "),
@@ -14197,13 +14619,13 @@ var render = function() {
               "div",
               { staticClass: "Home__CoinChart" },
               [
-                _vm._m(8),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("Lines", {
                   attrs: {
                     id: "coin",
-                    Coins: _vm.week_data,
-                    labels: _vm.week_data
+                    Coins: _vm.donation_data,
+                    labels: _vm.donation_data_label
                   }
                 })
               ],
@@ -14222,18 +14644,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("iframe", {
-        staticStyle: { border: "0" },
-        attrs: {
-          src:
-            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1877635.1007461809!2d137.24227896228032!3d35.027883556738324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019629a42fdc899%3A0xa6a1fcc916f3a4df!2z5a-M5aOr5bGx!5e0!3m2!1sja!2sjp!4v1576432477177!5m2!1sja!2sjp",
-          width: "100%",
-          height: "550",
-          frameborder: "0",
-          allowfullscreen: ""
-        }
-      })
+    return _c("h4", { staticClass: "text-center" }, [
+      _c("b", [_vm._v("地域ごとの集計")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center mt-5" }, [
+      _c("b", [_vm._v("地域ごとの集計")])
     ])
   },
   function() {
@@ -14265,7 +14685,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 card p-3 text-center" }, [
+    return _c("div", { staticClass: "col-3 card p-3 text-center" }, [
       _c("h4", { staticClass: "text-center mt-4" }, [
         _c("b", [_vm._v("弟子入り数")])
       ]),
@@ -14316,30 +14736,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "text-center p-2" }, [
-      _c("b", [_vm._v("性別ごとの利用比率")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "Mypage__Doughnut__title" }, [
-      _vm._v("25 "),
-      _c("small", [_vm._v("%")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center mt-4" }, [
-      _c("span", { staticClass: "Chart__label" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("男性利用　19人")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "Chart__label" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("女性利用　10人")])
+      _c("b", [_vm._v("7日間の利用推移")])
     ])
   },
   function() {
@@ -16660,10 +17057,10 @@ var render = function() {
         [
           _c("UserBar", {
             attrs: {
-              total_all: 1562,
-              total_month: 85,
-              total_calorie: 456,
-              total_donation: 789
+              total_all: _vm.all_count,
+              total_month: _vm.month_count,
+              total_calorie: _vm.calorie_count,
+              total_donation: _vm.donation_count
             }
           }),
           _vm._v(" "),
@@ -16755,8 +17152,9 @@ var render = function() {
                 _c("Bar", {
                   attrs: {
                     id: "bar",
-                    dataSet: _vm.time_data,
-                    labels: _vm.time_data_label
+                    dataSet: _vm.six_month_data,
+                    dataTime: _vm.other_month_data,
+                    labels: _vm.six_month_data_label
                   }
                 })
               ],
@@ -16773,28 +17171,58 @@ var render = function() {
                   _c("Doughnut", {
                     attrs: {
                       borderWidth: 70,
-                      dataSet: _vm.time_data,
-                      labels: _vm.time_data_label
+                      dataSet: _vm.active_data,
+                      labels: _vm.active_data
                     }
                   }),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _c("span", { staticClass: "Mypage__Doughnut__title" }, [
+                    _vm._v(_vm._s(_vm.active_ratio) + " "),
+                    _c("small", [_vm._v("%")])
+                  ])
                 ],
                 1
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "text-center mt-4" }, [
+                _c("span", { staticClass: "Chart__label bg__gray" }),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "非利用日数　" +
+                      _vm._s(_vm.today - _vm.month_data_label.length) +
+                      "日"
+                  )
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "Chart__label bg__red" }),
+                _vm._v(" "),
+                _c("span", [
+                  _vm._v(
+                    "使用日数 " + _vm._s(_vm.month_data_label.length) + "日"
+                  )
+                ])
+              ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(4),
+            _c("div", { staticClass: "col-4 card p-3 text-center" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("h1", { staticClass: "mt-1" }, [
+                _c("b", [_vm._v(_vm._s(_vm.follower_count))]),
+                _c("small", [_vm._v("pupil")])
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("Followers")])
+            ]),
             _vm._v(" "),
             _c(
               "div",
               { staticClass: "col-5 card p-3 " },
               [
-                _vm._m(5),
+                _vm._m(3),
                 _vm._v(" "),
                 _c("BarHorizontal", {
                   attrs: {
@@ -16808,7 +17236,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(6)
+            _vm._m(4)
           ])
         ],
         1
@@ -16825,9 +17253,21 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _vm._m(7),
+          _c("div", { staticClass: " card p-2 text-center" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("small", [
+              _vm._v(
+                "次のレベルまであと" +
+                  _vm._s(
+                    _vm.currentUser.experience_point - _vm.currentUser.point
+                  ) +
+                  "pint"
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(8),
+          _vm._m(6),
           _vm._v(" "),
           _vm._l(_vm.new_data, function(item) {
             return _c("div", { staticClass: " card p-1" }, [
@@ -16864,7 +17304,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("span", [_vm._v("募金 50円")])
+                        _c("span", [_vm._v("募金 " + _vm._s(item.coin) + "円")])
                       ]),
                       _vm._v(" "),
                       _c("span", [_vm._v(_vm._s(item.created_at))])
@@ -16872,7 +17312,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(9, true)
+                _vm._m(7, true)
               ])
             ])
           })
@@ -16887,40 +17327,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-      _c("h4", { staticClass: "d-inline-block" }, [
-        _c("b", [_vm._v("6か月の比較")])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "collapse navbar-collapse",
-          attrs: { id: "navbarText" }
-        },
-        [
-          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-            _c("li", { staticClass: "nav-item " }, [
-              _c("span", { staticClass: "Chart__label" }),
+    return _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light pt-3" },
+      [
+        _c("h4", { staticClass: "d-inline-block" }, [
+          _c("b", [_vm._v("6か月の比較")])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarText" }
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+              _c("li", { staticClass: "nav-item " }, [
+                _c("span", { staticClass: "Chart__label bg__red" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("ユーザー")])
+              ]),
               _vm._v(" "),
-              _c("span", [_vm._v("ユーザー")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item " }, [
-              _c("span", { staticClass: "Chart__label" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("みんな")])
+              _c("li", { staticClass: "nav-item " }, [
+                _c("span", { staticClass: "Chart__label bg__gray" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("みんな")])
+              ])
             ])
-          ])
-        ]
-      )
-    ])
+          ]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "text-center p-2" }, [
+    return _c("h4", { staticClass: "text-center p-3" }, [
       _c("b", [_vm._v("一か月の利用比率")])
     ])
   },
@@ -16928,40 +17372,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "Mypage__Doughnut__title" }, [
-      _vm._v("25 "),
-      _c("small", [_vm._v("%")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center mt-4" }, [
-      _c("span", { staticClass: "Chart__label" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("使用日数　15日")]),
-      _vm._v(" "),
-      _c("span", { staticClass: "Chart__label" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("非利用日数　10日")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 card p-3 text-center" }, [
-      _c("h4", { staticClass: "text-center mt-5" }, [
-        _c("b", [_vm._v("弟子入り数")])
-      ]),
-      _vm._v(" "),
-      _c("h1", { staticClass: "mt-1" }, [
-        _c("b", [_vm._v("1,523")]),
-        _c("small", [_vm._v("pupil")])
-      ]),
-      _vm._v(" "),
-      _c("span", [_vm._v("Followers")])
+    return _c("h4", { staticClass: "text-center mt-5" }, [
+      _c("b", [_vm._v("弟子入り数")])
     ])
   },
   function() {
@@ -16991,11 +17403,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " card p-2 text-center" }, [
-      _c("h3", {}, [_c("b", [_vm._v("Lev.58")])]),
-      _vm._v(" "),
-      _c("small", [_vm._v("次のレベルまであと151pint")])
-    ])
+    return _c("h3", {}, [_c("b", [_vm._v("Lev.58")])])
   },
   function() {
     var _vm = this
@@ -34201,6 +34609,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Follow_vue_vue_type_template_id_01ada95c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Follow_vue_vue_type_template_id_01ada95c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Map.vue":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Map.vue ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Map.vue?vue&type=template&id=479a2f41& */ "./resources/js/components/Map.vue?vue&type=template&id=479a2f41&");
+/* harmony import */ var _Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Map.vue?vue&type=script&lang=js& */ "./resources/js/components/Map.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Map.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Map.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Map.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Map.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Map.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Map.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Map.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Map.vue?vue&type=template&id=479a2f41&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Map.vue?vue&type=template&id=479a2f41& ***!
+  \************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Map.vue?vue&type=template&id=479a2f41& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=template&id=479a2f41&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

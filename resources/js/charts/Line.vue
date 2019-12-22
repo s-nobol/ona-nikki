@@ -67,7 +67,7 @@ export default {
                         pointRadius:5,
                         data: this.dataSet
                     },{
-                        label: '支援金用のチャート',
+                        label: '支援金',
                         backgroundColor: 'mintcream',
                         borderColor: 'mediumaquamarine',
                         pointBackgroundColor: 'white',

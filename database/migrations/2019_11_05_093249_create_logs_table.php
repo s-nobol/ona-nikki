@@ -27,7 +27,8 @@ class CreateLogsTable extends Migration
             
             
             
-            $table->integer('coin')->nullable();//コイン
+            // $table->integer('coin')->nullable();//コイン
+            $table->integer('coin')->default(0);//コイン
             
             
             $table->timestamps();

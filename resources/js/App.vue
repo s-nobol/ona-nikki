@@ -3,7 +3,7 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom ">
             
-                <span class="header__title" @click="onHome">おな 日記</span>
+                <span class="header__title" @click="onHome">おな 日記 β</span>
                 
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">

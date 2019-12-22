@@ -8,10 +8,10 @@
                 
                 <!--ユーザーばー-->
                 <UserBar 
-                    :total_all="1562"
-                    :total_month="85"
-                    :total_calorie="456"
-                    :total_donation="789"
+                    :total_all="all_count"
+                    :total_month="month_count"
+                    :total_calorie="calorie_count"
+                    :total_donation="donation_count"
                 />
                 
             
@@ -44,20 +44,21 @@
                 
                 <!--サブチャート-->
                 <div class="row">
+                
+                
+                    <!--過去6か月の比較-->
                     <div class="col-7 card">
-                         <!--<span>なんかのグラフ</span>-->
-                        
-                        <nav class="navbar navbar-expand-lg navbar-light">
+                        <nav class="navbar navbar-expand-lg navbar-light pt-3">
                             <h4 class="d-inline-block"><b>6か月の比較</b></h4>  
                             
                             <div class="collapse navbar-collapse" id="navbarText">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item ">
-                                        <span class="Chart__label"></span>
+                                        <span class="Chart__label bg__red"></span>
                                         <span>ユーザー</span>
                                     </li>
                                     <li class="nav-item ">
-                                        <span class="Chart__label"></span>
+                                        <span class="Chart__label bg__gray"></span>
                                         <span>みんな</span>
                                     </li>
                                 </ul>
@@ -65,28 +66,31 @@
                         </nav>
                         <Bar 
                             id="bar"
-                            :dataSet="time_data"
-                            :labels="time_data_label"
+                            :dataSet="six_month_data"
+                            :dataTime="other_month_data"
+                            :labels="six_month_data_label"
                         />
                     </div>
                     
                     
-                    
-                    <div class="col-5 card">
-                        <!--一か月の利用頻度（円グラフ）-->           
-                        <h4 class="text-center p-2"><b>一か月の利用比率</b></h4>  
+                
+                    <!--一か月の利用頻度（円グラフ）-->  
+                    <div class="col-5 card">         
+                        <h4 class="text-center p-3"><b>一か月の利用比率</b></h4>  
                  
                         <div class="Mypage__Doughnut">
                             <Doughnut 
                                 :borderWidth="70"
-                                :dataSet="time_data"
-                                :labels="time_data_label"
+                                :dataSet="active_data"
+                                :labels="active_data"
                             />
-                            <span class="Mypage__Doughnut__title">25 <small>%</small></span>
+                            <span class="Mypage__Doughnut__title">{{ active_ratio }} <small>%</small></span>
                         </div>
                         <div class="text-center mt-4">
-                            <span class="Chart__label"></span> <span>使用日数　15日</span>
-                            <span class="Chart__label"></span> <span>非利用日数　10日</span>
+                            <span class="Chart__label bg__gray"></span> 
+                            <span>非利用日数　{{ today - month_data_label.length }}日</span>
+                            <span class="Chart__label bg__red"></span> 
+                            <span>使用日数 {{ month_data_label.length }}日</span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +102,7 @@
                         <!--<span>何らかのグラフ・データ</span>-->
                         <h4 class="text-center mt-5"><b>弟子入り数</b></h4>
                         
-                        <h1 class="mt-1"><b>1,523</b><small>pupil</small></h1>
+                        <h1 class="mt-1"><b>{{ follower_count }}</b><small>pupil</small></h1>
                         <span>Followers</span>
                     </div>
                     
@@ -148,7 +152,7 @@
                     <!--レベル・ユーザーステータスになるもの-->
                     <div class=" card p-2 text-center">
                         <h3 class=""><b>Lev.58</b></h3>
-                        <small>次のレベルまであと151pint</small>
+                        <small>次のレベルまであと{{ currentUser.experience_point - currentUser.point }}pint</small>
                     </div>
                     
                     
@@ -181,7 +185,7 @@
                                             <span class="new__date__item bg__red">
                                                 <i class="fas fa-sun mr-2"></i>{{ item.category }}
                                             </span>
-                                            <span>募金 50円</span>
+                                            <span>募金 {{ item.coin }}円</span>
                                         </div>
                                         <span>{{ item.created_at }}</span>
                                     </div>
@@ -218,6 +222,8 @@
     display: inline-block;
     width: 25px;
     height: 15px;
+}
+.bg__gray{
     background-color: whitesmoke;
 }
 .new__date__item{
@@ -259,12 +265,16 @@ export default {
             tab: 'year',
             data: [],
             data_label: [],
+            today: new Date().getDate(),
             
             
             month_data: [],
             month_data_label:[],
-            last_month_data: [],
-            last_month_data_label: [],
+            
+            //過去6ヶ月のデータ
+            six_month_data: [],
+            six_month_data_label:[],
+            other_month_data: [],
             
             month_data_total: 0,    　 //1カ月の利用回数
             last_month_data_total: 0, //先月の利用回数
@@ -273,6 +283,7 @@ export default {
             time_data_label: [],
             
             active_data: [], //利用頻度
+            active_ratio: 0, //利用頻度
             
             
             new_data: [], //最新の5件のデータ
@@ -285,6 +296,13 @@ export default {
             category_data_label:[],
             category_data_color: [],
             
+            // UserBar1のデータ
+            all_count: 0,
+            month_count: 0,
+            calorie_count: 0,
+            donation_count: 0,
+            follower_count: 0,
+            
         }
     },
     methods: {
@@ -294,14 +312,14 @@ export default {
             this.tab = name 
             this.get_data(name)
         },
-        get_data(name){
+        get_select_data(name){
             // axios.get(`api/mypage/${name}/data`).then(response => {
             //     console.log(response);
             //     this.month_data = response.data.data
             //     this.month_data_label = response.data.data_label
             // })
         },
-        get_chart(){
+        get_data(){
             console.log("チャートの取得")
             axios.get(`api/mypage`).then(response => {
               
@@ -311,36 +329,31 @@ export default {
                 this.month_data = response.data.month_data
                 this.month_data_label = response.data.month_data_label
                 
-                // 先月のデータ
-                this.last_month_data = response.data.last_monnt_data
-                this.last_month_data_label = response.data.last_month_data_label
+                // 過去6ヶ月のデータ
+                this.six_month_data = response.data.six_month_data
+                this.six_month_data_label = response.data.six_month_data_label
+                this.other_month_data = response.data.other_month_data
                 
-                // 時間別データ
-                this.time_data = response.data.time_data
-                this.time_data_label = response.data.time_data_label
-                
-                
-                
-                // this.month_data_total = this.get_sum(this.month_data)
-                // this.last_month_data_total = this.get_sum(this.last_month_data)
-                
-                // this.active_data = this.get_active_data(this.month_data_label.length)
-                
-                
-                // // 最新5件のデータ
-                this.new_data = response.data.new_data
+                // 一か月の利用データ推移
+                this.active_data = this.get_active_data(this.month_data_label.length)
                 
                 // カテゴリー別割合
                 this.category_data = response.data.category_data
                 this.category_data_label = response.data.category_data_label
                 this.category_data_color = response.data.category_data_color
                 
-                // 募金額
-                // this.coin_data = response.data.coin_data
-                // this.coin_data_label = response.data.coin_data_label
+                // // 最新5件のデータ
+                this.new_data = response.data.new_data
                 
-                // this.day_data = response.data.day_data
+                // 日付のデータ
                 this.day_data = this.get_change_date( response.data.day_data)
+                
+                this.all_count = response.data.all_count
+                this.month_count = response.data.month_count
+                this.calorie_count = response.data.month_count * 48.5
+                this.donation_count = response.data.donation_count.count //ここだけ特殊
+                this.follower_count =  response.data.follower_count 
+                
             })
         },
         
@@ -354,10 +367,13 @@ export default {
         get_ave(data){
             return this.get_sum(data)/data.length;
         },
+        
+        
         // どのくらい利用しているか？
         get_active_data(data){
-            var days = 30 - data
-            return [data, days];
+            this.remain_day = this.today - data
+            this.active_ratio = Math.round( data / this.today *100) 
+            return [data, this.remain_day];
         },
         
         get_change_date(data){
@@ -371,8 +387,8 @@ export default {
         
     },
     created(){
-        this.get_data(this.tab)
-        this.get_chart()
+        this.get_select_data(this.tab)
+        this.get_data()
     }
 }
 </script>
