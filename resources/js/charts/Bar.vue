@@ -28,6 +28,12 @@ export default {
             require  : false,
             default: () => []
         },
+        //設定
+        backgroundColor: {
+            type: String,
+            require  : false,
+            default: 'whitesmoke'
+        },
     },
     data(){
         return{
@@ -51,7 +57,8 @@ export default {
                     },{
                         label: '時間別',
                         borderColor: ['rgba(63, 55, 110, 0.9)'],
-                        backgroundColor: 'rgba(63, 55, 110,  0.9)',
+                        // backgroundColor: 'rgba(63, 55, 110,  0.9)',
+                        backgroundColor: this.backgroundColor,
                         data: this.dataTime
                     }]
                 },  

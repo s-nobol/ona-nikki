@@ -2117,6 +2117,12 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    //設定
+    backgroundColor: {
+      type: String,
+      require: false,
+      "default": 'whitesmoke'
     }
   },
   data: function data() {
@@ -2140,7 +2146,8 @@ __webpack_require__.r(__webpack_exports__);
           }, {
             label: '時間別',
             borderColor: ['rgba(63, 55, 110, 0.9)'],
-            backgroundColor: 'rgba(63, 55, 110,  0.9)',
+            // backgroundColor: 'rgba(63, 55, 110,  0.9)',
+            backgroundColor: this.backgroundColor,
             data: this.dataTime
           }]
         },
@@ -2779,6 +2786,123 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/Time.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/charts/Time.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: {
+      type: String,
+      require: false,
+      "default": 'BarChart'
+    },
+    dataSet: {
+      type: Array,
+      require: false,
+      "default": function _default() {
+        return [];
+      }
+    },
+    dataTime: {
+      type: Array,
+      require: false,
+      "default": function _default() {
+        return [];
+      }
+    },
+    labels: {
+      type: Array,
+      require: false,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
+  data: function data() {
+    return {
+      chart: null,
+      backgroundColor: ['rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.8)', 'rgba(255, 226, 111, 0.9)', 'rgba(255, 226, 111, 0.9)', 'rgba(255, 226, 111, 0.8)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(255, 226, 111, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.8)', 'rgba(2, 77, 179, 0.9)', 'rgba(2, 77, 179, 0.9)', 'rgba(2, 77, 179, 0.8)', 'rgba(2, 77, 179, 0.7)', 'rgba(2, 77, 179, 0.7)']
+    };
+  },
+  methods: {
+    // チャートの作成
+    create_chart: function create_chart() {
+      var BarChart = document.getElementById(this.id).getContext('2d');
+      this.chart = new Chart(BarChart, {
+        type: 'bar',
+        data: {
+          labels: this.labels,
+          datasets: [{
+            label: '',
+            borderColor: 'white',
+            backgroundColor: 'rgba(255, 74, 74, 0.9)',
+            data: this.dataSet
+          }, {
+            label: '時間別',
+            borderColor: ['rgba(63, 55, 110, 0.9)'],
+            // backgroundColor: 'rgba(63, 55, 110,  0.9)',
+            backgroundColor: this.backgroundColor,
+            data: this.dataTime
+          }]
+        },
+        // laberuの非表示
+        options: {
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: true
+          },
+          scales: {
+            xAxes: [{
+              display: false,
+              stacked: false,
+              gridLines: {
+                display: true
+              }
+            }],
+            yAxes: [{
+              display: false,
+              gridLines: {
+                drawBorder: false
+              },
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+    }
+  },
+  watch: {
+    labels: function labels(_labels) {
+      console.log("TimeChart");
+
+      if (this.chart) {
+        this.chart.destroy();
+      }
+
+      this.create_chart();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/YearBar.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/charts/YearBar.vue?vue&type=script&lang=js& ***!
@@ -3044,10 +3168,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     id: {
@@ -3100,6 +3220,23 @@ __webpack_require__.r(__webpack_exports__);
       required: false,
       "default": 0
     }
+  },
+  data: function data() {
+    return {
+      loading: false
+    };
+  },
+  methods: {
+    selectItem: function selectItem(name) {
+      this.$emit('clickMap', name);
+    },
+    // 画像の読み込み後起動
+    load: function load() {// document.getElementById("map_item").style.display ="inline-block";
+    }
+  },
+  mounted: function mounted() {
+    this.loading = true; // 画像の読み込みが完了したら表示
+    // コールバック設定
   },
   watch: {
     // データが更新されたら起動
@@ -5069,16 +5206,26 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/Bar.vue */ "./resources/js/charts/Bar.vue");
-/* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
-/* harmony import */ var _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/Line.vue */ "./resources/js/charts/Line.vue");
-/* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
-/* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
-/* harmony import */ var _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Table.vue */ "./resources/js/components/Table.vue");
-/* harmony import */ var _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Ranker.vue */ "./resources/js/components/Ranker.vue");
+/* harmony import */ var _charts_Time_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/Time.vue */ "./resources/js/charts/Time.vue");
+/* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
+/* harmony import */ var _charts_Line_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/Line.vue */ "./resources/js/charts/Line.vue");
+/* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
+/* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
+/* harmony import */ var _components_Table_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Table.vue */ "./resources/js/components/Table.vue");
 /* harmony import */ var _components_Map_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Map.vue */ "./resources/js/components/Map.vue");
 /* harmony import */ var _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/home/HomeBar.vue */ "./resources/js/components/home/HomeBar.vue");
 /* harmony import */ var _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/home/TimeLine.vue */ "./resources/js/components/home/TimeLine.vue");
 /* harmony import */ var _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/home/TwitterFeed.vue */ "./resources/js/components/home/TwitterFeed.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5298,13 +5445,13 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     HomeBar: _components_home_HomeBar_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     Bar: _charts_Bar_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Lines: _charts_Line_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Lines: _charts_Line_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    TimeChart: _charts_Time_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Map: _components_Map_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Table: _components_Table_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Ranker: _components_Ranker_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Table: _components_Table_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     TimeLine: _components_home_TimeLine_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     TwitterFeed: _components_home_TwitterFeed_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
@@ -5317,10 +5464,15 @@ __webpack_require__.r(__webpack_exports__);
       donation_count: 0,
       data: [],
       data_label: [],
+      //地域ごとのグラフ
       location_data: [],
       location_data_label: [],
+      //性別ごとのグラフ
       sex_data: [],
       sex_data_label: [],
+      // 時間帯データ
+      time_data: [],
+      time_data_label: [],
       // 7日間データ
       week_data: [],
       week_data_label: [],
@@ -5694,9 +5846,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
-/* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
-/* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
+/* harmony import */ var _components_Map_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Map.vue */ "./resources/js/components/Map.vue");
+/* harmony import */ var _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../charts/BarHorizontal.vue */ "./resources/js/charts/BarHorizontal.vue");
+/* harmony import */ var _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/Doughnut.vue */ "./resources/js/charts/Doughnut.vue");
+/* harmony import */ var _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/BarLine.vue */ "./resources/js/charts/BarLine.vue");
 //
 //
 //
@@ -5831,14 +5984,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    BarHorizontal: _charts_BarHorizontal_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Doughnut: _charts_Doughnut_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BarLine: _charts_BarLine_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Map: _components_Map_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
     return {
@@ -5847,21 +6009,32 @@ __webpack_require__.r(__webpack_exports__);
       locations: ['北海道エリア', '東北エリア', '関東エリア', '中部エリア', '関西エリア', '中国エリア', '四国エリア', '九州エリア'],
       select: null,
       msgs: [],
+      //年齢ごとデータ
       age_data: [],
       age_data_label: [],
+      //性別ごとデータ
       sex_data: [],
       sex_data_label: [],
+      sex_data_sum: null,
+      //月額平均データ
       month_data: [],
       month_data_label: [],
-      month_data_all: []
+      month_data_all: [],
+      month_data_avg: null,
+      other_month_data: [],
+      other_month_data_avg: null
     };
   },
   methods: {
+    chengeLocation: function chengeLocation(name) {
+      alert("ロケーション変更" + name);
+      this.onchangeSelect(name);
+    },
     get_location: function get_location() {
       var _this = this;
 
       axios.get("/api/locations").then(function (response) {
-        console.log(response);
+        console.log('地域の名前取得', response);
         _this.location = response.data.location;
       });
     },
@@ -5874,15 +6047,31 @@ __webpack_require__.r(__webpack_exports__);
 
       this.select = name;
       axios.get("/api/location/".concat(name)).then(function (response) {
-        console.log(response);
+        console.log('location', response); // 年齢
+
         _this2.age_data = response.data.age_data;
-        _this2.age_data_label = response.data.age_data_label;
+        _this2.age_data_label = response.data.age_data_label; // 性別
+
         _this2.sex_data = response.data.sex_data;
         _this2.sex_data_label = response.data.sex_data_label;
+        _this2.sex_data_sum = _this2.get_sum(_this2.sex_data); // 月ごとのデータ
+
         _this2.month_data = response.data.month_data;
         _this2.month_data_label = response.data.month_data_label;
         _this2.month_data_all = response.data.month_data_all;
+        _this2.month_data_avg = _this2.get_ave(_this2.month_data);
+        _this2.other_month_data_avg = _this2.get_ave(_this2.month_data_all);
       });
+    },
+    // 配列の合計値をだす
+    get_sum: function get_sum(data) {
+      return data.reduce(function (prev, current, i, data) {
+        return prev + current;
+      });
+    },
+    // 配列の平均値
+    get_ave: function get_ave(data) {
+      return Math.round(this.get_sum(data) / data.length);
     }
   },
   created: function created() {
@@ -6069,6 +6258,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6088,6 +6287,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      user_all_avg: 0,
       // 月別利用データ
       month_data: [],
       month_data_label: [],
@@ -6097,6 +6297,7 @@ __webpack_require__.r(__webpack_exports__);
       sex_data: [],
       sex_data_label: [],
       sex_data_sum: [],
+      sex_user_all: [],
       // カテゴリー別データ
       category_data: [],
       category_data_label: [],
@@ -6104,7 +6305,10 @@ __webpack_require__.r(__webpack_exports__);
       // 募金推移データ
       coin_data: [],
       coin_data_label: [],
-      coin_data_sum: []
+      coin_data_sum: [],
+      coin_data_avg: [],
+      last_month_coin_data_sum: [],
+      coin_data_rate: null
     };
   },
   methods: {
@@ -6123,7 +6327,8 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.sex_data = response.data.sex_data;
           _this.sex_data_label = response.data.sex_data_label;
-          _this.sex_data_sum = _this.sum(_this.sex_data); // カテゴリー別割合
+          _this.sex_data_sum = _this.sum(_this.sex_data);
+          _this.user_all_avg = Math.round(_this.sex_data_sum / response.data.user_all * 100); // カテゴリー別割合
 
           _this.category_data = response.data.category_data;
           _this.category_data_label = response.data.category_data_label;
@@ -6132,6 +6337,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.coin_data = response.data.coin_data;
           _this.coin_data_label = response.data.coin_data_label;
           _this.coin_data_sum = _this.sum(_this.coin_data);
+          _this.coin_data_avg = Math.round(_this.coin_data_sum / _this.sex_data_sum * 10) / 10; // 先月のデータ
+
+          _this.last_month_coin_data_sum = _this.sum(response.data.last_month_coin_data);
+          _this.coin_data_rate = Math.round(_this.coin_data_sum / _this.last_month_coin_data_sum * 10) / 10;
         }
       });
     },
@@ -6387,6 +6596,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6402,11 +6615,16 @@ __webpack_require__.r(__webpack_exports__);
       sex_data_label: [],
       man_data: [],
       man_data_label: [],
+      man_data_max: null,
       woman_data: [],
       woman_data_label: [],
+      woman_data_max: null,
       age_label: ['10代', '20代', '30代', '40代', '50代', '60代', 'その他'],
+      // age_label: [],
       age_data: [],
-      age_data_label: []
+      age_data_label: [],
+      age_data_max: null,
+      age_data_mini: null
     };
   },
   methods: {
@@ -6419,10 +6637,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.sex_data_label = response.data.data_label;
         _this.man_data = response.data.man_data;
         _this.man_data_label = response.data.man_data_label;
+        _this.man_data_max = _this.get_max_data_label(_this.man_data, _this.man_data_label);
         _this.woman_data = response.data.woman_data;
         _this.woman_data_label = response.data.woman_data_label;
+        _this.woman_data_max = _this.get_max_data_label(_this.woman_data, _this.woman_data_label);
         _this.age_data = response.data.age_data;
-        _this.age_data_label = response.data.age_label; // this.pie_chart()
+        _this.age_data_label = response.data.age_data_label;
+        _this.age_data_max = _this.get_max_data_label(_this.age_data, _this.age_data_label);
+        _this.age_data_mini = _this.get_mini_data_label(_this.age_data, _this.age_data_label); // this.pie_chart()
 
         _this.man_chart();
 
@@ -6496,6 +6718,42 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       });
+    },
+    // グラフで一番多い数を検出する
+    get_max_data: function get_max_data(data) {
+      return Math.max.apply(null, data);
+    },
+    // グラフで一番多い数を検出する
+    get_max_data_label: function get_max_data_label(data, data_label) {
+      var max = 0;
+      var max_i = 0;
+
+      for (var i = 0; i < data.length; i++) {
+        if (data[i] > max) {
+          max = data[i];
+          max_i = i;
+        }
+      }
+
+      return data_label[max_i];
+    },
+    // 最低値
+    get_mini_data_label: function get_mini_data_label(data, data_label) {
+      var mini = 0;
+      var mini_i = 0;
+
+      for (var i = 0; i < data.length; i++) {
+        if (data_label[0]) {
+          mini = data_label[0];
+        }
+
+        if (data[i] > mini) {
+          mini = data[i];
+          mini_i = i;
+        }
+      }
+
+      return data_label[mini_i];
     }
   },
   created: function created() {
@@ -8463,7 +8721,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -8484,21 +8741,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      msg: '150',
       count: [],
       month: [],
       month_data: [],
       month_data_label: [],
+      month_data_sum: [],
       month_data_ave: [],
       other_user_month_data_count: [],
       doughnut: [],
-      // 時間別
-      time_data: [],
-      time_data_label: [],
       // 日付
       day_data: null,
       day_data_label: null,
       day_data_count: null,
+      active_data: null,
+      active_data_rate: null,
       // カテゴリー別データ
       category_data: [],
       category_data_label: [],
@@ -8518,19 +8774,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log('mypage-year', response);
         _this.month_data = response.data.month_data;
         _this.month_data_label = response.data.month_data_label;
-        _this.other_user_month_data_count = response.data.otherlogs; //日付ごとのカウント
+        _this.other_user_month_data_count = response.data.otherlogs;
+        _this.month_data_sum = _this.sum(_this.month_data); //日付ごとのカウント
 
         _this.day_data = response.data.day_data;
         _this.day_data_label = response.data.day_data_label;
         _this.day_data_count = response.data.day_data_count;
-        _this.day_data = [_this.day_data_count, 365 - _this.day_data_count]; // カテゴリー別割合
+        _this.day_data = [_this.day_data_count, 365 - _this.day_data_count];
+        _this.active_data_rate = Math.round(_this.day_data_count / 365 * 100); // カテゴリー別割合
 
         _this.category_data = response.data.category_data;
         _this.category_data_label = response.data.category_data_label;
         _this.category_data_color = response.data.category_data_color; // 募金額
 
         _this.coin_data = response.data.coin_data;
-        _this.coin_data_label = response.data.coin_data_label; // this.coin_data_sum = this.sum(this.coin_data) 
+        _this.coin_data_label = response.data.coin_data_label;
+        _this.coin_data_sum = _this.sum(_this.coin_data);
       });
     },
     // 配列の合計値をだす
@@ -8613,7 +8872,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Map{\n    position: relative;\n}\n.Map__item{\n    display: inline-block;\n    background-color: rgba(255,75,75,0.7);\n    color: white;\n    border-radius: 30px;\n    padding: 10px;\n}\n.Map-hokkaido{\n    position:absolute;\n    top: 13%;\n    right: 23%;\n    /*background-color: blue;*/\n}\n.Map-tohoku{\n    position:absolute;\n    top: 40%;\n    right: 32%;\n    /*background-color: gray;*/\n}\n.Map-kanto{\n    position:absolute;\n    top: 65%;\n    right: 38%;\n    /*background-color: gray;*/\n}\n.Map-tyubu{\n    position:absolute;\n    top: 58%;\n    right: 48%;\n    /*background-color: gray;*/\n}\n.Map-kansai{\n    position:absolute;\n    top: 70%;\n    right: 60%;\n    /*background-color: gray;*/\n}\n.Map-tyugoku{\n    position:absolute;\n    top: 66%;\n    right: 73%;\n    /*background-color: gray;*/\n}\n.Map-shikoku{\n    position:absolute;\n    top: 77%;\n    right: 70%;\n    /*background-color: gray;*/\n}\n.Map-kyusyu{\n    position:absolute;\n    top: 80%;\n    right: 85%;\n    /*background-color: gray;*/\n}\n", ""]);
+exports.push([module.i, "\n.Map{\n    position: relative;\n}\n.Map__item{\n    cursor: pointer;\n    display: inline-block;\n    /*display: none;*/\n    background-color: rgba(255,75,75,0.7);\n    color: white;\n    border-radius: 30px;\n    padding: 10px;\n}\n.Map-hokkaido{\n    position:absolute;\n    top: 13%;\n    right: 23%;\n}\n.Map-tohoku{\n    position:absolute;\n    top: 40%;\n    right: 32%;\n}\n.Map-kanto{\n    position:absolute;\n    top: 65%;\n    right: 38%;\n}\n.Map-tyubu{\n    position:absolute;\n    top: 58%;\n    right: 48%;\n}\n.Map-kansai{\n    position:absolute;\n    top: 70%;\n    right: 60%;\n}\n.Map-tyugoku{\n    position:absolute;\n    top: 66%;\n    right: 73%;\n}\n.Map-shikoku{\n    position:absolute;\n    top: 77%;\n    right: 70%;\n}\n.Map-kyusyu{\n    position:absolute;\n    top: 80%;\n    right: 85%;\n}\n", ""]);
 
 // exports
 
@@ -8803,7 +9062,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.Home__CoinChart{\n    position: relative;\n    background-color: #68d99b;\n}\n.Home__CoinChart__title{\n    position: absolute;\n    top: 15px;\n    left: 15px;\n    color: white;\n    font-size: 35px;\n}\n.bg__blue{\n    background-color: lightskyblue;\n}\n", ""]);
+exports.push([module.i, "\n.Home__CoinChart{\n    position: relative;\n    background-color: #68d99b;\n}\n.Home__CoinChart__title{\n    position: absolute;\n    top: 15px;\n    left: 15px;\n    color: white;\n    font-size: 35px;\n}\n.bg__blue{\n    background-color: lightskyblue;\n}\n.text__noon{\n    color: rgba(245, 216, 111, 1);\n}\n.text__night{\n    color: rgba(2, 67, 169, 1);\n}\n", ""]);
 
 // exports
 
@@ -11997,6 +12256,30 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/Time.vue?vue&type=template&id=655ca44e&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/charts/Time.vue?vue&type=template&id=655ca44e& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_c("canvas", { attrs: { id: _vm.id } })])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/YearBar.vue?vue&type=template&id=c6f1fa8c&":
 /*!******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/charts/YearBar.vue?vue&type=template&id=c6f1fa8c& ***!
@@ -12076,34 +12359,126 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "Map" }, [
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-hokkaido",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("北海道")
+          }
+        }
+      },
+      [_vm._v("北海道")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-tohoku",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("東北")
+          }
+        }
+      },
+      [_vm._v("東北")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-kanto",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("関東")
+          }
+        }
+      },
+      [_vm._v("関東")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-tyubu",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("中部")
+          }
+        }
+      },
+      [_vm._v("中部")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-kansai",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("関西")
+          }
+        }
+      },
+      [_vm._v("関西")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-tyugoku",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("中国")
+          }
+        }
+      },
+      [_vm._v("中国")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-shikoku",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("四国")
+          }
+        }
+      },
+      [_vm._v("四国")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "Map__item Map-kyusyu",
+        attrs: { id: "map_item" },
+        on: {
+          click: function($event) {
+            return _vm.selectItem("九州")
+          }
+        }
+      },
+      [_vm._v("九州")]
+    ),
+    _vm._v(" "),
+    _c("img", {
+      attrs: { src: "/image/map2.png", id: "map" },
+      on: { load: _vm.load }
+    })
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "Map" }, [
-      _c("div", { staticClass: "Map__item Map-hokkaido" }, [_vm._v("北海道")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-tohoku" }, [_vm._v("東北")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-kanto" }, [_vm._v("関東")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-tyubu" }, [_vm._v("中部")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-kansai" }, [_vm._v("関西")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-tyugoku" }, [_vm._v("中国")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-shikoku" }, [_vm._v("四国")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "Map__item Map-kyusyu" }, [_vm._v("九州")]),
-      _vm._v(" "),
-      _c("img", { attrs: { src: "/image/map.png" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -14491,14 +14866,14 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-9" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "row pt-5 pb-5" }, [
+          _c("div", { staticClass: "card pt-5 pb-5" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
               _c(
                 "div",
                 { staticClass: "col-5" },
                 [
-                  _vm._m(0),
-                  _vm._v(" "),
                   _c("BarHorizontal", {
                     attrs: {
                       id: "locatio4n",
@@ -14542,37 +14917,34 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-7 p-4" }, [_c("Map")], 1)
-            ])
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(2),
-            _vm._v(" "),
             _c(
               "div",
-              { staticClass: "col-5 card" },
+              { staticClass: "col-4 card p-3 text-center " },
               [
                 _vm._m(3),
                 _vm._v(" "),
-                _c("BarHorizontal", {
+                _vm._m(4),
+                _vm._v(" "),
+                _c("Bar", {
                   attrs: {
-                    id: "category2",
-                    dataSet: _vm.category_data,
-                    dataBackgroundColor: _vm.category_data_color,
-                    labels: _vm.category_data_label
+                    id: "test",
+                    dataSet: _vm.time_data,
+                    labels: _vm.time_data_label
                   }
                 })
               ],
               1
             ),
             _vm._v(" "),
-            _vm._m(4)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              { staticClass: "col-6 card " },
+              { staticClass: "col-5 card" },
               [
                 _vm._m(5),
                 _vm._v(" "),
@@ -14588,17 +14960,43 @@ var render = function() {
               1
             ),
             _vm._v(" "),
+            _vm._m(6)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              { staticClass: "col-6 card p-0" },
+              { staticClass: "col-5 card p-0 text-center" },
               [
-                _vm._m(6),
+                _vm._m(7),
                 _vm._v(" "),
                 _c("Lines", {
                   attrs: {
-                    id: "week",
+                    id: "week2",
                     dataSet: _vm.week_data,
                     labels: _vm.week_data
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _vm._m(8),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-4 card " },
+              [
+                _vm._m(9),
+                _vm._v(" "),
+                _vm._m(10),
+                _vm._v(" "),
+                _c("TimeChart", {
+                  attrs: {
+                    id: "time",
+                    backgroundColor: "rgba(102,204,148,0.9)",
+                    dataTime: _vm.time_data,
+                    labels: _vm.time_data_label
                   }
                 })
               ],
@@ -14615,22 +15013,7 @@ var render = function() {
             _vm._v(" "),
             _c("TwitterFeed"),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "Home__CoinChart" },
-              [
-                _vm._m(7),
-                _vm._v(" "),
-                _c("Lines", {
-                  attrs: {
-                    id: "coin",
-                    Coins: _vm.donation_data,
-                    labels: _vm.donation_data_label
-                  }
-                })
-              ],
-              1
-            )
+            _vm._m(11)
           ],
           1
         )
@@ -14653,24 +15036,35 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "text-center mt-5" }, [
-      _c("b", [_vm._v("地域ごとの集計")])
+      _c("b", [_vm._v("性別ごとの利用比率")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4 card p-3 text-center" }, [
-      _c("h4", { staticClass: "text-center mt-4" }, [
-        _c("b", [_vm._v("弟子入り数")])
-      ]),
+    return _c("div", { staticClass: "text-right pr-5" }, [
+      _c("small", [_vm._v("©日本全国オワコン・Project")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "text-center mt-4" }, [
+      _c("b", [_vm._v("月間募金額")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "mt-1" }, [
+      _c("i", { staticClass: "fas fa-yen-sign" }),
       _vm._v(" "),
-      _c("h1", { staticClass: "mt-1" }, [
-        _c("b", [_vm._v("1,523")]),
-        _c("small", [_vm._v("aces")])
-      ]),
+      _c("b", [_vm._v("71,748")]),
       _vm._v(" "),
-      _c("span", [_vm._v("Followers")])
+      _c("small", [_vm._v("円")])
     ])
   },
   function() {
@@ -14685,9 +15079,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3 card p-3 text-center" }, [
+    return _c("div", { staticClass: "col-3 card p-3 text-center " }, [
       _c("h4", { staticClass: "text-center mt-4" }, [
-        _c("b", [_vm._v("弟子入り数")])
+        _c("b", [_vm._v("今日救われた命の数")])
       ]),
       _vm._v(" "),
       _c("h1", { staticClass: "mt-1" }, [
@@ -14702,33 +15096,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("nav", { staticClass: "navbar navbar-expand-lg navbar-light" }, [
-      _c("h4", { staticClass: "d-inline-block" }, [
-        _c("b", [_vm._v("7日間の利用推移")])
+    return _c("h4", { staticClass: "text-center mt-2" }, [
+      _c("b", [_vm._v("一週間の集計")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3 card p-3 text-center" }, [
+      _c("h4", { staticClass: "text-center mt-4" }, [
+        _c("b", [_vm._v("月間利用人数")])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "collapse navbar-collapse",
-          attrs: { id: "navbarText" }
-        },
-        [
-          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-            _c("li", { staticClass: "nav-item " }, [
-              _c("span", { staticClass: "Chart__label" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("ユーザー")])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item " }, [
-              _c("span", { staticClass: "Chart__label" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("みんな")])
-            ])
-          ])
-        ]
-      )
+      _c("h1", { staticClass: "mt-1" }, [
+        _c("b", [_vm._v("1831")]),
+        _c("small", [_vm._v("人")])
+      ]),
+      _vm._v(" "),
+      _c("span", [_vm._v("Access")])
     ])
   },
   function() {
@@ -14736,15 +15122,56 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", { staticClass: "text-center p-2" }, [
-      _c("b", [_vm._v("7日間の利用推移")])
+      _c("b", [_vm._v("時間帯別利用推移")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h4", { staticClass: "text-center text-white" }, [
-      _c("b", [_vm._v("募金額推移")])
+    return _c(
+      "nav",
+      { staticClass: "navbar navbar-expand-lg navbar-light p-0 pl-2 pr-2" },
+      [
+        _c("span", { staticClass: "navbar-text" }, [
+          _c("i", { staticClass: "fas fa-cloud-sun fa-lg text__noon" }),
+          _vm._v(" 0時から\n                            ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarText" }
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav mr-auto" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "navbar-text" }, [
+              _vm._v(" 24時まで\n                                "),
+              _c("i", { staticClass: "fas fa-cloud-moon fa-lg text__night" })
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card" }, [
+      _c("iframe", {
+        staticStyle: { border: "0" },
+        attrs: {
+          src:
+            "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1877635.1007461809!2d137.24227896228032!3d35.027883556738324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019629a42fdc899%3A0xa6a1fcc916f3a4df!2z5a-M5aOr5bGx!5e0!3m2!1sja!2sjp!4v1576432477177!5m2!1sja!2sjp",
+          width: "100%",
+          height: "250",
+          frameborder: "0",
+          allowfullscreen: ""
+        }
+      })
     ])
   }
 ]
@@ -15065,221 +15492,240 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      {},
-      [
-        _vm._l(_vm.location, function(item) {
-          return _c(
-            "span",
-            {
-              staticClass: "location_item ",
-              on: {
-                click: function($event) {
-                  return _vm.onchangeSelect(item)
-                }
-              }
-            },
-            [_vm._v(_vm._s(item))]
-          )
-        }),
-        _vm._v(" "),
-        _vm._l(_vm.locations, function(item) {
-          return _c(
-            "span",
-            {
-              staticClass: "location_item ",
-              on: {
-                click: function($event) {
-                  return _vm.onchangeSelect(item)
-                }
-              }
-            },
-            [_vm._v(_vm._s(item))]
-          )
-        })
-      ],
-      2
-    ),
-    _vm._v(" "),
-    !_vm.select
-      ? _c("div", { staticClass: "card" }, [
-          _vm._m(1),
-          _vm._v(
-            "\n           \n           まだ何も選択されていません\n       "
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.select
-      ? _c("div", { staticClass: "card about__continer__bg" }, [
-          _c("div", { staticClass: "about__continer" }, [
-            _c("h3", { staticClass: "about__title mb-5" }, [
-              _c("b", [_vm._v(_vm._s(_vm.select) + "の自慰事情について")])
-            ]),
+  return _c(
+    "div",
+    [
+      !_vm.select
+        ? _c("div", { staticClass: "card" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c("div", { staticClass: "row mb-5" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-6" },
-                [
-                  _c("h5", [_vm._v("年齢と相関図")]),
-                  _vm._v(" "),
-                  _c("BarHorizontal", {
-                    attrs: {
-                      id: "age",
-                      dataSet: _vm.age_data,
-                      labels: _vm.age_data_label
-                    }
+            _c(
+              "div",
+              { staticClass: "w-50 m-auto" },
+              [
+                _c("Map", { on: { clickMap: _vm.chengeLocation } }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "text-center mb-5" },
+                  _vm._l(_vm.location, function(item) {
+                    return _c(
+                      "span",
+                      {
+                        staticClass: "location_item ",
+                        on: {
+                          click: function($event) {
+                            return _vm.onchangeSelect(item)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(item))]
+                    )
                   }),
-                  _vm._v(" "),
-                  _c("h5", [_vm._v("性別ごとの利用割合")]),
+                  0
+                )
+              ],
+              1
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "fade" } }, [
+        _vm.select
+          ? _c("div", { staticClass: "card about__continer__bg" }, [
+              _c("div", { staticClass: "text-right" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light",
+                    on: {
+                      click: function($event) {
+                        _vm.select = null
+                      }
+                    }
+                  },
+                  [_vm._v("戻る")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "about__continer" }, [
+                _c("h3", { staticClass: "about__title mb-5" }, [
+                  _c("b", [_vm._v(_vm._s(_vm.select) + "の自慰事情について")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mb-5" }, [
+                  _c("div", { staticClass: "col-6 " }, [
+                    _c("img", {
+                      staticClass: "location_image",
+                      attrs: { src: "/image/kyushu.png", alt: "" }
+                    })
+                  ]),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "pl-3 pr-3" },
+                    { staticClass: "col-6" },
                     [
-                      _c("Doughnut", {
+                      _c("h5", [_vm._v("年齢と相関図")]),
+                      _vm._v(" "),
+                      _c("BarHorizontal", {
                         attrs: {
-                          borderWidth: 80,
-                          dataSetSex: _vm.sex_data,
-                          labels: _vm.sex_data_label
+                          id: "age",
+                          dataSet: _vm.age_data,
+                          labels: _vm.age_data_label
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("h5", [_vm._v("性別ごとの利用割合")]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "pl-3 pr-3" },
+                        [
+                          _c("Doughnut", {
+                            attrs: {
+                              borderWidth: 80,
+                              dataSetSex: _vm.sex_data,
+                              labels: _vm.sex_data_label
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "media" }, [
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("span", [
+                            _c("h5", { staticClass: "mt-0" }, [
+                              _vm._v("年齢について")
+                            ]),
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(_vm.select) +
+                                "地方に在住の賢者さまは、合計" +
+                                _vm._s(_vm.sex_data_sum) +
+                                "人です。\n                        これは全国のユーザーの内15％を示しています。\n                        また、性別ごとに比較すると" +
+                                _vm._s(_vm.sex_data_label[0]) +
+                                "性の賢者様" +
+                                _vm._s(_vm.sex_data[0]) +
+                                "人、\n                        " +
+                                _vm._s(_vm.sex_data_label[1]) +
+                                "性の賢者様" +
+                                _vm._s(_vm.sex_data[1]) +
+                                "人で\n                        " +
+                                _vm._s(_vm.sex_data_label[0]) +
+                                "性の賢者様の利用人数が多い結果となりました。\n                        "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("img", {
+                          staticClass: "align-self-start mr-3 myimage",
+                          attrs: { src: "/image/kairakuten.png", alt: "" }
+                        })
+                      ])
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("h3", { staticClass: "about__title mb-5" }, [
+                  _c("b", [_vm._v("全国との比較")])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row " }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-6" },
+                    [
+                      _c("h5", [_vm._v("利用者数の推移と平均利用率")]),
+                      _vm._v(" "),
+                      _c("BarLine", {
+                        attrs: {
+                          lineDataSet: _vm.month_data_all,
+                          barDataSet: _vm.month_data,
+                          labels: _vm.month_data_label
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "media" }, [
+                        _c("img", {
+                          staticClass: "align-self-start mr-3 myimage",
+                          attrs: { src: "/image/kairakuten.png", alt: "" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("span", [
+                            _c("h5", { staticClass: "mt-0" }, [
+                              _vm._v("利用者数の推移について")
+                            ]),
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.select) +
+                                "地方の月額平均利用回数は" +
+                                _vm._s(_vm.month_data_avg) +
+                                "回です。\n                            全国の利用回数（" +
+                                _vm._s(_vm.other_month_data_avg) +
+                                "回）と比較すると\n                            "
+                            ),
+                            _vm.month_data > _vm.other_month_data
+                              ? _c("span", [_vm._v("やや多い")])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.month_data < _vm.other_month_data
+                              ? _c("span", [_vm._v("やや少ない")])
+                              : _vm._e(),
+                            _vm._v(
+                              "\n                            結果となりました。\n                            \n                            "
+                            )
+                          ])
+                        ])
+                      ])
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _vm._m(3)
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _c("div", { staticClass: "row " }, [
-              _c(
-                "div",
-                { staticClass: "col-6" },
-                [
-                  _c("h5", [_vm._v("利用者数の推移と平均利用率")]),
-                  _vm._v(" "),
-                  _c("BarLine", {
-                    attrs: {
-                      lineDataSet: _vm.month_data_all,
-                      barDataSet: _vm.month_data,
-                      labels: _vm.month_data_label
-                    }
+                  _c("div", { staticClass: "col-6 " }, [
+                    _c("img", {
+                      staticClass: "location_image",
+                      attrs: { src: "/image/kyushu.png", alt: "" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "text-center" },
+                  _vm._l(_vm.location, function(item) {
+                    return _c(
+                      "span",
+                      {
+                        staticClass: "location_item ",
+                        on: {
+                          click: function($event) {
+                            return _vm.onchangeSelect(item)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(item))]
+                    )
                   }),
-                  _vm._v(" "),
-                  _vm._m(5)
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm._m(6)
+                  0
+                )
+              ])
             ])
-          ])
-        ])
-      : _vm._e()
-  ])
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h5", [_c("b", [_vm._v("location")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-50 m-auto pt-5" }, [
-      _c("img", {
-        staticClass: "location_image",
-        attrs: { src: "/image/map.png" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "text-center" }, [
-        _c("span", [_vm._v("北海道　四国")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 " }, [
-      _c("img", {
-        staticClass: "location_image",
-        attrs: { src: "/image/kyushu.png", alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "media" }, [
-      _c("div", { staticClass: "media-body" }, [
-        _c("span", [
-          _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
-          _vm._v(
-            "\n                        テストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテストテストテストテスト\n                        テストテストテストテストテスト\n                        "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("img", {
-        staticClass: "align-self-start mr-3 myimage",
-        attrs: { src: "/image/kairakuten.png", alt: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h3", { staticClass: "about__title mb-5" }, [
-      _c("b", [_vm._v("全国との比較")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "media" }, [
-      _c("img", {
-        staticClass: "align-self-start mr-3 myimage",
-        attrs: { src: "/image/kairakuten.png", alt: "" }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "media-body" }, [
-        _c("span", [
-          _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者数の推移について")]),
-          _vm._v(
-            "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
-          )
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 " }, [
-      _c("img", {
-        staticClass: "location_image",
-        attrs: { src: "/image/kyushu.png", alt: "" }
-      })
+    return _c("h3", { staticClass: "about__title mt-5 mb-3" }, [
+      _c("b", [_vm._v("地域ごとの利用記録")])
     ])
   }
 ]
@@ -15332,20 +15778,79 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "col-4" }, [
+                _c("img", {
+                  staticClass: "align-self-start mr-3 myimage",
+                  attrs: { src: "/image/kairakuten.png", alt: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("span", [
+                      _c("h5", { staticClass: "mt-0" }, [
+                        _vm._v("利用推移について")
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.year) +
+                          "年" +
+                          _vm._s(_vm.month) +
+                          "月の合計利用回数は" +
+                          _vm._s(_vm.month_data_sum) +
+                          "回となりました。\n                            また、当月の利用人数は" +
+                          _vm._s(_vm.sex_data_sum) +
+                          "人で\n                            これは、一人当たり一か月に" +
+                          _vm._s(
+                            Math.round(
+                              (_vm.month_data_sum / _vm.sex_data_sum) * 10
+                            ) / 10
+                          ) +
+                          "\n                            回自慰行為が行われていることを表しています。\n                            "
+                      )
+                    ])
+                  ])
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-5" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("span", [
+                      _c("h5", { staticClass: "mt-0" }, [
+                        _vm._v("性別について")
+                      ]),
+                      _vm._v(
+                        "\n                            性別ごとの利用割合では、" +
+                          _vm._s(_vm.sex_data_label[0]) +
+                          "性の賢者様" +
+                          _vm._s(_vm.sex_data[0]) +
+                          "人、\n                            " +
+                          _vm._s(_vm.sex_data_label[1]) +
+                          "性の賢者様" +
+                          _vm._s(_vm.sex_data[1]) +
+                          "人\n                            と比較的" +
+                          _vm._s(_vm.sex_data_label[0]) +
+                          "性の賢者様による利用が多い結果となりました。"
+                      ),
+                      _c("br")
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "col-5" },
                 [
                   _c("h4", { staticClass: "text-center" }, [
-                    _vm._v(
-                      "性別ごとの利用割合 " + _vm._s(_vm.sex_data_sum) + "人"
-                    )
+                    _vm._v("利用者の性別")
                   ]),
                   _vm._v(" "),
                   _c("Doughnut", {
@@ -15379,11 +15884,109 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c(
+                      "span",
+                      [
+                        _c("h5", { staticClass: "mt-0" }, [
+                          _vm._v("カテゴリーについて")
+                        ]),
+                        _vm._v(
+                          "\n                            カテゴリーの比率は、\n                            "
+                        ),
+                        _vm._l(_vm.category_data, function(item, index) {
+                          return _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(index + 1) +
+                                "位が" +
+                                _vm._s(_vm.category_data_label[index]) +
+                                " (" +
+                                _vm._s(_vm.category_data[index]) +
+                                "回)、\n                            "
+                            )
+                          ])
+                        }),
+                        _vm._v(
+                          "\n                            となっており、平年並み並みの結果となりました。\n                            "
+                        )
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  })
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-5" }, [
-              _vm._m(4),
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    _vm.month > 1
+                      ? _c("span", [
+                          _c("h5", { staticClass: "mt-0" }, [
+                            _vm._v("募金額推移 について")
+                          ]),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.year) +
+                              "年" +
+                              _vm._s(_vm.month) +
+                              "月の募金額は合計" +
+                              _vm._s(_vm.coin_data_sum) +
+                              "円となりました。\n                            これは、先月の募金額" +
+                              _vm._s(_vm.last_month_coin_data_sum) +
+                              "円と比較して約" +
+                              _vm._s(_vm.coin_data_rate) +
+                              "％\n                            ほど"
+                          ),
+                          _vm.coin_data_sum > _vm.last_month_coin_data_sum
+                            ? _c("span", [_vm._v("増加")])
+                            : _vm._e(),
+                          _vm.coin_data_sum < _vm.last_month_coin_data_sum
+                            ? _c("span", [_vm._v("現象")])
+                            : _vm._e(),
+                          _vm._v(
+                            "しています。\n                            また、一人当たりの募金額は" +
+                              _vm._s(_vm.coin_data_avg) +
+                              "円となり、募金者の割合は増加傾向にあります。\n                            "
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.month == 1
+                      ? _c("span", [
+                          _c("h5", { staticClass: "mt-0" }, [
+                            _vm._v("募金額推移 について")
+                          ]),
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.year) +
+                              "年" +
+                              _vm._s(_vm.month) +
+                              "月の募金額は合計" +
+                              _vm._s(_vm.coin_data_sum) +
+                              "円となりました。\n                            また、一人当たりの募金額は" +
+                              _vm._s(_vm.coin_data_avg) +
+                              "円となります。\n                            "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -15405,7 +16008,19 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _c("div", { staticClass: "text-center" }, [
+              _c("span", [
+                _vm._v("合計射精回数　" + _vm._s(_vm.month_data_sum) + "回")
+              ]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("合計利用人数　" + _vm._s(_vm.sex_data_sum) + "人")
+              ]),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v("合計募金額　" + _vm._s(_vm.coin_data_sum) + "円")
+              ])
+            ])
           ])
         ])
       : _vm._e()
@@ -15417,106 +16032,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", [_c("b", [_vm._v("month")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用推移について")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者の割合")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("カテゴリーについて")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("募金額推移 について")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("span", [_vm._v("合計射精回数　555回")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("合計利用人数　15人")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("合計募金額　532円")])
-    ])
   }
 ]
 render._withStripped = true
@@ -15750,26 +16265,87 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "w-50 m-auto " }, [
+        _c("div", { staticClass: "media" }, [
+          _c("img", {
+            staticClass: "align-self-start mr-3 myimage",
+            attrs: { src: "/image/kairakuten.png", alt: "" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-body" }, [
+            _c("span", [
+              _c("h5", { staticClass: "mt-0" }, [_vm._v("性別について")]),
+              _vm._v(" "),
+              _vm._v(
+                "\n                    オナ日記のデータでは、" +
+                  _vm._s(_vm.sex_data_label[0]) +
+                  "性の賢者様" +
+                  _vm._s(_vm.sex_data[0]) +
+                  "人、\n                    " +
+                  _vm._s(_vm.sex_data_label[1]) +
+                  "性の賢者様" +
+                  _vm._s(_vm.sex_data[1]) +
+                  "人\n                    と比較的" +
+                  _vm._s(_vm.sex_data_label[0]) +
+                  "性の賢者様による利用が多い結果となりました。\n                    \n                    "
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
       _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3),
       _vm._v(" "),
       _c("div", { staticClass: "row " }, [
         _c(
           "div",
           { staticClass: "col-6 m-auto" },
           [
+            _vm._m(3),
+            _vm._v(" "),
             _c("bar", {
-              attrs: { dataSet: _vm.age_data, labels: _vm.age_data_label }
+              attrs: {
+                backgroundColor: "gainsboro",
+                dataTime: _vm.age_data,
+                labels: _vm.age_data_label
+              }
             })
           ],
           1
         )
       ]),
       _vm._v(" "),
-      _vm._m(4)
+      _c("div", { staticClass: "w-50 m-auto" }, [
+        _c("div", { staticClass: "media" }, [
+          _c("div", { staticClass: "media-body" }, [
+            _c("span", [
+              _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
+              _vm._v(
+                "性別ごとの利用比率を見ると男性の賢者様は、" +
+                  _vm._s(_vm.man_data_max) +
+                  "が多く、\n                    女性の賢者様は、" +
+                  _vm._s(_vm.woman_data_max) +
+                  "の利用人者が多い結果となりました。"
+              ),
+              _c("br"),
+              _vm._v(
+                "\n                    \n                    また、年齢ごとの比較によると" +
+                  _vm._s(_vm.age_data_max) +
+                  "の利用人数が一番多く、\n                    " +
+                  _vm._s(_vm.age_data_mini) +
+                  "の利用者が最も少ない結果となりました。\n                    "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "align-self-start mr-3 myimage",
+            attrs: { src: "/image/kairakuten.png", alt: "" }
+          })
+        ])
+      ])
     ])
   ])
 }
@@ -15786,30 +16362,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-50 m-auto " }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("性別について")]),
-            _vm._v(
-              "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "mt-5 about__title" }, [
-      _c("b", [_vm._v("年代ごとの利用者グラフ")])
+      _c("b", [_vm._v("男女別利用者")])
     ])
   },
   function() {
@@ -15830,22 +16384,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-50 m-auto" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("年齢について")]),
-            _vm._v(
-              "\n                    テストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテストテストテストテスト\n                    テストテストテストテストテスト\n                    "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        })
-      ])
+    return _c("h3", { staticClass: "mt-5 about__title" }, [
+      _c("b", [_vm._v("年齢ごとの利用者グラフ")])
     ])
   }
 ]
@@ -17600,11 +18140,59 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "col-4" }, [
+                _c("img", {
+                  staticClass: "align-self-start mr-3 myimage",
+                  attrs: { src: "/image/kairakuten.png", alt: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("span", [
+                      _c("h5", { staticClass: "mt-0" }, [
+                        _vm._v("利用推移について")
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.year) +
+                          "年の合計利用回数は" +
+                          _vm._s(_vm.month_data_sum) +
+                          "回、月額利用回数は" +
+                          _vm._s(Math.round(_vm.month_data_sum / 12)) +
+                          "回でした。\n                            これは、全国の平均的なユーザー利用回数15回よりもやや多い数値となっております。\n                            \n                            "
+                      )
+                    ])
+                  ])
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-5" }, [
-              _vm._m(2),
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("span", [
+                      _c("h5", { staticClass: "mt-0" }, [
+                        _vm._v("利用頻度について")
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.year) +
+                          "年の合計利用日数は" +
+                          _vm._s(_vm.day_data_count) +
+                          "回です。\n                            年間利用割合は" +
+                          _vm._s(_vm.active_data_rate) +
+                          "％でした。\n                            これは、全国の平均的なユーザー利用回数15回よりもやや多い数値となっております。\n                           \n                            \n                            "
+                      )
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -17643,11 +18231,79 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm._m(3)
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("div", { staticClass: "media-body" }, [
+                    _c(
+                      "span",
+                      [
+                        _c("h5", { staticClass: "mt-0" }, [
+                          _vm._v("カテゴリーについて")
+                        ]),
+                        _vm._v(
+                          "\n                            カテゴリーの比率は、\n                            "
+                        ),
+                        _vm._l(_vm.category_data, function(item, index) {
+                          return _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(index + 1) +
+                                "位が" +
+                                _vm._s(_vm.category_data_label[index]) +
+                                " (" +
+                                _vm._s(_vm.category_data[index]) +
+                                "回)、\n                            "
+                            )
+                          ])
+                        }),
+                        _vm._v(
+                          "\n                            となっております。\n                          \n                            "
+                        )
+                      ],
+                      2
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  })
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "row mb-5" }, [
-              _vm._m(4),
+              _c("div", { staticClass: "col-7" }, [
+                _c("div", { staticClass: "media" }, [
+                  _c("img", {
+                    staticClass: "align-self-start mr-3 myimage",
+                    attrs: { src: "/image/kairakuten.png", alt: "" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "media-body" }, [
+                    _c("span", [
+                      _c("h4", [
+                        _vm._v(
+                          "募金額推移 合計" + _vm._s(_vm.coin_data_sum) + "円"
+                        )
+                      ]),
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.year) +
+                          "年の募金額は合計" +
+                          _vm._s(_vm.coin_data_sum) +
+                          "円となりました。\n                            これは、先月の募金額1289円と比較して約" +
+                          _vm._s(_vm.active_data_rate) +
+                          "％ほど増加しています。\n                            また、一月あたりの募金額は" +
+                          _vm._s(
+                            Math.round((_vm.coin_data_sum / 12) * 10) / 10
+                          ) +
+                          "円となり、募金者の割合は増加傾向にあります。\n                            "
+                      )
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "div",
@@ -17667,7 +18323,23 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _c("div", { staticClass: "text-center" }, [
+              _c("span", { staticClass: "mr-3" }, [
+                _vm._v("合計射精回数　" + _vm._s(_vm.month_data_sum) + "回")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "mr-3" }, [
+                _vm._v(
+                  "合計消費カロリー　" +
+                    _vm._s(_vm.month_data_sum * 48.5) +
+                    "cal"
+                )
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "mr-3" }, [
+                _vm._v("合計募金額 " + _vm._s(_vm.coin_data_sum) + "円")
+              ])
+            ])
           ])
         ])
       : _vm._e()
@@ -17679,106 +18351,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", [_c("b", [_vm._v("月別利用推移")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用推移について")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("利用者の割合")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("カテゴリーについて")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-7" }, [
-      _c("div", { staticClass: "media" }, [
-        _c("img", {
-          staticClass: "align-self-start mr-3 myimage",
-          attrs: { src: "/image/kairakuten.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "media-body" }, [
-          _c("span", [
-            _c("h5", { staticClass: "mt-0" }, [_vm._v("募金額推移 について")]),
-            _vm._v(
-              "\n                            テストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテストテストテストテスト\n                            テストテストテストテストテスト\n                            先月と比較してXXXX％の伸びました\n                            "
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "text-center" }, [
-      _c("span", [_vm._v("合計射精回数　555回")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("合計消費カロリー　555cal")]),
-      _vm._v(" "),
-      _c("span", [_vm._v("合計募金額　532円")])
-    ])
   }
 ]
 render._withStripped = true
@@ -34471,6 +35043,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pie_vue_vue_type_template_id_50b18ea0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Pie_vue_vue_type_template_id_50b18ea0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/charts/Time.vue":
+/*!**************************************!*\
+  !*** ./resources/js/charts/Time.vue ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Time.vue?vue&type=template&id=655ca44e& */ "./resources/js/charts/Time.vue?vue&type=template&id=655ca44e&");
+/* harmony import */ var _Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Time.vue?vue&type=script&lang=js& */ "./resources/js/charts/Time.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/charts/Time.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/charts/Time.vue?vue&type=script&lang=js&":
+/*!***************************************************************!*\
+  !*** ./resources/js/charts/Time.vue?vue&type=script&lang=js& ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Time.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/Time.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/charts/Time.vue?vue&type=template&id=655ca44e&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/charts/Time.vue?vue&type=template&id=655ca44e& ***!
+  \*********************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Time.vue?vue&type=template&id=655ca44e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/charts/Time.vue?vue&type=template&id=655ca44e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_655ca44e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -189,16 +189,12 @@ class LogController extends Controller
             ->select(DB::raw('count(*) as count , day as label'))
             ->groupBy('day')
             ->get();
-            
         $month_count = $logs->pluck('count'); 
         $month_label = $logs->pluck('label');
-        $month_count_ave = "";
         
         
         // 平均データ
-        $all_logs = Log::selectRaw('count(*) / ? as count', [24])
-                ->groupBy('day')
-                ->get();
+        $all_logs = Log::selectRaw('count(*) / ? as count', [24])->groupBy('day')->get();
         $month_count_ave = $all_logs->pluck('count');
         
         
@@ -239,18 +235,29 @@ class LogController extends Controller
             ->whereMonth('created_time', $month)
             ->groupBy('day')
             ->get();
-        
         $coin_data = $logs->pluck('count'); 
         $coin_data_label = $logs->pluck('label');
         
+        //先月のデータ
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('sum(coin) as count, day as label'), DB::raw(' logs.created_at as created_time'))
+            ->whereYear('created_time', $year)
+            ->whereMonth('created_time', $month-1)
+            ->groupBy('day')
+            ->get();
+        $last_month_coin_data = $logs->pluck('count'); 
+        $last_month_coin_data_label = $logs->pluck('label');
         
+        $user_all = User::all()->count();
         return compact(
             'month',
             'month_count','month_count_ave','month_label',
             'sex_data','sex_data_label',
             'sex_data_user',
             'category_data','category_data_label','category_data_color',
-            'coin_data','coin_data_label' 
+            'coin_data','coin_data_label',
+            'last_month_coin_data', 'last_month_coin_data_label',
+            'user_all'
         );
             
             

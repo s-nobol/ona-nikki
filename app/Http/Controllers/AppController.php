@@ -29,11 +29,6 @@ class AppController extends Controller
         $data_label = $logs->pluck('label'); 
         
         
-        // 時間ごとの利用者
-        $time_logs =  $this->DB_abstract('time', $date);
-        $time_data = $time_logs->pluck('count');  
-        $time_data_label = $time_logs->pluck('label');  
-        
         
         // 地域ごとのデータ
         $location_logs = $this->DB_abstract('location', $date);
@@ -47,7 +42,12 @@ class AppController extends Controller
         $sex_data_label = $sex_logs->pluck('label');
         
         
-        // 地域ごとのデータ
+        // 時間ごとの利用者
+        $time_logs =  $this->DB_abstract('time', $date);
+        $time_data = $time_logs->pluck('count');  
+        $time_data_label = $time_logs->pluck('label');  
+        
+        // 過去一週間のデータ
         $week = Carbon::now()->subDays(7);
         $week_logs = $this->DB_abstract('day', $week);
         $week_data = $week_logs->pluck('count');  
@@ -95,10 +95,12 @@ class AppController extends Controller
         
         return  compact(
             'data','data_label',
-            'time_data', 'time_data_label',
             'location_data','location_data_label',
             'sex_data','sex_data_label',
+            
+            'time_data', 'time_data_label',
             'week_data','week_data_label',
+            
             'category_data', 'category_data_label', 'category_data_color',
             
             'donation_data','donation_data_label',
@@ -119,7 +121,7 @@ class AppController extends Controller
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
             ->groupBy($string)
-            ->orderBy('sex','desc')
+            ->orderBy('count','desc')
             ->get();
         $data = $logs->pluck('count');  
         $data_label = $logs->pluck('label');
@@ -146,7 +148,10 @@ class AppController extends Controller
         
         
         // 女性の年代別利用データ
-        $age_logs = $this->DB_abstract('age', $date);
+        $age_logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, age as label'))
+            ->groupBy('age')
+            ->get();
         $age_data = $age_logs->pluck('count');  
         $age_data_label = $age_logs->pluck('label');
         

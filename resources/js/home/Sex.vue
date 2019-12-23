@@ -29,10 +29,11 @@
                 <div class="media-body">
                     <span>
                     <h5 class="mt-0">性別について</h5>
-                    テストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテスト
+                    <!--人数比率-->
+                    オナ日記のデータでは、{{ sex_data_label[0] }}性の賢者様{{ sex_data[0] }}人、
+                    {{ sex_data_label[1] }}性の賢者様{{ sex_data[1]  }}人
+                    と比較的{{ sex_data_label[0] }}性の賢者様による利用が多い結果となりました。
+                    
                     </span>
                 </div>
             </div>
@@ -41,7 +42,7 @@
         
         <!--性別ごとの利用割合（いらない？）-->
         <h3 class="mt-5 about__title">
-            <b>年代ごとの利用者グラフ</b>
+            <b>男女別利用者</b>
         </h3>
         
         <div class="row mb-5">
@@ -59,11 +60,14 @@
         <!--年齢別の利用すいい棒グラフ-->
         <div class="row ">
             <div class="col-6 m-auto">
-                    
-               <bar 
-               :dataSet="age_data"
-               :labels="age_data_label"
-               />
+                <h3 class="mt-5 about__title">
+                    <b>年齢ごとの利用者グラフ</b>
+                </h3>
+                <bar 
+                    backgroundColor="gainsboro"
+                    :dataTime="age_data"
+                    :labels="age_data_label"
+                />
             </div>
         </div>
         
@@ -71,11 +75,11 @@
             <div class="media">
                 <div class="media-body">
                     <span>
-                    <h5 class="mt-0">年齢について</h5>
-                    テストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテストテストテストテスト
-                    テストテストテストテストテスト
+                    <h5 class="mt-0">年齢について</h5>性別ごとの利用比率を見ると男性の賢者様は、{{ man_data_max }}が多く、
+                    女性の賢者様は、{{ woman_data_max }}の利用人者が多い結果となりました。<br>
+                    
+                    また、年齢ごとの比較によると{{ age_data_max  }}の利用人数が一番多く、
+                    {{ age_data_mini }}の利用者が最も少ない結果となりました。
                     </span>
                 </div>
                 <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
@@ -99,20 +103,24 @@ export default {
     data(){
         return{
             
-            
             sex_data:[],
             sex_data_label:[],
             
             man_data: [],
             man_data_label: [],
+            man_data_max: null,
             
             woman_data: [],
             woman_data_label: [],
+            woman_data_max: null,
             
             age_label: [ '10代','20代','30代','40代','50代', '60代', 'その他'],
+            // age_label: [],
             
             age_data: [],
-            age_data_label: []
+            age_data_label: [],
+            age_data_max: null,
+            age_data_mini: null,
         }
     },
     methods: {
@@ -124,11 +132,16 @@ export default {
                 
                 this.man_data = response.data.man_data
                 this.man_data_label = response.data.man_data_label
+                this.man_data_max = this.get_max_data_label(this.man_data, this.man_data_label )
+                
                 this.woman_data = response.data.woman_data
                 this.woman_data_label = response.data.woman_data_label
+                this.woman_data_max = this.get_max_data_label(this.woman_data, this.woman_data_label )
                 
                 this.age_data = response.data.age_data
-                this.age_data_label = response.data.age_label
+                this.age_data_label = response.data.age_data_label
+                this.age_data_max = this.get_max_data_label(this.age_data, this.age_data_label )
+                this.age_data_mini = this.get_mini_data_label(this.age_data, this.age_data_label )
                 
                 // this.pie_chart()
                 this.man_chart()
@@ -207,6 +220,38 @@ export default {
                 }
             });
         },
+        
+        // グラフで一番多い数を検出する
+        get_max_data(data){
+            return Math.max.apply(null, data);
+        },
+         // グラフで一番多い数を検出する
+        get_max_data_label(data, data_label){
+            var max = 0
+            var max_i = 0
+            for(var i = 0; i< data.length; i++){
+                if(data[i]>max){
+                    max = data[i]
+                    max_i= i
+                }
+            }
+            return data_label[max_i];
+        },
+        // 最低値
+        get_mini_data_label(data, data_label){
+            var mini = 0
+            var mini_i = 0
+            for(var i = 0; i< data.length; i++){
+                if(data_label[0]){
+                    mini = data_label[0]
+                }
+                if(data[i]>mini){
+                    mini = data[i]
+                    mini_i = i
+                }
+            }
+            return data_label[mini_i];
+        }
     },
     
     

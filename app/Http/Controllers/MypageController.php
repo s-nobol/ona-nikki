@@ -121,7 +121,6 @@ class MypageController extends Controller
     // 月別での集計を行う
     public function year($year)
     {
-        // return "logd";
         $this->carbon_try($year, 1);
         
         
@@ -131,9 +130,10 @@ class MypageController extends Controller
             ->select(DB::raw('count(*) as count, month as label '))
             ->groupBy('month')
             ->get();
-          
         $month_data = $logs->pluck('count') ;
         $month_data_label  = $logs->pluck('label'); 
+          
+          
           
         // みんなの平均値
         $user_count = User::all()->count();
@@ -145,17 +145,26 @@ class MypageController extends Controller
         $otherlogs = $otherlogs->pluck('count');
         
         
+        
         //エラーがでるかも？
-        $logs = Log::
-            whereYear('created_at', $year )
+        $logs = Log::whereYear('created_at', $year )
             ->where('user_id', Auth::user()->id )
             ->select(  DB::raw("count(*) as count, strftime('%m-%d', created_at) as label"))
             ->groupBy('label')
             ->get();
-        
         $day_data = $logs->pluck('count'); 
-        $day_data_label = $logs->pluck('label') ;
-        $day_data_count = $logs->count() ;
+        $day_data_label = $logs->pluck('label');
+        $day_data_count = $logs->count();
+        
+        
+        // すべてユーザーの平均値(保留)
+        // $logs = Log::whereYear('created_at', $year )
+        //     ->select(  DB::raw("count(*)  as count, count(user_id) as user_count"))
+        //     ->groupBy('user_id')
+        //     ->get();
+        // $other_data =  $logs; 
+        // $day_data_label = $logs->pluck('label');
+        // $day_data_count = $logs->count();
         
         
         // カテゴリーデータ
@@ -165,9 +174,8 @@ class MypageController extends Controller
             ->where('user_id', Auth::user()->id )
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
-            ->take(7)
+            ->take(5)
             ->get();
-        
         $category_data = $logs->pluck('count'); 
         $category_data_label = $logs->pluck('label');
         $category_data_color = $logs->pluck('color');
@@ -181,7 +189,6 @@ class MypageController extends Controller
             ->where('user_id', Auth::user()->id )
             ->groupBy('day')
             ->get();
-        
         $coin_data = $logs->pluck('count'); 
         $coin_data_label = $logs->pluck('label');
         
@@ -189,7 +196,7 @@ class MypageController extends Controller
 
         return compact( 
             'month_data', 'month_data_label',
-            
+            'other_data',
             'day_data','day_data_label','day_data_count',
             'category_data','category_data_label','category_data_color',
             'coin_data','coin_data_label'       

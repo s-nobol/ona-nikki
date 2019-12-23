@@ -90,5 +90,5 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 // app.env のCallBack_Url修正（後日）
 
 
-// mypage.vue home.vueの合計データが正しく表示されるようにする
-// git checkout -b edit-total-ber
+//Month。Yearのコメントが正しく表示れるようにする
+// git checkout -b log-comment

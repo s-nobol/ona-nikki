@@ -1,14 +1,15 @@
 <template>
 <div class="Map">
-    <div class="Map__item Map-hokkaido">北海道</div>
-    <div class="Map__item Map-tohoku">東北</div>
-    <div class="Map__item Map-kanto">関東</div>
-    <div class="Map__item Map-tyubu">中部</div>
-    <div class="Map__item Map-kansai">関西</div>
-    <div class="Map__item Map-tyugoku">中国</div>
-    <div class="Map__item Map-shikoku">四国</div>
-    <div class="Map__item Map-kyusyu">九州</div>
-    <img src="/image/map.png"></img>
+    
+    <div class="Map__item Map-hokkaido" id="map_item"  @click="selectItem('北海道')">北海道</div>
+    <div class="Map__item Map-tohoku"   id="map_item"  @click="selectItem('東北')">東北</div>
+    <div class="Map__item Map-kanto"    id="map_item"  @click="selectItem('関東')">関東</div>
+    <div class="Map__item Map-tyubu"    id="map_item"  @click="selectItem('中部')">中部</div>
+    <div class="Map__item Map-kansai"   id="map_item"  @click="selectItem('関西')">関西</div>
+    <div class="Map__item Map-tyugoku"  id="map_item"  @click="selectItem('中国')">中国</div>
+    <div class="Map__item Map-shikoku"  id="map_item"  @click="selectItem('四国')">四国</div>
+    <div class="Map__item Map-kyusyu"   id="map_item"  @click="selectItem('九州')">九州</div>
+    <img src="/image/map2.png" id="map" v-on:load="load"></img>
 </div>
 </template>
 <style type="text/css">
@@ -16,59 +17,54 @@
     position: relative;
 }    
 .Map__item{
+    cursor: pointer;
     display: inline-block;
+    /*display: none;*/
     background-color: rgba(255,75,75,0.7);
     color: white;
     border-radius: 30px;
     padding: 10px;
+    
 }
 .Map-hokkaido{
     position:absolute;
     top: 13%;
     right: 23%;
-    /*background-color: blue;*/
 }
 .Map-tohoku{
     position:absolute;
     top: 40%;
     right: 32%;
-    /*background-color: gray;*/
 }
 .Map-kanto{
     position:absolute;
     top: 65%;
     right: 38%;
-    /*background-color: gray;*/
 }
 .Map-tyubu{
     position:absolute;
     top: 58%;
     right: 48%;
-    /*background-color: gray;*/
 }
 .Map-kansai{
     position:absolute;
     top: 70%;
     right: 60%;
-    /*background-color: gray;*/
 }
 .Map-tyugoku{
     position:absolute;
     top: 66%;
     right: 73%;
-    /*background-color: gray;*/
 }
 .Map-shikoku{
     position:absolute;
     top: 77%;
     right: 70%;
-    /*background-color: gray;*/
 }
 .Map-kyusyu{
     position:absolute;
     top: 80%;
     right: 85%;
-    /*background-color: gray;*/
 }
 </style>
 <script>
@@ -85,6 +81,26 @@ export default {
         shikoku_count: { type: Number, required: false, default: 0 },
         kyusyu_count: { type: Number, required: false, default: 0 },
         all_count: { type: Number, required: false, default: 0 },
+    },
+    data(){
+        return{
+            loading: false
+        }
+    },
+    methods:{
+        selectItem(name){
+            this.$emit('clickMap', name)
+        },
+        
+        // 画像の読み込み後起動
+        load: function() {
+            // document.getElementById("map_item").style.display ="inline-block";
+        },
+    },
+    mounted(){
+        this.loading = true
+        // 画像の読み込みが完了したら表示
+        // コールバック設定
     },
     watch: {
         
