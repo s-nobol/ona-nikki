@@ -14,7 +14,7 @@
         
         <!--チャート-->
         <div class="row">
-            <div class="col-9">
+            <div class="col-lg-9 p-0">
             
                 
                 
@@ -156,7 +156,7 @@
             
             
             <!--サイドバー-->
-            <div class="col-3 pl-4">
+            <div class="col-lg-3 pl-4 pr-0">
             
               
                 <!--タイムライン-->

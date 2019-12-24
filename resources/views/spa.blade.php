@@ -26,11 +26,11 @@
 </head>
 <body>
 <!--認証クラス-->
-<div>
-@auth<small>{{Auth::user()->name}} はログイン済みです</small>
-@else<small>ログインしていません</small> 
-@endauth
-</div>
+<!--<div>-->
+<!--@auth<small>{{Auth::user()->name}} はログイン済みです</small>-->
+<!--@else<small>ログインしていません</small> -->
+<!--@endauth-->
+<!--</div>-->
 <div id="app"></div>
 <script src="{{ mix('js/app.js') }} "></script>
 </body>

@@ -1,12 +1,10 @@
 <template>
-<div class="sidebar">
-    <!--サイドバー-->
-    <!--<div>サイドバー</div>-->
-    
+<div class="navigation">
+
     
     <div v-if="currentUser" >
         
-        <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
+        <div class="bg__red p-4 list-group-title"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
         <ul class="list-group">
             <li class="list-group-item ">
             
@@ -67,12 +65,12 @@
     </div>
     
     
-    <div class="bg__red p-4">
+    <div class="bg__red p-4 list-group-title" @click="$emit('close')">
         <b>2018年版</b>
     </div>
     
     
-        <ul class="list-group">   
+        <ul class="list-group list-group-content">   
             
             <li class="list-group-item">
                 <i class="far fa-chart-bar fa-lg"></i>年代
@@ -131,83 +129,49 @@
                 </RouterLink>
             </li>
             
+            <!--もしログインしていないとき-->
+            <div v-if="! currentUser" >       
+                <li class="list-group-item">
+                    <!--<RouterLink  to="/about" class="sidebar_item " >-->
+                        <span class="ml_50px" @click="login">ログイン</span>  
+                    <!--</RouterLink>-->
+                </li> 
+                <li class="list-group-item">
+                    <RouterLink  to="/signup" class="sidebar_item " >
+                        <span class="ml_50px">新規登録</span>  
+                    </RouterLink>
+                </li>
+            </div>
         </ul>
         
-          
-        
-        <!--<ul class="list-group">   -->
-        <!--    <li class="list-group-item" v-for="item in homeItems" >-->
-        <!--        <RouterLink  -->
-        <!--            :to="item.url"-->
-        <!--            class="sidebar_item "-->
-        <!--            :class="{ 'select_item' : $route.name == item.key }" >-->
-                    
-                    
-        <!--            <i  v-if="item.iconClass"  :class="item.iconClass"></i>-->
-        <!--            <span  v-if="item.iconClass" >{{ item.name }}</span>-->
-        <!--            <span v-else class="ml_50px">{{ item.name }}</span>-->
-                    
-        <!--        </RouterLink>                -->
-        <!--    </li>-->
-        <!--</ul>-->
             
 </div>
 </template>
 <style type="text/css">
-.sidebar{}
-@media screen and (max-width:991px){
-.sidebar{
+.navigation{  
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    width: 250px;
     display: none;
-}
-}
-
-.sidebar_item{
-    display: inline-block;
-    color: black;
-    width:100%;
+    z-index: 50;
     height: 100%;
+    overflow: hidden;
 }
-.sidebar_item:hover{
-    color: black;
-    text-decoration: none;
+@media screen and (max-width:991px){
+    .navigation{
+        display: block;
+    }
 }
-.ml_50px{
-    margin-left: 52px;
+.list-group-title{
+    width: 250px;
+    overflow: hidden;
 }
-.list-group-item{ 
-    
-    padding: 0px; 
-    height: 50px;
-    line-height:50px;
-    cursor: pointer;
-    transition-duration:0.3s;
-}
-.list-group-item:hover{
-    background-color:  whitesmoke;
-    text-decoration: none;
-}
-.list-group-item i{ 
-    display: inline-block;
-    width: 50px;
-    text-align: center;
-    color: gray;
-}
-.select_item{
-    background-color: whitesmoke;
-}
-.sidebar_item_message_button{
-    margin-left: 15px;
-    padding: 4px 8px;
-    background-color: #ff4a4a;
-    color: white;
-    border-radius: 50px;
+.list-group-content{
+    overflow: hidden;
 }
 </style>
 <script>
-// 初めに複数のチャートのデータを取得
-// まとめて表示する
-// chartディレクｓトリに素材ごとのチャートをいれておく
-
 export default {
     computed: {
         currentUser(){
@@ -239,6 +203,14 @@ export default {
             this.select = item.key
             this.$router.push(item.url)
             console.log(this.select )
+        },
+        // ログインボタンを押す
+        login(){
+        //     alert("ログインボタンが押されました")
+            this.$emit('login')
+        },
+        // 新規登録ボタンを押す
+        signup(){
         },
         
         logout(){

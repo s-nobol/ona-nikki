@@ -5,6 +5,16 @@
             
                 <span class="header__title" @click="onHome">おな 日記 β</span>
                 
+                <div class=" header__button">
+                    <button class="btn btn-danger mr-3" >送信</button>
+                    <span class="navbar-toggler-icon" @click="navigation = ! navigation" ></span>
+                </div>
+                
+                <!--<button class="navbar-toggler" type="button" @click="navigation = ! navigation"  >-->
+                <!--    <span class="navbar-toggler-icon"></span>-->
+                <!--</button>-->
+                
+                
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -20,26 +30,27 @@
                         <span @click="onSignup"class="login_button">サインアップ</span>
                     </span>
                 </div>
+                <!--<button @click="navigation = ! navigation" class="btn btn-light">ナビ</button>-->
             </nav> 
         </header>
         
         
         <!--フラッシュ-->
         <transition name="slide_down" >
-        <div v-if="message" class="flash__form" :class="messageType">
-            <div class=" container alert"  >{{ message }}</div>
-        </div>
+            <div v-if="message" class="flash__form" :class="messageType">
+                <div class=" container alert"  >{{ message }}</div>
+            </div>
         </transition >
         
         
         <div class="row ">
             <!--サイドバー-->
-            <div class="col-2">
+            <div class="col-lg-2 p-0">
                 <Sidebar />
             </div>
             
             <!--メイン-->
-            <main  class="col-10 pl-4 pr-4 pt-1">
+            <main  class="col-lg-10 pl-4 pr-4 pt-1">
                 <!--<div class="main__continer">-->
                     <RouterView />
                 <!--</div>-->
@@ -48,18 +59,27 @@
         
             
             
-        <!--モーダル-->
+            
+        <!--ナビゲーション-->
+        <transition name="slide_left" >
+            <NavigationBar v-if="navigation" @login="navigationLogin" @close="onCloseModal"/>
+        </transition >
+            
+            
+        <!--Login・モーダル-->
         <transition name="fade" >
             <LoginModal v-if="loginModal" @close="onCloseModal" />
         </transition >
         
-        <!--モーダル-->
+        
+        
+        <!--Alert・モーダル-->
         <transition name="fade" >
             <AlertModal v-if="alertModal" @close="onCloseModal" />
         </transition >
         
         
-        <!--モーダル-->
+        <!--LevelUp・モーダル-->
         <transition name="fade" >
             <LevelModal v-if="levelModal" @close="onCloseModal" 
                 :id="log_id"
@@ -81,6 +101,13 @@
     </div>
 </template>
 <style type="text/css">
+/*あとで修正*/
+.header__button{
+    display: none;
+}
+@media screen and (max-width:991px){
+    .header__button{display: inline-block;}
+}
     
 .fade-leave-active,.fade-enter-active{
   transition: opacity .5s;
@@ -96,9 +123,17 @@
     height: 0;
 }
 
+.slide_left-enter-active, .slide_left-leave-active {
+    transition: all .5s;
+}
+.slide_left-enter, .slide_left-leave-to {
+    width: 0;
+}
+
 </style>
 <script>
 import Sidebar from './components/Sidebar.vue'
+import NavigationBar from './components/NavigationBar.vue'
 
 import LoginModal from './components/modal/Login.vue'
 import LevelModal from './components/modal/Level.vue'
@@ -106,10 +141,11 @@ import AlertModal from './components/modal/Alert.vue'
 
 
 export default {
-    components: {Sidebar, LoginModal, LevelModal,AlertModal },
+    components: {Sidebar, NavigationBar, LoginModal, LevelModal,AlertModal },
     data(){
         return{
             nowTime: new Date().getHours() + ':' +  new Date().getMinutes() ,
+            navigation: false,
             loginModal: false,
             levelModal: false,
             alertModal: false,
@@ -193,10 +229,15 @@ export default {
             this.loginModal = true
         },
         onCloseModal() {
+            this.navigation = false
             this.loginModal = false
             this.levelModal = false
             this.alertModal = false
         },
+        navigationLogin(){
+            this.loginModal = true
+            this.navigation = false
+        }
     },
     watch: {
         

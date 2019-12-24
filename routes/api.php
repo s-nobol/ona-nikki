@@ -83,12 +83,11 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 
 //募金のランキング（なくていい？）
 // タイムライン(なくていい？)
-// 賢者崇める　（弟子入りボタン作成）
 
 
 
+
+
+//サイドバーのアコーディオン
 // app.env のCallBack_Url修正（後日）
-
-
-//Month。Yearのコメントが正しく表示れるようにする
-// git checkout -b log-comment
+// git checkout -b navigation
