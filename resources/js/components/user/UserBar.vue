@@ -4,7 +4,7 @@
     
     
     
-        <div class="col-3 card">
+        <div class="col-sm-3 card">
             <div class="row ">
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-globe-americas fa-2x text__all"></i>
@@ -22,7 +22,7 @@
         
         
     
-        <div class="col-3 card">
+        <div class="col-sm-3 card">
             <div class="row ">
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-clock  fa-2x text__month"></i>
@@ -41,7 +41,7 @@
         
         
     
-        <div class="col-3 card">
+        <div class="col-sm-3 card">
             <div class="row ">
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-cheese  fa-2x "></i>
@@ -60,7 +60,7 @@
         
         
     
-        <div class="col-3 card">
+        <div class="col-sm-3 card">
             <div class="row ">
                 <div class="col-2 UserBar__icon">
                     <i class="fas  fa-yen-sign  fa-2x"></i>
@@ -82,6 +82,7 @@
 </template>
 <style type="text/css">
 .UserBaer{
+    /*padding: 0px;*/
 }
 .UserBar__icon{
     text-align: center;
@@ -97,16 +98,11 @@
     color: white;
     background-color: rgba(255,75,75,1) ;
     
-    /*あとで削除？*/
-    /*color: rgba(255,75,75,1) ;*/
 }
 .card-body_title{
     padding: 2px 10px;
     border-radius: 15px;
     
-    /*あとで削除？*/
-    /*color:rgba(255,75,75,1) ;*/
-    /*background-color: rgba(255,75,75,1) ;*/
 }
 .card-body{
     text-align: center;

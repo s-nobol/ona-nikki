@@ -1,5 +1,5 @@
 <template>
-<div v-if="currentUser">
+<div v-if="currentUser" class=" col-lg-9 p-0">
     <form v-if="user"   @submit.prevent="userEdit(user.id)" class="profile_form card p-5">
     
         
@@ -160,7 +160,7 @@
 </template>
 <style type="text/css">
 .profile_form{
-    width: 75%;
+    /*width: 75%;*/
 }
 .profile_form input{
     padding: 5px;

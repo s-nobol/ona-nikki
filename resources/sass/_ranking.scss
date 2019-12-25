@@ -14,6 +14,19 @@
     width: 65%;
     margin: auto;
 }
+
+@media screen and (max-width:991px){
+    .rankig__page{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:760px){
+    .rankig__page{
+        width: 95%;
+    }
+}
+
 .ranking__title{
     margin: 50px;
     text-align: center;
@@ -29,7 +42,6 @@
     list-style:none;
     height: 150px;
     margin-bottom: 30px;
-    /*box-shadow: 0 2px 4px rgba(0,0,0,0.3);*/
     font-size: 0px;
     padding: 0px;
 }
@@ -48,7 +60,8 @@
     vertical-align: middle;
     display: inline-block;
     font-size: 18px;
-    width: 250px;
+    width: 35%;
+    overflow: hidden;
 }
 .rankig__card__user img {
     width: 80px;
@@ -58,6 +71,7 @@
     vertical-align: middle;
 }
 .rankig__card__count{
+    width: 20%;
     text-align: center;
 }
 .rankig__card__count__span{
@@ -76,5 +90,47 @@
     margin-right: auto;
     vertical-align: middle;
     font-size: 28px;
-    /*width: 30%;*/
+}
+
+
+
+// レスポンシブ
+@media screen and (max-width:991px){
+ 
+    .ranking__card{
+        margin-bottom: 15px;
+    }
+    .rankig__card__number {
+        width: 100px;
+        font-size: 30px;
+    }
+    .rankig__card__user img {
+        width: 80px;
+    }
+}
+
+@media screen and (max-width:760px){
+ 
+    .ranking__card{
+        height: 75px;
+    }
+    .rankig__card__number {
+        width: 50px;
+        font-size: 20px;
+    }
+    .rankig__card__user  img  {
+        width: 35px;
+    }
+    .rankig__card__user{
+        font-size: 15px;
+    }
+    .rankig__card__count__span{
+        font-size: 18px;
+    }
+    .rankig__card__point {
+        background-color: red;
+        display: none;
+        font-size:0px;
+    }
+
 }

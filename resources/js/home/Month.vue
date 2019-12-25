@@ -11,7 +11,7 @@
             <div class="row mb-5">
             
             
-                <div class="col-8">
+                <div class="col-lg-8">
                     <!--月別集計-->
                     <h5><b>month</b></h5>
                     
@@ -22,7 +22,7 @@
                     />
                 </div>
                 
-                <div class="col-4">
+                <div class="col-lg-4">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                     <div class="media">
                         <div class="media-body">
@@ -46,8 +46,22 @@
             <!--性別割合-->
             <div class="row mb-5">
             
+                <!--性別グラフ-->
+                <div class="col-lg-5 order-lg-2">
+                    <h4 class="text-center">利用者の性別</h4>
+                    
+                    <!--<div class="Mypage__Doughnut text-center">-->
+                        <Doughnut
+                            :dataSetSex="sex_data"
+                            :borderWidth="80"
+                            :labels="sex_data_label"
+                        />
+                    <!--    <span class="Mypage__Doughnut__title">男</span>-->
+                    <!--</div>-->
+                </div>
+                
                 <!--性別ごとの利用推移-->
-                <div class="col-7">
+                <div class="col-lg-7 order-lg-1">
                     <div class="media">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                         <div class="media-body">
@@ -62,19 +76,6 @@
                     </div>
                 </div>
                 
-                <div class="col-5">
-                    <h4 class="text-center">利用者の性別</h4>
-                    
-                    <!--<div class="Mypage__Doughnut text-center">-->
-                        <Doughnut
-                            :dataSetSex="sex_data"
-                            :borderWidth="80"
-                            :labels="sex_data_label"
-                        />
-                    <!--    <span class="Mypage__Doughnut__title">男</span>-->
-                    <!--</div>-->
-                </div>
-                
                 
             </div>
             
@@ -82,7 +83,7 @@
             <!--カテゴリー別割合-->
             <div class="row mb-5">
             
-                <div class="col-5">
+                <div class="col-lg-5">
                     <h4>カテゴリーの比率</h4>
                     <BarHorizontal
                         id="category"
@@ -93,7 +94,7 @@
                 </div>
                 
                 <!--カテゴリーの比率-->
-                <div class="col-7">
+                <div class="col-lg-7">
                     <div class="media">
                         <div class="media-body">
                             <span>
@@ -115,8 +116,19 @@
             <!--募金推移    -->
             <div class="row mb-5">
             
-            
-                <div class="col-7">
+                <!--募金グラフ-->
+                <div class="col-lg-5 order-lg-2">
+                    <h4>募金額推移 合計{{ coin_data_sum }}円</h4>
+                    <LineChart
+                        id="month"
+                        :Coins="coin_data"
+                        :labels="coin_data_label"
+                    />
+                </div>
+                    
+                
+                <!--募金グラフコメント-->
+                <div class="col-lg-7 order-lg-1">
                     <div class="media">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                         <div class="media-body">
@@ -136,16 +148,6 @@
                     </div>
                 </div>
                 
-                
-                <div class="col-5">
-                    <h4>募金額推移 合計{{ coin_data_sum }}円</h4>
-                    <LineChart
-                        id="month"
-                        :Coins="coin_data"
-                        :labels="coin_data_label"
-                    />
-                </div>
-                    
             </div>
             
             

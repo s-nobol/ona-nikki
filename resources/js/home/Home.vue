@@ -58,7 +58,7 @@
                         
                         
                         <!--マップ-->
-                        <div class="col-7 p-4">
+                        <div class="col-sm-7 p-4">
                             <Map />
                         </div>
                     </div>
@@ -74,8 +74,8 @@
                 <!--チャート1-->
                 <div class="row">
                 
-                    <div class="col-4 card p-3 text-center ">
-                        <h4 class="text-center mt-4"><b>月間募金額</b></h4>
+                    <div class="col-sm-4 card p-3 text-center ">
+                        <h4 class="text-center mt-3"><b>月間募金額</b></h4>
                         <h3 class="mt-1">
                             <i class="fas fa-yen-sign"></i>
                             <b>71,748</b>
@@ -89,7 +89,7 @@
                         />
                     </div>
                     
-                    <div class="col-5 card">
+                    <div class="col-sm-5 card">
                         <h4 class="text-center p-2"><b>カテゴリー別推移</b></h4> 
                             <BarHorizontal 
                                 id="category2"
@@ -100,7 +100,7 @@
                     </div>
                     
                     
-                    <div class="col-3 card p-3 text-center ">
+                    <div class="col-sm-3 card p-3 text-center ">
                         <h4 class="text-center mt-4"><b>今日救われた命の数</b></h4>
                         <!--<h4 class="text-center mt-4"><b>弟子入り数</b></h4>-->
                         <h1 class="mt-1"><b>1,523</b><small>aces</small></h1>
@@ -111,7 +111,7 @@
                 <!--チャート1-->
                 <div class="row">
                 
-                    <div class="col-5 card p-0 text-center">
+                    <div class="col-sm-5 card p-0 text-center">
                         <h4 class="text-center mt-2"><b>一週間の集計</b></h4>
                         <Lines 
                             id="week2"
@@ -119,13 +119,13 @@
                             :labels="week_data"
                         />
                     </div>
-                    <div class="col-3 card p-3 text-center">
+                    <div class="col-sm-3 card p-3 text-center">
                         <h4 class="text-center mt-4"><b>月間利用人数</b></h4>
                         <h1 class="mt-1"><b>1831</b><small>人</small></h1>
                         <span>Access</span>
                     </div>
                     
-                    <div class="col-4 card ">
+                    <div class="col-sm-4 card ">
                         <h4 class="text-center p-2"><b>時間帯別利用推移</b></h4>
                         <nav class="navbar navbar-expand-lg navbar-light p-0 pl-2 pr-2">
                             <span class="navbar-text">
@@ -156,7 +156,7 @@
             
             
             <!--サイドバー-->
-            <div class="col-lg-3 pl-4 pr-0">
+            <div class="col-lg-3 pr-0">
             
               
                 <!--タイムライン-->

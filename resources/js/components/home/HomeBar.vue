@@ -100,11 +100,14 @@
 .card_item{
     display: inline-block;
     width:19.8%;
-    /*height: 100px;*/
     background-color:  white;
     margin-left:  -1px;
-    /*text-align: center;*/
     padding: 0px;
+}
+@media screen and (max-width:760px){
+    .card_item{
+        width:100%;
+    }
 }
 
 .card_item i{

@@ -1,0 +1,66 @@
+
+
+// // テストVueの内容
+// .test-vue{
+//     text-align: center;
+// }
+// .test-vue__button{
+//     padding: 5px 15px;
+//     border-radius: 15px;
+//     border: gray 1px solid;
+// }
+
+.test-vue{
+    text-align: center;
+     &__button{
+        padding: 5px 15px;
+        border-radius: 15px;
+        border: white 1px solid;
+    }
+}
+
+
+
+// セレクタ
+$testtest: ".testtest";
+
+#{$testtest}-shout {
+  font-size: bold;
+  color: green;
+}
+
+// メディアクエリ
+$pc: 1024px; // PC
+$tab: 680px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (max-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+$box: '.box';
+#{$box}{
+    background-color: gray;
+    &__right{
+        display: inline-block;
+        padding: 15px;
+        &__name{
+            color: red;
+            font-size:45px;
+            @include tab {
+                font-size:35px;
+            };
+        }
+    }
+}

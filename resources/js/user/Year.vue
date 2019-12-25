@@ -12,7 +12,7 @@
             <div class="row mb-5">
             
             
-                <div class="col-8">
+                <div class="col-lg-8">
                     <!--月別集計-->
                     <h5><b>月別利用推移</b></h5>
                     
@@ -23,7 +23,7 @@
                     />
                 </div>
                 
-                <div class="col-4">
+                <div class="col-lg-4">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                     <div class="media">
                         <div class="media-body">
@@ -43,8 +43,19 @@
             <!--性別割合-->
             <div class="row mb-5">
             
+            
+                <!--性別ごとのグラフ-->
+                <div class="col-lg-5 order-lg-2">
+                    <h4>年間利用割合 {{ day_data_count }}/365日</h4>
+                    <Doughnut
+                        :dataSet="day_data"
+                        :labels="day_data_label"
+                    />
+                </div>
+                
+                
                 <!--性別ごとの利用推移-->
-                <div class="col-7">
+                <div class="col-lg-7 order-lg-1">
                     <div class="media">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                         <div class="media-body">
@@ -60,13 +71,6 @@
                     </div>
                 </div>
                 
-                <div class="col-5">
-                    <h4>年間利用割合 {{ day_data_count }}/365日</h4>
-                    <Doughnut
-                        :dataSet="day_data"
-                        :labels="day_data_label"
-                    />
-                </div>
                 
                 
             </div>
@@ -75,7 +79,7 @@
             <!--カテゴリー別割合-->
             <div class="row mb-5">
             
-                <div class="col-5">
+                <div class="col-lg-5">
                     <h4>カテゴリーの比率</h4>
                     <BarHorizontal 
                         id="category"
@@ -86,7 +90,7 @@
                 </div>
                 
                 <!--カテゴリーの比率-->
-                <div class="col-7">
+                <div class="col-lg-7">
                     <div class="media">
                         <div class="media-body">
                             <span>
@@ -110,7 +114,20 @@
             <div class="row mb-5">
             
             
-                <div class="col-7">
+                
+                <!--募金グラフ-->
+                <div class="col-lg-5 order-lg-2">
+                    <h4>募金額推移</h4>
+                    <LineChart
+                        id="month"
+                        :Coins="coin_data"
+                        :labels="coin_data_label"
+                    />
+                </div>
+                
+                
+                <!--募金グラフコメント-->
+                <div class="col-lg-7 order-lg-1">
                     <div class="media">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                         <div class="media-body">
@@ -123,16 +140,6 @@
                             </span>
                         </div>
                     </div>
-                </div>
-                
-                
-                <div class="col-5">
-                    <h4>募金額推移</h4>
-                    <LineChart
-                        id="month"
-                        :Coins="coin_data"
-                        :labels="coin_data_label"
-                    />
                 </div>
                     
             </div>
@@ -150,19 +157,6 @@
     </div>
 </div>
 </template>
-<style type="text/css">
-    .Doughnut_Chart{
-        /*width:500px;*/
-    }
-.chart_title{
-    padding: 10px;
-    background-color: #fafafa;
-    color:gray;
-}
-.chart_content{
-    padding: 10px;
-}
-</style>
 <script>
 import BarLine from '../charts/BarLine.vue'
 import LineChart from '../charts/Line.vue'

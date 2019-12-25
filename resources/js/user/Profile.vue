@@ -8,21 +8,21 @@
        
        
                 <!--ユーザー名-->
-                <div class="col-3">
+                <div class="col-sm-3 Profile__image">
                     <img v-if="user.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
                     <img v-if="! user.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
                
                    
-                    <div class="Status__user">
-                        <span class="Status__user__name">{{ currentUser.name }}</span>
-                        <span class="Status__user__edit" @click="mode =! mode">編集</span><br>
-                        <span class="Status__user__level">Lev.{{ currentUser.level }}</span>
+                    <div class="Profile__user">
+                        <span class="Profile__user__name">{{ currentUser.name }}</span>
+                        <span class="Profile__user__edit" @click="mode =! mode">編集</span><br>
+                        <span class="Profile__user__level">Lev.{{ currentUser.level }}</span>
                     </div>
                 </div>
                 
                 
                 <!--レベルゲージ-->
-                <div class="col-3 plr-2 Status__gerge">
+                <div class="col-sm-3 plr-2 Profile__gerge">
                     <small >これは次のレベルまであと {{ currentUser.experience_point }}pint</small>
                     <div class="user__gerge">
                         <div class="user__gerge__bar" id="gerge_bar">
@@ -33,12 +33,12 @@
                 
                 
                 <!--利用指数-->
-                <div class="col-3 plr-2 ">
+                <div class="col-sm-3 plr-2">
                     
                 </div>
                 
                 
-                <div class="col-3 plr-2 status__subtitle">
+                <div class="col-sm-3 plr-2 Profile__subtitle">
                     <div class="mt-2">{{ currentUser.name }}</div>
                     <div class="">{{ currentUser.email }}</div>
                 </div>
@@ -54,49 +54,6 @@
 
 </div>
 </template>
-<style type="text/css">
-.user_image{
-    width: 55px;
-    border-radius:55px;
-}
-
-.Status__user{
-    vertical-align: middle;
-    display: inline-block;
-    padding-left: 15px;
-}
-.Status__user__name{
-    font-size: 18px;
-    font-weight: bold;
-}
-.Status__user__edit{
-    color: mediumseagreen;
-    cursor: pointer;
-}
-.Status__user__level{
-    font-weight: bold;
-}
-
-.Status__gerge small{
-    color: gray;
-}
-.user__gerge{
-    background-color: whitesmoke;
-    height: 15px;
-}
-.user__gerge__bar{
-    background-color: mediumaquamarine;
-    height: 15px;
-    width: 0px;
-}
-
-.status__subtitle{
-    color:gray;
-    text-align: center;
-}
-.plr-2{ padding: 0px 20px; }
-</style>
-
 <script>
 import Profile_UserForm from '../components/user/UserForm.vue'
 import Profile_Logs from '../components/user/Logs.vue'
@@ -107,6 +64,10 @@ export default {
             user: [],
             mode: null,
             errors: [],
+            
+            // カテゴリー
+            categories: [],
+            categories_color: [],
         }
     },
     computed: {
@@ -130,7 +91,7 @@ export default {
                 if(response.status === 200){
                 }
             })
-        }
+        },
     },
     mounted(){
         this.getDonation()

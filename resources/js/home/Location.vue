@@ -21,7 +21,7 @@
        
        <!--ロケーションメイン-->
         <transition name="fade" >
-        <div v-if="select" class="card about__continer__bg">
+        <div v-if="select" class="card about__continer__bg ">
            
            <div class="text-right">
                <button class="btn btn-light" @click="select = null">戻る</button>
@@ -37,12 +37,11 @@
            
            
            <div class="row mb-5">
-               <div class="col-6 ">
+               <div class="col-sm-6 ">
                    <img src="/image/kyushu.png" class="location_image"alt="">
-                
                </div>
                
-               <div class="col-6">
+               <div class="col-sm-6">
                
                    <!--年代別グラフ-->
                    <h5>年齢と相関図</h5>
@@ -62,21 +61,26 @@
                         :labels="sex_data_label"
                    />
                    </div>
+               </div>
                    
-                <!--コメント-->
-                <div class="media">
-                    <div class="media-body">
-                        <span>
-                        <h5 class="mt-0">年齢について</h5>
-                        {{ select }}地方に在住の賢者さまは、合計{{ sex_data_sum }}人です。
-                        これは全国のユーザーの内15％を示しています。
-                        また、性別ごとに比較すると{{ sex_data_label[0] }}性の賢者様{{ sex_data[0] }}人、
-                        {{ sex_data_label[1] }}性の賢者様{{ sex_data[1] }}人で
-                        {{ sex_data_label[0] }}性の賢者様の利用人数が多い結果となりました。
-                        </span>
+                   
+               <div class="col-lg-6 ">
+               </div>
+               <div class="col-lg-6 ">
+                    <!--コメント-->
+                    <div class="media">
+                        <div class="media-body">
+                            <span>
+                            <h5 class="mt-0">年齢について</h5>
+                            {{ select }}地方に在住の賢者さまは、合計{{ sex_data_sum }}人です。
+                            これは全国のユーザーの内15％を示しています。
+                            また、性別ごとに比較すると{{ sex_data_label[0] }}性の賢者様{{ sex_data[0] }}人、
+                            {{ sex_data_label[1] }}性の賢者様{{ sex_data[1] }}人で
+                            {{ sex_data_label[0] }}性の賢者様の利用人数が多い結果となりました。
+                            </span>
+                        </div>
+                        <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                     </div>
-                    <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
-                </div>
                </div>
            </div>
             
@@ -86,15 +90,15 @@
             </h3>
             
             
-           <div class="row ">
-               <div class="col-6">
+           <div class="row mb-5">
+               <div class="col-lg-6">
                    <h5>利用者数の推移と平均利用率</h5>
                    <BarLine 
                        :lineDataSet="month_data_all"
                        :barDataSet="month_data"
                        :labels="month_data_label"
                    />
-            <!--<div class="w-50 m-auto">-->
+                   
                     <div class="media">
                         <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                         <div class="media-body">
@@ -109,12 +113,17 @@
                             </span>
                         </div>
                     </div>
-                <!--</div>-->
                 </div>
-               
-                <div class="col-6 ">
+                
+                
+                
+                <div class="col-lg-6 display_lg-none">
                     <img src="/image/kyushu.png" class="location_image"alt="">
                 </div>
+                
+                   
+                
+                
             </div>
                      
                      

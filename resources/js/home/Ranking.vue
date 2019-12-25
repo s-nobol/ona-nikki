@@ -2,12 +2,12 @@
 <div class="card">
    
     <!--ランキング-->
-        <div class="rankig__page">
-        
+    <div class="rankig__page">
+    
             <h2 class="ranking__title"><b>ランキング </b></h2>
            
-            <div class="row mb-5">
-
+            <div class="row mb-sm-5">
+    
                 <div class="col-4 ranking__tab "  :class="{ 'select__ranking' : select === 'week' }">
                     <span @click="changeSelect('week')" class="ranking__tab__item" >今週</span>
                 </div>
@@ -21,50 +21,55 @@
                 </div>
            </div>
        
-       
-       <!--ランキングカード-->
-       <div v-if="rankingUsers">
-           <ul v-for="(user, index) in  rankingUsers" 
-                class="ranking__card" >
-           
-               <!--ランキング番号-->
-               <li class="rankig__card__number ">
-                   <i v-if="index+1 < 4" class="fas fa-crown" :class="'rank__'+(index+1)"></i>
-                   <span>{{ index+1 }}</span>
-               </li>
+   
+           <!--ランキングカード-->
+           <div v-if="rankingUsers">
+               <ul v-for="(user, index) in  rankingUsers" 
+                    class="ranking__card " >
                
-               <!--ユーザー名-->
-               <li class="rankig__card__user">
-                    <img v-if="user.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
-                    <img v-if="! user.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
-                 
-                   <span class="ml-2">{{ user.name }} </span>
+                   <!--ランキング番号-->
+                   <li class="rankig__card__number">
+                       <i v-if="index+1 < 4" class="fas fa-crown" :class="'rank__'+(index+1)"></i>
+                       <span>{{ index+1 }}</span>
+                   </li>
                    
-                   <!--フォローボタン-->
-                   <Follow 
-                       :id="user.user_id" 
-                       :followCheck="user.followed_by_user"
-                       @chengeData="changeUserData(user)"
-                   />
-               </li>
-               
-               <!--ユーザーのログカウント-->
-               <li class="rankig__card__count">
-                   <span class="rankig__card__count__span">
-                   {{ user.count }}
-                   <small class="rankig__card__count__small">回</small>
-                   </span>
-               </li>
-               
-               <!--ポイント-->
-               <li class="rankig__card__point">
-                   <span >{{ user.point }} <small>EXP</small></span>
+                   <!--ユーザー名-->
+                   <li class="rankig__card__user ">
+                        <img v-if="user.oauth_image" class="user_image" :src="currentUser.oauth_image" alt="ユーザー画像">
+                        <img v-if="! user.oauth_image" class="user_image" src="/image/noimage.jpg" alt="ユーザー画像">
+                     
+                       <span class="ml-2">{{ user.name }} </span>
+                       
+                   </li>
                    
-               </li>
+                   <!--ユーザーのログカウント-->
+                   <li class="rankig__card__count ">
+                       <span class="rankig__card__count__span">
+                       {{ user.count }}
+                       <small class="rankig__card__count__small">回</small>
+                       </span>
+                   </li>
+                   
+                   <li class="rankig__card__follow ">
+                       <!--フォローボタン-->
+                       <Follow
+                           :id="user.user_id" 
+                           :followCheck="user.followed_by_user"
+                           @chengeData="changeUserData(user)"
+                       />
+                   </li>
+                   
+                   <!--ポイント-->
+                   <li class="rankig__card__point">
+                       <span >{{ user.point }} <small>EXP</small></span>
+                       
+                   </li>
+               
+               </ul>
+               
            
-           </ul>
-       </div>
-       
+           </div>
+           
        
        
    </div>

@@ -9,8 +9,6 @@
         <b>性別ごとの利用者グラフ</b>
     </h3>
     
-            
-                <!--<canvas id="pie" ></canvas>  -->
     
     <div class="about__continer">
         <div class="row  mb-5">
@@ -23,7 +21,7 @@
             </div>
         </div>
         
-        <div class="w-50 m-auto ">
+        <div class="w-lg-50 m-auto ">
             <div class="media">
                 <img class="align-self-start mr-3 myimage" src="/image/kairakuten.png" alt="">
                 <div class="media-body">
@@ -45,12 +43,12 @@
             <b>男女別利用者</b>
         </h3>
         
-        <div class="row mb-5">
-           <div class="col-6">
+        <div class="row mb-sm-5">
+           <div class="col-sm-6">
                <!--男*年齢横グラフ-->
                 <canvas id="man" ></canvas>
            </div>
-           <div class="col-6">
+           <div class="col-sm-6">
                <!--女*年齢横棒グラフ-->
                 <canvas id="woman" ></canvas>
            </div>
@@ -59,7 +57,7 @@
         
         <!--年齢別の利用すいい棒グラフ-->
         <div class="row ">
-            <div class="col-6 m-auto">
+            <div class="w-lg-50 m-auto">
                 <h3 class="mt-5 about__title">
                     <b>年齢ごとの利用者グラフ</b>
                 </h3>
@@ -71,7 +69,7 @@
             </div>
         </div>
         
-        <div class="w-50 m-auto">
+        <div class="w-lg-50 m-auto">
             <div class="media">
                 <div class="media-body">
                     <span>
@@ -89,11 +87,6 @@
     </div>
 </div>
 </template>
-<style type="text/css">
-    .myimage{
-        width: 100px;
-    }
-</style>
 <script>
 import Pie from '../charts/Pie.vue'
 import Doughnut from '../charts/Doughnut.vue'

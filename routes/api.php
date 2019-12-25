@@ -79,15 +79,9 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
  * 
 **/
 
-// User::find(103)->delete();
-
 //募金のランキング（なくていい？）
 // タイムライン(なくていい？)
 
 
-
-
-
-//サイドバーのアコーディオン
-// app.env のCallBack_Url修正（後日）
-// git checkout -b navigation
+//レスポンシブデザインの作成
+// git checkout -b responsive-vue

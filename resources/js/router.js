@@ -4,12 +4,11 @@ import Router from 'vue-router'
 
 // // view
 import index from './pages/Index.vue'
-import test from './pages/Test.vue'
+import test from './Test.vue'
 import category from './pages/Category.vue'
 
 //home
 import home from './home/Home.vue'
-import home2 from './home/Home2.vue'
 import sex from './home/Sex.vue'
 // import age from './home/Age.vue'
 import location from './home/Location.vue'
@@ -28,9 +27,8 @@ import oauth from './pages/Oauth.vue'
 //mypage
 import mypage from './user/Mypage.vue'
 import profile from './user/Profile.vue'
-import logs from './user/Logs.vue'
+// import logs from './user/Logs.vue'
 import user_year from './user/Year.vue'
-// import show from './user/Show.vue'
 // import user_month from './user/Month.vue'
 
 
@@ -41,7 +39,6 @@ export default new Router({
         // home
         { path: '/', component: index  },
         { path: '/home', component: home , name: 'home' },
-        { path: '/home2', component: home2 , name: 'home2' },
         { path: '/about', component: about  , name: 'about'  },
         { path: '/policy', component: policy  , name: 'policy'  },
         { path: '/notify', component: notify  , name: 'notify'  },
@@ -63,7 +60,7 @@ export default new Router({
         // mypage
         { path: '/mypage', component: mypage , name: 'mypage'  },
         { path: '/mypage/profile', component: profile , name: 'profile'  },
-        { path: '/mypage/logs', component: logs  , name: 'mypage-logs' },
+        // { path: '/mypage/logs', component: logs  , name: 'mypage-logs' },
         { path: '/mypage/logs/:year', component: user_year, props: true , name: 'mypage-year'  },
         { path: '/mypage/notify', component: notify  , name: 'notify'  },
         // { path: '/mypage/logs/:year/:month', component: user_month,  props: true },//今は入れなくていい?

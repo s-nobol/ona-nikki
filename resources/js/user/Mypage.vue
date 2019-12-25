@@ -4,7 +4,7 @@
     
  
         <div class="row "> 
-            <div class="col-9 ">
+            <div class="col-lg-9">
                 
                 <!--ユーザーばー-->
                 <UserBar 
@@ -47,7 +47,7 @@
                 
                 
                     <!--過去6か月の比較-->
-                    <div class="col-7 card">
+                    <div class="col-sm-7 card">
                         <nav class="navbar navbar-expand-lg navbar-light pt-3">
                             <h4 class="d-inline-block"><b>6か月の比較</b></h4>  
                             
@@ -75,7 +75,7 @@
                     
                 
                     <!--一か月の利用頻度（円グラフ）-->  
-                    <div class="col-5 card">         
+                    <div class="col-sm-5 card">         
                         <h4 class="text-center p-3"><b>一か月の利用比率</b></h4>  
                  
                         <div class="Mypage__Doughnut">
@@ -98,7 +98,7 @@
                 
                 <div class="row">
                 
-                    <div class="col-4 card p-3 text-center">
+                    <div class="col-sm-4 card p-3 text-center">
                         <!--<span>何らかのグラフ・データ</span>-->
                         <h4 class="text-center mt-5"><b>弟子入り数</b></h4>
                         
@@ -106,7 +106,7 @@
                         <span>Followers</span>
                     </div>
                     
-                    <div class="col-5 card p-3 ">
+                    <div class="col-sm-5 card p-3 ">
                         <h4 class="text-center"><b>カテゴリー別グラフ</b></h4>
                         <BarHorizontal 
                             id="category"
@@ -116,7 +116,7 @@
                         />
                     </div>
                     
-                    <div class="col-3 card p-3 text-center">
+                    <div class="col-sm-3 card p-3 text-center">
                         <span class="rounded-pill bg__red p-1">平均利用時間</span>
                         <h2 class="d-inline-block"><b>25</b>hour</h2>
                     </div>
@@ -138,7 +138,7 @@
             
             
             <!--サイドバー-->
-            <div class="col-3 pl-3">
+            <div class="col-lg-3 pl-3">
         
                     <!--カレンダー-->
                     <div class=" card ">
@@ -205,33 +205,6 @@
         
     </div>
 </template>
-<style type="text/css">
-.Mypage__Doughnut{
-    position: relative;
-}
-.Mypage__Doughnut__title{
-    position: absolute;
-    display: inline-block;
-    font-size: 45px;
-    top:50%;
-    left: 50%;
-    margin-left: -35px;
-    margin-top: -35px;
-}
-.Chart__label{
-    display: inline-block;
-    width: 25px;
-    height: 15px;
-}
-.bg__gray{
-    background-color: whitesmoke;
-}
-.new__date__item{
-    padding: 1px 5px;
-    border-radius: 15px;
-    
-}
-</style>
 <script>
 
 import Bar from '../charts/Bar.vue'
@@ -240,7 +213,6 @@ import Lines from '../charts/Line.vue'
 import Doughnut from '../charts/Doughnut.vue'
 import BarHorizontal from '../charts/BarHorizontal.vue'
 import Table from '../components/Table.vue'
-import Dateitem from './Date.vue'
 
 // import Calendar from '../components/user/Calendar.vue'
 
@@ -251,8 +223,7 @@ import CalendarTest from '../components/user/CalendarTest.vue'
 
 export default {
     components: { Bar, BarLine ,Doughnut, BarHorizontal,
-    Table, Dateitem, HomeBar,Lines ,
-    UserBar,CalendarTest},
+    Table, HomeBar,Lines , UserBar,CalendarTest},
     
     computed: {
         currentUser(){

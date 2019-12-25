@@ -32,19 +32,24 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_URL'),
+        'redirect' => env('APP_URL') . '/login/github/callback',
+        
+        // 'redirect' => env('GITHUB_URL'),
     ],
     
     'twitter' => [
         'client_id'     => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect'      => env('TWITTER_URL'),
+        'redirect' => env('APP_URL') . '/login/twitter/callback',
+        
+        // 'redirect'      => env('TWITTER_URL'),
     ],
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect'      => env('GOOGLE_URL'),
-        // 'redirect' => env('APP_URL') . '/login/google/callback',//後日変更
+        'redirect' => env('APP_URL') . '/login/google/callback',
+        
+        // 'redirect'      => env('GOOGLE_URL'),
     ]
 
 ];

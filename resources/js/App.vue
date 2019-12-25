@@ -50,10 +50,17 @@
             </div>
             
             <!--メイン-->
-            <main  class="col-lg-10 pl-4 pr-4 pt-1">
-                <!--<div class="main__continer">-->
+            <!--<main  class="col-lg-10 pl-4 pr-4 pt-1">-->
+            <!--    <div class="main__continer">-->
+            <!--        <RouterView />-->
+            <!--    </div>-->
+            <!--</main>-->
+            
+            <!--メイン-->
+            <main  class="col-lg-10 pt-1">
+                <div class="main__continer ">
                     <RouterView />
-                <!--</div>-->
+                </div>
             </main>
         </div>
         
@@ -101,13 +108,6 @@
     </div>
 </template>
 <style type="text/css">
-/*あとで修正*/
-.header__button{
-    display: none;
-}
-@media screen and (max-width:991px){
-    .header__button{display: inline-block;}
-}
     
 .fade-leave-active,.fade-enter-active{
   transition: opacity .5s;
@@ -115,31 +115,25 @@
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 .slide_down-enter-active, .slide_down-leave-active {
     transition: all .5s;
 }
 .slide_down-enter, .slide_down-leave-to {
     height: 0;
 }
-
 .slide_left-enter-active, .slide_left-leave-active {
     transition: all .5s;
 }
 .slide_left-enter, .slide_left-leave-to {
     width: 0;
 }
-
 </style>
 <script>
 import Sidebar from './components/Sidebar.vue'
 import NavigationBar from './components/NavigationBar.vue'
-
 import LoginModal from './components/modal/Login.vue'
 import LevelModal from './components/modal/Level.vue'
 import AlertModal from './components/modal/Alert.vue'
-
-
 export default {
     components: {Sidebar, NavigationBar, LoginModal, LevelModal,AlertModal },
     data(){

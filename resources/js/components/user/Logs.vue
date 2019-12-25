@@ -1,11 +1,5 @@
 <template>
     <div>
-       
-        <!--<div class="card">-->
-        <!--    <span>すべて削除</span>-->
-            
-        <!--    <div>検索</div>-->
-        <!--</div>-->
         <div class="card">
             <!--<div class="bg-light p-2">-->
                 <h3><b>最新の記録 (30件)</b></h3>
@@ -16,11 +10,11 @@
                         <th scope="col">id</th>
                         <!--<th scope="col">エリア</th>-->
                         <th scope="col">カテゴリー</th>
-                        <th scope="col" >コメント</th>
-                        <th scope="col" >募金額</th>
-                        <th scope="col" >ステータス⇩</th>
+                        <th scope="col" class="display_sm-none">コメント</th>
+                        <th scope="col" class="display_sm-none">募金額</th>
+                        <th scope="col" class="display_sm-none">ステータス</th>
                         <th scope="col">詳細</th>
-                        <th scope="col">日付⇩</th>
+                        <th scope="col">日付</th>
                     </tr>
                 </thead>
                 <tbody v-for="log in logs" class="text-center">
@@ -35,21 +29,23 @@
                         </td>
                         <td v-if="editNumber === log.id " content="category">
                             <select v-model="log.category" :value="log.category">
-                                <option value="みかん">みかん</option>
-                                <option value="リンゴ">リンゴ</option>
-                                <option value="イチゴ">イチゴ</option>
-                                <option value="ぶどう">ぶどう</option>
-                            </select>
+                                    <option 
+                                        v-for="item in categories_color"
+                                        :style="{ 'background-color': item.color }"
+                                        :value="item.color"
+                                    >{{ item.color }}</option>
+                            </select> 
+                            <!--</select>   -->
                         </td>
                         
                         <!--コメント-->
-                        <td content="comment">作成中</td>
+                        <td content="comment" class="display_sm-none">作成中</td>
                         
                         <!--コイン-->
-                        <td content="coin">{{ log.coin }}円</td>
+                        <td content="coin" class="display_sm-none">{{ log.coin }}円</td>
                         
                         <!--ステータス-->
-                        <td content="status">
+                        <td content="status" class="display_sm-none">
                             <i class="fas fa-check-circle fa-lg text__gray" :class="{ 'text-success' : log.check }"></i>
                         </td>
                         
@@ -61,16 +57,13 @@
                         </td>
                         
                         <!--作成時間-->
-                        <td content="created_at">{{ log.created_at }}</td>
+                        <td content="created_at" >{{ log.created_at }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </template>
-<style type="text/css">
-.text__gray{  color: gray; }
-</style>
 <script>
 
 export default {
@@ -78,9 +71,24 @@ export default {
         return{
             logs: [],
             editNumber: null,
+            
+            // カテゴリー
+            categories: [],
+            categories_color: [],
         }
     },
     methods: {
+        
+        //カテゴリーの取得
+        getCategory(){
+            axios.get(`/api/categories`).then(response => {
+                console.log('category',response); 
+                if(response.status === 200){
+                    this.categories = response.data
+                    this.categories_color = response.data
+                }
+            })
+        },
         get_logs(){
             axios.get(`/api/mypage/logs`).then(response => {
                 console.log(response);
@@ -133,6 +141,7 @@ export default {
         }
     },
     created(){
+        this.getCategory()
         this.get_logs()
     }
 }

@@ -1,0 +1,86 @@
+// マイページ
+.Mypage__Doughnut{
+    position: relative;
+}
+.Mypage__Doughnut__title{
+    position: absolute;
+    display: inline-block;
+    font-size: 45px;
+    top:50%;
+    left: 50%;
+    margin-left: -35px;
+    margin-top: -35px;
+}
+.Chart__label{
+    display: inline-block;
+    width: 25px;
+    height: 15px;
+}
+.bg__gray{
+    background-color: whitesmoke;
+}
+.new__date__item{
+    padding: 1px 5px;
+    border-radius: 15px;
+    
+}
+
+
+
+
+// プロフィール
+.user_image{
+    width: 55px;
+    border-radius:55px;
+}
+
+.Profile__user{
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 15px;
+}
+.Profile__user__name{
+    font-size: 18px;
+    font-weight: bold;
+}
+.Profile__user__edit{
+    color: mediumseagreen;
+    cursor: pointer;
+}
+.Profile__user__level{
+    font-weight: bold;
+}
+
+.Profile__gerge small{
+    color: gray;
+}
+.user__gerge{
+    background-color: whitesmoke;
+    height: 15px;
+}
+.user__gerge__bar{
+    background-color: mediumaquamarine;
+    height: 15px;
+    width: 0px;
+}
+
+.Profile__subtitle{
+    color:gray;
+    text-align: center;
+}
+.plr-2{ padding: 0px 20px; }
+@media screen and (max-width:760px){
+    .Profile__image{
+        text-align: center;
+    }
+    .user_image{
+        width: 100px;
+        border-radius:100px;
+    }
+    .Profile__user{
+        display: block;
+    }
+    .Profile__subtitle{
+        display: none;
+    }
+}

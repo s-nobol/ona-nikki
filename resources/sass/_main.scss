@@ -13,13 +13,25 @@ h1 h2,h3,h4,h5,h6,ul, li ,p, div,span, strong, b,  a{
 
 //メインコンテナの幅
 .main__continer {
-        width: 95%;
+        padding: 0px 20px;
+        // padding: 0px 1.5rem;
 }
-
+@media screen and (max-width:760px){
+    .main__continer{
+        padding: 0px;
+    }
+}
 
 .about__continer__bg{
     padding: 50px;
 }
+
+@media screen and (max-width:760px){
+    .about__continer__bg{
+        padding: 10px;
+    }
+}
+
 
 .about__continer{
     width: 90%;
@@ -28,6 +40,7 @@ h1 h2,h3,h4,h5,h6,ul, li ,p, div,span, strong, b,  a{
 .about__title{
     text-align: center;
 }
+
 
 // カードの設定
 .card{
@@ -61,36 +74,15 @@ body{
     background-color: $mein_color;
     color: white; 
 }
-// .bg__all{
-//     background-color: $mein_color;
-//     color: white; 
-// }
-// .bg__month{
-//     background-color: #ff8080;
-//     color: white; 
-// }
-// .bg__calorie{
-//     background-color: #ff8f66;
-//     color: white; 
-// }
-// .bg__donation{
-//     background-color: mediumseagreen;
-//     color: white; 
-// }
 
-// .text__all{
-//     color: $mein_color; 
-// }
-// .text__month{
-//     color: #ff8080; 
-// }
-// .text__calorie{
-//     color: #ff8f66; 
-// }
-// .text__donation{
-//     color: mediumseagreen; 
-// }
 
+// ヘッダー
+.header__button{
+    display: none;
+}
+@media screen and (max-width:991px){
+    .header__button{display: inline-block;}
+}
 
 
 
@@ -107,80 +99,30 @@ body{
     color: gray;
 }
 // mypage　上部　ステータスバー
-.Statusbar{
-    list-style: none;
-    font-size:0px;
-    padding: 0px;
-    margin: 0px;
-    background: white;
-    
+
+
+//location sex month
+.myimage{
+    width: 100px;
 }
-.Statusbar__item{
-    display: inline-block;
-    position: relative;
-    height:100px;
-    width: 150px;
-    padding: 15px;
-}
-.Statusbar__item__title{
-    color: gray;
-    font-size: 15px;
-    font-weight: bold;
-}
-.Statusbar__item__content{
-    font-size: 35px;
-    position:absolute;
-    bottom: 5px;
-    right: 5px;
-    font-weight: bold;
-}
-.Statusbar__item__content small{
-    font-size: 18px;
-    color:gray;
+
+@media screen and (max-width:991px){
+    .myimage{
+        width: 50px;
+    }
 }
 
 
-.StatusCard{
-    height:170px;
-    overflow: hidden;
-}
-.StatusCard__title{
-    margin-top: 15px;
-    position: relative;
-}
-.StatusCard__title span{
-    font-weight: bold;
-}
-.StatusCard__title strong{
-    position:absolute;
-    right:5px;
-    color:gray;
-}
-.StatusCard__content{
-    line-height: 120px;
-    font-size: 45px;
-    font-weight: bold;
-    text-align: center;
-}
-.StatusCard__content i{
-    font-size: 25px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: -25px;
-}
+
+.text__gray{  color: gray; }
+
+
+
+
+
 .bg__menu{
     background-color: Menu;
 }
-// フラッシュ
-.flash__form{
-    height: 50px;
-    overflow: hidden;
-}
-.flash-edit{
-    background-color: mediumseagreen;
-    color:white;
-}
-
 // ヘッダー
 .header__title{
     font-size:35px;
@@ -209,7 +151,6 @@ body{
     font-size: 45px;
     font-weight: bold;
     color: rgba(255, 74, 74, 0.9);
-    
 }
 
 
@@ -227,4 +168,34 @@ body{
 .bg_indigo{
     background-color: mediumseagreen;
     color:white;
+}
+
+
+// フラッシュ
+.flash__form{
+    height: 50px;
+    overflow: hidden;
+}
+.flash-edit{
+    background-color: mediumseagreen;
+    color:white;
+}
+
+// フラッシュ
+// 成功
+.flash-success{
+    background-color: white;
+}
+//info
+.flash-info{
+    background-color: azure;
+}
+//warnig
+.flash-warnig{
+    background-color: #ffff80;
+}
+// 失敗
+.flash-danger{
+    background-color: tomato;
+    color: white;
 }
