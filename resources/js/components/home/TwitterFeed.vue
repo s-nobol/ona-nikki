@@ -1,42 +1,56 @@
 <template>
 <div class="card">
-            
-            <h4 class=" p-3">Twitterタイムライン</h4>
-            
-            <div class="">
-                <span>Twitterタイムライン</span>
-                
-                <!--<a class="twitter-timeline"  href="https://twitter.com/hashtag/%E6%B4%B2%E5%B4%8E%E8%A5%BF" data-widget-id="777064933750026240">#洲崎西 のツイート</a>-->
-                
-                <a class="twitter-timeline" href="https://twitter.com/BarackObama?ref_src=twsrc%5Etfw">Tweets by BarackObama</a> 
-               
-                   <v-timeline
-                      :id="twitterId"
-                      :source-type="'profile'"
-                      :options="{ 'height': twitterHeight }" />
-            </div>
-       
-
+  
+        <!--タイムライン（現在サポートされていない）-->
+        <!--  <div :index="i" v-for="(tw,i) in tweets" :key="tw.title">-->
+        <!--    <v-timeline-->
+        <!--    :id="tw.title"-->
+        <!--    :source-type="'profile'"-->
+        <!--    :options="{ 'height': twitterHeight }" />-->
+        <!--  </div>-->
+        
+        
+        
+    <div class="Timeline ">
+        <h4 class="p-3 border- m-0"><b>タイムライン</b></h4>
+        <div class="Timeline__item ">
+            <Tweet id="1210108158691012610"></Tweet>
+            <Tweet id="1207499345789980672"></Tweet>
+            <Tweet id="1211300252877115392"></Tweet>
+            <Tweet id="1207499345789980672"></Tweet>
+        </div>
+    </div>
 </div>
 </template>
 <style type="text/css">
-</style> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script>!function(d,s,id){
-var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+.Timeline{
+    max-height:350px;
+    overflow-y: scroll;
+    margin: 0px;
+    padding: 0px;
+    /*background-color: ;*/
+}    
+</style>
 <script>
-
-// import Timeline from 'vue-tweet-embed/timeline'
-
-// export default{
-//   components: {
-//     'v-timeline': Timeline,
-//   },
-//   data() {
-//     return {
-//       twitterId: 'tsuka_rinorino',
-//       twitterHeight: '400',
-//     }
-//   },    
-// }
+import { Tweet, Moment, Timeline } from 'vue-tweet-embed'
+// import { Tweet } from 'vue-tweet-embed'
+ 
+export default{
+  components: {
+    'v-timeline': Timeline,
+    Tweet: Tweet
+  },
+  data() {
+    return {
+      twitterHeight: '400',
+      tweets: []
+    }
+  },
+  created() {
+        axios.get('https://twitter.com/Test2019501').then(response => {
+                console.log('twitter',response);
+        })  
+  }
+}
 </script>
+

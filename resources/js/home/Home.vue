@@ -166,16 +166,16 @@
             <!--サイドバー-->
             <div class="col-lg-3 pr-0">
             
+                <!--Twitterフィード-->
+                <TwitterFeed />
               
                 <!--タイムライン-->
                 <TimeLine 
                 :dataSet="new_data"
                 />
             
-                <!--Twitterフィード-->
-                <TwitterFeed />
                 
-                <Ranking :dataSet="new_data"/>
+                <!--<Ranking :dataSet="new_data"/>-->
                 
                   <!--マップ-->
                 <div class="card">

@@ -47,7 +47,7 @@
 </template>
 <style type="text/css">
 .test img{
-    width: 25px;
+    width: 30px;
     border-radius: 25px;
 }
 </style>
