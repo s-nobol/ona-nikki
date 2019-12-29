@@ -13,48 +13,48 @@
             </li>
             
             <li class="list-group-item  ">
-                <RouterLink  to="/mypage/logs/2018" class="sidebar_item" >
+                <RouterLink  to="/mypage/logs/2018" class="sidebar__item" >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item ">
-                <RouterLink  to="/mypage/logs/2019" class="sidebar_item" >
+                <RouterLink  to="/mypage/logs/2019" class="sidebar__item" >
                     <span class="ml_50px">2019</span>
                 </RouterLink>
             </li>
             
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/profile" class="sidebar_item" >
+                <RouterLink  to="/mypage/profile" class="sidebar__item" >
                     <i class="far fa-address-card fa-lg"></i>
                     <span>プロフィール</span>
-                    <span v-if="! currentUser.status_check" class="sidebar_item_message_button">1</span>
+                    <span v-if="! currentUser.status_check" class="sidebar__item_message_button">1</span>
                 </RouterLink>
             </li>
             
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage" class="sidebar_item" >
+                <RouterLink  to="/mypage" class="sidebar__item" >
                     <i class="fas fa-home fa-lg"></i>
                     <span>マイページ</span>
                 </RouterLink>
             </li>
             
             
-            <li class="list-group-item">
-                <RouterLink  to="/mypage/notify" class="sidebar_item" >
-                    <i class="fas fa-envelope fa-lg"></i>
-                    <span>お知らせ</span>
-                </RouterLink>
-            </li>
+            <!--<li class="list-group-item">-->
+            <!--    <RouterLink  to="/mypage/notify" class="sidebar__item" >-->
+            <!--        <i class="fas fa-envelope fa-lg"></i>-->
+            <!--        <span>お知らせ</span>-->
+            <!--    </RouterLink>-->
+            <!--</li>-->
             
-            <li class="list-group-item">
-                <RouterLink  to="/ranking" class="sidebar_item" >
-                    <i class="fas fa-crown fa-lg"></i>
-                    <span>ランキング</span>
-                </RouterLink>
-            </li>
+            <!--<li class="list-group-item">-->
+            <!--    <RouterLink  to="/ranking" class="sidebar__item" >-->
+            <!--        <i class="fas fa-crown fa-lg"></i>-->
+            <!--        <span>ランキング</span>-->
+            <!--    </RouterLink>-->
+            <!--</li>-->
             
             
             <li class="list-group-item pl-5">
@@ -78,39 +78,39 @@
             
             
             <li class="list-group-item">
-                <RouterLink  to="/logs/2018" class="sidebar_item " >
+                <RouterLink  to="/logs/2018" class="sidebar__item " >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/logs/2019" class="sidebar_item" >
+                <RouterLink  to="/logs/2019" class="sidebar__item" >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/home" class="sidebar_item " >
+                <RouterLink  to="/home" class="sidebar__item " >
                     <span class="ml_50px">ホーム</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/sex" class="sidebar_item" >
+                <RouterLink  to="/sex" class="sidebar__item" >
                     <i class="fas fa-venus-mars  fa-lg"></i>
                     <span >年齢・性別</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/location" class="sidebar_item" >
+                <RouterLink  to="/location" class="sidebar__item" >
                     <i class="fas fa-thumbtack fa-lg"></i>
                     <span>都道府県</span>                
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/ranking" class="sidebar_item" >
+                <RouterLink  to="/ranking" class="sidebar__item" >
                     <i class="fas fa-crown fa-lg"></i>
                     <span>ランキング</span>
                 </RouterLink>
@@ -118,13 +118,13 @@
             
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->
-                <RouterLink  to="/policy" class="sidebar_item " >
+                <RouterLink  to="/policy" class="sidebar__item " >
                     <span class="ml_50px">プライバシーポリシー</span>  
                 </RouterLink>
             </li>
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->
-                <RouterLink  to="/about" class="sidebar_item " >
+                <RouterLink  to="/about" class="sidebar__item " >
                     <span class="ml_50px">おな日記について</span>  
                 </RouterLink>
             </li>
@@ -132,12 +132,12 @@
             <!--もしログインしていないとき-->
             <div v-if="! currentUser" >       
                 <li class="list-group-item">
-                    <!--<RouterLink  to="/about" class="sidebar_item " >-->
+                    <!--<RouterLink  to="/about" class="sidebar__item " >-->
                         <span class="ml_50px" @click="login">ログイン</span>  
                     <!--</RouterLink>-->
                 </li> 
                 <li class="list-group-item">
-                    <RouterLink  to="/signup" class="sidebar_item " >
+                    <RouterLink  to="/signup" class="sidebar__item " >
                         <span class="ml_50px">新規登録</span>  
                     </RouterLink>
                 </li>

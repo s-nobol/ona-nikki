@@ -15,29 +15,29 @@
             </li>
             
             <li class="list-group-item  ">
-                <RouterLink  to="/mypage/logs/2018" class="sidebar_item" >
+                <RouterLink  to="/mypage/logs/2018" class="sidebar__item" >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item ">
-                <RouterLink  to="/mypage/logs/2019" class="sidebar_item" >
+                <RouterLink  to="/mypage/logs/2019" class="sidebar__item" >
                     <span class="ml_50px">2019</span>
                 </RouterLink>
             </li>
             
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/profile" class="sidebar_item" >
+                <RouterLink  to="/mypage/profile" class="sidebar__item" >
                     <i class="far fa-address-card fa-lg"></i>
                     <span>プロフィール</span>
-                    <span v-if="! currentUser.status_check" class="sidebar_item_message_button">1</span>
+                    <span v-if="! currentUser.status_check" class="sidebar__item_message_button">1</span>
                 </RouterLink>
             </li>
             
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage" class="sidebar_item" >
+                <RouterLink  to="/mypage" class="sidebar__item" >
                     <i class="fas fa-home fa-lg"></i>
                     <span>マイページ</span>
                 </RouterLink>
@@ -45,14 +45,14 @@
             
             
             <li class="list-group-item">
-                <RouterLink  to="/mypage/notify" class="sidebar_item" >
+                <RouterLink  to="/mypage/notify" class="sidebar__item" >
                     <i class="fas fa-envelope fa-lg"></i>
                     <span>お知らせ</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/ranking" class="sidebar_item" >
+                <RouterLink  to="/ranking" class="sidebar__item" >
                     <i class="fas fa-crown fa-lg"></i>
                     <span>ランキング</span>
                 </RouterLink>
@@ -80,39 +80,39 @@
             
             
             <li class="list-group-item">
-                <RouterLink  to="/logs/2018" class="sidebar_item " >
+                <RouterLink  to="/logs/2018" class="sidebar__item " >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/logs/2019" class="sidebar_item" >
+                <RouterLink  to="/logs/2019" class="sidebar__item" >
                     <span class="ml_50px">2018</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/home" class="sidebar_item " >
+                <RouterLink  to="/home" class="sidebar__item " >
                     <span class="ml_50px">ホーム</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/sex" class="sidebar_item" >
+                <RouterLink  to="/sex" class="sidebar__item" >
                     <i class="fas fa-venus-mars  fa-lg"></i>
-                    <span >年齢・性別</span>
+                    <span>年齢・性別</span>
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/location" class="sidebar_item" >
+                <RouterLink  to="/location" class="sidebar__item" >
                     <i class="fas fa-thumbtack fa-lg"></i>
                     <span>都道府県</span>                
                 </RouterLink>
             </li>
             
             <li class="list-group-item">
-                <RouterLink  to="/ranking" class="sidebar_item" >
+                <RouterLink  to="/ranking" class="sidebar__item" >
                     <i class="fas fa-crown fa-lg"></i>
                     <span>ランキング</span>
                 </RouterLink>
@@ -120,13 +120,13 @@
             
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->
-                <RouterLink  to="/policy" class="sidebar_item " >
+                <RouterLink  to="/policy" class="sidebar__item " >
                     <span class="ml_50px">プライバシーポリシー</span>  
                 </RouterLink>
             </li>
             <li class="list-group-item">
                 <!--<i class="fas fa-ban fa-lg"></i>-->
-                <RouterLink  to="/about" class="sidebar_item " >
+                <RouterLink  to="/about" class="sidebar__item " >
                     <span class="ml_50px">おな日記について</span>  
                 </RouterLink>
             </li>
@@ -139,7 +139,7 @@
         <!--    <li class="list-group-item" v-for="item in homeItems" >-->
         <!--        <RouterLink  -->
         <!--            :to="item.url"-->
-        <!--            class="sidebar_item "-->
+        <!--            class="sidebar__item "-->
         <!--            :class="{ 'select_item' : $route.name == item.key }" >-->
                     
                     
@@ -155,53 +155,53 @@
 </template>
 <style type="text/css">
 .sidebar{}
-@media screen and (max-width:991px){
-.sidebar{
-    display: none;
-}
-}
+/*@media screen and (max-width:991px){*/
+/*.sidebar{*/
+/*    display: none;*/
+/*}*/
+/*}*/
 
-.sidebar_item{
-    display: inline-block;
-    color: black;
-    width:100%;
-    height: 100%;
-}
-.sidebar_item:hover{
-    color: black;
-    text-decoration: none;
-}
-.ml_50px{
-    margin-left: 52px;
-}
-.list-group-item{ 
+/*.sidebar__item{*/
+/*    display: inline-block;*/
+/*    color: black;*/
+/*    width:100%;*/
+/*    height: 100%;*/
+/*}*/
+/*.sidebar__item:hover{*/
+/*    color: black;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.ml_50px{*/
+/*    margin-left: 52px;*/
+/*}*/
+/*.list-group-item{ */
     
-    padding: 0px; 
-    height: 50px;
-    line-height:50px;
-    cursor: pointer;
-    transition-duration:0.3s;
-}
-.list-group-item:hover{
-    background-color:  whitesmoke;
-    text-decoration: none;
-}
-.list-group-item i{ 
-    display: inline-block;
-    width: 50px;
-    text-align: center;
-    color: gray;
-}
-.select_item{
-    background-color: whitesmoke;
-}
-.sidebar_item_message_button{
-    margin-left: 15px;
-    padding: 4px 8px;
-    background-color: #ff4a4a;
-    color: white;
-    border-radius: 50px;
-}
+/*    padding: 0px; */
+/*    height: 50px;*/
+/*    line-height:50px;*/
+/*    cursor: pointer;*/
+/*    transition-duration:0.3s;*/
+/*}*/
+/*.list-group-item:hover{*/
+/*    background-color:  whitesmoke;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.list-group-item i{ */
+/*    display: inline-block;*/
+/*    width: 50px;*/
+/*    text-align: center;*/
+/*    color: gray;*/
+/*}*/
+/*.select_item{*/
+/*    background-color: whitesmoke;*/
+/*}*/
+/*.sidebar__item_message_button{*/
+/*    margin-left: 15px;*/
+/*    padding: 4px 8px;*/
+/*    background-color: #ff4a4a;*/
+/*    color: white;*/
+/*    border-radius: 50px;*/
+/*}*/
 </style>
 <script>
 // 初めに複数のチャートのデータを取得

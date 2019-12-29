@@ -85,3 +85,9 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 
 //レスポンシブデザインの作成
 // git checkout -b responsive-vue
+// php artisan db:seed
+// php artisan migrate:fresh
+
+//タイムラインの作成
+// git checkout -b timeline
+//  npm install vue-tweet-embed --save-dev

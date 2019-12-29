@@ -1,22 +1,38 @@
 <template>
-    <div >
+    <div class="card">
+    
+    
+
+        <h4 class="p-3 border-bottom "><b>今日のランキング</b></h4>
+        
+    
         <div v-if="dataSet" class="ranker">
-            <ul v-for="user,index in dataSet" class="ranker__item">
-            
-                <li class="ranker__item__number">
-                    <span>{{ index +1 }}</span>
-                </li>
-                <li class="ranker__item__image">
-                    <img v-if="user.image" src="/image/noimage.jpg"></img>
-                    <img v-else="user.image" src="/image/noimage.jpg"></img>
-                </li>
-                <li class="ranker__item__user">
-                    <h3 class="user_name">{{ user.name }}</h3>
-                    <span class="user_level">Lev.{{ user.level }}</span>
-                </li>
-                <li class="ranker__item__count">
-                    <span class="p-2  ranker__count">{{ user.count }}</span>
-                </li>
+            <ul v-for="(user,index) in dataSet" class="ranker__item">
+                
+                <div v-if="index < 5 ">
+                
+                    <!--ランキング番号-->
+                    <li class="ranker__item__number">
+                        <span>{{ index +1 }}</span>
+                    </li>
+                    
+                    <!--画像-->
+                    <li class="ranker__item__image">
+                        <img v-if="user.image" src="/image/noimage.jpg"></img>
+                        <img v-else="user.image" src="/image/noimage.jpg"></img>
+                    </li>
+                    
+                    <!--名前-->
+                    <li class="ranker__item__user">
+                        <h3 class="user_name">{{ user.name }}</h3>
+                        <span class="user_level">Lev.{{ user.level }}</span>
+                    </li>
+                    
+                    <!--カウント-->
+                    <li class="ranker__item__count">
+                        <span class="p-2  ranker__count">{{ user.count }}</span>
+                    </li>
+                </div>
             </ul>
         </div>
     </div>

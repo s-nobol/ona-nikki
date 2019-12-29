@@ -18,26 +18,30 @@
                 <!--メインチャート-->
                 <div class="card">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <h3 class="d-inline-block">月別利用推移</h3>
+                        <h3 class="d-inline-block">
+                        <span v-if="tab === 'month' ">月別</span>
+                        <span v-if="tab === 'year' ">年間</span>
+                        <span v-if="tab === 'all' ">すべての</span>
+                        利用推移</h3>
                         
                         <div class="collapse navbar-collapse" id="navbarText">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item ">
-                                    <span @click="selectTab('month')">今月</span>
+                                    <span @click="selectTab('month')" class="mainchart__item">今月</span>
                                 </li>
                                 <li class="nav-item ">
-                                    <span @click="selectTab('year')">年間</span>
+                                    <span @click="selectTab('year')" class="mainchart__item">年間</span>
                                 </li>
                                 <li class="nav-item ">
-                                    <span @click="selectTab('all')">すべて</span>
+                                    <span @click="selectTab('all')" class="mainchart__item">すべて</span>
                                 </li>
                             </ul>
                         </div>
                     </nav>
                     <Lines 
                         id="line1"
-                        :dataSet="month_data"
-                        :labels="month_data_label"
+                        :dataSet="data"
+                        :labels="data_label"
                     />
                 </div>
                 
@@ -151,7 +155,7 @@
                     
                     <!--レベル・ユーザーステータスになるもの-->
                     <div class=" card p-2 text-center">
-                        <h3 class=""><b>Lev.58</b></h3>
+                        <h3 class=""><b>Lev.{{ currentUser.level }}</b></h3>
                         <small>次のレベルまであと{{ currentUser.experience_point - currentUser.point }}pint</small>
                     </div>
                     
@@ -205,6 +209,11 @@
         
     </div>
 </template>
+<style type="text/css">
+.mainchart__item{
+    cursor: pointer;
+}
+</style>
 <script>
 
 import Bar from '../charts/Bar.vue'
@@ -232,13 +241,16 @@ export default {
     },
     data(){
         return{
-            msg: '5',
             tab: 'year',
             data: [],
             data_label: [],
             today: new Date().getDate(),
             
+            // メインデータ
+            data: [],
+            data_label:[],
             
+            // 月のデータ
             month_data: [],
             month_data_label:[],
             
@@ -281,14 +293,14 @@ export default {
             this.data = []
             this.data_label = []
             this.tab = name 
-            this.get_data(name)
+            this.get_select_data(name)
         },
         get_select_data(name){
-            // axios.get(`api/mypage/${name}/data`).then(response => {
-            //     console.log(response);
-            //     this.month_data = response.data.data
-            //     this.month_data_label = response.data.data_label
-            // })
+            axios.get(`api/mypage/${name}/data`).then(response => {
+                console.log('mypage-select',response);
+                this.data = response.data.data
+                this.data_label = response.data.data_label
+            })
         },
         get_data(){
             console.log("チャートの取得")

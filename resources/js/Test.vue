@@ -7,10 +7,9 @@
             
                 <h5>sassのテストを行う</h5>
                 
-                <div class="box">
-                    <div class="box__right">
-                        <span class="box__right__name">ボックス左</span>
-                    </div>
+                
+                <div class="test2">
+                    <span class="test2__buttons">こんにちは</span>
                 </div>
                 
             </div>

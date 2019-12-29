@@ -69,28 +69,39 @@ class AppController extends Controller
         $category_data_color = $logs->pluck('color');
         
         
-        //最新のデータ
-        $new_data =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('*,logs.created_at as created_time'))
-            ->orderBy('created_time','desc')
-            ->take(10)
-            ->get();
+ 
         
         
    
-        // coinデータ
+        // 募金額データ
         $logs =  Log::select(DB::raw('sum(coin) as count, day as label'))
             ->where('created_at','>', $date)
             ->groupBy('day')
             ->get();
         $donation_data = $logs->pluck('count'); 
         $donation_data_label = $logs->pluck('label');
+   
+   
+        // 募金額データ
+        $month_date = Carbon::now()->subDays(30);
+        $logs =  Log::select(DB::raw('sum(coin) as count, day as label'))
+            ->where('created_at','>', $month_date)
+            ->groupBy('day')
+            ->get();
+        $month_donation_data = $logs->pluck('count'); 
+        $month_donation_data_label = $logs->pluck('label');
         
         
+               //最新のデータ
+        $new_data =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('*,logs.created_at as created_time'))
+            ->orderBy('created_time','desc')
+            ->take(10)
+            ->get();
+            
         // 一か月のデータカウンター
         $month_date = Carbon::now()->subDays(18);
         $month_data_count = Log::where('created_at','>', $month_date)->get()->count();
-        
         
         
         return  compact(
@@ -104,6 +115,7 @@ class AppController extends Controller
             'category_data', 'category_data_label', 'category_data_color',
             
             'donation_data','donation_data_label',
+            'month_donation_data','month_donation_data_label',
             'new_data',
             'month_data_count'
             );

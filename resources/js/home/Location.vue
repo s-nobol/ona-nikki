@@ -31,7 +31,7 @@
            
            
             <h3 class="about__title mb-5">
-               <b>{{ select }}の自慰事情について</b>
+               <b>{{ select }}にお住まいの賢者様について</b>
                
             </h3>
            
@@ -106,8 +106,8 @@
                             <h5 class="mt-0">利用者数の推移について</h5>
                             {{ select }}地方の月額平均利用回数は{{ month_data_avg }}回です。
                             全国の利用回数（{{ other_month_data_avg }}回）と比較すると
-                            <span v-if="month_data > other_month_data ">やや多い</span>
-                            <span v-if="month_data < other_month_data ">やや少ない</span>
+                            <span v-if="month_data_avg > other_month_data_avg ">やや多い</span>
+                            <span v-if="month_data_avg < other_month_data_avg ">やや少ない</span>
                             結果となりました。
                             
                             </span>

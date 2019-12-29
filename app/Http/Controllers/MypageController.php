@@ -251,6 +251,18 @@ class MypageController extends Controller
         $data_label = $logs->pluck('label');
         return compact('data', 'data_label');
     }
+    public function month_data()
+    {
+        // 月ごとにソートすると2018年11月と2019年11月がかぶる
+        $logs = Auth::user()->logs()
+            ->whereYear('created_at', Carbon::now()->month )
+            ->select( DB::raw('count(*) as count , day as label') )
+            ->groupBy('day')
+            ->get();
+        $data = $logs->pluck('count'); 
+        $data_label = $logs->pluck('label');
+        return compact('data', 'data_label');
+    }
     
     
     // Urlパラメータが正しいのか検証

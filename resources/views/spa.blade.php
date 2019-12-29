@@ -25,6 +25,9 @@
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<!--<a class="twitter-timeline" href="https://twitter.com/BarackObama?ref_src=twsrc%5Etfw">Tweets by BarackObama</a> -->
+<!--<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+
 <!--認証クラス-->
 <!--<div>-->
 <!--@auth<small>{{Auth::user()->name}} はログイン済みです</small>-->

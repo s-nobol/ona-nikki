@@ -32,23 +32,26 @@
                     <div class="row">
                     
                     
-                        <!--ロケーション-->
-                        <div class="col-5">
-                            <!--<h4 class="text-center"><b>地域ごとの集計</b></h4>  -->
+                        <!--ロケーショングラフ-->
+                        <div class="col-5  p-0 pl-2">
                             <BarHorizontal 
-                                id="locatio4n"
+                            
+                                id="location"
                                 :dataSet="location_data"
                                 :labels="location_data_label"
                             />
                             
                             
+                        <!--性別ごとのグラフ-->
                             <h4 class="text-center mt-5"><b>性別ごとの利用比率</b></h4>
-                            <div class="pl-5 pr-5">
-                                <Doughnut 
-                                    :borderWidth="80"
-                                    :dataSetSex="sex_data"
-                                    :labels="sex_data_label"
-                                />
+                            <div class="pl-3 pr-3">
+                                <div class="pl-5 pr-5">
+                                    <Doughnut 
+                                        :borderWidth="80"
+                                        :dataSetSex="sex_data"
+                                        :labels="sex_data_label"
+                                    />
+                                </div>
                             </div>
                             <div class="text-center mt-4">
                                 <span class="Chart__label"></span> <span>男性利用　{{ man_count }}人</span>
@@ -78,14 +81,14 @@
                         <h4 class="text-center mt-3"><b>月間募金額</b></h4>
                         <h3 class="mt-1">
                             <i class="fas fa-yen-sign"></i>
-                            <b>71,748</b>
+                            <b>{{ month_donation_count }}</b>
                             <small>円</small>
                         </h3>
                         <!--<span>Access</span>-->
                          <Bar
-                            id="test"
-                            :dataSet="time_data"
-                            :labels="time_data_label"
+                            id="coins"
+                            :dataSet="month_donation_data"
+                            :labels="month_donation_data_label"
                         />
                     </div>
                     
@@ -101,10 +104,15 @@
                     
                     
                     <div class="col-sm-3 card p-3 text-center ">
-                        <h4 class="text-center mt-4"><b>今日救われた命の数</b></h4>
-                        <!--<h4 class="text-center mt-4"><b>弟子入り数</b></h4>-->
-                        <h1 class="mt-1"><b>1,523</b><small>aces</small></h1>
-                        <span>Followers</span>
+                        <h4 class="text-center mt-4"><b>救われた命の数</b></h4>
+                        <h1 class="mt-1"><b>{{ Math.round( month_donation_count / 100 ) }}</b><small>人</small></h1>
+                        <div>
+                            <i class="fas fa-male fa-lg"></i>
+                            <i class="fas fa-male fa-lg"></i>
+                            <i class="fas fa-male fa-lg"></i>
+                            <i class="fas fa-male fa-lg"></i>
+                        </div>
+                        <span>Humans</span>
                     </div>
                 </div>
                 
@@ -160,16 +168,14 @@
             
               
                 <!--タイムライン-->
-                <TimeLine />
+                <TimeLine 
+                :dataSet="new_data"
+                />
             
                 <!--Twitterフィード-->
                 <TwitterFeed />
                 
-                
-                <!--サブ・タイムライン-->
-                <!--<TimeLine />-->
-              
-     
+                <Ranking :dataSet="new_data"/>
                 
                   <!--マップ-->
                 <div class="card">
@@ -224,11 +230,12 @@ import Table from '../components/Table.vue'
 
 import Map from '../components/Map.vue'
 import HomeBar from '../components/home/HomeBar.vue'
+import Ranking from '../components/home/Ranking.vue'
 import TimeLine from '../components/home/TimeLine.vue'
 import TwitterFeed from '../components/home/TwitterFeed.vue'
 export default {
     components: {HomeBar, Bar, BarLine ,Doughnut, Lines, BarHorizontal,TimeChart,
-    Map,
+    Map,Ranking,
         Table,TimeLine,TwitterFeed},
     data(){
         return{
@@ -271,6 +278,13 @@ export default {
             // 募金データ
             donation_data: [],
             donation_data_label: [],
+            
+            // 募金データ(月間)
+            month_donation_data: [],
+            month_donation_data_label: [],
+            month_donation_count: null,
+            
+            new_data:[]
         }
     },
     methods: {
@@ -299,10 +313,6 @@ export default {
                 this.week_data = response.data.week_data
                 this.week_data_label = response.data.week_data_label
                 
-                // 募金額推移
-                this.donation_data = response.data.donation_data
-                this.donation_data_label = response.data.donation_data_label
-                this.donation_count = this.get_sum(this.donation_data)
             
                 // カテゴリー別割合
                 this.category_data = response.data.category_data
@@ -310,7 +320,25 @@ export default {
                 this.category_data_color = response.data.category_data_color
                 
                 
-                this.month_count = response.data.month_data_count
+                // 募金額推移
+                this.donation_data = response.data.donation_data
+                this.donation_data_label = response.data.donation_data_label
+                this.donation_count = this.get_sum(this.donation_data)
+                
+                // 募金額推移
+                this.month_donation_data = response.data.month_donation_data
+                this.month_donation_data_label = response.data.month_donation_data_label
+                this.month_donation_count = this.get_sum(this.month_donation_data)
+                
+                
+                
+                
+                // 最新のデータ（5件）
+                this.new_data = response.data.new_data
+                // 今日のランキング
+                
+                
+                // this.month_count = response.data.month_data_count
             })
         },
         
