@@ -84,6 +84,9 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 // php artisan db:seed
 // php artisan migrate:fresh
 
+// ヘロクにアプリデプロイ
+// git push heroku master 
+
 //タイムラインの作成
 // git checkout -b twitterfeed
 //  npm install vue-tweet-embed --save-dev
