@@ -84,22 +84,30 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
  	
 // ヘロクにアプリデプロイ
 // git push heroku master 
- 
-// マイグレーション 
-// heroku run php artisan migrate
+
+
+// データベース作成
+// heroku config:get CLEARDB_DATABASE_URL=pgsql
+// heroku config:set APP_ENV=heroku
+// heroku config:set APP_URL=https://ona-nikki.herokuapp.com
+// CLEARDB_DATABASE_URL: mysql://[DB_USERNAME]:[DB_PASSWORD]@[DB_HOST]/[DB_DATABASE]?reconnect=true
+
+// heroku config:set CLEARDB_DATABASE_URL :mysql://b7cdebec37bc54:f16f86c2@us-cdbr-iron-east-05.cleardb.net/heroku_bac17cd21a2ea89?reconnect=true&encoding=utf8mb4
+
+// heroku config:set DB_CONNECTION=mysql
+// heroku config:set DB_CONNECTION=sqlite
+// heroku config:set DB_HOST=us-cdbr-iron-east-05.cleardb.net
+// heroku config:set DB_DATABASE=heroku_bac17cd21a2ea89?reconnect=true&encoding=utf8mb4
+// heroku config:set DB_USERNAME=b7cdebec37bc54
+// heroku config:set DB_PASSWORD=f16f86c2
+
 // heroku run php artisan migrate:fresh
 // heroku run php artisan db:seed
-//  heroku config:get APP_KEY
+ 
+// マイグレーション 
+// Heroku-SQLiteでやってみる
+// heroku run touch database/database.sqlite
+// heroku config:get DB_CONNECTION=sqlite 
 
-// エラー
+// heroku addons:create cleardb:standard-100  --version=5.7
 
-// In Connection.php line 669:
-                                                                                                                                                                                     
-//   SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "11" (SQL: insert into
-//   "logs" ("user_id", "month", "day", "time", "category", "coin", "ca  
-//   tegory_id", "created_at", "updated_at") values (59, 9, 11, 21, 4, 8, 10, 2018-07-25 00:00:00, 2019-12-30 21:13:34) returning "id")                                                 
-                                                                                                                                                                                     
-
-// In Connection.php line 335:
-                                                                                                
-//   SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "11"  
