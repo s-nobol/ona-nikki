@@ -87,3 +87,20 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 //タイムラインの作成
 // git checkout -b twitterfeed
 //  npm install vue-tweet-embed --save-dev
+//  source <(curl -sL https://cdn.learnenough.com/heroku_install)
+
+// データベース作成
+// heroku config:set DB_CONNECTION=pgsql
+// heroku config:set DB_HOST=ec2-107-21-110-75.compute-1.amazonaws.com
+// heroku config:set DB_DATABASE=test
+// heroku config:set DB_USERNAME=
+// heroku config:set DB_PASSWORD=
+ 
+ 	
+ 
+// マイグレーション 
+// heroku config:set APP_KEY=$(php artisan --no-ansi key:generate --show)
+// heroku run php artisan migrate
+// heroku run php artisan migrate:fresh
+// heroku run php artisan db:seed
+//  heroku config:get APP_KEY
