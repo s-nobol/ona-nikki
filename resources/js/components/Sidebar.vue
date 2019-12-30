@@ -6,7 +6,7 @@
     
     <div v-if="currentUser" >
         
-        <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.105 (エロ仙人)</div>
+        <div class="bg__red p-4"><b>{{ currentUser.name }}</b>　Lv.{{ currentUser.level }}</div>
         <ul class="list-group">
             <li class="list-group-item ">
             
