@@ -25,9 +25,11 @@ class MypageController extends Controller
     
     public function mypage()
     {
-        // 過去一か月のデータ取得(今月のデータにしたい)
         
+        
+        // 過去一か月のデータ取得(今月のデータにしたい)
         $select_month = Carbon::now()->subDays(30);
+        
         
         // 過去一か月のデータ取得
         $logs = Auth::user()->logs()
@@ -50,6 +52,7 @@ class MypageController extends Controller
         $six_month_data = $logs->pluck('count'); 
         $six_month_data_label = $logs->pluck('label');
         
+        
         // 6ヶ月のデータその他ユーザー
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select(DB::raw('count(*) / count(users.id) as count, month as label'),
@@ -57,7 +60,6 @@ class MypageController extends Controller
             ->where( 'created_time', '>', $select_6_month)
             ->groupBy('month')
             ->get();
-            
         $other_month_data= $logs->pluck('count'); 
         $other_month_data_label = $logs->pluck('label');
         
@@ -73,16 +75,17 @@ class MypageController extends Controller
             ->orderBy('count', 'desc')
             ->take(7)
             ->get();
-        
         $category_data = $logs->pluck('count'); 
         $category_data_label = $logs->pluck('label');
         $category_data_color = $logs->pluck('color');
         
         
         
-        // 最新のデータ
-        $new_data = Auth::user()->logs()
-            ->orderBy('created_at','desc')
+        // 最新のデータ 
+        $new_data =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
+            ->select(DB::raw('*, name as category_name '), DB::raw(' logs.created_at as created_at'))
+            ->where('user_id', Auth::user()->id )
+            ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
             

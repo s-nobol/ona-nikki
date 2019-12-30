@@ -4359,9 +4359,6 @@ __webpack_require__.r(__webpack_exports__);
     return {
       now_time: new Date()
     };
-  },
-  created: function created() {
-    console.log(new Date() - new Date('2019-12-28'));
   }
 });
 
@@ -4424,10 +4421,9 @@ __webpack_require__.r(__webpack_exports__);
       tweets: []
     };
   },
-  created: function created() {
-    axios.get('https://twitter.com/Test2019501').then(function (response) {
-      console.log('twitter', response);
-    });
+  created: function created() {// axios.get('https://twitter.com/Test2019501').then(response => {
+    //         console.log('twitter',response);
+    // })  
   }
 });
 
@@ -4892,8 +4888,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loginForm: {
-        email: '123@example.com',
-        password: '123123123'
+        // email: '123@example.com',
+        // password: '123123123'
+        email: '',
+        password: ''
       },
       errors: ''
     };
@@ -5969,7 +5967,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.data = response.data.data;
         _this.data_label = response.data.data_label;
-        _this.day_count = _this.get_sum(_this.data); // 地域別
+        _this.day_count = _this.get_sum(_this.data);
+        _this.month_count = response.data.month_data_count; // 地域別
 
         _this.location_data = response.data.location_data;
         _this.location_data_label = response.data.location_data_label; //性別
@@ -6013,12 +6012,19 @@ __webpack_require__.r(__webpack_exports__);
     },
     // 性別ごとの集計
     set_sex_date: function set_sex_date(sex_data, sex_data_label) {
-      if (sex_data_label[0] === "男") {
-        this.man_count = sex_data[0];
-        this.woman_count = sex_data[1];
-      } else if (sex_data_label[0] === "女") {
-        this.man_count = sex_data[1];
-        this.woman_count = sex_data[0];
+      // if(sex_data_label[0] === "男" ){
+      //     this.man_count = sex_data[0]
+      //     this.woman_count = sex_data[1]
+      // }else if(sex_data_label[0] === "女" ){
+      //     this.man_count = sex_data[1]
+      //     this.woman_count = sex_data[0]
+      // }
+      for (var i = 0; i < sex_data.length; i++) {
+        if (sex_data_label[i] === "男") {
+          this.man_count = sex_data[i];
+        } else if (sex_data_label[i] === "女") {
+          this.woman_count = sex_data[i];
+        }
       }
     }
   },
@@ -7889,9 +7895,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       loginForm: {
-        name: '123',
-        email: '123@example.com',
-        password: '123123123'
+        // name: '123',
+        // email: '123@example.com',
+        // password: '123123123'
+        name: '',
+        email: '',
+        password: ''
       },
       errors: []
     };
@@ -12293,9 +12302,9 @@ var render = function() {
   return _c("div", { staticClass: "navigation" }, [
     _vm.currentUser
       ? _c("div", [
-          _c("div", { staticClass: "bg__red p-4 list-group-title" }, [
+          _c("div", { staticClass: "bg__red p-4" }, [
             _c("b", [_vm._v(_vm._s(_vm.currentUser.name))]),
-            _vm._v("　Lv.105 (エロ仙人)")
+            _vm._v("　Lv." + _vm._s(_vm.currentUser.level))
           ]),
           _vm._v(" "),
           _c("ul", { staticClass: "list-group" }, [
@@ -12596,7 +12605,7 @@ var render = function() {
       ? _c("div", [
           _c("div", { staticClass: "bg__red p-4" }, [
             _c("b", [_vm._v(_vm._s(_vm.currentUser.name))]),
-            _vm._v("　Lv.105 (エロ仙人)")
+            _vm._v("　Lv." + _vm._s(_vm.currentUser.level))
           ]),
           _vm._v(" "),
           _c("ul", { staticClass: "list-group" }, [
@@ -17523,7 +17532,7 @@ var render = function() {
                         _c("span", { staticClass: "new__date__item bg__red" }, [
                           _c("i", { staticClass: "fas fa-sun mr-2" }),
                           _vm._v(
-                            _vm._s(item.category) +
+                            _vm._s(item.category_name) +
                               "\n                                        "
                           )
                         ]),
@@ -35891,15 +35900,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/js/components/home/TwitterFeed.vue ***!
   \******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TwitterFeed_vue_vue_type_template_id_0caafb2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TwitterFeed.vue?vue&type=template&id=0caafb2c& */ "./resources/js/components/home/TwitterFeed.vue?vue&type=template&id=0caafb2c&");
 /* harmony import */ var _TwitterFeed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TwitterFeed.vue?vue&type=script&lang=js& */ "./resources/js/components/home/TwitterFeed.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _TwitterFeed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _TwitterFeed_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _TwitterFeed_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TwitterFeed.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/home/TwitterFeed.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TwitterFeed_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TwitterFeed.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/home/TwitterFeed.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -35931,7 +35939,7 @@ component.options.__file = "resources/js/components/home/TwitterFeed.vue"
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/home/TwitterFeed.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

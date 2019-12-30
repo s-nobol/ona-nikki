@@ -187,7 +187,7 @@
                                     <div class="media-body">
                                         <div class="mt-1">
                                             <span class="new__date__item bg__red">
-                                                <i class="fas fa-sun mr-2"></i>{{ item.category }}
+                                                <i class="fas fa-sun mr-2"></i>{{ item.category_name }}
                                             </span>
                                             <span>募金 {{ item.coin }}円</span>
                                         </div>

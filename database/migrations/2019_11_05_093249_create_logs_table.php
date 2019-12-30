@@ -17,7 +17,7 @@ class CreateLogsTable extends Migration
             $table->bigIncrements('id');
             
             $table->tinyInteger('month');
-            $table->date('day');
+            $table->tinyInteger('day');
             $table->tinyInteger('time');
             
             $table->string('category')->nullable();

@@ -297,6 +297,8 @@ export default {
                 this.data_label = response.data.data_label
                 this.day_count = this.get_sum(this.data)
                 
+                this.month_count = response.data.month_data_count
+                
                 // 地域別
                 this.location_data = response.data.location_data
                 this.location_data_label = response.data.location_data_label
@@ -355,12 +357,19 @@ export default {
         
         // 性別ごとの集計
         set_sex_date(sex_data, sex_data_label){
-            if(sex_data_label[0] === "男" ){
-                this.man_count = sex_data[0]
-                this.woman_count = sex_data[1]
-            }else if(sex_data_label[0] === "女" ){
-                this.man_count = sex_data[1]
-                this.woman_count = sex_data[0]
+            // if(sex_data_label[0] === "男" ){
+            //     this.man_count = sex_data[0]
+            //     this.woman_count = sex_data[1]
+            // }else if(sex_data_label[0] === "女" ){
+            //     this.man_count = sex_data[1]
+            //     this.woman_count = sex_data[0]
+            // }
+            for(var i=0; i< sex_data.length ; i++ ){
+                if(sex_data_label[i] === "男" ){
+                    this.man_count = sex_data[i]
+                }else if(sex_data_label[i] === "女" ){
+                    this.woman_count = sex_data[i]
+                }
             }
         },
         

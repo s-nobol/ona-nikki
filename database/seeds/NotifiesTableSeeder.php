@@ -12,6 +12,6 @@ class NotifiesTableSeeder extends Seeder
     public function run()
     {
         // Notify 15個
-        factory(App\Notify::class, 15)->create()->each(function ($notify) {});
+        factory(App\Notify::class, 5)->create()->each(function ($notify) {});
     }
 }

@@ -79,31 +79,27 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
  * 
 **/
 
-
-
-// php artisan db:seed
-// php artisan migrate:fresh
-
+// Heroku修正
+// git checkout -b heroku-edit
+ 	
 // ヘロクにアプリデプロイ
 // git push heroku master 
-
-//タイムラインの作成
-// git checkout -b twitterfeed
-//  npm install vue-tweet-embed --save-dev
-//  source <(curl -sL https://cdn.learnenough.com/heroku_install)
-
-// データベース作成
-// heroku config:set DB_CONNECTION=pgsql
-// heroku config:set DB_HOST=ec2-107-21-110-75.compute-1.amazonaws.com
-// heroku config:set DB_DATABASE=test
-// heroku config:set DB_USERNAME=
-// heroku config:set DB_PASSWORD=
- 
- 	
  
 // マイグレーション 
-// heroku config:set APP_KEY=$(php artisan --no-ansi key:generate --show)
 // heroku run php artisan migrate
 // heroku run php artisan migrate:fresh
 // heroku run php artisan db:seed
 //  heroku config:get APP_KEY
+
+// エラー
+
+// In Connection.php line 669:
+                                                                                                                                                                                     
+//   SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "11" (SQL: insert into
+//   "logs" ("user_id", "month", "day", "time", "category", "coin", "ca  
+//   tegory_id", "created_at", "updated_at") values (59, 9, 11, 21, 4, 8, 10, 2018-07-25 00:00:00, 2019-12-30 21:13:34) returning "id")                                                 
+                                                                                                                                                                                     
+
+// In Connection.php line 335:
+                                                                                                
+//   SQLSTATE[22007]: Invalid datetime format: 7 ERROR:  invalid input syntax for type date: "11"  

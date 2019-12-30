@@ -63,8 +63,10 @@ export default {
     data(){
         return{
             loginForm: {
-                email: '123@example.com',
-                password: '123123123'
+                // email: '123@example.com',
+                // password: '123123123'
+                email: '',
+                password: ''
             },
             errors: '',
         }

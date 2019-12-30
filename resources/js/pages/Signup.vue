@@ -101,9 +101,12 @@ export default {
     data(){
         return{
             loginForm: {
-                name: '123',
-                email: '123@example.com',
-                password: '123123123'
+                // name: '123',
+                // email: '123@example.com',
+                // password: '123123123'
+                name: '',
+                email: '',
+                password: ''
             },
             errors: [],
         }

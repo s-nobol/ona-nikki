@@ -14,10 +14,15 @@ class Log extends Model
         'count' => 'integer',
         'check' => 'boolean',
         'created_at' => 'datetime:Y年m月d日',
+        'created_time' => 'datetime:Y年m月d日',
     ];
+    
+
     
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+    
+    
 }

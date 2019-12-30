@@ -18,13 +18,14 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     $sex=['男','女','その他'];
+    $age = [ '10代', '20代', '30代', '40代', '50代', '60代', 'その他',  ];
     $location = [ '北海道', '東北', '関東', '中部', '関西', '四国', '中国', '九州' ];
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         
         'age' => rand(10,15),
-        'sex' => $sex[rand(0,2)],
+        'sex' => $sex[rand(0,1)],
         'location' => $location[rand(0,7)],
         
         'level' => 1,

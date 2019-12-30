@@ -69,10 +69,7 @@ export default {
             now_time: new Date()
         }
     },
-    created(){
-        
-        console.log(new Date() - new Date('2019-12-28'))
-    }
+    
     
 }
 </script>

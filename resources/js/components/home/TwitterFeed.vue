@@ -47,9 +47,9 @@ export default{
     }
   },
   created() {
-        axios.get('https://twitter.com/Test2019501').then(response => {
-                console.log('twitter',response);
-        })  
+        // axios.get('https://twitter.com/Test2019501').then(response => {
+        //         console.log('twitter',response);
+        // })  
   }
 }
 </script>
