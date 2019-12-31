@@ -31,24 +31,25 @@ class Location_Api_Test extends TestCase
         parent::setUp();
         
         $sex =["男","女"];
-        $address = ["大阪","東京","名古屋"];
-        $time = [1,2,3,4];
+        $address = ["北海道","関東","関西"];
+        $time = [1,2,3,4,5];
         $id = 0;
         
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 1; $i < 10; $i++) {
             $date = new Carbon('2019-11-25');
             $date->hour = $i+1; 
             
             $this->user = factory(User::class)->create([ 
+                'id' => $i,
                 'sex' => $sex[$id%2], 
-                // 'location'=> $address[$i%3]
-                'location'=> $address[0]
+                'location'=> $address[$i%3]
+                // 'location'=> $address[0]
             ]);
             
             $this->Log = factory(Log::class)->create([ 
                 'user_id' => $i,  
                 'created_at' => $date ,
-                'time' =>$time[$i%4] 
+                'time' => $time[$i%4] 
             ]);
         }
         

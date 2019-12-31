@@ -42,6 +42,7 @@ class Sex_Api_Test extends TestCase
         for ($i = 1; $i < 30; $i++) {
             
             $this->user = factory(User::class)->create([
+                'id'=> $i,
                 // 'age' => rand(1,4),
                 'age' => $age[$i%5],
                 'sex' => $sex[$i%2], 

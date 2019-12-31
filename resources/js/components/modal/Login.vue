@@ -14,14 +14,14 @@
                 <!--メールアドレス-->
                 <div>
                     <label for="login-email">Email</label><br>
-                    <input type="text" v-model="loginForm.email" >
+                    <input type="email" v-model="loginForm.email" name="email">
                 </div>
                 
                 
                 <!--パスワード-->
                 <div>
                     <label for="login-password">Password</label><br>
-                    <input type="password" v-model="loginForm.password">
+                    <input type="password" v-model="loginForm.password"  name="password">
                 </div>
                 
                 

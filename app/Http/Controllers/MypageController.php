@@ -55,9 +55,8 @@ class MypageController extends Controller
         
         // 6ヶ月のデータその他ユーザー
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) / count(users.id) as count, month as label'),
-                        DB::raw('logs.created_at as created_time '))
-            ->where( 'created_time', '>', $select_6_month)
+            ->select(DB::raw('count(*) / count(users.id) as count, month as label'))
+            ->where( 'logs.created_at', '>', $select_6_month)
             ->groupBy('month')
             ->get();
         $other_month_data= $logs->pluck('count'); 
@@ -68,8 +67,8 @@ class MypageController extends Controller
         // カテゴリーデータ
         $year = Carbon::now()->year;
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '))
+            ->whereYear('logs.created_at', $year)
             ->where('user_id', Auth::user()->id )
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
@@ -83,24 +82,31 @@ class MypageController extends Controller
         
         // 最新のデータ 
         $new_data =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('*, name as category_name '), DB::raw(' logs.created_at as created_at'))
+            ->select(DB::raw('*, name as category_name '))
             ->where('user_id', Auth::user()->id )
-            ->orderBy('created_at', 'desc')
+            ->orderBy('logs.created_at', 'desc')
             ->take(5)
             ->get();
             
         
         // カレンダーのデータ
-        $logs =Auth::user()->logs()
-            ->select(DB::raw('count(*) as count, day as label, created_at'))
-            ->where( 'created_at', '>', $select_month)
-            ->groupBy('day')
-            ->orderBy('created_at')
+        // $logs =Auth::user()->logs()
+        //     ->select(DB::raw('count(*) as count, day as label, created_at'))
+        //     ->where( 'created_at', '>', $select_month)
+        //     ->groupBy('day')
+        //     ->orderBy('created_at')
+        //     ->get();
+        // $day_data = $logs->pluck('created_at');
+        
+        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->where( 'logs.created_at', '>', $select_month)
+            ->where( 'user_id', Auth::user()->id )
+            ->orderBy('logs.created_at')
             ->get();
-        $day_data = $logs->pluck('created_at') ;
+        $day_data = $logs->pluck('created_at');
             
             
-        // 合計データ
+        // // 合計データ
         $all_count = Auth::user()->logs()->count();
         $month_count = Auth::user()->logs()->where( 'created_at', '>', $select_month)->count();
         $donation_count = Auth::user()->logs()->select(DB::raw('sum(coin) as count'))->first();
@@ -152,7 +158,7 @@ class MypageController extends Controller
         //エラーがでるかも？
         $logs = Log::whereYear('created_at', $year )
             ->where('user_id', Auth::user()->id )
-            ->select(  DB::raw("count(*) as count, strftime('%m-%d', created_at) as label"))
+            ->select(  DB::raw("count(*) as count, DATE_FORMAT(created_at, '%m-%d')  as label"))
             ->groupBy('label')
             ->get();
         $day_data = $logs->pluck('count'); 
@@ -172,8 +178,8 @@ class MypageController extends Controller
         
         // カテゴリーデータ
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '))
+            ->whereYear('logs.created_at', $year)
             ->where('user_id', Auth::user()->id )
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
@@ -185,10 +191,10 @@ class MypageController extends Controller
         
         
         
-        // coinデータ
+        // // coinデータ
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('sum(coin) as count, day as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
+            ->select(DB::raw('sum(coin) as count, day as label'))
+            ->whereYear('logs.created_at', $year)
             ->where('user_id', Auth::user()->id )
             ->groupBy('day')
             ->get();

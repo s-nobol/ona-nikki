@@ -57,9 +57,8 @@ class AppController extends Controller
         
         // カテゴリーデータ
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '),
-            DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $date)
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '))
+            ->whereYear('logs.created_at', $date)
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
             ->take(10)
@@ -73,7 +72,7 @@ class AppController extends Controller
         
         
    
-        // 募金額データ
+        // // 募金額データ
         $logs =  Log::select(DB::raw('sum(coin) as count, day as label'))
             ->where('created_at','>', $date)
             ->groupBy('day')
@@ -82,7 +81,7 @@ class AppController extends Controller
         $donation_data_label = $logs->pluck('label');
    
    
-        // 募金額データ
+        // // 募金額データ
         $month_date = Carbon::now()->subDays(30);
         $logs =  Log::select(DB::raw('sum(coin) as count, day as label'))
             ->where('created_at','>', $month_date)
@@ -92,10 +91,10 @@ class AppController extends Controller
         $month_donation_data_label = $logs->pluck('label');
         
         
-               //最新のデータ
+        //       //最新のデータ
         $new_data =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('*,logs.created_at as created_time'))
-            ->orderBy('created_time','desc')
+            ->select(DB::raw('*'))
+            ->orderBy('logs.created_at','desc')
             ->take(10)
             ->get();
             
@@ -131,7 +130,7 @@ class AppController extends Controller
         $date = Carbon::now()->subDays(500);
         $string = 'sex';
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
             ->groupBy($string)
             ->orderBy('count','desc')
             ->get();
@@ -141,7 +140,7 @@ class AppController extends Controller
         
         // 男性の年代別利用データ
         $man_logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, age as label'))
             ->where( 'sex', '男')
             ->groupBy('sex','age')
             ->get();
@@ -151,7 +150,7 @@ class AppController extends Controller
         
         // 女性の年代別利用データ
         $woman_logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, age as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, age as label'))
             ->where( 'sex', '女')
             ->groupBy('sex','age')
             ->get();
@@ -178,7 +177,7 @@ class AppController extends Controller
     
     public function locations()
     {  
-        // 年齢別デー��
+        // 年齢別データ
         $logs = User::select(DB::raw('count(*) as count, location as label'))
             ->groupBy('location')
             ->get(); 
@@ -195,7 +194,7 @@ class AppController extends Controller
         $date = Carbon::now()->subDays(500);
         $string = 'age';
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
             ->groupBy($string)
             ->where('location', $name)
             ->get();
@@ -217,19 +216,19 @@ class AppController extends Controller
         $date = Carbon::now()->subDays(90);
         $string = 'month';
         $month_logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
             ->groupBy($string)
             ->where('location', $name)
-            ->where( 'created_time', '>', $date)
+            ->where( 'logs.created_at', '>', $date)
             ->get();
         $month_data = $month_logs->pluck('count');  
         $month_data_label = $month_logs->pluck('label');
         
         // 全国の利用率平均利用
         $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) / 8 as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+            ->select(DB::raw('count(*) / 8 as count, '.$string.' as label'))
             ->groupBy($string)
-            ->where( 'created_time', '>', $date)
+            ->where( 'logs.created_at', '>', $date)
             ->get();;
         $month_data_all = $logs->pluck('count');  
         
@@ -263,17 +262,12 @@ class AppController extends Controller
         
         // $logs = $this->DB_ranking('user_id', $date, 20);
         
-        
-        
-        $logs =    User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select('*',  DB::raw('count(*) as count, user_id as label'), 
-            DB::raw(' logs.created_at as created_time'), 
-            DB::raw(' users.id as id'))
+        $logs = User::join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, users.*'))
             ->groupBy('user_id')
-            ->where( 'created_time', '>', $date)
+            ->where( 'logs.created_at', '>', $date)
             ->orderBy('count','desc')
             ->take(20)
-            // ->with('followers')
             ->get();
             
         
@@ -282,28 +276,36 @@ class AppController extends Controller
     }
     
     
-    
     // 抽象的なデータベースの取得
     public function DB_abstract($string, $date)
     {   
-        return  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+        return  DB::table('users')
+            ->join('logs', 'users.id', '=', 'logs.user_id')
+            ->select(DB::raw('count(*) as count, '.$string.' as label'))
             ->groupBy($string)
-            ->where( 'created_time', '>', $date)
+            ->where('logs.created_at', '>', $date)
             ->get();
     }
     
-    
+    // sqliteで起動確認済みのコード
+    // public function DB_abstract_test($string, $date)
+    // {   
+    //     return  User::join('logs', 'users.id', '=', 'logs.user_id')
+    //         ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+    //         ->select(DB::raw('count(*) as count, '.$string.' as label'), DB::raw(''))
+    //         ->groupBy($string)
+    //         ->where('created_at', '>', $date)
+    //         ->get();
+    // }
     
     public function DB_ranking($string, $date, $take)
     {   
         return  User::join('logs', 'users.id', '=', 'logs.user_id')
             ->select('*', 
-            DB::raw('count(*) as count, '.$string.' as label'), 
-            DB::raw(' logs.created_at as created_time'), 
+            DB::raw('count(*) as count, '.$string.' as label'),
             DB::raw(' users.id as user_id'))
             ->groupBy($string)
-            ->where( 'created_time', '>', $date)
+            ->where( 'logs.created_at ', '>', $date)
             ->orderBy('count','desc')
             ->take($take)
             ->get();

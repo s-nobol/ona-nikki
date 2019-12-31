@@ -334,7 +334,7 @@ export default {
                 this.all_count = response.data.all_count
                 this.month_count = response.data.month_count
                 this.calorie_count = response.data.month_count * 48.5
-                this.donation_count = response.data.donation_count.count //ここだけ特殊
+                this.donation_count = this.count_check(response.data.donation_count.count) //ここだけ特殊
                 this.follower_count =  response.data.follower_count 
                 
             })
@@ -366,6 +366,15 @@ export default {
                 list.push(time);
             }
             return list;
+        },
+        
+        // 正しい数値か確
+        count_check(data){
+            if(data){
+                return data
+            }else{
+                return 0
+            }
         }
         
     },

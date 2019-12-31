@@ -201,9 +201,9 @@ class LogController extends Controller
         // sexデータ (エラーの可能あり)
         //回数に対しての利用人数
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(DISTINCT user_id) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
+            ->select(DB::raw('count(DISTINCT user_id) as count, sex as label'))
+            ->whereYear('logs.created_at', $year)
+            ->whereMonth('logs.created_at', $month)
             ->groupBy('sex')
             ->orderBy('count', 'desc' )
             ->get();
@@ -215,9 +215,9 @@ class LogController extends Controller
         
         // categoryデータ
         $logs =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
+            ->select(DB::raw('count(*) as count, categories.name as label, categories.color as color '))
+            ->whereYear('logs.created_at', $year)
+            ->whereMonth('logs.created_at', $month)
             ->groupBy('category_id')
             ->orderBy('count', 'desc')
             ->get();
@@ -230,9 +230,9 @@ class LogController extends Controller
         
         // coinデータ
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('sum(coin) as count, day as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month)
+            ->select(DB::raw('sum(coin) as count, day as label'))
+            ->whereYear('logs.created_at', $year)
+            ->whereMonth('logs.created_at', $month)
             ->groupBy('day')
             ->get();
         $coin_data = $logs->pluck('count'); 
@@ -240,9 +240,9 @@ class LogController extends Controller
         
         //先月のデータ
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('sum(coin) as count, day as label'), DB::raw(' logs.created_at as created_time'))
-            ->whereYear('created_time', $year)
-            ->whereMonth('created_time', $month-1)
+            ->select(DB::raw('sum(coin) as count, day as label'))
+            ->whereYear('logs.created_at', $year)
+            ->whereMonth('logs.created_at', $month-1)
             ->groupBy('day')
             ->get();
         $last_month_coin_data = $logs->pluck('count'); 

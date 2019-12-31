@@ -76,38 +76,40 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
  * @danger 警告
  * LogController/monthで disint クエリ使用する
  * Mypage_controller/Month strftime('%m-%d') クエリ使用する
- * 
+ * heroku addons:create cleardb --version=5.7
 **/
 
-// Heroku修正
-// git checkout -b heroku-edit
  	
 // ヘロクにアプリデプロイ
 // git push heroku master 
 
 
-// データベース作成
-// heroku config:get CLEARDB_DATABASE_URL=pgsql
-// heroku config:set APP_ENV=heroku
-// heroku config:set APP_URL=https://ona-nikki.herokuapp.com
 // CLEARDB_DATABASE_URL: mysql://[DB_USERNAME]:[DB_PASSWORD]@[DB_HOST]/[DB_DATABASE]?reconnect=true
-
-// heroku config:set CLEARDB_DATABASE_URL :mysql://b7cdebec37bc54:f16f86c2@us-cdbr-iron-east-05.cleardb.net/heroku_bac17cd21a2ea89?reconnect=true&encoding=utf8mb4
+// CLEARDB_DATABASE_URL: mysql://b20dbf5ee47508:402586d2@us-cdbr-iron-east-05.cleardb.net/heroku_080cd7b47d11202?reconnect=true
 
 // heroku config:set DB_CONNECTION=mysql
-// heroku config:set DB_CONNECTION=sqlite
 // heroku config:set DB_HOST=us-cdbr-iron-east-05.cleardb.net
-// heroku config:set DB_DATABASE=heroku_bac17cd21a2ea89?reconnect=true&encoding=utf8mb4
-// heroku config:set DB_USERNAME=b7cdebec37bc54
-// heroku config:set DB_PASSWORD=f16f86c2
+// heroku config:set DB_DATABASE=heroku_080cd7b47d11202
+// heroku config:set DB_USERNAME=b20dbf5ee47508
+// heroku config:set DB_PASSWORD=402586d2
+// heroku_ca13435d9228b65
 
+
+// heroku run php artisan migrate:reset
 // heroku run php artisan migrate:fresh
 // heroku run php artisan db:seed
  
-// マイグレーション 
-// Heroku-SQLiteでやってみる
-// heroku run touch database/database.sqlite
-// heroku config:get DB_CONNECTION=sqlite 
+// passwordと、確認フィールドとが、一致していません
 
-// heroku addons:create cleardb:standard-100  --version=5.7
+ 
 
+// 一応修正したPushしてみる。
+// git checkout -b mysql
+
+// create database test;
+
+// おな日記のデータベースを作成して確認する(未完)
+// DB_DATABASE=ona-nikki
+// create database onanikki;
+
+// テストが上書きされないか確認

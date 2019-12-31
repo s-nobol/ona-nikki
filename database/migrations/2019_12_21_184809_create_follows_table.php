@@ -18,8 +18,8 @@ class CreateFollowsTable extends Migration
             
             
             //フォロワーのID
-            $table->bigInteger('user_id');
-            $table->bigInteger('followed_id')->index();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('followed_id')->unsigned();
             
             
             // 一致をさける
@@ -28,6 +28,10 @@ class CreateFollowsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('followed_id')->references('id')->on('users')->onDelete('cascade');
             
+            
+            // Flamer
+            // $table->bigInteger('flamer_id')->unsigned();
+            // $table->foreign('flamer_id')->references('id')->on('flamers')->onDelete('cascade');
             
             $table->timestamps();
         });

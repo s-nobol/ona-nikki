@@ -7891,6 +7891,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7900,7 +7906,8 @@ __webpack_require__.r(__webpack_exports__);
         // password: '123123123'
         name: '',
         email: '',
-        password: ''
+        password: '',
+        password_confirmation: ''
       },
       errors: []
     };
@@ -7916,10 +7923,19 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
       axios.post("/api/register", this.loginForm).then(function (response) {
-        console.log('ログイン成功', response);
+        console.log('サインイン成功', response);
 
         if (response.status === 200) {
           _this.$store.commit('currentUser', response.data);
+        }
+
+        if (response.status === 201) {
+          _this.$store.commit('currentUser', response.data);
+
+          _this.$store.commit('message', {
+            type: 'success',
+            content: 'ログインしました'
+          });
         }
 
         if (response.status === 422) {
@@ -8270,7 +8286,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.all_count = response.data.all_count;
         _this2.month_count = response.data.month_count;
         _this2.calorie_count = response.data.month_count * 48.5;
-        _this2.donation_count = response.data.donation_count.count; //ここだけ特殊
+        _this2.donation_count = _this2.count_check(response.data.donation_count.count); //ここだけ特殊
 
         _this2.follower_count = response.data.follower_count;
       });
@@ -8300,6 +8316,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return list;
+    },
+    // 正しい数値か確
+    count_check: function count_check(data) {
+      if (data) {
+        return data;
+      } else {
+        return 0;
+      }
     }
   },
   created: function created() {
@@ -13857,7 +13881,7 @@ var render = function() {
                         expression: "loginForm.email"
                       }
                     ],
-                    attrs: { type: "text" },
+                    attrs: { type: "email", name: "email" },
                     domProps: { value: _vm.loginForm.email },
                     on: {
                       input: function($event) {
@@ -13885,7 +13909,7 @@ var render = function() {
                         expression: "loginForm.password"
                       }
                     ],
-                    attrs: { type: "password" },
+                    attrs: { type: "password", name: "password" },
                     domProps: { value: _vm.loginForm.password },
                     on: {
                       input: function($event) {
@@ -17159,7 +17183,7 @@ var render = function() {
                 expression: "loginForm.name"
               }
             ],
-            attrs: { type: "text" },
+            attrs: { type: "text", name: "name" },
             domProps: { value: _vm.loginForm.name },
             on: {
               input: function($event) {
@@ -17185,7 +17209,7 @@ var render = function() {
                 expression: "loginForm.email"
               }
             ],
-            attrs: { type: "text" },
+            attrs: { type: "text", name: "email" },
             domProps: { value: _vm.loginForm.email },
             on: {
               input: function($event) {
@@ -17213,7 +17237,7 @@ var render = function() {
                 expression: "loginForm.password"
               }
             ],
-            attrs: { type: "password" },
+            attrs: { type: "password", name: "password" },
             domProps: { value: _vm.loginForm.password },
             on: {
               input: function($event) {
@@ -17221,6 +17245,38 @@ var render = function() {
                   return
                 }
                 _vm.$set(_vm.loginForm, "password", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("label", { attrs: { for: "login-password" } }, [
+            _vm._v("Password-confirmation")
+          ]),
+          _c("br"),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.loginForm.password_confirmation,
+                expression: "loginForm.password_confirmation"
+              }
+            ],
+            attrs: { type: "password", name: "password_confirmation" },
+            domProps: { value: _vm.loginForm.password_confirmation },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.loginForm,
+                  "password_confirmation",
+                  $event.target.value
+                )
               }
             }
           })

@@ -38,7 +38,7 @@ class Home_Api_Test extends TestCase
             $date = new Carbon('2019-11-25');
             $date->hour = $i; 
             if ($i % 2 == 0) { $id = 0 ;}else{ $id = 1; }
-            $this->user = factory(User::class)->create([ 'sex' => $sex[$id], 'location'=> $address[$i%3]]);
+            $this->user = factory(User::class)->create(['id'=> $i, 'sex' => $sex[$id], 'location'=> $address[$i%3]]);
             $this->Log = factory(Log::class)->create([ 
                 'user_id' => $i,   'created_at' => $date ,'time' =>$time[$i%4] 
                 ]);
@@ -95,47 +95,47 @@ class Home_Api_Test extends TestCase
     
     
     // メソッドの確認
-    public function test_DB_days日付のデータ取得できるか()
-    {   
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('logs.created_at as created_time'))
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        $this->assertEquals(10, $logs->count());
-    }
+    // public function test_DB_days日付のデータ取得できるか()
+    // {   
+    //     $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+    //         ->select(DB::raw('logs.created_at as created_time'))
+    //         ->where( 'created_time', '>', $this->date)
+    //         ->get();
+    //     $this->assertEquals(10, $logs->count());
+    // }
      
-    public function test_DB_time日付のデータ取得できるか()
-    {   
-        $string = "time"; 
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count,'.$string.' as label'), DB::raw(' logs.created_at as created_time'))
-            ->groupBy($string)
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        $this->assertEquals(count($this->time), $logs->count());
-    }
+    // public function test_DB_time日付のデータ取得できるか()
+    // {   
+    //     $string = "time"; 
+    //     $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+    //         ->select(DB::raw('count(*) as count,'.$string.' as label'), DB::raw(' logs.created_at as created_time'))
+    //         ->groupBy($string)
+    //         ->where( 'created_time', '>', $this->date)
+    //         ->get();
+    //     $this->assertEquals(count($this->time), $logs->count());
+    // }
     
     
-    public function test_DB_Sexのデータ取得できるか()
-    {   
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
-            ->groupBy('sex')
-            ->where( 'created_time', '>', $this->date)
-            ->get();
+    // public function test_DB_Sexのデータ取得できるか()
+    // {   
+    //     $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+    //         ->select(DB::raw('count(*) as count, sex as label'), DB::raw(' logs.created_at as created_time'))
+    //         ->groupBy('sex')
+    //         ->where( 'created_time', '>', $this->date)
+    //         ->get();
         
-        $this->assertEquals(count($this->sex) , $logs->count());
-    }
+    //     $this->assertEquals(count($this->sex) , $logs->count());
+    // }
     
-    public function test_DB_Locationのデータ取得できるか()
-    {   
-        $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
-            ->select(DB::raw('count(*) as count, location as label'), DB::raw(' logs.created_at as created_time'))
-            ->groupBy('location')
-            ->where( 'created_time', '>', $this->date)
-            ->get();
-        $this->assertEquals(count($this->address) , $logs->count());
-    }
+    // public function test_DB_Locationのデータ取得できるか()
+    // {   
+    //     $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
+    //         ->select(DB::raw('count(*) as count, location as label'), DB::raw(' logs.created_at as created_time'))
+    //         ->groupBy('location')
+    //         ->where( 'created_time', '>', $this->date)
+    //         ->get();
+    //     $this->assertEquals(count($this->address) , $logs->count());
+    // }
     
     
 }

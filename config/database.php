@@ -93,13 +93,27 @@ return [
         
         //テスト用
         'testing' => [
-            'driver'   => 'sqlite',
-            'database' => ':memory:', // SQLiteのインメモリ機能を使用
-            'prefix'   => '',
-            'options'  => [
-                // テストデータの永続化
-                PDO::ATTR_PERSISTENT => false,
-            ],
+            // 'driver'   => 'sqlite',
+            // 'database' => ':memory:', // SQLiteのインメモリ機能を使用
+            // 'prefix'   => '',
+            // 'options'  => [
+            //     // テストデータの永続化
+            //     PDO::ATTR_PERSISTENT => false,
+            // ],
+                
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'test',
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'modes' => [],
+            'engine' => null,
         ],
 
     ],

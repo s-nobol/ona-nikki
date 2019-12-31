@@ -23,21 +23,27 @@
                 <!--名前-->
                 <div>
                     <label for="login-name">Name</label><br>
-                    <input type="text" v-model="loginForm.name" >
+                    <input type="text" v-model="loginForm.name"  name="name">
                 </div>
                 
             
                 <!--メールアドレス-->
                 <div>
                     <label for="login-email">Email</label><br>
-                    <input type="text" v-model="loginForm.email" >
+                    <input type="text" v-model="loginForm.email"  name="email">
                 </div>
                 
                 
                 <!--パスワード-->
                 <div>
                     <label for="login-password">Password</label><br>
-                    <input type="password" v-model="loginForm.password">
+                    <input type="password" v-model="loginForm.password" name="password">
+                </div>
+                
+                <!--パスワード-->
+                <div>
+                    <label for="login-password">Password-confirmation</label><br>
+                    <input type="password" v-model="loginForm.password_confirmation" name="password_confirmation">
                 </div>
                 
             
@@ -106,7 +112,8 @@ export default {
                 // password: '123123123'
                 name: '',
                 email: '',
-                password: ''
+                password: '',
+                password_confirmation: ''
             },
             errors: [],
         }
@@ -122,9 +129,16 @@ export default {
             this.errors = []
             axios.post(`/api/register`, this.loginForm).then(response => {
                 
-                console.log('ログイン成功', response);
+                console.log('サインイン成功', response);
                 if(response.status === 200){
                     this.$store.commit('currentUser', response.data)
+                }
+                if(response.status === 201){
+                    this.$store.commit('currentUser', response.data) 
+                    this.$store.commit('message',{
+                        type: 'success',
+                        content: 'ログインしました',
+                    })
                 }
                 if(response.status === 422){
                     this.errors = response.data.errors

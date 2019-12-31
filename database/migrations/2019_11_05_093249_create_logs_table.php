@@ -26,15 +26,13 @@ class CreateLogsTable extends Migration
             // $table->integer('')->nullable(); 費やした時間
             
             
-            
-            // $table->integer('coin')->nullable();//コイン
             $table->integer('coin')->default(0);//コイン
             
             
             $table->timestamps();
             
             
-            // User
+            // User 
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             

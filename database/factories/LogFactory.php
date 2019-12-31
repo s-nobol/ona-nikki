@@ -11,7 +11,7 @@ $factory->define(Log::class, function (Faker $faker) {
         'user_id' => rand(1,99),
         'month' => rand(1,12),
         'day' => rand(1,30),
-        'time' => rand(0,23),
+        'time' => rand(1,23),
         // 'category' => rand(1,5),
         'coin' => rand(0,15),
         'category_id' => rand(1,10),
