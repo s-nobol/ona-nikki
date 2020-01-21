@@ -2642,6 +2642,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 //
 //
 //
@@ -2687,7 +2695,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      chart: null
+      chart: null,
+      maxSize: 0
     };
   },
   methods: {
@@ -2699,7 +2708,7 @@ __webpack_require__.r(__webpack_exports__);
         data: {
           labels: this.labels,
           datasets: [{
-            label: '月別集計',
+            label: '合計',
             backgroundColor: 'rgba(255, 74, 74, 0.3)',
             borderColor: 'rgba(255, 74, 74, 0.8)',
             pointBackgroundColor: 'white',
@@ -2708,7 +2717,7 @@ __webpack_require__.r(__webpack_exports__);
             pointRadius: 5,
             data: this.dataSet2
           }, {
-            label: '月別集計',
+            label: '合計',
             backgroundColor: 'rgba(255, 74, 74, 0.3)',
             borderColor: 'rgba(255, 74, 74, 0.8)',
             pointBackgroundColor: 'white',
@@ -2753,13 +2762,22 @@ __webpack_require__.r(__webpack_exports__);
             yAxes: [{
               display: false,
               gridLines: {
-                // display: false,
                 drawBorder: false
+              },
+              ticks: {
+                beginAtZero: true,
+                // max: this.maxSize
+                suggestedMax: this.maxSize
               }
             }]
           }
         }
       });
+    },
+    setMaxsize: function setMaxsize() {
+      var max = Math.max.apply(Math, _toConsumableArray(this.dataSet));
+      this.maxSize = max * 1.1;
+      console.log("最大値は000です", this.maxSize);
     }
   },
   watch: {
@@ -2770,6 +2788,7 @@ __webpack_require__.r(__webpack_exports__);
         this.chart.destroy();
       }
 
+      this.setMaxsize();
       this.create_chart();
     }
   }
@@ -5006,11 +5025,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    //日付のみのデータ（1,2,3...11,13...30,31）
     dataSet: {
       type: Array,
       require: true,
+      "default": function _default() {
+        return [];
+      }
+    },
+    //Mysql用のデータ（2019-12-25T15:00:00.00, 2019-12-25T15:00:00.00）
+    dataSet2: {
+      type: Array,
+      require: false,
       "default": function _default() {
         return [];
       }
@@ -5041,10 +5076,10 @@ __webpack_require__.r(__webpack_exports__);
       var today = this.date.getDate(); // 先月分のデータ
 
       var before_days = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
-      console.log("月初め", before_days);
+      var before_date = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate(); // console.log("月初め",before_days, '月初め日付' , before_date)
 
-      for (var i = 0; i < before_days; i++) {
-        this.before_days.push(i);
+      for (var i = before_days - 1; i >= 0; i--) {
+        this.before_days.push(before_date - i);
       } // 月末のデータ
 
 
@@ -5054,7 +5089,8 @@ __webpack_require__.r(__webpack_exports__);
         var hash = {
           'number': i + 1,
           'actived': false,
-          'other': 'その他'
+          'other': 'その他',
+          'active_date': ''
         };
         this.month_data.push(hash);
       }
@@ -5074,12 +5110,40 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       }
+    },
+    setActiveDate: function setActiveDate() {
+      var month_data_length = this.month_data.length;
+      var day_data = this.dataSet2;
+
+      for (var i = 0; i < day_data.length; i++) {
+        // 利用した日にち
+        var active_date = new Date(day_data[i]);
+        var day = active_date.getDate() - 1; // もし今月の利用の場合
+
+        if (this.date.getMonth() === active_date.getMonth()) {
+          for (var j = 0 + day; j < month_data_length; j++) {
+            if (active_date.getDate() === this.month_data[j].number) {
+              this.month_data[j].actived = true;
+              this.month_data[j].active_date = active_date;
+            }
+          }
+        }
+      }
+    },
+    onClickItem: function onClickItem(item) {
+      var message = item.active_date.getFullYear() + '年' + item.active_date.getMonth() + 1 + '月' + item.active_date.getDate() + '日' + ' ' + item.active_date.getHours() + ':' + item.active_date.getMinutes() + '　に利用しました。';
+      alert(message);
+      console.log(item);
     }
   },
   watch: {
-    dataSet: function dataSet(_dataSet) {
-      // console.log("カレンダーの変更", this.dataSet)
-      this.getDataSet();
+    // dataSet: function(dataSet){
+    // // console.log("カレンダーの変更", this.dataSet)
+    //     this.getDataSet()
+    //  },
+    dataSet2: function dataSet2(_dataSet) {
+      console.log("データの取得", _dataSet);
+      this.setActiveDate();
     }
   },
   created: function created() {
@@ -5099,6 +5163,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -6234,7 +6299,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     chengeLocation: function chengeLocation(name) {
-      alert("ロケーション変更" + name);
+      alert(name + 'の詳細データに移行します');
       this.onchangeSelect(name);
     },
     get_location: function get_location() {
@@ -8206,6 +8271,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -8242,7 +8310,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       data: [],
       data_label: [],
       today: new Date().getDate()
-    }, _defineProperty(_ref, "data", []), _defineProperty(_ref, "data_label", []), _defineProperty(_ref, "month_data", []), _defineProperty(_ref, "month_data_label", []), _defineProperty(_ref, "six_month_data", []), _defineProperty(_ref, "six_month_data_label", []), _defineProperty(_ref, "other_month_data", []), _defineProperty(_ref, "month_data_total", 0), _defineProperty(_ref, "last_month_data_total", 0), _defineProperty(_ref, "time_data", []), _defineProperty(_ref, "time_data_label", []), _defineProperty(_ref, "active_data", []), _defineProperty(_ref, "active_ratio", 0), _defineProperty(_ref, "new_data", []), _defineProperty(_ref, "day_data", []), _defineProperty(_ref, "category_data", []), _defineProperty(_ref, "category_data_label", []), _defineProperty(_ref, "category_data_color", []), _defineProperty(_ref, "all_count", 0), _defineProperty(_ref, "month_count", 0), _defineProperty(_ref, "calorie_count", 0), _defineProperty(_ref, "donation_count", 0), _defineProperty(_ref, "follower_count", 0), _ref;
+    }, _defineProperty(_ref, "data", []), _defineProperty(_ref, "data_label", []), _defineProperty(_ref, "month_data", []), _defineProperty(_ref, "month_data_label", []), _defineProperty(_ref, "six_month_data", []), _defineProperty(_ref, "six_month_data_label", []), _defineProperty(_ref, "other_month_data", []), _defineProperty(_ref, "month_data_total", 0), _defineProperty(_ref, "last_month_data_total", 0), _defineProperty(_ref, "time_data", []), _defineProperty(_ref, "time_data_label", []), _defineProperty(_ref, "active_data", []), _defineProperty(_ref, "active_ratio", 0), _defineProperty(_ref, "new_data", []), _defineProperty(_ref, "day_data", []), _defineProperty(_ref, "day_data2", []), _defineProperty(_ref, "category_data", []), _defineProperty(_ref, "category_data_label", []), _defineProperty(_ref, "category_data_color", []), _defineProperty(_ref, "all_count", 0), _defineProperty(_ref, "month_count", 0), _defineProperty(_ref, "calorie_count", 0), _defineProperty(_ref, "donation_count", 0), _defineProperty(_ref, "follower_count", 0), _ref;
   },
   methods: {
     selectTab: function selectTab(name) {
@@ -8283,6 +8351,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.new_data = response.data.new_data; // 日付のデータ
 
         _this2.day_data = _this2.get_change_date(response.data.day_data);
+        _this2.day_data2 = response.data.day_data; //あとで修正する 
+
         _this2.all_count = response.data.all_count;
         _this2.month_count = response.data.month_count;
         _this2.calorie_count = response.data.month_count * 48.5;
@@ -8947,7 +9017,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.Calender__header{\n    text-align: center;\n    padding: 10px;\n    font-size: 18px;\n    font-weight: bold;\n    border-bottom: 1px solid gainsboro;\n}\n.Calender__content{\n    margin-top: 10px;\n    margin-bottom: 15px;\n}\n.Calender__item{\n    text-align: center;\n    display: inline-block;\n    width: 14.28%;\n    height: 30px;\n    line-height: 30px;\n}\n.Calender__item__select{\n    cursor: pointer;\n    color: white;\n    display: inline-block;\n    width: 27px;\n    height: 27px;\n    line-height: 27px;\n    background-color: rgba(255, 74, 74, 1);\n    -webkit-transition-duration: 0.3s;\n            transition-duration: 0.3s;\n    border-radius: 27px;\n}\n.Calender__item__select:hover{\n    background-color: silver;\n}\n", ""]);
+exports.push([module.i, "\n.Calender__header{\n    text-align: center;\n    padding: 10px;\n    font-size: 18px;\n    font-weight: bold;\n    border-bottom: 1px solid gainsboro;\n}\n.Calender__content{\n    margin-top: 10px;\n    margin-bottom: 15px;\n}\n.before__day{\n    color: silver;\n}\n.Calender__item{\n    text-align: center;\n    display: inline-block;\n    width: 14.28%;\n    height: 30px;\n    line-height: 30px;\n}\n.Calender__item__select{\n    cursor: pointer;\n    color: white;\n    display: inline-block;\n    width: 27px;\n    height: 27px;\n    line-height: 27px;\n    background-color: rgba(255, 74, 74, 1);\n    -webkit-transition-duration: 0.3s;\n            transition-duration: 0.3s;\n    border-radius: 27px;\n}\n.Calender__item__select:hover{\n    background-color: silver;\n}\n", ""]);
 
 // exports
 
@@ -14036,20 +14106,35 @@ var render = function() {
       { staticClass: "Calender__content" },
       [
         _vm._l(_vm.days_title, function(item) {
-          return _c("span", { staticClass: "Calender__item" }, [
-            _vm._v(_vm._s(item))
-          ])
+          return _c(
+            "span",
+            {
+              staticClass: "Calender__item",
+              class: { text__red: item === "日", "text-primary": item === "土" }
+            },
+            [_vm._v(_vm._s(item))]
+          )
         }),
         _vm._v(" "),
         _vm._l(_vm.before_days, function(item) {
-          return _c("span", { staticClass: "Calender__item" }, [_vm._v("X")])
+          return _c("span", { staticClass: "Calender__item  before__day " }, [
+            _vm._v(_vm._s(item))
+          ])
         }),
-        _vm._v(" "),
         _vm._l(_vm.month_data, function(item) {
-          return _c("span", { staticClass: "Calender__item" }, [
-            _c("span", { class: { "Calender__item__select ": item.actived } }, [
-              _vm._v(_vm._s(item.number))
-            ])
+          return _c("span", { staticClass: "Calender__item " }, [
+            _c(
+              "span",
+              {
+                class: { "Calender__item__select ": item.actived },
+                on: {
+                  click: function($event) {
+                    return _vm.onClickItem(item)
+                  }
+                }
+              },
+              [_vm._v(_vm._s(item.number))]
+            )
           ])
         })
       ],
@@ -14140,14 +14225,14 @@ var render = function() {
                                 }
                               }
                             },
-                            _vm._l(_vm.categories_color, function(item) {
+                            _vm._l(_vm.categories, function(item) {
                               return _c(
                                 "option",
                                 {
                                   style: { "background-color": item.color },
-                                  domProps: { value: item.color }
+                                  domProps: { value: item.name }
                                 },
-                                [_vm._v(_vm._s(item.color))]
+                                [_vm._v(_vm._s(item.name))]
                               )
                             }),
                             0
@@ -14250,7 +14335,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h3", [_c("b", [_vm._v("最新の記録 (30件)")])])
+    return _c("h3", { staticClass: "p-2" }, [
+      _c("b", [_vm._v("最新の記録 (30件)")])
+    ])
   },
   function() {
     var _vm = this
@@ -14308,7 +14395,7 @@ var render = function() {
         _c("div", { staticClass: "row " }, [
           _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
+          _c("div", { staticClass: "col-10  pr-0 pl-1" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("span", { staticClass: "card-body_title bg__all" }, [
                 _vm._v("合計射精回数")
@@ -14327,7 +14414,7 @@ var render = function() {
         _c("div", { staticClass: "row " }, [
           _vm._m(1),
           _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
+          _c("div", { staticClass: "col-10  pr-0 pl-1" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("span", { staticClass: "card-body_title bg__month" }, [
                 _vm._v("月間射精回数")
@@ -14346,7 +14433,7 @@ var render = function() {
         _c("div", { staticClass: "row " }, [
           _vm._m(2),
           _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
+          _c("div", { staticClass: "col-10 pr-0 pl-1" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("span", { staticClass: "card-body_title " }, [
                 _vm._v("カロリー消費")
@@ -14365,7 +14452,7 @@ var render = function() {
         _c("div", { staticClass: "row " }, [
           _vm._m(3),
           _vm._v(" "),
-          _c("div", { staticClass: "col-10" }, [
+          _c("div", { staticClass: "col-10  pr-0 pl-1" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("span", { staticClass: "card-body_title " }, [
                 _vm._v("合計支援金")
@@ -17536,7 +17623,11 @@ var render = function() {
           _c(
             "div",
             { staticClass: " card " },
-            [_c("CalendarTest", { attrs: { dataSet: _vm.day_data } })],
+            [
+              _c("CalendarTest", {
+                attrs: { dataSet: _vm.day_data, dataSet2: _vm.day_data2 }
+              })
+            ],
             1
           ),
           _vm._v(" "),
@@ -17586,11 +17677,15 @@ var render = function() {
                     _c("div", { staticClass: "media-body" }, [
                       _c("div", { staticClass: "mt-1" }, [
                         _c("span", { staticClass: "new__date__item bg__red" }, [
-                          _c("i", { staticClass: "fas fa-sun mr-2" }),
-                          _vm._v(
-                            _vm._s(item.category_name) +
-                              "\n                                        "
-                          )
+                          _c("i", { staticClass: "fas fa-sun mr-1" }),
+                          _vm._v(" "),
+                          item.category
+                            ? _c("span", [_vm._v(_vm._s(item.category))])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !item.category
+                            ? _c("span", [_vm._v(" null ")])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("span", [_vm._v("募金 " + _vm._s(item.coin) + "円")])
@@ -17601,7 +17696,21 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(6, true)
+                _c(
+                  "div",
+                  { staticClass: "col-3  p-0 " },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-success mt-2",
+                        attrs: { to: "/mypage/profile" }
+                      },
+                      [_vm._v("編集")]
+                    )
+                  ],
+                  1
+                )
               ])
             ])
           })
@@ -17714,14 +17823,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-3  p-0 " }, [
-      _c("button", { staticClass: "btn btn-success mt-2" }, [_vm._v("編集")])
-    ])
   }
 ]
 render._withStripped = true

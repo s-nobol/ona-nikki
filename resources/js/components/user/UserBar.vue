@@ -9,7 +9,7 @@
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-globe-americas fa-2x text__all"></i>
                 </div>
-                <div class="col-10">
+                <div class="col-10  pr-0 pl-1">
                     <div class="card-body">
                         <span class="card-body_title bg__all" >合計射精回数</span> 
                         <h4 class="card-title ">
@@ -27,7 +27,7 @@
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-clock  fa-2x text__month"></i>
                 </div>
-                <div class="col-10">
+                <div class="col-10  pr-0 pl-1">
                     <div class="card-body">
                         <span class="card-body_title bg__month">月間射精回数</span> 
                         <h4 class="card-title ">
@@ -46,7 +46,7 @@
                 <div class="col-2 UserBar__icon">
                     <i class="fas fa-cheese  fa-2x "></i>
                 </div>
-                <div class="col-10">
+                <div class="col-10 pr-0 pl-1">
                     <div class="card-body">
                         <span class="card-body_title ">カロリー消費</span> 
                         <h4 class="card-title ">
@@ -65,7 +65,7 @@
                 <div class="col-2 UserBar__icon">
                     <i class="fas  fa-yen-sign  fa-2x"></i>
                 </div>
-                <div class="col-10">
+                <div class="col-10  pr-0 pl-1">
                     <div class="card-body">
                         <span class="card-body_title ">合計支援金</span> 
                         <h4 class="card-title">

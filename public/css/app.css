@@ -11176,6 +11176,10 @@ body {
   color: white;
 }
 
+.text__red {
+  color: #ff4a4a;
+}
+
 .header__button {
   display: none;
 }

@@ -36,7 +36,8 @@ export default {
     },
     data(){
         return{
-            chart: null
+            chart: null,
+            maxSize: 0,
             }
     },
     methods: {
@@ -49,7 +50,7 @@ export default {
                 data: {
                     labels: this.labels,
                     datasets: [{
-                        label: '月別集計',
+                        label: '合計',
                         backgroundColor: 'rgba(255, 74, 74, 0.3)',
                         borderColor: 'rgba(255, 74, 74, 0.8)',
                         pointBackgroundColor: 'white',
@@ -58,7 +59,7 @@ export default {
                         pointRadius:5,
                         data: this.dataSet2
                     },{
-                        label: '月別集計',
+                        label: '合計',
                         backgroundColor: 'rgba(255, 74, 74, 0.3)',
                         borderColor: 'rgba(255, 74, 74, 0.8)',
                         pointBackgroundColor: 'white',
@@ -103,8 +104,12 @@ export default {
                         yAxes: [{
                             display: false,
                             gridLines: {
-                                // display: false,
                                 drawBorder: false
+                            },
+                            ticks: {
+                                beginAtZero: true,
+                                // max: this.maxSize
+                                suggestedMax: this.maxSize,
                             }
                         }]
                     },
@@ -112,11 +117,17 @@ export default {
                 }
             });
         },
+        setMaxsize(){
+            var max =  Math.max(...this.dataSet)
+            this.maxSize = max * 1.1
+            console.log("最大値は000です",this.maxSize)
+        }
     },
     watch: {
         labels: function(labels){
             console.log("BarChart")
             if(this.chart){this.chart.destroy()}
+            this.setMaxsize()
             this.create_chart()
         }
     },

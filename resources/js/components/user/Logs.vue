@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <!--<div class="bg-light p-2">-->
-                <h3><b>最新の記録 (30件)</b></h3>
+                <h3 class="p-2"><b>最新の記録 (30件)</b></h3>
             <!--</div>-->
             <table  v-if="logs" class="table p-2" >
                 <thead class="text-center">
@@ -27,13 +27,14 @@
                             <span v-if="log.category">{{ log.category }}</span>
                             <span v-else>null</span>
                         </td>
+                        
                         <td v-if="editNumber === log.id " content="category">
                             <select v-model="log.category" :value="log.category">
                                     <option 
-                                        v-for="item in categories_color"
+                                        v-for="item in categories"
                                         :style="{ 'background-color': item.color }"
-                                        :value="item.color"
-                                    >{{ item.color }}</option>
+                                        :value="item.name"
+                                    >{{ item.name }}</option>
                             </select> 
                             <!--</select>   -->
                         </td>

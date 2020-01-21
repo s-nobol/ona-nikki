@@ -148,6 +148,7 @@
                     <div class=" card ">
                         <CalendarTest  
                         :dataSet="day_data"
+                        :dataSet2="day_data2"
                         />
                     </div>
                     
@@ -187,7 +188,9 @@
                                     <div class="media-body">
                                         <div class="mt-1">
                                             <span class="new__date__item bg__red">
-                                                <i class="fas fa-sun mr-2"></i>{{ item.category_name }}
+                                                <i class="fas fa-sun mr-1"></i>
+                                                <span v-if="item.category">{{ item.category }}</span>
+                                                <span v-if="! item.category"> null </span>
                                             </span>
                                             <span>募金 {{ item.coin }}円</span>
                                         </div>
@@ -198,7 +201,7 @@
                             
                             
                             <div class="col-3  p-0 ">
-                                <button class="btn btn-success mt-2">編集</button>
+                                <router-link to="/mypage/profile" class="btn btn-success mt-2">編集</router-link>
                             </div>
                         </div>
                     </div>
@@ -271,7 +274,7 @@ export default {
             
             new_data: [], //最新の5件のデータ
             day_data: [],
-            
+            day_data2:[],
             
             
             // カテゴリー別データ
@@ -330,6 +333,8 @@ export default {
                 
                 // 日付のデータ
                 this.day_data = this.get_change_date( response.data.day_data)
+                this.day_data2 = response.data.day_data //あとで修正する 
+                
                 
                 this.all_count = response.data.all_count
                 this.month_count = response.data.month_count

@@ -189,7 +189,7 @@ export default {
     },
     methods: {
         chengeLocation(name){
-            alert("ロケーション変更"+name)
+            alert(name+'の詳細データに移行します')
             this.onchangeSelect(name)
         },
         get_location(){

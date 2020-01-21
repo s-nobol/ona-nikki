@@ -85,31 +85,19 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 
 
 // CLEARDB_DATABASE_URL: mysql://[DB_USERNAME]:[DB_PASSWORD]@[DB_HOST]/[DB_DATABASE]?reconnect=true
-// CLEARDB_DATABASE_URL: mysql://b20dbf5ee47508:402586d2@us-cdbr-iron-east-05.cleardb.net/heroku_080cd7b47d11202?reconnect=true
 
 // heroku config:set DB_CONNECTION=mysql
-// heroku config:set DB_HOST=us-cdbr-iron-east-05.cleardb.net
-// heroku config:set DB_DATABASE=heroku_080cd7b47d11202
-// heroku config:set DB_USERNAME=b20dbf5ee47508
-// heroku config:set DB_PASSWORD=402586d2
-// heroku_ca13435d9228b65
+// heroku config:set DB_HOST=jj820qt5lpu6krut.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+// heroku config:set DB_DATABASE=tmwvhrvxto1olg11
+// heroku config:set DB_USERNAME=y1nwcimzvzbttzy7
+// heroku config:set DB_PASSWORD=lixdqjxxprj1lqc8
+
 
 
 // heroku run php artisan migrate:reset
 // heroku run php artisan migrate:fresh
 // heroku run php artisan db:seed
- 
-// passwordと、確認フィールドとが、一致していません
 
- 
 
-// 一応修正したPushしてみる。
-// git checkout -b mysql
-
-// create database test;
-
-// おな日記のデータベースを作成して確認する(未完)
-// DB_DATABASE=ona-nikki
-// create database onanikki;
-
-// テストが上書きされないか確認
+// カレンダーの編集
+// git checkout -b calendar-edit

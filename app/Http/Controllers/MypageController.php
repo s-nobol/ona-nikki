@@ -80,23 +80,16 @@ class MypageController extends Controller
         
         
         
-        // 最新のデータ 
-        $new_data =  Category::join('logs', 'categories.id', '=', 'logs.category_id')
-            ->select(DB::raw('*, name as category_name '))
-            ->where('user_id', Auth::user()->id )
+        // 最新のデータ 5件
+        $new_data = 
+        // Category::join('logs', 'categories.id', '=', 'logs.category_id')
+        //     ->select(DB::raw('*, name as category_name '))
+            Log::where('user_id', Auth::user()->id )
             ->orderBy('logs.created_at', 'desc')
             ->take(5)
             ->get();
             
         
-        // カレンダーのデータ
-        // $logs =Auth::user()->logs()
-        //     ->select(DB::raw('count(*) as count, day as label, created_at'))
-        //     ->where( 'created_at', '>', $select_month)
-        //     ->groupBy('day')
-        //     ->orderBy('created_at')
-        //     ->get();
-        // $day_data = $logs->pluck('created_at');
         
         $logs =  User::join('logs', 'users.id', '=', 'logs.user_id')
             ->where( 'logs.created_at', '>', $select_month)
@@ -105,6 +98,9 @@ class MypageController extends Controller
             ->get();
         $day_data = $logs->pluck('created_at');
             
+        
+        // 今月
+        $select_month = Carbon::now()->startOfMonth();
             
         // // 合計データ
         $all_count = Auth::user()->logs()->count();
@@ -151,7 +147,7 @@ class MypageController extends Controller
             // ->select(DB::raw('count(*) / ? as count', [$user_count]))
             ->groupBy('month')
             ->get();
-        $otherlogs = $otherlogs->pluck('count');
+        $other_data = $otherlogs->pluck('count');
         
         
         
@@ -236,12 +232,8 @@ class MypageController extends Controller
     {
         // 月ごとにソートすると2018年11月と2019年11月がかぶる
         $logs = Auth::user()->logs()
-            ->select(
-                DB::raw('count(*) as count '), 
-                DB::raw("strftime('%Y-%m', created_at) label"),
-                DB::raw("strftime('%Y', created_at) year"),
-                DB::raw("strftime('%m', created_at) months"))
-            ->groupBy('year','months')
+            ->select(DB::raw("count(*) as count, DATE_FORMAT(created_at, '%Y-%m')  as label"))
+            ->groupBy('label')
             ->get();
         $data = $logs->pluck('count'); 
         $data_label = $logs->pluck('label');
