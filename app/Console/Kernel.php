@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
             $month = $carbon->month;
             $day = $carbon->day;
         
-             factory(Log::class)->create([ 
+            factory(Log::class)->create([ 
                 'month' => $month,
                 'day' => $day,
                 'created_at' =>$carbon,

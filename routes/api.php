@@ -81,16 +81,11 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 
  	
 // ヘロクにアプリデプロイ
+//  source <(curl -sL https://cdn.learnenough.com/heroku_install)
 // git push heroku master 
 
 
 // CLEARDB_DATABASE_URL: mysql://[DB_USERNAME]:[DB_PASSWORD]@[DB_HOST]/[DB_DATABASE]?reconnect=true
-
-// heroku config:set DB_CONNECTION=mysql
-// heroku config:set DB_HOST=jj820qt5lpu6krut.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
-// heroku config:set DB_DATABASE=tmwvhrvxto1olg11
-// heroku config:set DB_USERNAME=y1nwcimzvzbttzy7
-// heroku config:set DB_PASSWORD=lixdqjxxprj1lqc8
 
 
 
@@ -99,5 +94,10 @@ Route::delete('/follow/{user}', 'FollowController@destroy');
 // heroku run php artisan db:seed
 
 
-// カレンダーの編集
-// git checkout -b calendar-edit
+
+// Herokuダミーデータの作成中（Phpから実行されない）
+
+// git checkout -b  command-dummy
+//  php artisan make:command CreateLog
+// 1＿コマンドを打つとログが作成されるようにする
+// 2＿Logのダミーデータを作成できるようにする
